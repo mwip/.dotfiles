@@ -10,7 +10,7 @@
 
   Further, prevent git from showing all untracked files in your home directory: 
 
-  #+begin_src 
+  #+begin_src bash
   config config status.showUntrackedFiles no
   #+end_src
 

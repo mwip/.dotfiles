@@ -2,7 +2,13 @@
 
   as described [[https://wiki.archlinux.org/index.php/Dotfiles#Tracking_dotfiles_directly_with_Git][in this Arch-Wiki page]], I use a bare git repository to track my configuration and dotfiles. 
   
-  To use them clone this repository and add an alias that serves this specific bare repo:
+  To use them clone this repository ...
+
+  #+begin_src bash
+  git clone --bare https://github.com/mwip/.dotfiles.git ~/.dotfiles
+  #+end_src
+
+  ... and add an alias that serves this specific bare repo:
 
   #+begin_src bash
   $ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles-bare-repo/ --work-tree=$HOME'
@@ -11,7 +17,7 @@
   Further, prevent git from showing all untracked files in your home directory: 
 
   #+begin_src bash
-  config config status.showUntrackedFiles no
+  dotfiles config status.showUntrackedFiles no
   #+end_src
 
 ** Enjoy!

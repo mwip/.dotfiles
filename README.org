@@ -4,19 +4,19 @@
   
   To use them clone this repository ...
 
-  #+begin_src bash
+  #+begin_src shell
   git clone --bare https://github.com/mwip/.dotfiles.git ~/.dotfiles
   #+end_src
 
   ... and add an alias that serves this specific bare repo:
 
-  #+begin_src bash
-  $ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles-bare-repo/ --work-tree=$HOME'
+  #+begin_src shell
+  alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles-bare-repo/ --work-tree=$HOME'
   #+end_src
 
   Further, prevent git from showing all untracked files in your home directory: 
 
-  #+begin_src bash
+  #+begin_src shell
   dotfiles config status.showUntrackedFiles no
   #+end_src
 

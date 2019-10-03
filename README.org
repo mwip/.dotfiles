@@ -11,7 +11,7 @@
   ... and add an alias that serves this specific bare repo:
 
   #+begin_src shell
-  alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles-bare-repo/ --work-tree=$HOME'
+  alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
   #+end_src
 
   Further, prevent git from showing all untracked files in your home directory: 
@@ -19,5 +19,18 @@
   #+begin_src shell
   dotfiles config status.showUntrackedFiles no
   #+end_src
+
+** Revert your current configuration
+
+   *Please be careful!* This will delete your current configuration!
+   
+   After cloning the repo, you will see that the files have been deleted. Therefore, you need to revert the files. You can do that like this: 
+
+   #+begin_src shell
+   dotfiles restore --staged .zshrc
+   dotfiles diff .zshrc # will show you the differences between your current file and this configuration
+   dotfiles restore .zshrc
+   #+end_src
+   
 
 ** Enjoy!

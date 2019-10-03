@@ -451,7 +451,9 @@
       :init
       (progn
       (bind-key "C-x g" 'magit-status)
-      ))
+      )
+      :config
+      ((setq magit-diff-refine-hunk (quote all))))
    #+end_src
 * R-Related Configuration
 ** Force scroll on R-console

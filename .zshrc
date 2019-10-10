@@ -120,7 +120,7 @@ alias pacman-autoremove='sudo pacman -Rsn $(pacman -Qdtq)'
 alias t='echo "" && todo.sh'
 alias ct='clear && t'
 alias update-bootloader='sudo bootctl --path=/efi update'
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles-bare-repo/ --work-tree=$HOME'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # powerline
 powerline-daemon -q

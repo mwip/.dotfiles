@@ -553,7 +553,6 @@
    (setq org-log-reschedule 'time)
    #+end_src
 
-
 ** Refile
    Allow refiling to all org-agenda-files
    #+begin_src emacs-lisp
@@ -580,6 +579,13 @@
                      ))
    #+end_src
  
+** Deadline warning days
+   #+begin_src emacs-lisp
+     (setq org-deadline-warning-days 7)
+   #+end_src
+
+ 
+
 * Custom Shortcuts
 ** Custom Key Map
 *** Initialize keymap on =C-1=

@@ -1,4 +1,4 @@
-#+STARTUP: content
+#c+STARTUP: content
 * Load Packages
 ** Refresh package contents first
    #+BEGIN_SRC emacs-lisp
@@ -386,9 +386,15 @@
    #+END_SRC
 ** Code Margin 80-column
    #+BEGIN_SRC emacs-lisp
-   (require 'whitespace)
-   (setq-default whitespace-style '(face lines-tail))
-   (setq-default fill-column 80)
+   ;(require 'whitespace)
+   ;(setq-default whitespace-style '(face lines-tail))
+   ;(setq-default fill-column 80)
+
+   (use-package fill-column-indicator
+     :ensure t)
+   (setq fci-rule-width 2)
+   (setq fci-rule-color "red")
+   (add-hook 'python-mode-hook 'fci-mode)
    #+END_SRC
 ** Auto-Complete
    Autocomplete everywhere
@@ -454,6 +460,25 @@
       )
       :config
       (setq magit-diff-refine-hunk (quote all)))
+   #+end_src
+** Auto highlight 
+   #+begin_src emacs-lisp
+     (use-package auto-highlight-symbol
+       :ensure t)
+
+     (global-auto-highlight-symbol-mode)
+     (define-key auto-highlight-symbol-mode-map (kbd "M-p") 'ahs-backward)
+     (define-key auto-highlight-symbol-mode-map (kbd "M-n") 'ahs-forward)
+     (setq ahs-idle-interval 0.3) ;; if you want instant highlighting, set it to 0, but I find it annoying
+     (setq ahs-default-range 'ahs-range-whole-buffer) ;; highlight every occurence in buffer
+
+     ;; inhibits highlighting in specific places, like in comments
+     (setq ahs-inhibit-face-list '(font-lock-comment-delimiter-face
+				   font-lock-comment-face
+				     font-lock-doc-face
+				     font-lock-doc-string-face
+				     font-lock-string-face))
+   
    #+end_src
 * R-Related Configuration
 ** Force scroll on R-console

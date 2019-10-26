@@ -469,7 +469,7 @@
      (global-auto-highlight-symbol-mode)
      (define-key auto-highlight-symbol-mode-map (kbd "M-p") 'ahs-backward)
      (define-key auto-highlight-symbol-mode-map (kbd "M-n") 'ahs-forward)
-     (setq ahs-idle-interval 0.3) ;; if you want instant highlighting, set it to 0, but I find it annoying
+     (setq ahs-idle-interval 1.0) ;; if you want instant highlighting, set it to 0, but I find it annoying
      (setq ahs-default-range 'ahs-range-whole-buffer) ;; highlight every occurence in buffer
 
      ;; inhibits highlighting in specific places, like in comments
@@ -479,6 +479,22 @@
 				     font-lock-doc-string-face
 				     font-lock-string-face))
    
+   #+end_src
+** Move line up/down
+   #+begin_src emacs-lisp
+     (defun move-line-up ()
+       (interactive)
+       (transpose-lines 1)
+       (forward-line -2))
+
+     (defun move-line-down ()
+       (interactive)
+       (forward-line 1)
+       (transpose-lines 1)
+       (forward-line -1))
+
+     (global-set-key (kbd "M-<up>") 'move-line-up)
+     (global-set-key (kbd "M-<down>") 'move-line-down)
    #+end_src
 * R-Related Configuration
 ** Force scroll on R-console
@@ -679,9 +695,9 @@
    (global-set-key (kbd "<C-M-up>") 'duplicate-line-up)
    (global-set-key (kbd "<C-M-down>") 'duplicate-line-down)
    #+END_SRC
-
-
-
-
-
+** Comment for german keyboard-layout
+   #+begin_src emacs-lisp
+   (global-set-key (kbd "<C-x C-S-,>") 'comment-line)
+   
+   #+end_src
 

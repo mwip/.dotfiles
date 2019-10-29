@@ -1,4 +1,4 @@
-#c+STARTUP: content
+#+STARTUP: content
 * Load Packages
 ** Refresh package contents first
    #+BEGIN_SRC emacs-lisp
@@ -644,7 +644,13 @@
    #+end_src
 
  
-
+** Org Edna
+   #+begin_src emacs-lisp
+     (use-package org-edna
+       :ensure t
+       :config
+       (org-edna-load))
+   #+end_src
 * Custom Shortcuts
 ** Custom Key Map
 *** Initialize keymap on =C-1=

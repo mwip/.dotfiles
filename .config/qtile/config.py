@@ -160,8 +160,12 @@ keys = [
     Key([mod, 'control'], 'Return', lazy.spawn('firefox')),
     # logout
     Key([mod, 'shift'], 'q', lazy.spawn("/home/loki/.config/qtile/dmenu_exit.sh")),
+    Key([mod], 'l', lazy.spawn("/home/loki/.config/qtile/lockscreen.sh")),
     Key([], 'XF86MonBrightnessDown', lazy.spawn('/home/loki/.config/qtile/brightness.sh -')),
     Key([], 'XF86MonBrightnessUp', lazy.spawn('/home/loki/.config/qtile/brightness.sh +')),
+    Key([], 'XF86AudioRaiseVolume', lazy.spawn('/home/loki/.config/qtile/adjust_volume.sh +')),
+    Key([], 'XF86AudioLowerVolume', lazy.spawn('/home/loki/.config/qtile/adjust_volume.sh -')),
+    
 ]
 
 # Mouse bindings and options

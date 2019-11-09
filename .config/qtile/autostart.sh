@@ -10,3 +10,6 @@ keepassxc &
 xrdb -merge ~/.Xresources &
 nm-applet &
 setxkbmap de &
+synology-drive & 
+syncthing-gtk &
+dunst &

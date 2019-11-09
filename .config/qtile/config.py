@@ -2,7 +2,7 @@ import os, subprocess, socket
 from libqtile import bar, hook, layout, widget #, extension
 from libqtile.command import lazy, Client
 from libqtile.config import Click, Drag, Group, Key, Screen
-
+import batterystatus
 
 wmname = 'LG3D'
 mod = 'mod4'
@@ -104,6 +104,10 @@ def go_to_prev_group():
 
     return __inner
 
+def poll_battery():
+#     return "test"
+    return batterystatus.battery_status()
+
 # Key bindings
 keys = [
     # Window manager controls
@@ -134,7 +138,7 @@ keys = [
 
     # Switch window focus to other pane(s) of stack
     # Key([mod], 'space', lazy.layout.next()),
-    Key([mod], 'space', lazy.spawn('dmenu_run -fn "Ubuntu Mono-14')),
+    Key([mod], 'space', lazy.spawn('dmenu_run -fn "Ubuntu Mono-14"')),
 
     # Toggle between different layouts as defined below
     Key([mod], 'Tab',    lazy.next_layout()),
@@ -158,17 +162,6 @@ keys = [
     Key([mod, 'shift'], 'q', lazy.spawn("/home/loki/.config/qtile/dmenu_exit.sh")),
     Key([], 'XF86MonBrightnessDown', lazy.spawn('/home/loki/.config/qtile/brightness.sh -')),
     Key([], 'XF86MonBrightnessUp', lazy.spawn('/home/loki/.config/qtile/brightness.sh +')),
-
-    
-    # Key(['mod4'], 't', lazy.run_extension(extension.DmenuRun(
-    #     dmenu_prompt=">",
-    #     dmenu_font="Andika-8",
-    #     background="#15181a",
-    #     foreground="#00ff00",
-    #     selected_background="#079822",
-    #     selected_foreground="#fff",
-    #     dmenu_height=24,  # Only supported by some dmenu forks
-    # ))),
 ]
 
 # Mouse bindings and options
@@ -222,12 +215,8 @@ layouts = [
         single_border_width = 2,
         margin = my_gaps,
     ),
-    layout.Columns(
-        border_width = 2,
-        single_border_width = 2,
-        margin = my_gaps, 
-    ),
     layout.TreeTab(),
+    layout.Floating(),
 ]
 
 floating_layout = layout.Floating()
@@ -240,7 +229,8 @@ def init_widgets_list():
             active_color = "FF0000",
             inactive_text = "",
             inactive_color = "222222",
-            font = "Ubuntu Mono Nerd"
+            font = "Ubuntu Mono Nerd Font",
+            fontsize = 16,
         ),
         widget.Sep(
             linewidth = 1,
@@ -250,7 +240,9 @@ def init_widgets_list():
             this_screen_border = '805300',
             this_current_screen_border = '805300',
             active = 'e69500',
-            inactive = '555555'
+            inactive = '555555',
+            font = "Ubuntu Mono Nerd Font",
+            fontsize = 16,
         ),
         widget.Sep(
             linewidth = 1,
@@ -258,8 +250,8 @@ def init_widgets_list():
         widget.TaskList(
             highlight_method = "block",
             fontsize = 12,
-            border = '805300'
-            
+            border = '805300',
+            font = "Ubuntu Mono Nerd Font"
         ),
         widget.Sep(
             linewidth = 1,
@@ -268,36 +260,57 @@ def init_widgets_list():
         widget.CPUGraph(
             fill_color = "e69500.3",
             graph_color = 'e69500',
-            border_color = '805300'
+            border_color = '805300',
+            font = "Ubuntu Mono Nerd Font",
+            fontsize = 16,
         ),
         widget.TextBox(""),
         widget.MemoryGraph(
             fill_color = "e69500.3",
             graph_color = 'e69500',
-            border_color = '805300'
+            border_color = '805300',
+            font = "Ubuntu Mono Nerd Font",
+            fontsize = 16,
         ),
-        widget.TextBox(""),
-        widget.NetGraph(
-            fill_color = "e69500.3",
-            graph_color = 'e69500',
-            border_color = '805300'
-        ),
-        widget.Systray(
-            padding = 5
-        ),
-        widget.BatteryIcon(
-            fontsize = 0
-        ),
-        widget.Battery(),
+        # widget.TextBox(""),
+        # widget.NetGraph(
+        #     fill_color = "e69500.3",
+        #     graph_color = 'e69500',
+        #     border_color = '805300'
+        # ),
         widget.Sep(
             linewidth = 1,
             padding = 5),
-        widget.CurrentLayout(),
+        widget.Systray(
+            padding = 5
+        ),
+        widget.Sep(
+            padding = 5,
+            linewidth = 1,
+        ),
+        widget.BatteryIcon(
+            fontsize = 0,
+            update_interval = 5
+        ),
+        widget.GenPollText(
+            func = poll_battery,
+            update_interval = 5,
+            font = "Ubuntu Mono Nerd Font",
+        ),
+        widget.Sep(
+            linewidth = 1,
+            padding = 5),
+        widget.CurrentLayout(
+            font = "Ubuntu Mono Nerd Font",
+            fontsize = 16,
+        ),
         widget.Sep(
             linewidth = 1,
             padding = 5),
         widget.Clock(
-            format = "%Y-%m-%d - %H:%M:%S"
+            format = "%Y-%m-%d - %H:%M:%S",
+            font = "Ubuntu Mono Nerd Font",
+            fontsize = 16,
         )
     ]
     return widget_list
@@ -319,8 +332,8 @@ def init_widgets_screen3():
 screens = [
     Screen(top=bar.Bar(widgets = init_widgets_screen1(),
                        opacity = 0.95, size = 22)), 
-    Screen(top=bar.Bar(widgets = init_widgets_screen2(),
-                       opacity = 0.95, size = 22)),
+    # Screen(top=bar.Bar(widgets = init_widgets_screen2(),
+    #                    opacity = 0.95, size = 22)),
     # Screen(top=bar.Bar(widgets = init_widgets_screen3(),
     #                    opacity = 0.95, size = 22)),
 ]
@@ -336,12 +349,6 @@ auto_fullscreen = True
 def autostart():
     home = os.path.expanduser('~/.config/qtile/autostart.sh')
     subprocess.call([home])
-
-# autostart every time
-# @hook.subscribe.startup
-# def autostart():
-#     home = os.path.expanduser('~/.config/qtile/autostart_always.sh')
-#     subprocess.call([home])
 
 def main(qtile):
     ''' This function is called when Qtile starts. '''

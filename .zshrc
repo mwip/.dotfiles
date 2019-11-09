@@ -128,7 +128,7 @@ powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
 
-export PATH=$PATH:/home/loki/geoprocessors
+export PATH=$PATH:/home/loki/geoprocessors:$HOME/bin
 
 chpwd() ls
 

@@ -272,6 +272,7 @@
    #+begin_src emacs-lisp
    (global-set-key (kbd "\e\em") (lambda () (interactive) (find-file "~/myorg.org")))   
    (global-set-key (kbd "\e\ec") (lambda () (interactive) (find-file "~/.emacs.d/configuration.org")))
+   (global-set-key (kbd "\e\eq") (lambda () (interactive) (find-file "~/.config/qtile/config.py")))
    #+END_SRC
 ** Languagetool
    #+begin_src emacs-lisp

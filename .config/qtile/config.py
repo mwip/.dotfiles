@@ -2,6 +2,7 @@ import os, subprocess, socket, re
 from libqtile import bar, hook, layout, widget #, extension
 from libqtile.command import lazy, Client
 from libqtile.config import Click, Drag, Group, Key, Screen
+from rules import Rules
 import batterystatus
 
 wmname = 'LG3D'
@@ -150,14 +151,8 @@ keys = [
     #############################################################################
     # Own shortcuts                                                             #
     #############################################################################
-    # resizing windows
-    # Key([mod, "control"], "j", lazy.layout.grow_down()),
-    # Key([mod, "control"], "k", lazy.layout.grow_up()),
-    # Key([mod, "control"], "h", lazy.layout.grow_left()),
-    # Key([mod, "control"], "l", lazy.layout.grow_right()),
     # # emacs
     Key(['control', 'mod1'], 'e', lazy.spawn('emacs')),
-    # Key(['control', mod], 'n', lazy.switch_screen()),
     # pcmanfm 
     Key([mod], 'e', lazy.spawn('/home/loki/.config/qtile/dmenu_filemanager.sh')),
     # firefox
@@ -165,6 +160,7 @@ keys = [
     # logout
     Key([mod, 'shift'], 'q', lazy.spawn("/home/loki/.config/qtile/dmenu_exit.sh")),
     Key([mod], 'l', lazy.spawn("/home/loki/.config/qtile/lockscreen.sh")),
+    # volume control
     Key([], 'XF86MonBrightnessDown', lazy.spawn('/home/loki/.config/qtile/brightness.sh -')),
     Key([], 'XF86MonBrightnessUp', lazy.spawn('/home/loki/.config/qtile/brightness.sh +')),
     Key([], 'XF86AudioRaiseVolume', lazy.spawn('/home/loki/.config/qtile/adjust_volume.sh +')),
@@ -204,8 +200,9 @@ for i in groups:
     # mod + shift + letter of group = switch to & move focused window to group
     keys.append(Key([mod, 'shift'], i.name, lazy.window.togroup(i.name)))
 
+my_rules = Rules()
+dgroups_app_rules = my_rules.init_rules()
 dgroups_key_binder = None
-dgroups_app_rules = []
 
 # Layouts
 layouts = [

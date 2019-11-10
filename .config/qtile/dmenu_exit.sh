@@ -22,8 +22,8 @@ function confirm {
 
 function execute {
     if [ "$CHOICE" == "Lock" ];then
-	ACTION="echo TODO"
-	#ACTION="/usr/bin/slock"
+	# ACTION="echo TODO"
+	ACTION="$HOME/.config/qtile/lockscreen.sh"
     elif [ "$CHOICE" == "Logout" ];then
 	ACTION="$HOME/.config/qtile/logoff.py"
     elif [ "$CHOICE" == "Suspend" ];then

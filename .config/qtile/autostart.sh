@@ -13,4 +13,7 @@ setxkbmap de &
 syncthing-gtk &
 dunst &
 redshift-gtk -t 6500:3000 -l 48.13:11.57 & 
-sleep 60 && synology-drive & 
+$HOME/.config/qtile/deactivateBluetooth &
+blueman-applet &
+libinput-gestures-setup restart &
+sleep 60 && synology-drive &

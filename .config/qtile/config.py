@@ -1,4 +1,4 @@
-import os, subprocess, socket
+import os, subprocess, socket, re
 from libqtile import bar, hook, layout, widget #, extension
 from libqtile.command import lazy, Client
 from libqtile.config import Click, Drag, Group, Key, Screen
@@ -107,6 +107,10 @@ def go_to_prev_group():
 def poll_battery():
 #     return "test"
     return batterystatus.battery_status()
+
+def poll_volume():
+    vol = subprocess.run(['/usr/bin/pamixer','--get-volume-human'], stdout=subprocess.PIPE).stdout.decode('utf-8')
+    return "墳 " + re.sub('\n', '', vol)
 
 # Key bindings
 keys = [
@@ -286,9 +290,6 @@ def init_widgets_list():
         widget.Sep(
             linewidth = 1,
             padding = 5),
-        widget.Sep(
-            linewidth = 1,
-            padding = 5),
         widget.CurrentLayout(
             font = "Ubuntu Mono Nerd Font",
             fontsize = 16,
@@ -312,13 +313,22 @@ def init_widgets_list():
         widget.Sep(
             linewidth = 1,
             padding = 5),
-        widget.Volume(
-            theme_path = '/usr/share/icons/breeze-dark/status/22/',
-            # device = 'alsa_output.pci-0000_00_1f.3.analog-stereo',
-            # get_volume_command = "pamixer --get-volume",
+        widget.GenPollText(
+            func = poll_volume,
+            update_interval = 1,
             font = "Ubuntu Mono Nerd Font",
-            fontsize = 16,            
         ),
+        # widget.Volume(
+        #     #theme_path = '/usr/share/icons/breeze-dark/status/22/',
+        #     #device = 'alsa_output.pci-0000_00_1f.3.analog-stereo',
+        #     volume_app = "pamixer",
+        #     get_volume_command = "pamixer --get-volume-human",
+        #     volume_down_command = "pamixer -d 5",
+        #     volume_up_command = "pamixer -i 5",
+        #     mute_command = "pamixer -t",
+        #     font = "Ubuntu Mono Nerd Font",
+        #     fontsize = 16,            
+        # ),
         widget.Sep(
             linewidth = 1,
             padding = 5),

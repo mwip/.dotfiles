@@ -18,10 +18,5 @@ fi
    
 if [ $1 == 'm' ]
 then
-    if [ $(pamixer --get-volume-human) == 'muted' ]
-    then
-	pamixer -u && gst-play-1.0 $HOME/.config/qtile/audio-volume-change.oga
-    else
-	pamixer -m
-    fi
+    pamixer -t && gst-play-1.0 $HOME/.config/qtile/audio-volume-change.oga
 fi

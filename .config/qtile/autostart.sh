@@ -13,4 +13,4 @@ setxkbmap de &
 syncthing-gtk &
 dunst &
 redshift-gtk -t 6500:3000 -l 48.13:11.57 & 
-sleep 30 && synology-drive & 
+sleep 60 && synology-drive & 

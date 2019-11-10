@@ -165,6 +165,7 @@ keys = [
     Key([], 'XF86MonBrightnessUp', lazy.spawn('/home/loki/.config/qtile/brightness.sh +')),
     Key([], 'XF86AudioRaiseVolume', lazy.spawn('/home/loki/.config/qtile/adjust_volume.sh +')),
     Key([], 'XF86AudioLowerVolume', lazy.spawn('/home/loki/.config/qtile/adjust_volume.sh -')),
+    Key([], 'XF86AudioMute', lazy.spawn('/home/loki/.config/qtile/adjust_volume.sh m'))
     
 ]
 
@@ -285,6 +286,13 @@ def init_widgets_list():
         widget.Sep(
             linewidth = 1,
             padding = 5),
+        widget.Sep(
+            linewidth = 1,
+            padding = 5),
+        widget.CurrentLayout(
+            font = "Ubuntu Mono Nerd Font",
+            fontsize = 16,
+        ),
         widget.Systray(
             padding = 5
         ),
@@ -304,9 +312,12 @@ def init_widgets_list():
         widget.Sep(
             linewidth = 1,
             padding = 5),
-        widget.CurrentLayout(
+        widget.Volume(
+            theme_path = '/usr/share/icons/breeze-dark/status/22/',
+            # device = 'alsa_output.pci-0000_00_1f.3.analog-stereo',
+            # get_volume_command = "pamixer --get-volume",
             font = "Ubuntu Mono Nerd Font",
-            fontsize = 16,
+            fontsize = 16,            
         ),
         widget.Sep(
             linewidth = 1,

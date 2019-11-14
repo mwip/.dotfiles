@@ -1,3 +1,3 @@
 #!/bin/bash
 
-xbacklight $1 10
+xbacklight $1 10 -time 0

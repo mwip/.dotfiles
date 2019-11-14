@@ -4,6 +4,7 @@ from libqtile.command import lazy, Client
 from libqtile.config import Click, Drag, Group, Key, Screen
 from rules import Rules
 import batterystatus
+import get_brightness
 
 wmname = 'LG3D'
 mod = 'mod4'
@@ -109,6 +110,9 @@ def poll_battery():
 #     return "test"
     return batterystatus.battery_status()
 
+def poll_brightness():
+    return get_brightness.get_brightness()
+
 def poll_volume():
     vol = subprocess.run(['/usr/bin/pamixer','--get-volume-human'], stdout=subprocess.PIPE).stdout.decode('utf-8')
     return "墳 " + re.sub('\n', '', vol)
@@ -165,8 +169,9 @@ keys = [
     Key([], 'XF86MonBrightnessUp', lazy.spawn('/home/loki/.config/qtile/brightness.sh +')),
     Key([], 'XF86AudioRaiseVolume', lazy.spawn('/home/loki/.config/qtile/adjust_volume.sh +')),
     Key([], 'XF86AudioLowerVolume', lazy.spawn('/home/loki/.config/qtile/adjust_volume.sh -')),
-    Key([], 'XF86AudioMute', lazy.spawn('/home/loki/.config/qtile/adjust_volume.sh m'))
-    
+    Key([], 'XF86AudioMute', lazy.spawn('/home/loki/.config/qtile/adjust_volume.sh m')),
+    Key([], 'Print', lazy.spawn("scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/Pictures/screenshots/ && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/$f && notify-send \"screenshot copied to clipboard\"'")),
+    Key(['shift'], 'Print', lazy.spawn("scrot -s '%Y-%m-%d_$wx$h.png' -e 'mv $f /tmp/shot.png && xclip -selection clipboard -t image/png -i /tmp/shot.png && notify-send \"screenshot copied to clipboard\"'")),    
 ]
 
 # Mouse bindings and options
@@ -291,6 +296,10 @@ def init_widgets_list():
             font = "Ubuntu Mono Nerd Font",
             fontsize = 16,
         ),
+        widget.Sep(
+            padding = 5,
+            linewidth = 1,
+        ),
         widget.Systray(
             padding = 5
         ),
@@ -312,6 +321,14 @@ def init_widgets_list():
             padding = 5),
         widget.GenPollText(
             func = poll_volume,
+            update_interval = 1,
+            font = "Ubuntu Mono Nerd Font",
+        ),
+        widget.Sep(
+            linewidth = 1,
+            padding = 5),
+        widget.GenPollText(
+            func = poll_brightness,
             update_interval = 1,
             font = "Ubuntu Mono Nerd Font",
         ),

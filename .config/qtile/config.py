@@ -321,7 +321,7 @@ def init_widgets_list():
             padding = 5),
         widget.GenPollText(
             func = poll_volume,
-            update_interval = 1,
+            update_interval = 5,
             font = "Ubuntu Mono Nerd Font",
         ),
         widget.Sep(
@@ -329,7 +329,7 @@ def init_widgets_list():
             padding = 5),
         widget.GenPollText(
             func = poll_brightness,
-            update_interval = 1,
+            update_interval = 5,
             font = "Ubuntu Mono Nerd Font",
         ),
         # widget.Volume(

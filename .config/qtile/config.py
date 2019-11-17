@@ -296,9 +296,12 @@ def init_widgets_list():
             linewidth = 1,
             padding = 5),
         widget.CurrentLayout(
-            font = "Ubuntu Mono Nerd Font",
-            fontsize = 16,
+           font = "Ubuntu Mono Nerd Font",
+           fontsize = 16,
         ),
+        # widget.CurrentLayoutIcon(
+            # custom_icon_paths = '/home/loki/.icons/layout-icons/'
+        # ),
         widget.Sep(
             padding = 5,
             linewidth = 1,
@@ -310,10 +313,11 @@ def init_widgets_list():
             padding = 5,
             linewidth = 1,
         ),
-        widget.BatteryIcon(
-            fontsize = 0,
-            update_interval = 5
-        ),
+        #widget.BatteryIcon(
+        #    fontsize = 0,
+            #theme_path = '/home/loki/.icons/',
+        #    update_interval = 5
+        #),
         widget.GenPollText(
             func = poll_battery,
             update_interval = 5,

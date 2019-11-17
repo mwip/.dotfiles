@@ -24,7 +24,7 @@ def battery_status():
     percentage = re.search("percentage: *(.+?)\n", string)
 
     if (state.group(1) == "charging"):
-        return percentage.group(1) + " ﮣ " + convert_time(time_to_full.group(1))
+        return " ﮣ " + percentage.group(1) + convert_time(time_to_full.group(1))
         
     if (state.group(1) == "discharging"):
-        return percentage.group(1) + "  " + convert_time(time_to_empty.group(1))
+        return "  " + percentage.group(1) + convert_time(time_to_empty.group(1))

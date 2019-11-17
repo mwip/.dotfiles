@@ -170,8 +170,8 @@ keys = [
     Key([], 'XF86AudioRaiseVolume', lazy.spawn('/home/loki/.config/qtile/adjust_volume.sh +')),
     Key([], 'XF86AudioLowerVolume', lazy.spawn('/home/loki/.config/qtile/adjust_volume.sh -')),
     Key([], 'XF86AudioMute', lazy.spawn('/home/loki/.config/qtile/adjust_volume.sh m')),
-    Key([], 'Print', lazy.spawn("scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/Pictures/screenshots/ && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/$f && notify-send \"screenshot copied to clipboard\"'")),
-    Key(['shift'], 'Print', lazy.spawn("scrot -s '%Y-%m-%d_$wx$h.png' -e 'mv $f /tmp/shot.png && xclip -selection clipboard -t image/png -i /tmp/shot.png && notify-send \"screenshot copied to clipboard\"'")),    
+    Key([mod], 's', lazy.spawn('/home/loki/.config/qtile/screenshot_full.sh')),
+    Key([mod, 'shift'], 's', lazy.spawn('/home/loki/.config/qtile/screenshot_region.sh')),    
 ]
 
 # Mouse bindings and options

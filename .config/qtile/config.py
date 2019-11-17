@@ -10,6 +10,7 @@ wmname = 'LG3D'
 mod = 'mod4'
 my_gaps = 15
 my_term = 'urxvtc'
+script_path = os.path.expanduser('~/.scripts/')
 
 ##### DEFINING SOME WINDOW FUNCTIONS #####
 
@@ -28,7 +29,7 @@ def window_to_next_group(qtile):
 # logout with dmenu check for security
 @lazy.function
 def exit_menu(qtile):
-    cmd = os.path.expanduser('~/.config/qtile/dmenu_exit.sh')
+    cmd = script_path + 'dmenu_exit.sh'
     os.system(cmd)
 
 def window_to_prev_group():
@@ -158,20 +159,22 @@ keys = [
     # # emacs
     Key(['control', 'mod1'], 'e', lazy.spawn('emacs')),
     # pcmanfm 
-    Key([mod], 'e', lazy.spawn('/home/loki/.config/qtile/dmenu_filemanager.sh')),
+    Key([mod], 'e', lazy.spawn(script_path + 'dmenu_filemanager.sh')),
     # firefox
     Key([mod, 'control'], 'Return', lazy.spawn('firefox')),
     # logout
-    Key([mod, 'shift'], 'q', lazy.spawn("/home/loki/.config/qtile/dmenu_exit.sh")),
-    Key([mod], 'l', lazy.spawn("/home/loki/.config/qtile/lockscreen.sh")),
+    Key([mod, 'shift'], 'q', lazy.spawn(script_path + 'dmenu_exit.sh')),
+    Key([mod], 'l', lazy.spawn(script_path + 'lockscreen.sh')),
+    # brightness control
+    Key([], 'XF86MonBrightnessDown', lazy.spawn(script_path + 'brightness.sh -')),
+    Key([], 'XF86MonBrightnessUp', lazy.spawn(script_path + 'brightness.sh +')),
     # volume control
-    Key([], 'XF86MonBrightnessDown', lazy.spawn('/home/loki/.config/qtile/brightness.sh -')),
-    Key([], 'XF86MonBrightnessUp', lazy.spawn('/home/loki/.config/qtile/brightness.sh +')),
-    Key([], 'XF86AudioRaiseVolume', lazy.spawn('/home/loki/.config/qtile/adjust_volume.sh +')),
-    Key([], 'XF86AudioLowerVolume', lazy.spawn('/home/loki/.config/qtile/adjust_volume.sh -')),
-    Key([], 'XF86AudioMute', lazy.spawn('/home/loki/.config/qtile/adjust_volume.sh m')),
-    Key([mod], 's', lazy.spawn('/home/loki/.config/qtile/screenshot_full.sh')),
-    Key([mod, 'shift'], 's', lazy.spawn('/home/loki/.config/qtile/screenshot_region.sh')),    
+    Key([], 'XF86AudioRaiseVolume', lazy.spawn(script_path + 'adjust_volume.sh +')),
+    Key([], 'XF86AudioLowerVolume', lazy.spawn(script_path + 'adjust_volume.sh -')),
+    Key([], 'XF86AudioMute', lazy.spawn(script_path + 'adjust_volume.sh m')),
+    # screenshots
+    Key([mod], 's', lazy.spawn(script_path + 'screenshot_full.sh')),
+    Key([mod, 'shift'], 's', lazy.spawn(script_path + 'screenshot_region.sh')),    
 ]
 
 # Mouse bindings and options
@@ -386,7 +389,7 @@ auto_fullscreen = True
 
 @hook.subscribe.startup_once
 def autostart():
-    home = os.path.expanduser('~/.config/qtile/autostart.sh')
+    home = script_path + 'autostart.sh'
     subprocess.call([home])
 
 def main(qtile):

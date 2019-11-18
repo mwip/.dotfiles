@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DMENU="/usr/bin/dmenu -i -p"
-FOLDERS="home\nDownloads/\nDocuments/\n.config"
+FOLDERS="home\nCloudStation\nDownloads/\nDocuments/\n.config"
 
 function choose {
     CHOICE=$(echo -e $FOLDERS | $DMENU "Launch file browser at:" )

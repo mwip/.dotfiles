@@ -12,18 +12,18 @@ class Function(object):
     def window_to_prev_group():
         @lazy.function
         def __inner(qtile):
-            if qtile.currentWindow is not None:
-                i = qtile.groups.index(qtile.currentGroup)
-                qtile.currentWindow.togroup(qtile.groups[i - 1].name)
+            if qtile.current_window is not None:
+                i = qtile.groups.index(qtile.current_group)
+                qtile.current_window.togroup(qtile.groups[i - 1].name)
         return __inner
 
     @staticmethod
-    def window_to_next_group(qtile):
+    def window_to_next_group():
         @lazy.function
         def __inner(qtile):
-            if qtile.currentWindow is not None:
-                i = qtile.groups.index(qtile.currentGroup)
-                qtile.currentWindow.togroup(qtile.groups[i + 1].name)
+            if qtile.current_window is not None:
+                i = qtile.groups.index(qtile.current_group)
+                qtile.current_window.togroup(qtile.groups[i + 1].name)
         return __inner
 
     # logout with dmenu check for security
@@ -39,48 +39,48 @@ class Function(object):
     def window_to_prev_group():
         @lazy.function
         def __inner(qtile):
-            if qtile.currentWindow is not None:
-                index = qtile.groups.index(qtile.currentGroup)
+            if qtile.current_window is not None:
+                index = qtile.groups.index(qtile.current_group)
                 if index > 0:
-                    qtile.currentWindow.togroup(qtile.groups[index - 1].name)
+                    qtile.current_window.togroup(qtile.groups[index - 1].name)
                 else:
-                    qtile.currentWindow.togroup(qtile.groups[len(qtile.groups) - 2].name)
+                    qtile.current_window.togroup(qtile.groups[len(qtile.groups) - 2].name)
         return __inner
 
     @staticmethod
     def window_to_next_group():
         @lazy.function
         def __inner(qtile):
-            if qtile.currentWindow is not None:
-                index = qtile.groups.index(qtile.currentGroup)
+            if qtile.current_window is not None:
+                index = qtile.groups.index(qtile.current_group)
                 if index < len(qtile.groups) - 2:
-                    qtile.currentWindow.togroup(qtile.groups[index + 1].name)
+                    qtile.current_window.togroup(qtile.groups[index + 1].name)
                 else:
-                    qtile.currentWindow.togroup(qtile.groups[0].name)
+                    qtile.current_window.togroup(qtile.groups[0].name)
         return __inner
 
     @staticmethod
     def window_to_prev_screen():
         @lazy.function
         def __inner(qtile):
-            if qtile.currentWindow is not None:
-                index = qtile.screens.index(qtile.currentScreen)
+            if qtile.current_window is not None:
+                index = qtile.screens.index(qtile.current_screen)
                 if index > 0:
-                    qtile.currentWindow.togroup(qtile.screens[index - 1].group.name)
+                    qtile.current_window.togroup(qtile.screens[index - 1].group.name)
                 else:
-                    qtile.currentWindow.togroup(qtile.screens[len(qtile.screens) - 1].group.name)
+                    qtile.current_window.togroup(qtile.screens[len(qtile.screens) - 1].group.name)
         return __inner
 
     @staticmethod
     def window_to_next_screen():
         @lazy.function
         def __inner(qtile):
-            if qtile.currentWindow is not None:
-                index = qtile.screens.index(qtile.currentScreen)
+            if qtile.current_window is not None:
+                index = qtile.screens.index(qtile.current_screen)
                 if index < len(qtile.screens) - 1:
-                    qtile.currentWindow.togroup(qtile.screens[index + 1].group.name)
+                    qtile.current_window.togroup(qtile.screens[index + 1].group.name)
                 else:
-                    qtile.currentWindow.togroup(qtile.screens[0].group.name)
+                    qtile.current_window.togroup(qtile.screens[0].group.name)
         return __inner
 
 
@@ -88,7 +88,7 @@ class Function(object):
     def go_to_next_group():
         @lazy.function
         def __inner(qtile):
-            index = qtile.groups.index(qtile.currentGroup)
+            index = qtile.groups.index(qtile.current_group)
             if index < len(qtile.groups) - 2:
                 qtile.groups[index + 1].cmd_toscreen()
             else:
@@ -100,7 +100,7 @@ class Function(object):
     def go_to_prev_group():
         @lazy.function
         def __inner(qtile):
-            index = qtile.groups.index(qtile.currentGroup)
+            index = qtile.groups.index(qtile.current_group)
             if index > 0:
                 qtile.groups[index - 1].cmd_toscreen()
             else:

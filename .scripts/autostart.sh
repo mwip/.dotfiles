@@ -16,6 +16,7 @@ redshift-gtk -t 6500:3000 -l 48.13:11.57 &
 $HOME/.config/qtile/deactivateBluetooth &
 blueman-applet &
 libinput-gestures-setup restart &
+udiskie &
 # Device specific autostarts 
 if [ $(hostname) == "bifrost" ] 
 then

@@ -66,7 +66,10 @@ class Keys(object):
             Key([], 'XF86AudioMute', lazy.spawn(script_path + 'adjust_volume.sh m')),
             # screenshots
             Key([mod], 's', lazy.spawn(script_path + 'screenshot_full.sh')),
-            Key([mod, 'shift'], 's', lazy.spawn(script_path + 'screenshot_region.sh')),    
+            Key([mod, 'shift'], 's', lazy.spawn(script_path + 'screenshot_region.sh')),
+            Key([], 'XF86AudioPlay', lazy.spawn(script_path + 'mpc_playpause.sh')), 
+            Key([], 'XF86AudioNext', lazy.spawn('mpc next')), 
+            Key([], 'XF86AudioPrev', lazy.spawn('mpc prev')), 
         ]
     
 class Mouses(object):

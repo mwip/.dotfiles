@@ -1,5 +1,5 @@
 #!/bin/bash
-ICON=$HOME/.config/qtile/icon.png
+ICON=$HOME/.scripts/icon.png
 TMPBG=/tmp/screen.png
 scrot $TMPBG
 convert $TMPBG -scale 5% -scale 2000% $TMPBG

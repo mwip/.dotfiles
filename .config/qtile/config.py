@@ -51,9 +51,13 @@ layouts = obj_layouts.init_layouts(my_gaps)
 floating_layout = layout.Floating()
 
 # Widgets
-my_widgets1 = Widgets(hostname, primaryMonitor = False)
-my_widgets2 = Widgets(hostname, primaryMonitor = True)
-my_widgets3 = Widgets(hostname, primaryMonitor = False)
+whichPrimary = {
+    'bifrost': [True, False, False],
+    'walhall': [False, True, False]
+}
+my_widgets1 = Widgets(hostname, primaryMonitor = whichPrimary[hostname][0])
+my_widgets2 = Widgets(hostname, primaryMonitor = whichPrimary[hostname][1])
+#my_widgets3 = Widgets(hostname, primaryMonitor = whichPrimary[hostname][2])
 
 # Screens with Widgets
 screens = [

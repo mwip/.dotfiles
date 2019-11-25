@@ -169,6 +169,7 @@ class Widgets(object):
                     func = Function.poll_battery,
                     update_interval = 5,
                     font = "Ubuntu Mono Nerd Font",
+                    fontsize = 16,
                 ),
             ],
             [
@@ -185,6 +186,7 @@ class Widgets(object):
                     func = Function.poll_volume,
                     update_interval = 5,
                     font = "Ubuntu Mono Nerd Font",
+                    fontsize = 16,
             ),
             ],
             [
@@ -201,6 +203,7 @@ class Widgets(object):
                     func = Function.poll_brightness,
                     update_interval = 5,
                     font = "Ubuntu Mono Nerd Font",
+                    fontsize = 16,
                 ),
             ],
             [

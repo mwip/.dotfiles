@@ -69,7 +69,10 @@ class Keys(object):
             Key([mod, 'shift'], 's', lazy.spawn(script_path + 'screenshot_region.sh')),
             Key([], 'XF86AudioPlay', lazy.spawn(script_path + 'mpc_playpause.sh')), 
             Key([], 'XF86AudioNext', lazy.spawn('mpc next')), 
-            Key([], 'XF86AudioPrev', lazy.spawn('mpc prev')), 
+            Key([], 'XF86AudioPrev', lazy.spawn('mpc prev')),
+            # screens and monitors
+            Key([mod], 'p', lazy.spawn(script_path + 'dmenu_displayselect.sh')),
+            
         ]
     
 class Mouses(object):

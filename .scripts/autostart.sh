@@ -23,6 +23,6 @@ then
     # remap lenovo print key to context menu key
     xmodmap -e "keycode 107 = Menu" &
 fi
-sleep 60 && synology-drive &
+#sleep 60 && synology-drive &
 
 

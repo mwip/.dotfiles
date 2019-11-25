@@ -29,4 +29,3 @@ def battery_status():
     if (state.group(1) == "discharging"):
         return percentage.group(1) + "  " + convert_time(time_to_empty.group(1))
 
-print(battery_status())

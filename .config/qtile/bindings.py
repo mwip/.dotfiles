@@ -15,7 +15,7 @@ class Keys(object):
             # Window manager controls
             Key([mod, 'control'], 'r', lazy.restart()),
             # Key([mod, 'control'], 'q', lazy.shutdown()),
-            Key([mod], 'r', lazy.spawn('dmenu_run -fn "Ubuntu Mono-14"')),
+            Key([mod], 'r', lazy.spawn(script_path + 'dmenu_recent.sh')),
             Key([mod], 'Return', lazy.spawn(my_term)),
             Key([mod], 'q',      lazy.window.kill()),
             
@@ -40,7 +40,7 @@ class Keys(object):
             
             # Switch window focus to other pane(s) of stack
             # Key([mod], 'space', lazy.layout.next()),
-            Key([mod], 'space', lazy.spawn('dmenu_run -fn "Ubuntu Mono-14"')),
+            Key([mod], 'space', lazy.spawn(script_path + 'dmenu_recent.sh')),
             
             # Toggle between different layouts as defined below
             Key([mod], 'Tab',    lazy.next_layout()),

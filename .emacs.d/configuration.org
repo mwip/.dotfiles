@@ -662,13 +662,17 @@
      (setq org-deadline-warning-days 7)
    #+end_src
 
- 
 ** Org Edna
    #+begin_src emacs-lisp
      (use-package org-edna
        :ensure t
        :config
        (org-edna-load))
+   #+end_src
+** Org-ref
+   #+begin_src
+   (use-package org-ref
+      :ensure t)
    #+end_src
 * Custom Shortcuts
 ** Custom Key Map

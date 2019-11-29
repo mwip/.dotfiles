@@ -13,11 +13,5 @@ class Layouts(object):
                 single_border_width = 2,
                 margin = my_gaps,
             ),
-            layout.Matrix(
-                border_width = 2,
-                single_border_width = 2,
-                margin = my_gaps,
-            ),
             layout.TreeTab(),
-            layout.Floating(),
         ]

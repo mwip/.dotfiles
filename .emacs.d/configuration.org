@@ -274,6 +274,7 @@
    (global-set-key (kbd "\e\es") (lambda () (interactive) (find-file "~/shopping.org")))   
    (global-set-key (kbd "\e\ec") (lambda () (interactive) (find-file "~/.emacs.d/configuration.org")))
    (global-set-key (kbd "\e\eq") (lambda () (interactive) (find-file "~/.config/qtile/config.py")))
+   (global-set-key (kbd "\e\ea") (lambda () (interactive) (find-file "~/org-diss/dissertation.org")))
    #+END_SRC
 ** Languagetool
    #+begin_src emacs-lisp
@@ -370,7 +371,7 @@
      (add-hook 'prog-mode-hook 'hexcolour-add-to-font-lock)
      (add-hook 'python-mode-hook 'hexcolour-add-to-font-lock)
      (add-hook 'org-mode-hook 'hexcolour-add-to-font-lock)
-     (add-hook 'text-mode-hook 'hexcolour-acdd-to-font-lock)
+     (add-hook 'text-mode-hook 'hexcolour-add-to-font-lock)
    #+END_SRC
 * Coding-Related Configuration
 ** Projects with projectile
@@ -670,10 +671,15 @@
        (org-edna-load))
    #+end_src
 ** Org-ref
-   #+begin_src
-   (use-package org-ref
-      :ensure t)
-   #+end_src
+   #+BEGIN_SRC emacs-lisp
+     (use-package org-ref
+       :ensure t)
+     (setq org-latex-pdf-process
+                   '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+                     "bibtex %b"
+                     "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+                     "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+   #+END_SRC
 * Custom Shortcuts
 ** Custom Key Map
 *** Initialize keymap on =C-1=

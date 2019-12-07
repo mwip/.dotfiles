@@ -23,6 +23,11 @@ then
     # remap lenovo print key to context menu key
     xmodmap -e "keycode 107 = Menu" &
 fi
+if [ $(hostname) == "walhall" ]
+then
+    # start mpd notifications (using dunst)
+    mpDris2 &
+fi
 #sleep 60 && synology-drive &
 
 

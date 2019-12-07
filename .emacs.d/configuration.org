@@ -513,8 +513,8 @@
        (transpose-lines 1)
        (forward-line -1))
 
-     (global-set-key (kbd "M-<up>") 'move-line-up)
-     (global-set-key (kbd "M-<down>") 'move-line-down)
+     (global-set-key (kbd "C-M-<up>") 'move-line-up)
+     (global-set-key (kbd "C-M-<down>") 'move-line-down)
    #+end_src
 * R-Related Configuration
 ** Force scroll on R-console
@@ -727,8 +727,8 @@
      (next-line 1)
      (yank)
    )
-   (global-set-key (kbd "<C-M-up>") 'duplicate-line-up)
-   (global-set-key (kbd "<C-M-down>") 'duplicate-line-down)
+   (global-set-key (kbd "<M-S-up>") 'duplicate-line-up)
+   (global-set-key (kbd "<M-S-down>") 'duplicate-line-down)
    #+END_SRC
 ** Comment for german keyboard-layout
    #+begin_src emacs-lisp

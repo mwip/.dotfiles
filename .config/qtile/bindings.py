@@ -16,6 +16,7 @@ class Keys(object):
             Key([mod, 'control'], 'r', lazy.restart()),
             # Key([mod, 'control'], 'q', lazy.shutdown()),
             Key([mod], 'r', lazy.spawn(script_path + 'dmenu_recent.sh')),
+            Key([mod, "mod1"], 'r', lazy.spawn(script_path + 'dmenu_removeRecent.sh')),
             Key([mod], 'Return', lazy.spawn(my_term)),
             Key([mod], 'q',      lazy.window.kill()),
             

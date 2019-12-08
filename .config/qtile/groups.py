@@ -1,4 +1,4 @@
-from libqtile.config import Group, Key
+from libqtile.config import Group, Key, Match
 from libqtile.command import lazy
 
 class Groups(object):
@@ -6,12 +6,12 @@ class Groups(object):
     def init_groups(self):
         
         return [
-            Group('1', label = '1:'),#, matches = Match(title=["Firefox"])),
-            Group('2', label = '2:'),#, matches = Match(title=["emacs"])),
+            Group('1', label = '1:'), #matches = Match(title=["Firefox"])),
+            Group('2', label = '2:'), #matches = Match(title=["emacs@walhall"])),
             Group('3', label = '3:'),
             Group('4', label = '4:'),
             Group('5', label = '5:'),
-            Group('6', label = '6:ﱘ'),
+            Group('6', label = '6:ﱘ'), #matches = Match(wm_class = ["terminator"])),
             Group('7', label = '7:'),
             Group('8', label = '8:'),
             Group('9', label = '9:'),

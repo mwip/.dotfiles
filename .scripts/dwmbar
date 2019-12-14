@@ -1,5 +1,7 @@
 #! /usr/bin/bash
 
+home="/home/loki/"
+
 dte(){
   dte="$(date +"%Y-%m-%d %H:%M")"
   echo -e "$dte"
@@ -8,6 +10,20 @@ dte(){
 mem(){
   mem=`free | awk '/Mem/ {printf "%d MiB/%d MiB\n", $3 / 1024.0, $2 / 1024.0 }'`
   echo -e "$mem"
+}
+
+bat(){
+    bat="$($home/.scripts/batterystatus.sh)"
+    echo -e "$bat"
+}
+
+bri(){
+    bri="$($home/.scripts/get_brightness.sh)"
+    echo -e "$bri"
+}
+
+vol(){
+    echo -e "墳 $(pamixer --get-volume-human)"
 }
 
 cpu(){
@@ -20,7 +36,7 @@ cpu(){
   echo -e "$cpu% cpu"
 }
 
-while true; do
-     xsetroot -name "$(cpu) | $(mem) | $(dte)"
-     sleep 10s    # Update time every ten seconds
-done &
+while true; do 
+	xsetroot -name "$(cpu) | $(mem) | $(bat) | $(vol) | $(bri) | $(dte)"
+	sleep 10
+done

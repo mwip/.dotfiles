@@ -22,10 +22,9 @@ function confirm {
 
 function execute {
     if [ "$CHOICE" == "Lock" ];then
-	# ACTION="echo TODO"
-	ACTION="$HOME/.config/qtile/lockscreen.sh"
+	ACTION="$HOME/.scripts/lockscreen.sh"
     elif [ "$CHOICE" == "Logout" ];then
-	ACTION="$HOME/.config/qtile/logoff.py"
+	ACTION="$HOME/.config/qtile/logoff.py && $HOME/.scripts/dwm_logoff"
     elif [ "$CHOICE" == "Suspend" ];then
 	ACTION="/bin/systemctl -i suspend"
     elif [ "$CHOICE" == "Reboot" ];then

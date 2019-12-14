@@ -123,7 +123,7 @@ alias update-bootloader='sudo bootctl --path=/efi update'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias dwm-clean='make clean && rm -f config.h && git reset --hard origin/master'
 alias dwm-install='make && sudo make clean install'
-alias dwm-merge='~/.scriptsdwm-merge'
+alias dwm-merge='~/.scripts/dwm-merge'
 
 # powerline
 powerline-daemon -q

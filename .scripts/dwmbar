@@ -1,29 +1,34 @@
 #! /usr/bin/bash
 
 home="/home/loki/"
+sep=" | "
 
 dte(){
   dte="$(date +"%Y-%m-%d %H:%M")"
-  echo -e "$dte"
+  echo -e "$dte$sep"
 }
 
 mem(){
   mem=`free | awk '/Mem/ {printf "%d MiB/%d MiB\n", $3 / 1024.0, $2 / 1024.0 }'`
-  echo -e "$mem"
+  echo -e "$mem$sep"
 }
 
 bat(){
-    bat="$($home/.scripts/batterystatus.sh)"
-    echo -e "$bat"
+    if [ "$(hostname)" == "bifrost" ]; then
+	bat="$($home/.scripts/batterystatus.sh)"
+	echo -e "$bat$sep"
+    fi
 }
 
 bri(){
-    bri="$($home/.scripts/get_brightness.sh)"
-    echo -e "$bri"
+    if [ "$(hostname)" == "bifrost" ]; then
+	bri="$($home/.scripts/get_brightness.sh)"
+	echo -e "$bri$sep"
+    fi
 }
 
 vol(){
-    echo -e "墳 $(pamixer --get-volume-human)"
+    echo -e "墳 $(pamixer --get-volume-human)$sep"
 }
 
 cpu(){
@@ -33,10 +38,10 @@ cpu(){
   read cpu a b c idle rest < /proc/stat
   total=$((a+b+c+idle))
   cpu=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
-  echo -e "$cpu% cpu"
+  echo -e "$cpu% cpu$sep"
 }
 
 while true; do 
-	xsetroot -name "$(cpu) | $(mem) | $(bat) | $(vol) | $(bri) | $(dte)"
+	xsetroot -name "$(cpu)$(mem)$(bat)$(vol)$(bri)$(dte)"
 	sleep 10
 done

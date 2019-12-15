@@ -121,7 +121,7 @@ alias t='echo "" && todo.sh'
 alias ct='clear && t'
 alias update-bootloader='sudo bootctl --path=/efi update'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias dwm-clean='make clean && rm -f config.h && git reset --hard origin/master'
+alias dwm-clean='make clean && rm -f config.h && git reset --hard cb3f58a'
 alias dwm-install='make && sudo make clean install'
 alias dwm-merge='~/.scripts/dwm-merge'
 
@@ -139,5 +139,5 @@ chpwd() ls
 # neofetch --disable GPU
 
 # show pfetch at startup of console
-pfetch
+#pfetch
 

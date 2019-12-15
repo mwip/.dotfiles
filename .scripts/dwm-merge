@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-make clean && rm -f config.h && git reset --hard origin/master && 
+make clean && rm -f config.h && git reset --hard cb3f58a && 
 for branch in $(git for-each-ref --format='%(refname)' refs/heads/ | cut -d'/' -f3); do
 	if [ "$branch" != "master" ]; then
 		git merge $branch -m $branch

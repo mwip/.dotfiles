@@ -293,6 +293,10 @@
    (add-hook 'visual-line-mode-hook 'my-activate-adaptive-wrap-prefix-mode))
    (global-visual-line-mode)
    (adaptive-wrap-prefix-mode)
+   (add-hook 'org-agenda-mode-hook
+          (lambda ()
+            (visual-line-mode -1)
+            (toggle-truncate-lines 1)))
    #+end_src
 ** Better Control-Backspace behavior
    #+begin_src emacs-lisp

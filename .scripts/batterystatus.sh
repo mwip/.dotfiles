@@ -21,7 +21,7 @@ fi
 
 if [ "$state" == "fully-charged" ];
 then
-    state="$(echo $state | sed 's/fully-charged/  fully charged/')"
+    state="$(echo $state | sed 's/fully-charged/  fully charged/')"
     out="$state"
 fi
 

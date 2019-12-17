@@ -19,7 +19,7 @@ then
     out="$perct $state $ttemp"
 fi
 
-if [ "$state" == "charging" ];
+if [ "$state" == "fully-charged" ];
 then
     state="$(echo $state | sed 's/fully-charged/  fully charged/')"
     out="$state"

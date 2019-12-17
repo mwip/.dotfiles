@@ -29,6 +29,6 @@ then
     # start mpd notifications (using dunst)
     mpDris2 &
 fi
-#sleep 60 && synology-drive &
+synology-drive &
 
 

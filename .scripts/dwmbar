@@ -42,6 +42,6 @@ cpu(){
 }
 
 while true; do 
-	xsetroot -name "$(cpu)$(mem)$(bat)$(vol)$(bri)$(dte)"
+	xsetroot -name "$(bat)$(vol)$(bri)$(dte)"
 	sleep 10
 done

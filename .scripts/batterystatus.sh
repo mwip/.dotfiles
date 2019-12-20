@@ -15,7 +15,18 @@ fi
 
 if [ "$state" == "discharging" ];
 then
-    state="$(echo $state | sed 's/discharging/  /')"
+    perctmp=$(echo $perct | sed 's/%.*//')
+    if [ "$perctmp" -gt "80" ]; then
+	state="$(echo $state | sed 's/discharging/  /')"
+    elif [ "$perctmp" -gt "60" ]; then
+	state="$(echo $state | sed 's/discharging/  /')"
+    elif [ "$perctmp" -gt "40" ]; then
+	state="$(echo $state | sed 's/discharging/  /')"
+    elif [ "$perctmp" -gt "20" ]; then
+	state="$(echo $state | sed 's/discharging/  /')"
+    else
+	state="$(echo $state | sed 's/discharging/  /')"
+    fi
     out="$perct $state $ttemp"
 fi
 

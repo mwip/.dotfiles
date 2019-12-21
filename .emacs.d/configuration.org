@@ -695,6 +695,12 @@
    #+BEGIN_SRC emacs-lisp
    (setq ess-style 'RStudio)
    #+END_SRC
+** Key binding for evaluation
+   #+begin_src emacs-lisp
+     (require 'ess-mode)
+     (define-key ess-mode-map (kbd "<C-return>") 'ess-eval-region-or-function-or-paragraph-and-step)
+     (define-key ess-mode-map (kbd "<C-enter>") 'ess-eval-region-or-function-or-paragraph-and-step)
+   #+end_src
 ** Snippets
    See [[https://joaotavora.github.io/yasnippet/snippet-development.html][here]] how to write your own snippets
    Paste the snippets in =.emacs.d/snippets/=
@@ -720,7 +726,7 @@
      (use-package iedit
        :ensure t)
    #+END_SRC
-
+ 
 ** Auto-completion for file names
    #+BEGIN_SRC emacs-lisp
    ;;(setq ess-tab-complete-in-script t)
@@ -729,16 +735,30 @@
    Found [[https://emacs.stackexchange.com/questions/8041/how-to-implement-the-piping-operator-in-ess-mode][here]]
    #+BEGIN_SRC emacs-lisp
    (defun then_R_operator ()
-	 "R - %>% operator or 'then' pipe operator"
-	 (interactive)
-	 (just-one-space 1)
-	 (insert "%>%")
-	 (reindent-then-newline-and-indent))
+                "R - %>% operator or 'then' pipe operator"
+                (interactive)
+                (just-one-space 1)
+                (insert "%>%")
+                (reindent-then-newline-and-indent))
    (global-set-key (kbd "C-S-m") 'then_R_operator)
-	 
-
    #+END_SRC
-
+** ESS-Fontlock
+   #+begin_src emacs-lisp
+     (setq ess-R-font-lock-keywords
+                                  (quote ((ess-R-fl-keyword:keywords . t)
+                                                  (ess-R-fl-keyword:constants . t)
+                                                  (ess-R-fl-keyword:modifiers . t)
+                                                  (ess-R-fl-keyword:fun-defs . t)
+                                                  (ess-R-fl-keyword:assign-ops . t)
+                                                  (ess-R-fl-keyword:%op% . t)
+                                                  (ess-fl-keyword:fun-calls . t)
+                                                  (ess-fl-keyword:numbers . t)
+                                                  (ess-fl-keyword:operators . t)
+                                                  (ess-fl-keyword:delimiters . t)
+                                                  (ess-fl-keyword:= . t)
+                                                  (ess-R-fl-keyword:F&T . t))))
+ 
+   #+end_src
 * Python-related config
 ** Jedi autocomplete
    #+begin_src emacs-lisp

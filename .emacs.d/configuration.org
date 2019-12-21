@@ -849,6 +849,30 @@
                      "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
                      "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
    #+END_SRC
+
+** Capture
+   #+begin_src emacs-lisp
+  (global-set-key (kbd "C-c c") 'org-capture)
+  (setq org-capture-templates
+     '(("t" "TODO Item" entry (file+headline "~/myorg.org" "INBOX")
+"** TODO %?\nDEADLINE: %^t")
+       ("p" "Paper to read" entry (file+headline "~/myorg.org" "INBOX")
+       "** READ [[file:~/Literatur/%^{Enter PDF-Filename (relative to ~/Literatur)}][%^{Enter a link display name}]]\n   CONTEXT: %^{Which context is this paper for}")
+       ("l" "Link to read" entry (file+headline "~/myorg.org" "INBOX")
+        "** READ %^{Enter Link}\n    CONTEXT: %^{Context of the link}")
+       ("P" "New Project" entry(file+headline "~/myorg.org" "INBOX")
+"** PROJ %^{What is the project name?}
+   DEADLINE: %^t
+   :PROPERTIES:
+   :PURPOSE: %^{What is the purpose of the project?}
+   :VISION: %^{What is the vision of the project?}
+   :Bainstorm:
+   %?
+   :END:
+ *** TODO What is the very next thing that needs to happen?
+    SCHEDULED: %^T
+    must be specific, what needs to be done? ('Set meeting is not sufficient')")))
+   #+end_src
 * Custom Shortcuts
 ** Custom Key Map
 *** Initialize keymap on =C-1=

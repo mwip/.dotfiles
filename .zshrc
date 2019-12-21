@@ -124,6 +124,7 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias dwm-clean='make clean && rm -f config.h && git reset --hard cb3f58a'
 alias dwm-install='make && sudo make clean install'
 alias dwm-merge='~/.scripts/dwm-merge'
+alias dwm-diff='~/.scripts/dwm-diffs'
 
 # powerline
 powerline-daemon -q

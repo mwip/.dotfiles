@@ -830,21 +830,24 @@
 ** Custom Agenda Views
    #+begin_src emacs-lisp
      (setq org-agenda-custom-commands
-                   '(("c" . "My Custom Agendas")
-                     ("cu" "Unscheduled items"
-                      ((todo ""
-                                     ((org-agenda-overriding-header "\nUnscheduled items")
-                                      (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp)))))
-                      nil nil)
-                     ("co" "Overdue items"
-                      ((tags "DEADLINE<\"<today>\""
-                                     ((org-agenda-overriding-header "\nOverdue items")
-                                      (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done)))))
-                      nil nil)
-                     ("cw" "Waiting items"
-                      ((todo "WAIT"
-                                     ((org-agenda-overriding-header "\nWaiting items")))))
-                     ))
+		   '(("c" . "My Custom Agendas")
+		     ("cu" "Unscheduled items"
+		      ((todo ""
+				     ((org-agenda-overriding-header "\nUnscheduled items")
+				      (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp)))))
+		      nil nil)
+		     ("co" "Overdue items"
+		      ((tags "DEADLINE<\"<today>\""
+				     ((org-agenda-overriding-header "\nOverdue items")
+				      (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done)))))
+		      nil nil)
+		     ("cw" "Waiting items"
+		      ((todo "WAIT"
+				     ((org-agenda-overriding-header "\nWaiting items")))))
+		     ("cp" "Projects list"
+		      ((todo "PROJ"
+			     ((org-agenda-overriding-header "\nProjects list")))))
+		     ))
    #+end_src
  
 ** Deadline warning days

@@ -41,7 +41,14 @@ cpu(){
   echo -e "$cpu% cpu$sep"
 }
 
+mus(){
+    if [ "$(hostname)" == "walhall" ]; then
+	music=$(echo $(mpc) | sed -e 's/\n//g' -e 's/\[playing\]/~/' -e 's/\[paused\]/~/' -e 's/~.*//g')
+	echo " "$music$sep
+    fi
+}
+
 while true; do 
-	xsetroot -name "$(bat)$(vol)$(bri)$(dte)"
+	xsetroot -name "$(mus)$(bat)$(vol)$(bri)$(dte)"
 	sleep 10
 done

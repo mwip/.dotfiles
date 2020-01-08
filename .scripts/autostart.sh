@@ -28,7 +28,7 @@ fi
 if [ $(hostname) == "walhall" ]
 then
     # start mpd notifications (using dunst)
-    sleep 30 & mpDris2 &
+    # sleep 30 & mpDris2 & # should be started as systemd service
 fi
 synology-drive &
 

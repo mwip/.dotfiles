@@ -847,6 +847,11 @@
 		     ("cp" "Projects list"
 		      ((todo "PROJ"
 			     ((org-agenda-overriding-header "\nProjects list")))))
+		     ("cW" "Completed and/or deferred tasks from previous week"
+		             ((agenda "" ((org-agenda-span 7)
+			      (org-agenda-start-day "-7d")
+			      (org-agenda-entry-types '(:timestamp))
+			      (org-agenda-show-log t)))))
 		     ))
    #+end_src
  

@@ -10,6 +10,7 @@
 
 
 # Global variables
+update_interval=2
 interface=$1
 received_bytes=""
 old_received_bytes=""
@@ -31,17 +32,12 @@ eval $line
 # This function should be called each second.
 function get_velocity
 {
-value=$1    
-old_value=$2
+value=$1*8    
+old_value=$2*8
 
-let vel=$value-$old_value
-let velKB=$vel/1024
-if [ $velKB != 0 ];
-then
-echo -n "$velKB KB/s";
-else
-echo -n "$vel B/s";
-fi
+let vel=($value-$old_value)/$update_interval
+let velMbit=$vel/1024/1024
+echo -n "$velMbit Mbit/s"
 }
 
 # Gets initial values.
@@ -74,6 +70,6 @@ old_received_bytes=$received_bytes
 old_transmitted_bytes=$transmitted_bytes
 
 # Waits one second.
-sleep 2;
+sleep $update_interval;
 
 done

@@ -23,7 +23,7 @@ synology-drive &
 # net speed 
 case "$(hostname)" in
     walhall)
-	interface="epn4s0"
+	interface="enp4s0"
 	;;
     bifrost)
 	interface="wlp0s20f3"

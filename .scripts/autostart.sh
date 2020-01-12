@@ -14,13 +14,24 @@ setxkbmap de &
 syncthing-gtk &
 dunst &
 redshift-gtk -t 6500:3000 -l 48.13:11.57 & 
-$HOME/.config/qtile/deactivateBluetooth &
+$HOME/.scripts/deactivateBluetooth &
 blueman-applet &
 libinput-gestures-setup restart &
 xautolock -time 10 -locker '$HOME/.scripts/lockscreen.sh' &
 udiskie &
+synology-drive &
+# net speed 
+case "$(hostname)" in
+    walhall)
+	interface="epn4s0"
+	;;
+    bifrost)
+	interface="wlp0s20f3"
+	;;
+esac && $HOME/.scripts/net_speed.sh $interface &
+
 # Device specific autostarts 
-if [ $(hostname) == "bifrost" ] 
+if [ $(hostname) == "bifrost" ]
 then
     # remap lenovo print key to context menu key
     xmodmap -e "keycode 107 = Menu" &
@@ -30,6 +41,4 @@ then
     # start mpd notifications (using dunst)
     # sleep 30 & mpDris2 & # should be started as systemd service
 fi
-synology-drive &
-
 

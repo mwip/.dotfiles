@@ -17,7 +17,7 @@ redshift-gtk -t 6500:3000 -l 48.13:11.57 &
 $HOME/.scripts/deactivateBluetooth &
 blueman-applet &
 libinput-gestures-setup restart &
-xautolock -time 10 -locker '$HOME/.scripts/lockscreen.sh' &
+xautolock -time 10 -notify 30 -notifier "notify-send 'xautolock kicking in soon'" -corners 000- -locker '$HOME/.scripts/lockscreen.sh' &
 udiskie &
 synology-drive &
 # net speed 

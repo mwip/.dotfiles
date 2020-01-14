@@ -793,8 +793,8 @@
 ** Org todo rotation
    =C-c C-t= will trigger a selection how to mark todo items
   #+BEGIN_SRC emacs-lisp
-   (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "IN-PROGRESS(i)" "WAIT(w)" "PROJ(p)" "SOMEDAY(s)" "MAYBE(m)" "|" "DONE(d)" "CANCELLED(c)")))
+  (setq org-todo-keywords
+     '((sequence "TODO(t)" "NEXT(n)" "IN-PROGRESS(i)" "WAIT(w@/!)" "MAYBE(m)" "SOMEDAY(s)" "PROJ(p)" "READ(r)" "PUT-INTO-PAPER(a)" "|" "DONE(d)" "CANCELLED(c@/!)")))
    #+END_SRC
 ** Monday is the first day in Calendar week
 

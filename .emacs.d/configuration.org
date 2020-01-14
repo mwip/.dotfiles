@@ -883,7 +883,7 @@
   (global-set-key (kbd "C-c c") 'org-capture)
   (setq org-capture-templates
      '(("t" "TODO Item" entry (file+headline "~/myorg.org" "INBOX")
-"** TODO %?\nDEADLINE: %^t")
+"** TODO %?\n   DEADLINE: %^t")
        ("p" "Paper to read" entry (file+headline "~/myorg.org" "INBOX")
        "** READ [[file:~/Literatur/%^{Enter PDF-Filename (relative to ~/Literatur)}][%^{Enter a link display name}]]\n   CONTEXT: %^{Which context is this paper for}")
        ("l" "Link to read" entry (file+headline "~/myorg.org" "INBOX")
@@ -901,6 +901,13 @@
     SCHEDULED: %^T
     must be specific, what needs to be done? ('Set meeting is not sufficient')")))
    #+end_src
+** Agenda: Skip scheduled when deadline is shown
+   see [[https://superuser.com/questions/501440/emacs-org-mode-how-to-avoid-duplicate-lines-in-agenda-when-items-is-scheduled][this SE post]]
+   #+BEGIN_SRC emacs-lisp
+   (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+   (setq org-agenda-skip-scheduled-if-deadline-is-shown "not-today")
+   #+END_SRC
+
 * Custom Shortcuts
 ** Custom Key Map
 *** Initialize keymap on =C-1=

@@ -288,8 +288,8 @@
       :ensure t)
    (when (fboundp 'adaptive-wrap-prefix-mode)
    (defun my-activate-adaptive-wrap-prefix-mode ()
-   "Toggle `visual-line-mode' and `adaptive-wrap-prefix-mode' simultaneously."
-   (adaptive-wrap-prefix-mode (if visual-line-mode 1 -1)))
+     "Toggle `visual-line-mode' and `adaptive-wrap-prefix-mode' simultaneously."
+     (adaptive-wrap-prefix-mode (if visual-line-mode 1 -1)))
    (add-hook 'visual-line-mode-hook 'my-activate-adaptive-wrap-prefix-mode))
    (global-visual-line-mode)
    (adaptive-wrap-prefix-mode)
@@ -831,11 +831,14 @@
    #+begin_src emacs-lisp
      (setq org-agenda-custom-commands
 		   '(("c" . "My Custom Agendas")
-		     ("cu" "Unscheduled items"
-		      ((todo ""
-				     ((org-agenda-overriding-header "\nUnscheduled items")
-				      (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp)))))
-		      nil nil)
+                     ("cu" "Unscheduled items"
+                     ((todo ""
+                                    ((org-agenda-overriding-header "\nUnscheduled items")
+                                     (org-agenda-skip-function
+                                       '(org-agenda-skip-entry-if
+                                          'timestamp
+                                                  'todo '("PROJ"))))))
+                     nil nil) 
 		     ("co" "Overdue items"
 		      ((tags "DEADLINE<\"<today>\""
 				     ((org-agenda-overriding-header "\nOverdue items")
@@ -907,6 +910,13 @@
    (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
    (setq org-agenda-skip-scheduled-if-deadline-is-shown "not-today")
    #+END_SRC
+** Agenda include Archive
+   #+BEGIN_SRC emacs-lisp
+   (require 'org-agenda)
+   (org-agenda-archives-mode 'files)
+   #+END_SRC
+
+
 
 * Custom Shortcuts
 ** Custom Key Map

@@ -912,8 +912,7 @@
    #+END_SRC
 ** Agenda include Archive
    #+BEGIN_SRC emacs-lisp
-   (require 'org-agenda)
-   (org-agenda-archives-mode 'files)
+   (setq org-agenda-archives-mode t)
    #+END_SRC
 
 

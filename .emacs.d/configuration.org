@@ -4,8 +4,9 @@
    #+BEGIN_SRC emacs-lisp
    (unless (package-installed-p 'use-package)
        (package-refresh-contents)
-       (package-install 'use-package))   
+       (package-install 'use-package))
    #+END_SRC
+
 ** =org-bullets=
    Nice bullet points for org mode
    #+BEGIN_SRC emacs-lisp
@@ -115,17 +116,9 @@
 	  :ensure t)
 	(company-quickhelp-mode)
 
-       ;; (require 'color)
-  
-       ;; (let ((bg (face-attribute 'default :background)))
-       ;;   (custom-set-faces
-       ;;    `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
-       ;;    `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
-       ;;    `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
-       ;;    `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
-       ;;    `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
+	;; disable company in org-files
+	(setq company-global-modes '(not org-mode))
 
-     
    #+END_SRC
 * General Configurations
 ** Ido-Mode
@@ -542,9 +535,20 @@
      (add-hook 'org-mode-hook 'hexcolour-add-to-font-lock)
      (add-hook 'text-mode-hook 'hexcolour-add-to-font-lock)
    #+END_SRC
-* Coding-Related Configuration
-** Projects with projectile
-   See [[https://projectile.readthedocs.io/en/latest/usage/][Documentaiton]]
+** Languagetool support
+   #+begin_src emacs-lisp
+     (use-package langtool
+       :ensure t
+       :config
+       (setq langtool-language-tool-jar "/usr/share/java/languagetool/languagetool-server.jar"
+	     langtool-server-user-arguments '("-p" "8082")
+	     langtool-java-classpath	"/usr/share/languagetool:/usr/share/java/languagetool/*")
+     )
+   #+end_src
+
+* coding-related configuration
+** projects with projectile
+   see [[https://projectile.readthedocs.io/en/latest/usage/][Documentaiton]]
    #+begin_src emacs-lisp
    (use-package projectile
       :ensure t
@@ -560,7 +564,7 @@
    (use-package ag
       :ensure t)
    #+END_SRC
-** Dumb Jump
+** dumb jump
    #+begin_src emacs-lisp
    (use-package dumb-jump
    :ensure t
@@ -573,8 +577,8 @@
    :init
    (dumb-jump-mode))
    #+END_SRC
-** Code Margin 80-column
-   #+BEGIN_SRC emacs-lisp
+** code margin 80-column
+   #+begin_SRC emacs-lisp
    ;(require 'whitespace)
    ;(setq-default whitespace-style '(face lines-tail))
    ;(setq-default fill-column 80)
@@ -585,8 +589,8 @@
    (setq fci-rule-color "red")
    (add-hook 'python-mode-hook 'fci-mode)
    #+END_SRC
-** Auto-Complete
-   Autocomplete everywhere
+** auto-complete
+   autocomplete everywhere
    #+BEGIN_SRC emacs-lisp
      ;; (use-package auto-complete
      ;;    :ensure t
@@ -939,6 +943,16 @@
       (define-key mymap (kbd "w") 'swap-windows-custom)
     #+end_src
     
+*** Languagetool
+    #+begin_src emacs-lisp
+    (define-key mymap (kbd "l l") 'langtool-check)
+    (define-key mymap (kbd "l d") 'langtool-check-done)
+    (define-key mymap (kbd "l s") 'langtool-switch-default-language)
+    (define-key mymap (kbd "l m") 'langtool-show-message-at-point)
+    (define-key mymap (kbd "l c") 'langtool-correct-buffer)
+    (define-key mymap (kbd "l n") 'langtool-goto-next-error)
+    (define-key mymap (kbd "l p") 'langtool-goto-previous-error)
+    #+end_src
 ** Org-Mode
    #+BEGIN_SRC emacs-lisp
    (global-set-key "\C-ca" 'org-agenda)

@@ -837,7 +837,7 @@
                                      (org-agenda-skip-function
                                        '(org-agenda-skip-entry-if
                                           'timestamp
-                                                  'todo '("PROJ"))))))
+                                                  'todo '("PROJ" "READ"))))))
                      nil nil) 
 		     ("co" "Overdue items"
 		      ((tags "DEADLINE<\"<today>\""
@@ -855,9 +855,13 @@
 			      (org-agenda-start-day "-7d")
 			      (org-agenda-entry-types '(:timestamp))
 			      (org-agenda-show-log t)))))
+		     ("cr" "Papers to read"
+		      ((todo "READ"
+			 ((org-agenda-overriding-header "\nPapers to read")
+			  (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))))))
 		     ))
    #+end_src
- 
+
 ** Deadline warning days
    #+begin_src emacs-lisp
      (setq org-deadline-warning-days 7)

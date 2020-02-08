@@ -141,4 +141,4 @@ chpwd() ls
 
 # show pfetch at startup of console
 #pfetch
-
+source /opt/OTB-7.0.0-Linux64/otbenv.profile

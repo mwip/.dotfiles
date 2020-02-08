@@ -929,6 +929,10 @@
 
 
 * Custom Shortcuts
+** Deactivate C-z
+   #+BEGIN_SRC emacs-lisp
+   (global-unset-key (kbd "C-z"))
+   #+END_SRC
 ** Custom Key Map
 *** Initialize keymap on =C-1=
     #+BEGIN_SRC emacs-lisp

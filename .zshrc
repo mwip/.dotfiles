@@ -125,7 +125,7 @@ alias dwm-clean='make clean && rm -f config.h && git reset --hard cb3f58a'
 alias dwm-install='make && sudo make clean install'
 alias dwm-merge='~/.scripts/dwm-merge'
 alias dwm-diff='~/.scripts/dwm-diffs'
-
+alias tor='cd /opt/tor-browser_en-US && ./start-tor-browser.desktop'
 # powerline
 powerline-daemon -q
 . /usr/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh

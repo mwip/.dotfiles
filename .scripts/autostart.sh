@@ -20,6 +20,7 @@ libinput-gestures-setup restart &
 xautolock -time 10 -notify 30 -notifier "notify-send 'xautolock kicking in soon'" -corners 000- -locker '$HOME/.scripts/lockscreen.sh' &
 udiskie &
 synology-drive &
+emacs --daemon &
 # net speed 
 case "$(hostname)" in
     walhall)
@@ -35,6 +36,8 @@ if [ $(hostname) == "bifrost" ]
 then
     # remap lenovo print key to context menu key
     xmodmap -e "keycode 107 = Menu" &
+    # reduce size in alacritty 
+    sed 's/size: 11/size: 9/g' .config/alacritty/acritty.yml > .config/alacritty/alacritty.yml
 fi
 if [ $(hostname) == "walhall" ]
 then

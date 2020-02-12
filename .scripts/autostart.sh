@@ -20,7 +20,7 @@ libinput-gestures-setup restart &
 xautolock -time 10 -notify 30 -notifier "notify-send 'xautolock kicking in soon'" -corners 000- -locker '$HOME/.scripts/lockscreen.sh' &
 udiskie &
 synology-drive &
-emacs --daemon &
+emacs --daemon --chdir=$HOME &
 # net speed 
 case "$(hostname)" in
     walhall)

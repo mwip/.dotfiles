@@ -967,9 +967,10 @@
 
 
 * Custom Shortcuts
-** Deactivate C-z
+** Remap C-z to undo
    #+BEGIN_SRC emacs-lisp
-   (global-unset-key (kbd "C-z"))
+     (global-unset-key (kbd "C-z"))
+     (global-set-key (kbd "C-z") 'undo-tree-undo)
    #+END_SRC
 ** Custom Key Map
 *** Initialize keymap on =C-1=

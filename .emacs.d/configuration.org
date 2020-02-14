@@ -972,6 +972,11 @@
      (global-unset-key (kbd "C-z"))
      (global-set-key (kbd "C-z") 'undo-tree-undo)
    #+END_SRC
+** C-d to delete line
+   #+begin_src emacs-lisp
+    (global-unset-key (kbd "C-d"))
+    (global-set-key (kbd "C-d") 'kill-whole-line)
+   #+end_src
 ** Custom Key Map
 *** Initialize keymap on =C-1=
     #+BEGIN_SRC emacs-lisp

@@ -28,8 +28,6 @@ alias ct="clear && t"
 # export LSCOLORS=ExFxCxDxBxegedabagacad
 
 
-neofetch
-
 # powerline
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1

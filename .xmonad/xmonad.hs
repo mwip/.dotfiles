@@ -79,15 +79,7 @@ main = do
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
      [
-        className =? "Firefox"    --> doShift "<action=xdotool key super+2>www</action>"
-      , title =? "Vivaldi"        --> doShift "<action=xdotool key super+2>www</action>"
-      , title =? "irssi"          --> doShift "<action=xdotool key super+6>chat</action>"
-      , className =? "cmus"       --> doShift "<action=xdotool key super+7>media</action>"
-      , className =? "vlc"        --> doShift "<action=xdotool key super+7>media</action>"
-      , className =? "Virtualbox"  --> doFloat
-      , className =? "Gimp"        --> doFloat
-      , className =? "Gimp"       --> doShift "<action=xdotool key super+8>gfx</action>"
-      , className =? "KeePassXC"   --> doFloat
+        className =? "KeePassXC"   --> doFloat
       , (className =? "Firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      ]
 
@@ -118,6 +110,7 @@ myKeys =
         , ("M-S-<Space>", sendMessage (Toggle NBFULL) >> sendMessage ToggleStruts) -- Toggles noborder/full
         , ("M-i", sendMessage (IncMasterN 1))
         , ("M-d", sendMessage (IncMasterN (-1)))
+        , ("M-S-q", spawn (home ++ ".scripts/dmenu_exit.sh"))
         
         
         -- Windows

@@ -106,12 +106,12 @@ monocle    = renamed [Replace "monocle"]  $ limitWindows 20 $ Full
 
 myStartupHook = do
           spawnOnce "/home/loki/.scripts/autostart.sh &"
-	  spawnOnce "stalonetray" 
+          spawnOnce "stalonetray" 
           setWMName "LG3D"
 
 myKeys =
         [ 
-	-- Xmonad 
+          -- Xmonad 
           ("M-S-r", spawn "xmonad --recompile")
         , ("M-C-r", spawn "xmonad --restart")
         , ("M-S-n", sendMessage $ Toggle NOBORDERS)
@@ -123,16 +123,18 @@ myKeys =
         -- Windows
         , ("M-q", kill1)                           -- Kill the currently focused client
         , ("M-S-a", killAll)                       -- Kill all the windows on current workspace
-	, ("M-f", sinkAll)                         -- Push all floating windows back to tile
+        , ("M-f", sinkAll)                         -- Push all floating windows back to tile
 
         -- Terminal
-	, ("M-<Return>", spawn myTerminal)
+        , ("M-<Return>", spawn myTerminal)
 
         -- Programs
         , ("M-r", spawn "/home/loki/.scripts/dmenu_recent.sh -fn 'Ubuntu Mono Nerd Font:size=11'")
         , ("M-C-<Return>", spawn "firefox")
-	, ("C-S-e", spawn "emacsclient -c -a")
-	, ("M-S-b", spawn "/home/loki/.scripts/pabluezswitch")
+        , ("C-S-e", spawn "emacsclient -c -a ''")
+        , ("M-c", spawn (home ++ ".scripts/org-capture.sh"))
+        , ("M-S-b", spawn (home ++ ".scripts/pabluezswitch.sh"))
+        , ("M-p", spawn (home ++ ".scripts/dmenu_displayselect.sh"))
 
         -- Laptop
         , ("<XF86MonBrightnessUp>", spawn (home ++ ".scripts/brightness.sh +"))
@@ -154,5 +156,5 @@ myKeys =
         ]
 
 --myWorkspaces :: [String]   
-myWorkspaces = ["WWW", "EMX", "CMD", "R", "FLS", "MUX", "GIS", "DOC", "GFX"] 
+myWorkspaces = ["1:WWW", "2:EMX", "3:CMD", "4:R", "5:FLS", "6:MUX", "7:GIS", "8:DOC", "9:GFX"] 
         --["1:", "2:", "3:", "4:", "5:", "6:ﱘ", "7:", "8:", "9:"]

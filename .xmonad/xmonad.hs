@@ -6,6 +6,7 @@ import qualified XMonad.StackSet as W
 
 -- Hooks
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, defaultPP, wrap, pad, xmobarPP, xmobarColor, shorten, PP(..))
+import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.ManageDocks 
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.EwmhDesktops
@@ -87,7 +88,7 @@ main = do
 
 
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
-myManageHook = composeAll
+myManageHook = insertPosition Below Newer <+> composeAll
      [
         className =? "KeePassXC"   --> doFloat
       , (className =? "Firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog

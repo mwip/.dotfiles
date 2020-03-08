@@ -37,12 +37,8 @@ then
     # remap lenovo print key to context menu key
     xmodmap -e "keycode 107 = Menu" &
     # reduce size in alacritty 
-    sed 's/size: 11/size: 9/g' .config/alacritty/acritty.yml > .config/alacritty/alacritty.yml
-    $HOME/.scripts/batterychecker.sh
-fi
-if [ $(hostname) == "walhall" ]
-then
+    sed 's/size: 11/size: 9/g' $HOME/.config/alacritty/alacritty.yml > /tmp/alacritty && cat /tmp/alacritty > $HOME/.config/alacritty/alacritty.yml &
     # start mpd notifications (using dunst)
     # sleep 30 & mpDris2 & # should be started as systemd service
-fi
+fi &
 emacs --daemon --chdir=$HOME &

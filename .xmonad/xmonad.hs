@@ -56,7 +56,7 @@ home            = "/home/loki/"
 
 main = do
     nScreens <- countScreens
-    xmproc0 <- if nScreens < 1
+    xmproc0 <- if nScreens > 1
       then spawnPipe "xmobar -x 0 -d /home/loki/.config/xmobar/xmobarrc0"
       else spawnPipe "/dev/null"
       

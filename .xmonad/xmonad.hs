@@ -135,7 +135,7 @@ myKeys =
         -- Programs
         , ("M-r", spawn "/home/loki/.scripts/dmenu_recent.sh -fn 'Ubuntu Mono Nerd Font:size=11'")
         , ("M-C-<Return>", spawn "firefox")
-        , ("C-S-e", spawn "emacsclient -c -a ''")
+        , ("C-M1-e", spawn "emacsclient -c -a ''")
         , ("M-c", spawn (home ++ ".scripts/org-capture.sh"))
         , ("M-S-b", spawn (home ++ ".scripts/pabluezswitch.sh"))
         , ("M-p", spawn (home ++ ".scripts/dmenu_displayselect.sh"))

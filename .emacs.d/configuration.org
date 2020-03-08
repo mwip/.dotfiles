@@ -792,6 +792,10 @@
    #+BEGIN_SRC emacs-lisp
    (require 'org)
    #+END_SRC
+** Require org-inlinetask
+   #+begin_src emacs-lisp
+   (require 'org-inlinetask)
+   #+end_src
 ** Restore easy snippets
    #+BEGIN_SRC emacs-lisp
    (require 'org-tempo)
@@ -965,7 +969,11 @@
    #+END_SRC
 
 
-
+** PDF-tools
+   #+begin_src emacs-lisp
+   (use-package pdf-tools
+     :ensure t)
+   #+end_src
 * Custom Shortcuts
 ** Remap C-z to undo
    #+BEGIN_SRC emacs-lisp

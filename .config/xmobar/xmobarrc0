@@ -1,0 +1,17 @@
+Config { font    = "xft:Mononoki Nerd Font:pixelsize=12:antialias=true:hinting=true"
+       , additionalFonts = [ "xft:FontAwesome:pixelsize=13" ]
+       , bgColor = "#282A36"
+       , fgColor = "#B45BCF"
+       , position = Top L 94
+       , lowerOnStart = True
+       , hideOnStart = False
+       , allDesktops = True
+       , persistent = True
+       , iconRoot = "/home/dt/.xmonad/xpm/"  -- default: "."
+      , commands = [ Run Com "/home/loki/.scripts/dwmbar" ["-oneshot"] "mystatus" 10
+       	 	    , Run UnsafeStdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = " %UnsafeStdinReader% }{ <fc=#BBBBBB>%mystatus%</fc> "
+       }

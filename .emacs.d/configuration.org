@@ -697,6 +697,11 @@
      (global-set-key (kbd "C-M-<up>") 'move-line-up)
      (global-set-key (kbd "C-M-<down>") 'move-line-down)
    #+end_src
+** Haskell-mode
+   #+begin_src emacs-lisp
+   (use-package haskell-mode
+     :ensure t)
+   #+end_src
 * R-Related Configuration
 ** Force scroll on R-console
    #+BEGIN_SRC emacs-lisp

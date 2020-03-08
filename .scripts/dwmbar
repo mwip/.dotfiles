@@ -60,11 +60,23 @@ net(){
     echo -en "$(cat $HOME/.cache/networktraffic | sed 's/\r//g')$sep"
 }
 
-
-#~~~~~~~~~~~~Loop this thing~~~~~~~~~~~~~~~~~~~~~~~~~~# 
-while true; do
+status(){
     status="$(net)$(mus)$(bat)$(vol)$(bri)$(dte)"
     echo "$status"
+}
+
+#~~~~~~~~~~~~Perform oneshot~~~~~~~~~~~~~~~~~~~~~~~~~~#
+if [ $1 == "-oneshot" ]; then
+    status="$(status)"
+    echo $status
+    exit
+fi
+
+
+#~~~~~~~~~~~~Loop this thing~~~~~~~~~~~~~~~~~~~~~~~~~~#
+while true; do
+    status="$(status)"
+    echo  $status
     xsetroot -name "$status"
     sleep 2
 done

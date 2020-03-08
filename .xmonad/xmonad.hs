@@ -3,21 +3,26 @@ import XMonad
 import XMonad.Config.Desktop
 import Data.Monoid
 import qualified XMonad.StackSet as W
+
 -- Hooks
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, defaultPP, wrap, pad, xmobarPP, xmobarColor, shorten, PP(..))
 import XMonad.Hooks.ManageDocks 
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.EwmhDesktops
+
 -- Utils
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeysP)
 import XMonad.Util.SpawnOnce
+
 -- Actions
 import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Actions.WithAll (sinkAll, killAll)
+
 -- Prompt
 import XMonad.Prompt
 import XMonad.Prompt.Unicode
+
 -- Layout
 import XMonad.Layout.PerWorkspace (onWorkspace) 
 import XMonad.Layout.Renamed (renamed, Rename(CutWordsLeft, Replace))
@@ -33,6 +38,7 @@ import qualified XMonad.Layout.ToggleLayouts as T (toggleLayouts, ToggleLayout(T
 import XMonad.Layout.Gaps
 import XMonad.Layout.Named
 import XMonad.Layout.ResizableTile
+import XMonad.Layout.IndependentScreens (countScreens)
 
 -- System
 import System.IO
@@ -48,12 +54,16 @@ windowCount     = gets $ Just . show . length . W.integrate' . W.stack . W.works
 home            = "/home/loki/"
 
 main = do
-    xmproc0 <- spawnPipe "xmobar -x 0 -d /home/loki/.config/xmobar/xmobarrc0"
+    nScreens <- countScreens
+    xmproc0 <- if nScreens < 1
+      then spawnPipe "xmobar -x 0 -d /home/loki/.config/xmobar/xmobarrc0"
+      else spawnPipe "/dev/null"
+      
     xmproc1 <- spawnPipe "xmobar -x 1 -d /home/loki/.config/xmobar/xmobarrc1"
     xmonad $ ewmh desktopConfig
         { manageHook = manageDocks <+> myManageHook <+> manageHook desktopConfig
         , logHook = dynamicLogWithPP xmobarPP
-                        { ppOutput = \x -> hPutStrLn xmproc0 x  >> hPutStrLn xmproc1 x
+                        { ppOutput = \x -> hPutStrLn xmproc1 x  >> hPutStrLn xmproc0 x
                         , ppCurrent = xmobarColor "#c3e88d" "" . wrap "[" "]" -- Current workspace in xmobar
                         , ppVisible = xmobarColor "#c3e88d" ""                -- Visible but not current workspace
                         , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""   -- Hidden workspaces in xmobar

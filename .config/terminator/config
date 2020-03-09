@@ -1,0 +1,26 @@
+[global_config]
+  borderless = True
+  title_font = Ubuntu Mono 12
+  title_use_system_font = False
+[keybindings]
+  help = <Alt>F1
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_darkness = 0.67
+    cursor_color = "#aaaaaa"
+    custom_command = ncmpcpp
+    exit_action = restart
+    scrollbar_position = hidden
+    show_titlebar = False
+    use_custom_command = True
+    use_theme_colors = True

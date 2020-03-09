@@ -8,7 +8,7 @@
    - DE/WM: Xmonad
    - Input: Ergodox-EZ
 
-   [[file:rice.png][My current Setup]]
+   [[file:rice.png]]
 
 ** Getting started
 

@@ -1,7 +1,7 @@
 Config { font    = "xft:Ubuntu Mono Nerd Font:pixelsize=14:antialias=true:hinting=true"
        , additionalFonts = [ "xft:FontAwesome:pixelsize=13" ]
        , bgColor = "#282A36"
-       , fgColor = "#B45BCF"
+       , fgColor = "#D0D0D0"
        , position = TopW L 94
        , lowerOnStart = True
        , hideOnStart = False

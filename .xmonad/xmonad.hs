@@ -68,7 +68,7 @@ main = do
                         , ppCurrent = xmobarColor "#c3e88d" "" . wrap "[" "]" -- Current workspace in xmobar
                         , ppVisible = xmobarColor "#c3e88d" ""                -- Visible but not current workspace
                         , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""   -- Hidden workspaces in xmobar
-                        , ppHiddenNoWindows = xmobarColor "#F07178" ""        -- Hidden workspaces (no windows)
+                        , ppHiddenNoWindows = xmobarColor "#444444" ""        -- Hidden workspaces (no windows)
                         , ppTitle = xmobarColor "#d0d0d0" "" . shorten 80     -- Title of active window in xmobar
                         , ppSep =  "<fc=#9AEDFE> : </fc>"                     -- Separators in xmobar
                         , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"  -- Urgent workspace
@@ -139,6 +139,9 @@ myKeys =
         , ("M-c", spawn (home ++ ".scripts/org-capture.sh"))
         , ("M-S-b", spawn (home ++ ".scripts/pabluezswitch.sh"))
         , ("M-p", spawn (home ++ ".scripts/dmenu_displayselect.sh"))
+
+        -- Ergodox-Layout
+        , ("M-S-l", spawn "zathura /home/loki/Documents/output.pdf")
 
         -- Laptop
         , ("<XF86MonBrightnessUp>", spawn (home ++ ".scripts/brightness.sh +"))

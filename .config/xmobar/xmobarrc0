@@ -8,7 +8,7 @@ Config { font    = "xft:Mononoki Nerd Font:pixelsize=12:antialias=true:hinting=t
        , allDesktops = True
        , persistent = True
        , iconRoot = "/home/dt/.xmonad/xpm/"  -- default: "."
-      , commands = [ Run Com "/home/loki/.scripts/dwmbar" ["-oneshot"] "mystatus" 10
+      , commands = [ Run Com "/home/loki/.scripts/dwmbar" ["-oneshot"] "mystatus" 25
        	 	    , Run UnsafeStdinReader
                     ]
        , sepChar = "%"

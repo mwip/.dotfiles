@@ -139,6 +139,15 @@ myKeys =
         , ("M-c", spawn (home ++ ".scripts/org-capture.sh"))
         , ("M-S-b", spawn (home ++ ".scripts/pabluezswitch.sh"))
         , ("M-p", spawn (home ++ ".scripts/dmenu_displayselect.sh"))
+        -- Meh
+        , ("C-S-M1-m", spawn "terminator")
+        , ("C-S-M1-e", spawn "emacsclient -c -a ''")
+        , ("C-S-M1-r", spawn "rstudio-bin")
+        , ("C-S-M1-t", spawn "thunderbird")
+        , ("C-S-M1-a", spawn "pavucontrol")
+        , ("C-S-M1-s", spawn "signal-desktop")
+        , ("C-S-M1-d", spawn "telegram-desktop")
+        , ("C-S-M1-b", spawn "blueman-manager")
 
         -- Ergodox-Layout
         , ("M-S-l", spawn "zathura /home/loki/Documents/output.pdf")

@@ -1,5 +1,17 @@
 * My Dotfiles
 
+** My current setup
+
+   - Machine 1: Desktop PC with 2 Monitors
+   - Machine 2: Lenovo T490s
+   - OS: Arch Linux
+   - DE/WM: Xmonad
+   - Input: Ergodox-EZ
+
+   [[rice.png][My current Setup]]
+
+** Getting started
+
   as described [[https://wiki.archlinux.org/index.php/Dotfiles#Tracking_dotfiles_directly_with_Git][in this Arch-Wiki page]], I use a bare git repository to track my configuration and dotfiles. 
   
   To use them clone this repository ...

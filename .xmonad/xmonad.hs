@@ -53,6 +53,7 @@ myBorderWidth   = 2         -- Sets border width for windows
 myGaps          = 6
 windowCount     = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 home            = "/home/loki/"
+scripts         = (home ++ ".scripts/")
 
 main = do
     nScreens <- countScreens
@@ -136,9 +137,9 @@ myKeys =
         , ("M-r", spawn "/home/loki/.scripts/dmenu_recent.sh -fn 'Ubuntu Mono Nerd Font:size=11'")
         , ("M-C-<Return>", spawn "firefox")
         , ("C-M1-e", spawn "emacsclient -c -a ''")
-        , ("M-c", spawn (home ++ ".scripts/org-capture.sh"))
-        , ("M-S-b", spawn (home ++ ".scripts/pabluezswitch.sh"))
-        , ("M-p", spawn (home ++ ".scripts/dmenu_displayselect.sh"))
+        , ("M-c", spawn (scripts ++ "org-capture.sh"))
+        , ("M-S-b", spawn (scripts ++ "pabluezswitch.sh"))
+        , ("M-p", spawn (scripts ++ "dmenu_displayselect.sh"))
         -- Meh
         , ("C-S-M1-m", spawn "terminator")
         , ("C-S-M1-e", spawn "emacsclient -c -a ''")
@@ -148,21 +149,22 @@ myKeys =
         , ("C-S-M1-s", spawn "signal-desktop")
         , ("C-S-M1-d", spawn "telegram-desktop")
         , ("C-S-M1-b", spawn "blueman-manager")
+        , ("C-S-M1-k", spawn ("alacritty -e '" ++ scripts ++ "xmonad_keys.sh'"))
 
         -- Ergodox-Layout
         , ("M-S-l", spawn "zathura /home/loki/Documents/output.pdf")
 
         -- Laptop
-        , ("<XF86MonBrightnessUp>", spawn (home ++ ".scripts/brightness.sh +"))
-        , ("<XF86MonBrightnessDown>", spawn (home ++ ".scripts/brightness.sh -"))
-        , ("<XF86AudioMicMute>", spawn (home ++ ".scripts/toggle_microphone.sh"))
-        , ("<XF86AudioMute>", spawn (home ++ ".scripts/adjust_volume.sh m"))
-        , ("<XF86AudioRaiseVolume>", spawn (home ++ ".scripts/adjust_volume.sh +"))
-        , ("<XF86AudioLowerVolume>", spawn (home ++ ".scripts/adjust_volume.sh -"))
+        , ("<XF86MonBrightnessUp>", spawn (scripts ++ "brightness.sh +"))
+        , ("<XF86MonBrightnessDown>", spawn (scripts ++ "brightness.sh -"))
+        , ("<XF86AudioMicMute>", spawn (scripts ++ "toggle_microphone.sh"))
+        , ("<XF86AudioMute>", spawn (scripts ++ "adjust_volume.sh m"))
+        , ("<XF86AudioRaiseVolume>", spawn (scripts ++ "adjust_volume.sh +"))
+        , ("<XF86AudioLowerVolume>", spawn (scripts ++ "adjust_volume.sh -"))
 
         -- Screenshots
-        , ("M-s", spawn (home ++ ".scripts/screenshot_full.sh"))
-        , ("M-S-s", spawn (home ++ ".scripts/screenshot_region.sh"))
+        , ("M-s", spawn (scripts ++ "screenshot_full.sh"))
+        , ("M-S-s", spawn (scripts ++ "screenshot_region.sh"))
 
         -- Media
         , ("<XF86AudioPlay>", spawn "mpc toggle")

@@ -14,7 +14,7 @@ Config { font    = "xft:Ubuntu Mono Nerd Font:pixelsize=14:antialias=true:hintin
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader% }{ <fc=#BBBBBB>%mystatus%</fc>%trayerpad%"
+       , template = " %UnsafeStdinReader% }{ <fc=#BBBBBB>%mystatus%</fc>%trayerpad% "
        }
 
   

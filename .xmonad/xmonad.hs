@@ -57,15 +57,16 @@ scripts         = (home ++ ".scripts/")
 
 main = do
     nScreens <- countScreens
-    xmproc0 <- if nScreens > 1
-      then spawnPipe "xmobar -x 0 -d /home/loki/.config/xmobar/xmobarrc0"
+    -- primary display
+    xmproc0 <- spawnPipe "xmobar -x 1 -d /home/loki/.config/xmobar/xmobarrc0"
+    xmproc1 <- if nScreens > 1
+      then spawnPipe "xmobar -x 0 -d /home/loki/.config/xmobar/xmobarrc1"
       else spawnPipe "/dev/null"
       
-    xmproc1 <- spawnPipe "xmobar -x 1 -d /home/loki/.config/xmobar/xmobarrc1"
     xmonad $ ewmh desktopConfig
         { manageHook = manageDocks <+> myManageHook <+> manageHook desktopConfig
         , logHook = dynamicLogWithPP xmobarPP
-                        { ppOutput = \x -> hPutStrLn xmproc1 x  >> hPutStrLn xmproc0 x
+                        { ppOutput = \x -> hPutStrLn xmproc0 x  >> hPutStrLn xmproc1 x
                         , ppCurrent = xmobarColor "#c3e88d" "" . wrap "[" "]" -- Current workspace in xmobar
                         , ppVisible = xmobarColor "#c3e88d" ""                -- Visible but not current workspace
                         , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""   -- Hidden workspaces in xmobar
@@ -110,7 +111,7 @@ monocle    = renamed [Replace "monocle"]  $ limitWindows 20 $ Full
 
 myStartupHook = do
           spawnOnce "/home/loki/.scripts/autostart.sh &"
-          spawnOnce "stalonetray" 
+          --spawnOnce "stalonetray" 
           setWMName "LG3D"
 
 myKeys =

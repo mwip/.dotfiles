@@ -94,6 +94,7 @@ myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = insertPosition Below Newer <+> composeAll
      [
         className =? "KeePassXC"   --> doFloat
+      , className =? "Tor Browser" --> doFloat
       , (className =? "Firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      ]
 

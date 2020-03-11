@@ -19,6 +19,7 @@ import XMonad.Util.SpawnOnce
 -- Actions
 import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Actions.WithAll (sinkAll, killAll)
+import XMonad.Actions.CycleWS
 
 -- Prompt
 import XMonad.Prompt
@@ -124,7 +125,9 @@ myKeys =
         , ("M-i", sendMessage (IncMasterN 1))
         , ("M-d", sendMessage (IncMasterN (-1)))
         , ("M-S-q", spawn (home ++ ".scripts/dmenu_exit.sh"))
-        
+        , ("M-y", nextScreen)
+        , ("M-S-y", shiftNextScreen >> nextScreen)
+        , ("M-x", swapNextScreen)
         
         -- Windows
         , ("M-q", kill1)                           -- Kill the currently focused client

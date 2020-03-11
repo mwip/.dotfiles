@@ -2,17 +2,19 @@ Config { font    = "xft:Ubuntu Mono Nerd Font:pixelsize=14:antialias=true:hintin
        , additionalFonts = [ "xft:FontAwesome:pixelsize=13" ]
        , bgColor = "#282A36"
        , fgColor = "#D0D0D0"
-       , position = TopW L 94
+       , position = Top
        , lowerOnStart = True
        , hideOnStart = False
        , allDesktops = True
        , persistent = True
        , iconRoot = "/home/dt/.xmonad/xpm/"  -- default: "."
        , commands = [ Run Com "/home/loki/.scripts/dwmbar" ["-oneshot"] "mystatus" 25
+       	 	    , Run Com "/home/loki/.scripts/trayer_padding_icon.sh" [] "trayerpad" 25
        	 	    , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader% }{ <fc=#BBBBBB>%mystatus%</fc>    "
+       , template = " %UnsafeStdinReader% }{ <fc=#BBBBBB>%mystatus%</fc>%trayerpad%"
        }
 
+  

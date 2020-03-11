@@ -149,6 +149,7 @@ myKeys =
         , ("C-S-M1-a", spawn "pavucontrol")
         , ("C-S-M1-s", spawn "signal-desktop")
         , ("C-S-M1-d", spawn "telegram-desktop")
+        , ("C-S-M1-f", spawn "firefox")
         , ("C-S-M1-b", spawn "blueman-manager")
         , ("C-S-M1-k", spawn ("alacritty -e '" ++ scripts ++ "xmonad_keys.sh'"))
 

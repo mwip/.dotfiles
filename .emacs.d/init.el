@@ -17,6 +17,24 @@
  ;; If there is more than one, they won't work right.
  '(doc-view-continuous nil)
  '(org-agenda-files (quote ("~/org-diss/dissertation.org" "~/myorg.org")))
+ '(org-latex-default-packages-alist
+   (quote
+    (("AUTO" "inputenc" t
+      ("pdflatex"))
+     ("T1" "fontenc" t
+      ("pdflatex"))
+     ("" "graphicx" t nil)
+     ("" "grffile" t nil)
+     ("" "longtable" nil nil)
+     ("" "wrapfig" nil nil)
+     ("" "rotating" nil nil)
+     ("normalem" "ulem" t nil)
+     ("" "amsmath" t nil)
+     ("" "textcomp" t nil)
+     ("" "amssymb" t nil)
+     ("" "capt-of" nil nil)
+     ("colorlinks=true, allcolors=MidnightBlue" "hyperref" nil nil)
+     ("dvipsnames, usenames" "xcolor" nil nil))))
  '(package-selected-packages
    (quote
     (org-pdftools syntax-subword org-ref fill-column-indicator company-distel company-jedi magit git-gutter neotree all-the-icons-ivy treemacs doom-themes doom-modeline dumb-jump ag counsel-projectile projectile powerline iedit expand-region undo-tree multiple-cursors yasnippet-snippets yasnippet flycheck ess org which-key use-package try tabbar org-bullets counsel color-theme-modern auto-org-md auto-complete ace-window))))

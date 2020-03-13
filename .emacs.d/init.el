@@ -33,7 +33,7 @@
      ("" "textcomp" t nil)
      ("" "amssymb" t nil)
      ("" "capt-of" nil nil)
-     ("colorlinks=true, allcolors=MidnightBlue" "hyperref" nil nil)
+     ("colorlinks=true, allcolors=MidnightBlue, final=true" "hyperref" nil nil)
      ("dvipsnames, usenames" "xcolor" nil nil))))
  '(package-selected-packages
    (quote

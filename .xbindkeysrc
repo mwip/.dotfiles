@@ -1,0 +1,5 @@
+# install xbindkeys & xdotool
+"/usr/bin/xdotool key Alt+Left"
+ b:8
+"/usr/bin/xdotool key Alt+Right"
+ b:9

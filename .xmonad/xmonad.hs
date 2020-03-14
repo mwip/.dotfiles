@@ -178,8 +178,14 @@ myKeys =
         , ("<XF86AudioNext>", spawn "mpc next")
         , ("<XF86AudioPrev>", spawn "mpc prev")
 
+        ] ++ [
+        -- Extra Workspaces: https://stackoverflow.com/a/27743913/3250126
+          (("M-" ++ key), (windows $ W.greedyView ws)) | (key, ws) <- myExtraWorkspaces
+        ] ++ [
+          (("M-S-" ++ key), (windows $ W.shift ws)) | (key, ws) <- myExtraWorkspaces
         ]
 
---myWorkspaces :: [String]   
-myWorkspaces = ["1:WWW", "2:EMX", "3:CMD", "4:R", "5:FLS", "6:MUX", "7:GIS", "8:DOC", "9:GFX"] 
+myExtraWorkspaces = [("0", "0:MSG")] -- https://stackoverflow.com/a/27743913/3250126
+myWorkspaces = ["1:WWW", "2:EMX", "3:CMD", "4:R", "5:FLS"
+               , "6:MUX", "7:GIS", "8:DOC", "9:GFX"] ++ (map snd myExtraWorkspaces)
         --["1:", "2:", "3:", "4:", "5:", "6:ﱘ", "7:", "8:", "9:"]

@@ -185,7 +185,8 @@ myKeys =
           (("M-S-" ++ key), (windows $ W.shift ws)) | (key, ws) <- myExtraWorkspaces
         ]
 
-myExtraWorkspaces = [("0", "0:MSG")] -- https://stackoverflow.com/a/27743913/3250126
-myWorkspaces = ["1:WWW", "2:EMX", "3:CMD", "4:R", "5:FLS"
-               , "6:MUX", "7:GIS", "8:DOC", "9:GFX"] ++ (map snd myExtraWorkspaces)
-        --["1:", "2:", "3:", "4:", "5:", "6:ﱘ", "7:", "8:", "9:"]
+myExtraWorkspaces = [("0", "0:\xf0e0")] -- https://stackoverflow.com/a/27743913/3250126
+myWorkspaces = ["1:\xf269", "2:\xf15c", "3:\xf120", "4:\xf25d", "5:\xf07c"
+               , "6:\xf001", "7:\xf0ac", "8:\xf1dd", "9:\xf1fc"] ++ (map snd myExtraWorkspaces)
+        --["1:", "2:", "3:", "4:", "5:", "6:ﱘ", "7:", "8:", "9:", "0:"]
+        -- Unicode escape chars: https://stackoverflow.com/q/60682325/3250126

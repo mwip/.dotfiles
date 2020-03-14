@@ -129,6 +129,9 @@ myKeys =
         , ("M-y", nextScreen)
         , ("M-S-y", shiftNextScreen >> nextScreen)
         , ("M-x", swapNextScreen)
+
+        -- Trayer
+        , ("M-S-t", spawn (scripts ++ "restart_trayer.sh"))
         
         -- Windows
         , ("M-q", kill1)                           -- Kill the currently focused client

@@ -149,6 +149,7 @@ myKeys =
         , ("M-S-b", spawn (scripts ++ "pabluezswitch.sh"))
         , ("M-p", spawn (scripts ++ "dmenu_displayselect.sh"))
         , ("M-g", spawn (scripts ++ "dmenu_filemanager.sh"))
+        , ("M-l", spawn "xautolock -locknow")
         -- Meh
         , ("C-S-M1-m", spawn "terminator")
         , ("C-S-M1-e", spawn "emacsclient -c -a ''")

@@ -59,9 +59,9 @@ scripts         = (home ++ ".scripts/")
 main = do
     nScreens <- countScreens
     -- primary display
-    xmproc0 <- spawnPipe "xmobar -x 1 -d /home/loki/.config/xmobar/xmobarrc0"
+    xmproc0 <- spawnPipe "xmobar -x 0 -d /home/loki/.config/xmobar/xmobarrc0"
     xmproc1 <- if nScreens > 1
-      then spawnPipe "xmobar -x 0 -d /home/loki/.config/xmobar/xmobarrc1"
+      then spawnPipe "xmobar -x 1 -d /home/loki/.config/xmobar/xmobarrc1"
       else spawnPipe "/dev/null"
       
     xmonad $ ewmh desktopConfig

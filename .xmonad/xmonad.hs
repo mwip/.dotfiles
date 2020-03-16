@@ -181,10 +181,6 @@ myKeys =
         -- Laptop
         , ("<XF86MonBrightnessUp>", spawn (scripts ++ "brightness.sh +"))
         , ("<XF86MonBrightnessDown>", spawn (scripts ++ "brightness.sh -"))
-        , ("<XF86AudioMicMute>", spawn (scripts ++ "toggle_microphone.sh"))
-        , ("<XF86AudioMute>", spawn (scripts ++ "adjust_volume.sh m"))
-        , ("<XF86AudioRaiseVolume>", spawn (scripts ++ "adjust_volume.sh +"))
-        , ("<XF86AudioLowerVolume>", spawn (scripts ++ "adjust_volume.sh -"))
 
         -- Screenshots
         , ("M-s", spawn (scripts ++ "screenshot_full.sh"))
@@ -194,6 +190,10 @@ myKeys =
         , ("<XF86AudioPlay>", spawn "mpc toggle")
         , ("<XF86AudioNext>", spawn "mpc next")
         , ("<XF86AudioPrev>", spawn "mpc prev")
+        , ("<XF86AudioMicMute>", spawn (scripts ++ "toggle_microphone.sh"))
+        , ("<XF86AudioMute>", spawn (scripts ++ "adjust_volume.sh m"))
+        , ("<XF86AudioRaiseVolume>", spawn (scripts ++ "adjust_volume.sh +"))
+        , ("<XF86AudioLowerVolume>", spawn (scripts ++ "adjust_volume.sh -"))
 
         ] ++ [
         -- Extra Workspaces: https://stackoverflow.com/a/27743913/3250126

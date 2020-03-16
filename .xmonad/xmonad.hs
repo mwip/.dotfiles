@@ -45,6 +45,9 @@ import XMonad.Layout.IndependentScreens (countScreens)
 -- System
 import System.IO
 
+-- Control
+import Control.Monad (liftM2)
+
 
 myFont          = "xft:Ubuntu Mono Nerd Font:regular:pixelsize=12"
 myModMask       = mod4Mask  -- Sets modkey to super/windows key
@@ -90,23 +93,32 @@ main = do
         } `additionalKeysP` myKeys
 
 
+--["1:\xf269", "2:\xf15c", "3:\xf120", "4:\xf25d", "5:\xf07c", "6:\xf001", "7:\xf0ac", "8:\xf1dd", "9:\xf1fc", "0:\xf0e0"]
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = insertPosition Below Newer <+> composeAll
      [
-        className =? "KeePassXC"   --> doFloat
-      , className =? "Tor Browser" --> doFloat
-      , (className =? "Firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
+       className =? "KeePassXC"                           --> doFloat
+     , className =? "firefox"                             --> viewShift "1:\xf269"
+     , className =? "chromium"                            --> viewShift "1:\xf269"
+     , className =? "Emacs"                               --> viewShift "2:\xf15c"
+     , className =? "RStudio"                             --> viewShift "4:\xf25d"
+     , className =? "Pcmanfm"                             --> viewShift "5:\xf07c"
+     , className =? "Terminator"                          --> viewShift "6:\xf001"
+     , className =? "QGIS3"                               --> viewShift "7:\xf0ac"
+     , className =? "Inkscape"                            --> viewShift "9:\xf1fc"
+     , className =? "Gimp"                                --> viewShift "9:\xf1fc"
+     , className =? "Signal"                              --> viewShift "0:\xf0e0"
+     , className =? "TelegramDesktop"                     --> viewShift "0:\xf0e0"
+     , title =?     "Media viewer"                        --> doFloat
+     , className =? "Tor Browser"                         --> doFloat
+     , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      ]
+  where viewShift = doF . liftM2 (.) W.greedyView W.shift
 
---myLayoutHook = avoidStruts $ layoutHook desktopConfig $ smartBorders Tall ||| smartBorders Full
-  --where
-  --  tiled   = named "[]=" $ Tall 
-  --  full    = named "[M]" $ Full
 myLayoutHook = avoidStruts $ windowArrange $ smartBorders $
                mkToggle (NBFULL ?? NOBORDERS ?? EOT) $ myDefaultLayout
              where 
                  myDefaultLayout = tall ||| noBorders monocle
-
 tall       = renamed [Replace "tall"]     $ limitWindows 12 $ spacing 6 $ ResizableTall 1 (3/100) (1/2) []
 monocle    = renamed [Replace "monocle"]  $ limitWindows 20 $ Full
 

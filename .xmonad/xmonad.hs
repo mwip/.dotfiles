@@ -1,3 +1,6 @@
+----------------------------------------------------------------------
+-- Imports
+----------------------------------------------------------------------
 -- Xmonad
 import XMonad
 import XMonad.Config.Desktop
@@ -49,6 +52,9 @@ import System.IO
 import Control.Monad (liftM2)
 
 
+----------------------------------------------------------------------
+-- Variables
+----------------------------------------------------------------------
 myFont          = "xft:Ubuntu Mono Nerd Font:regular:pixelsize=12"
 myModMask       = mod4Mask  -- Sets modkey to super/windows key
 myTerminal      = "alacritty"      -- Sets default terminal
@@ -59,6 +65,10 @@ windowCount     = gets $ Just . show . length . W.integrate' . W.stack . W.works
 home            = "/home/loki/"
 scripts         = (home ++ ".scripts/")
 
+
+----------------------------------------------------------------------
+-- Main
+----------------------------------------------------------------------
 main = do
     nScreens <- countScreens
     -- primary display
@@ -93,6 +103,9 @@ main = do
         } `additionalKeysP` myKeys
 
 
+----------------------------------------------------------------------
+-- Managehooks
+----------------------------------------------------------------------
 --["1:\xf269", "2:\xf15c", "3:\xf120", "4:\xf25d", "5:\xf07c", "6:\xf001", "7:\xf0ac", "8:\xf1dd", "9:\xf1fc", "0:\xf0e0"]
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = insertPosition Below Newer <+> composeAll
@@ -115,6 +128,10 @@ myManageHook = insertPosition Below Newer <+> composeAll
      ]
   where viewShift = doF . liftM2 (.) W.greedyView W.shift
 
+
+----------------------------------------------------------------------
+-- Layouts
+----------------------------------------------------------------------
 myLayoutHook = avoidStruts $ windowArrange $ smartBorders $
                mkToggle (NBFULL ?? NOBORDERS ?? EOT) $ myDefaultLayout
              where 
@@ -123,11 +140,17 @@ tall       = renamed [Replace "tall"]     $ limitWindows 12 $ spacing 6 $ Resiza
 monocle    = renamed [Replace "monocle"]  $ limitWindows 20 $ Full
 
 
+----------------------------------------------------------------------
+-- Startup
+----------------------------------------------------------------------
 myStartupHook = do
           spawnOnce "/home/loki/.scripts/autostart.sh &"
           --spawnOnce "stalonetray" 
           setWMName "LG3D"
 
+----------------------------------------------------------------------
+-- Key bindings
+----------------------------------------------------------------------
 myKeys =
         [ 
           -- Xmonad 
@@ -202,6 +225,9 @@ myKeys =
           (("M-S-" ++ key), (windows $ W.shift ws)) | (key, ws) <- myExtraWorkspaces
         ]
 
+----------------------------------------------------------------------
+-- Workspaces
+----------------------------------------------------------------------
 myExtraWorkspaces = [("0", "0:\xf0e0")] -- https://stackoverflow.com/a/27743913/3250126
 myWorkspaces = ["1:\xf269", "2:\xf15c", "3:\xf120", "4:\xf25d", "5:\xf07c"
                , "6:\xf001", "7:\xf0ac", "8:\xf1dd", "9:\xf1fc"] ++ (map snd myExtraWorkspaces)

@@ -596,6 +596,8 @@
    (setq fci-rule-width 2)
    (setq fci-rule-color "red")
    (add-hook 'python-mode-hook 'fci-mode)
+   (add-hook 'haskell-mode-hook 'fci-mode)
+   (add-hook 'ess-mode-hook 'fci-mode)
    #+END_SRC
 ** auto-complete
    autocomplete everywhere

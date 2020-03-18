@@ -33,7 +33,7 @@ bri(){
 
 #~~~~~~~~~~~~Volume~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~# 
 vol(){
-    echo -e "墳 $(pamixer --get-volume-human)$sep"
+    echo -e " 墳 $(pamixer --get-volume-human)$sep"
 }
 
 #~~~~~~~~~~~~CPU~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~# 

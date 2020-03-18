@@ -123,6 +123,7 @@ myManageHook = insertPosition Below Newer <+> composeAll
      , className =? "Gimp"                                --> viewShift "9:\xf1fc"
      , className =? "Signal"                              --> viewShift "0:\xf0e0"
      , className =? "TelegramDesktop"                     --> viewShift "0:\xf0e0"
+     , className =? "Thunderbird"                         --> viewShift "0:\xf0e0"
      , title =?     "Media viewer"                        --> doFloat
      , className =? "Tor Browser"                         --> doFloat
      , className =? "cloud-drive-ui"                      --> doFloat

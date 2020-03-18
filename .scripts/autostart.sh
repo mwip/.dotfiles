@@ -7,7 +7,8 @@ then
 fi &
 xbindkeys &
 wmname LG3D & # DWM tweak to get jabref running
-trayer --edge top --align right --expand true --widthtype request --transparent true --alpha 0 --height 18 --tint 0x282a36 --monitor "primary" &
+#trayer --edge top --align right --expand true --widthtype request --transparent true --alpha 0 --height 18 --tint 0x282a36 --monitor "primary" &
+stalonetray &
 compton &
 nitrogen --restore & 
 # urxvtd -q -o -f &

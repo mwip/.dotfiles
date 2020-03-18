@@ -124,6 +124,7 @@ myManageHook = insertPosition Below Newer <+> composeAll
      , className =? "TelegramDesktop"                     --> viewShift "0:\xf0e0"
      , title =?     "Media viewer"                        --> doFloat
      , className =? "Tor Browser"                         --> doFloat
+     , className =? "cloud-drive-ui"                      --> doFloat
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      ]
   where viewShift = doF . liftM2 (.) W.greedyView W.shift
@@ -165,8 +166,8 @@ myKeys =
         , ("M-S-y", shiftNextScreen >> nextScreen)
         , ("M-x", swapNextScreen)
 
-        -- Trayer
-        , ("M-S-t", spawn (scripts ++ "restart_trayer.sh"))
+        -- Tray
+        , ("M-S-t", spawn (scripts ++ "restart_systray.sh stalonetray"))
         
         -- Windows
         , ("M-q", kill1)                           -- Kill the currently focused client

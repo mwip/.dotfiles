@@ -704,6 +704,10 @@
    (use-package haskell-mode
      :ensure t)
    #+end_src
+** Column numbers
+   #+begin_src emacs-lisp
+   (setq column-number-mode t)
+   #+end_src
 * R-Related Configuration
 ** Force scroll on R-console
    #+BEGIN_SRC emacs-lisp

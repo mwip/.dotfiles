@@ -138,10 +138,10 @@ myManageHook = insertPosition Below Newer <+> composeAll
 myLayoutHook = avoidStruts $ windowArrange $ smartBorders $
                mkToggle (NBFULL ?? NOBORDERS ?? EOT) $ myDefaultLayout
              where 
-                 myDefaultLayout = tall ||| noBorders monocle ||| floats
+                 myDefaultLayout = tall ||| noBorders monocle -- ||| floats
 tall       = renamed [Replace "tall"]     $ limitWindows 12 $ spacing 6 $ ResizableTall 1 (3/100) (1/2) []
 monocle    = renamed [Replace "monocle"]  $ limitWindows 20 $ Full
-floats     = renamed [Replace "floats"]   $ limitWindows 20 $ simplestFloat
+--floats     = renamed [Replace "floats"]   $ limitWindows 20 $ simplestFloat
 
 
 ----------------------------------------------------------------------

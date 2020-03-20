@@ -107,7 +107,8 @@ main = do
 ----------------------------------------------------------------------
 -- Managehooks
 ----------------------------------------------------------------------
---["1:\xf269", "2:\xf15c", "3:\xf120", "4:\xf25d", "5:\xf07c", "6:\xf001", "7:\xf0ac", "8:\xf1dd", "9:\xf1fc", "0:\xf0e0"]
+--["1:\xf269", "2:\xf15c", "3:\xf120", "4:\xf25d", "5:\xf07c",
+--"6:\xf001", "7:\xf0ac", "8:\xf1dd", "9:\xf1fc", "0:\xf0e0", "ß:\xf11b"]
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = insertPosition Below Newer <+> composeAll
      [
@@ -119,11 +120,18 @@ myManageHook = insertPosition Below Newer <+> composeAll
      , className =? "Pcmanfm"                             --> viewShift "5:\xf07c"
      , className =? "Terminator"                          --> viewShift "6:\xf001"
      , className =? "QGIS3"                               --> viewShift "7:\xf0ac"
+     , className =? "TeXstudio"                           --> viewShift "8:\xf1dd"
+     , className =? "libreoffice-startcenter"             --> viewShift "8:\xf1dd"
+     , className =? "libreoffice-writer"                  --> viewShift "8:\xf1dd"
+     , className =? "libreoffice-calc"                    --> viewShift "8:\xf1dd"
+     , className =? "libreoffice-impress"                 --> viewShift "8:\xf1dd"
+     , className =? "org.jabref.JabRefMain"               --> viewShift "8:\xf1dd"
      , className =? "Inkscape"                            --> viewShift "9:\xf1fc"
      , className =? "Gimp"                                --> viewShift "9:\xf1fc"
      , className =? "Signal"                              --> viewShift "0:\xf0e0"
      , className =? "TelegramDesktop"                     --> viewShift "0:\xf0e0"
      , className =? "Thunderbird"                         --> viewShift "0:\xf0e0"
+     , className =? "Steam"                               --> viewShift "ß:\xf11b"
      , className =? "myCookbook"                          --> doFloat
      , title =?     "Media viewer"                        --> doFloat
      , className =? "Tor Browser"                         --> doFloat

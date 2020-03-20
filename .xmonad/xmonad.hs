@@ -114,7 +114,7 @@ myManageHook = insertPosition Below Newer <+> composeAll
      [
        className =? "KeePassXC"                           --> doFloat
      , className =? "firefox"                             --> viewShift "1:\xf269"
-     , className =? "chromium"                            --> viewShift "1:\xf269"
+     , className =? "Chromium"                            --> viewShift "1:\xf269"
      , className =? "Emacs"                               --> viewShift "2:\xf15c"
      , className =? "RStudio"                             --> viewShift "4:\xf25d"
      , className =? "Pcmanfm"                             --> viewShift "5:\xf07c"

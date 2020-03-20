@@ -182,7 +182,7 @@ myKeys =
         , ("M-<Return>", spawn myTerminal)
 
         -- Programs
-        , ("M-r", spawn "/home/loki/.scripts/dmenu_recent.sh -fn 'Ubuntu Mono Nerd Font:size=11'")
+        , ("M-r", spawn "/home/loki/.scripts/dmenu_recent.sh -i -fn 'Ubuntu Mono Nerd Font:size=11'")
         , ("M-C-<Return>", spawn "firefox")
         , ("C-M1-e", spawn "emacsclient -c -a ''")
         , ("M-c", spawn (scripts ++ "org-capture.sh"))

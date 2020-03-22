@@ -821,7 +821,7 @@
    =C-c C-t= will trigger a selection how to mark todo items
   #+BEGIN_SRC emacs-lisp
   (setq org-todo-keywords
-     '((sequence "TODO(t)" "NEXT(n)" "IN-PROGRESS(i)" "WAIT(w@/!)" "MAYBE(m)" "SOMEDAY(s)" "PROJ(p)" "READ(r)" "PUT-INTO-PAPER(a)" "|" "DONE(d)" "CANCELLED(c@/!)")))
+     '((sequence "TODO(t)" "NEXT(n)" "IN-PROGRESS(i)" "WAIT(w@/!)" "MAYBE(m)" "SOMEDAY(s)" "PROJ(p)" "READ(r)" "PUT-INTO-PAPER(a)" "|" "DONE(d)" "CANCELLED(c@/!)" "FINISHED-PROJ(f@)")))
    #+END_SRC
 ** Monday is the first day in Calendar week
 

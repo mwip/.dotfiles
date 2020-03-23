@@ -13,6 +13,7 @@ import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.ManageDocks 
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageHelpers
 
 -- Utils
 import XMonad.Util.Run(spawnPipe)
@@ -112,7 +113,8 @@ main = do
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = insertPosition Below Newer <+> composeAll
      [
-       className =? "KeePassXC"                           --> doFloat
+       isDialog                                           --> doF W.shiftMaster
+     , className =? "KeePassXC"                           --> doFloat
      , className =? "firefox"                             --> viewShift "1:\xf269"
      , className =? "Chromium"                            --> viewShift "1:\xf269"
      , className =? "Emacs"                               --> viewShift "2:\xf15c"

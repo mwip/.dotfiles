@@ -38,8 +38,7 @@ esac && $HOME/.scripts/net_speed.sh $interface &
 # Device specific autostarts 
 if [ $(hostname) == "bifrost" ]
 then
-    setxkbmap de &
-    setxkbmap -option ctrl:nocaps & # remap capslock to control
+    setxkbmap de && setxkbmap -option ctrl:nocaps & # remap capslock to control
     # remap lenovo print key to context menu key
     xmodmap -e "keycode 107 = Menu" &
     # reduce size in alacritty 

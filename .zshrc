@@ -96,8 +96,6 @@ export EDITOR=vim
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-#alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
 # If not running interactively, don't do anything
@@ -110,25 +108,8 @@ zstyle :compinstall filename '/home/loki/.zshrc'
 autoload -Uz compinit
 compinit
 
-
+source $HOME/.config/aliases 
  
-alias ls='ls --color=auto'
-PS1='[\u@\h \W]\$ '
-alias ..='cd ..'
-alias ll='ls -alh --color=auto'
-
-alias pacman-autoremove='sudo pacman -Rsn $(pacman -Qdtq)'
-alias t='echo "" && todo.sh'
-alias ct='clear && t'
-alias update-bootloader='sudo bootctl --path=/efi update'
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias d='dotfiles'
-alias dwm-clean='make clean && rm -f config.h && git reset --hard cb3f58a'
-alias dwm-install='make && sudo make clean install'
-alias dwm-merge='~/.scripts/dwm-merge'
-alias dwm-diff='~/.scripts/dwm-diffs'
-alias tor='cd /opt/tor-browser_en-US && ./start-tor-browser.desktop && exit'
-alias cal='cal -m'
 # powerline
 powerline-daemon -q
 . /usr/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh

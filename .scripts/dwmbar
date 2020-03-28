@@ -60,8 +60,14 @@ net(){
     echo -en "$(cat $HOME/.cache/networktraffic | sed 's/\r//g')$sep"
 }
 
+temp(){
+    [ "$(hostname)" == "walhall" ] && temp=$(sensors | grep "CPU Temperature" | awk '{print $3}' | sed 's/+//')
+    [ "$(hostname)" == "bifrost" ] && temp=$(sensors | grep "Package id 0:" | awk '{print $4}' | sed 's/+//')
+    echo "  "$temp$sep
+}
+
 status(){
-    status="$(net)$(mus)$(bat)$(vol)$(bri)$(dte)"
+    status="$(net)$(mus)$(bat)$(temp)$(vol)$(bri)$(dte)"
     echo "$status"
 }
 

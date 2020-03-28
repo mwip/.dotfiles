@@ -63,7 +63,7 @@ net(){
 temp(){
     [ "$(hostname)" == "walhall" ] && temp=$(sensors | grep "CPU Temperature" | awk '{print $3}' | sed 's/+//')
     [ "$(hostname)" == "bifrost" ] && temp=$(sensors | grep "Package id 0:" | awk '{print $4}' | sed 's/+//')
-    echo "  "$temp$sep
+    echo "  "$temp$sep
 }
 
 status(){

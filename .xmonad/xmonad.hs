@@ -21,7 +21,7 @@ import XMonad.Util.EZConfig(additionalKeysP)
 import XMonad.Util.SpawnOnce
 
 -- Actions
-import XMonad.Actions.CopyWindow (kill1)
+import XMonad.Actions.CopyWindow (kill1, copy)
 import XMonad.Actions.WithAll (sinkAll, killAll)
 import XMonad.Actions.CycleWS
 
@@ -44,7 +44,7 @@ import qualified XMonad.Layout.ToggleLayouts as T (toggleLayouts, ToggleLayout(T
 import XMonad.Layout.Gaps
 import XMonad.Layout.Named
 import XMonad.Layout.ResizableTile
-import XMonad.Layout.SimplestFloat
+-- import XMonad.Layout.SimplestFloat
 import XMonad.Layout.IndependentScreens (countScreens)
 
 -- System
@@ -113,7 +113,7 @@ main = do
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = insertPosition Below Newer <+> composeAll
      [
-       isDialog                                           --> doF W.shiftMaster
+       isDialog                                           --> doF W.swapUp
      , className =? "KeePassXC"                           --> doFloat
      , className =? "firefox"                             --> viewShift "1:\xf269"
      , className =? "Chromium"                            --> viewShift "1:\xf269"
@@ -127,6 +127,7 @@ myManageHook = insertPosition Below Newer <+> composeAll
      , className =? "libreoffice-writer"                  --> viewShift "8:\xf1dd"
      , className =? "libreoffice-calc"                    --> viewShift "8:\xf1dd"
      , className =? "libreoffice-impress"                 --> viewShift "8:\xf1dd"
+     , className =? "libreoffice"                         --> viewShift "8:\xf1dd"
      , className =? "org.jabref.JabRefMain"               --> viewShift "8:\xf1dd"
      , className =? "Inkscape"                            --> viewShift "9:\xf1fc"
      , className =? "Gimp"                                --> viewShift "9:\xf1fc"
@@ -238,13 +239,17 @@ myKeys =
           (("M-" ++ key), (windows $ W.greedyView ws)) | (key, ws) <- myExtraWorkspaces
         ] ++ [
           (("M-S-" ++ key), (windows $ W.shift ws)) | (key, ws) <- myExtraWorkspaces
-        ]
+        ] -- ++ [
+          --(("M-C-" ++ key), (windows $ copy ws)) | (key, ws) <- zip ["1","2","3","4","5","6","7","8","9"] wrkspcs
+        --, (("M-C-" ++ key), (windows $ copy ws)) | (key, ws) <- myExtraWorkspaces
+        --     ]
 
 ----------------------------------------------------------------------
 -- Workspaces
 ----------------------------------------------------------------------
 myExtraWorkspaces = [("0", "0:\xf0e0"), ("ß", "ß:\xf11b")] -- https://stackoverflow.com/a/27743913/3250126
-myWorkspaces = ["1:\xf269", "2:\xf15c", "3:\xf120", "4:\xf25d", "5:\xf07c"
-               , "6:\xf001", "7:\xf0ac", "8:\xf1dd", "9:\xf1fc"] ++ (map snd myExtraWorkspaces)
+wrkspcs = ["1:\xf269", "2:\xf15c", "3:\xf120", "4:\xf25d", "5:\xf07c"
+               , "6:\xf001", "7:\xf0ac", "8:\xf1dd", "9:\xf1fc"]
+myWorkspaces = wrkspcs ++ (map snd myExtraWorkspaces)
         --["1:", "2:", "3:", "4:", "5:", "6:ﱘ", "7:", "8:", "9:", "0:"]
         -- Unicode escape chars: https://stackoverflow.com/q/60682325/3250126

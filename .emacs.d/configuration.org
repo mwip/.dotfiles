@@ -498,6 +498,12 @@
      )
    #+end_src
 
+** Auto dim other buffers
+   #+BEGIN_SRC emacs-lisp
+   (use-package auto-dim-other-buffers
+      :ensure t)
+   (auto-dim-other-buffers-mode)
+   #+END_SRC
 * coding-related configuration
 ** projects with projectile
    see [[https://projectile.readthedocs.io/en/latest/usage/][Documentaiton]]

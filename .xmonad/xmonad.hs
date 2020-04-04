@@ -100,7 +100,7 @@ main = do
         , startupHook        = myStartupHook
         , workspaces         = myWorkspaces
         , borderWidth        = myBorderWidth
-        , normalBorderColor  = "#292d3e"
+        , normalBorderColor  = "#161616"
         , focusedBorderColor = "#ba0000"
         } `additionalKeysP` myKeys
 
@@ -134,6 +134,7 @@ myManageHook = insertPosition Below Newer <+> composeAll
      , className =? "Signal"                              --> viewShift "0:\xf0e0"
      , className =? "TelegramDesktop"                     --> viewShift "0:\xf0e0"
      , className =? "Thunderbird"                         --> viewShift "0:\xf0e0"
+     , className =? "qTox"                                --> viewShift "0:\xf0e0"
      , className =? "Steam"                               --> viewShift "ß:\xf11b"
      , className =? "myCookbook"                          --> doFloat
      , title =?     "Media viewer"                        --> doFloat

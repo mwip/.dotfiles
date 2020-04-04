@@ -504,6 +504,13 @@
       :ensure t)
    (auto-dim-other-buffers-mode)
    #+END_SRC
+** Half page up/down
+   #+begin_src emacs-lisp
+   (autoload 'View-scroll-half-page-forward "view")
+   (autoload 'View-scroll-half-page-backward "view")
+   (global-set-key (kbd "C-v") 'View-scroll-half-page-forward)
+   (global-set-key (kbd "M-v") 'View-scroll-half-page-backward)
+   #+end_src
 * coding-related configuration
 ** projects with projectile
    see [[https://projectile.readthedocs.io/en/latest/usage/][Documentaiton]]

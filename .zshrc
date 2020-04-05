@@ -111,10 +111,10 @@ compinit
 source $HOME/.config/aliases 
  
 # powerline
-powerline-daemon -q
-. /usr/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
-POWERLINE_BASH_CONTINUATION=1
-POWERLINE_BASH_SELECT=1
+# powerline-daemon -q
+# . /usr/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
+# POWERLINE_BASH_CONTINUATION=1
+# POWERLINE_BASH_SELECT=1
 
 export PATH=$PATH:/home/loki/github/geoprocessors:$HOME/bin
 

@@ -1,7 +1,8 @@
 # File and directory operations
-alias ls='ls --color=auto'
+alias ls='lsd --group-dirs first'
 alias ..='cd ..'
-alias ll='ls -alh --color=auto'
+alias ll='ls -Alh'
+alias lt='ls --tree'
 
 # pacman and trizen 
 alias pacman-autoremove='sudo pacman -Rsn $(pacman -Qdtq)'

@@ -59,7 +59,7 @@ import Control.Monad (liftM2)
 ----------------------------------------------------------------------
 myFont          = "xft:Ubuntu Mono Nerd Font:regular:pixelsize=12"
 myModMask       = mod4Mask  -- Sets modkey to super/windows key
-myTerminal      = "urxvtc" -- "alacritty"      -- Sets default terminal
+myTerminal      = "kitty" -- "alacritty"      -- Sets default terminal
 myTextEditor    = "emacsclient -c"     -- Sets default text editor
 myBorderWidth   = 2         -- Sets border width for windows
 myGaps          = 6
@@ -138,6 +138,7 @@ myManageHook = insertPosition Below Newer <+> composeAll
      , className =? "Steam"                               --> viewShift "ß:\xf11b"
      , className =? "myCookbook"                          --> doFloat
      , title =?     "Media viewer"                        --> doFloat
+     , title =?     "Select entry type"                   --> doFloat
      , className =? "Tor Browser"                         --> doFloat
      , className =? "cloud-drive-ui"                      --> doFloat
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog

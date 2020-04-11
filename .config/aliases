@@ -4,6 +4,9 @@ alias ..='cd ..'
 alias ll='ls -Alh'
 alias lt='ls --tree'
 
+# find files from current directory
+alias ff='~/.scripts/fzf_file_search.sh'
+
 # pacman and trizen 
 alias pacman-autoremove='sudo pacman -Rsn $(pacman -Qdtq)'
 alias up='trizen -Syu'

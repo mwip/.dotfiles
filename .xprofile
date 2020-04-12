@@ -1,2 +1,4 @@
 export MYTERM='kitty'
 export MYBROWSER='firefox'
+export MYFILEMNGR='doublecmd -T'
+

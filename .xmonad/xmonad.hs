@@ -225,6 +225,7 @@ myKeys =
         -- Laptop
         , ("<XF86MonBrightnessUp>", spawn (scripts ++ "brightness.sh +"))
         , ("<XF86MonBrightnessDown>", spawn (scripts ++ "brightness.sh -"))
+        , ("M-<F11>", spawn (scripts ++ "toggle_touchpad.sh"))
 
         -- Screenshots
         , ("M-s", spawn (scripts ++ "screenshot_full.sh"))

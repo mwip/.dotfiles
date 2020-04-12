@@ -1,19 +1,21 @@
 #!/bin/bash
 
 DMENU="/usr/bin/dmenu -i -p"
-FOLDERS="home\nCloudStation\nDownloads/\nDocuments/\n.config"
+FOLDERS="home\nCloudStation\nDownloads/\nDocuments/\n.config\n~~edit~~"
 
-function choose {
-    CHOICE=$(echo -e $FOLDERS | $DMENU "Launch file browser at:" )
-}
+FILEMNGR="doublecmd -T"
 
-function launch {
-    cd $HOME
-    if [ $CHOICE == "home" ]
-    then
-	CHOICE=""
-    fi
-    pcmanfm $CHOICE
-}
+CHOICE=$(echo -e $FOLDERS | $DMENU "Launch file browser at:" )
 
-choose && launch
+case $CHOICE in
+    home)
+	$FILEMNGR $HOME
+	;;
+    '~~edit~~')
+	$MYTERM vim ${BASH_SOURCE[0]}
+	;;
+    *)
+	doublecmd -T $CHOICE
+esac
+
+

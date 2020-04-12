@@ -474,7 +474,8 @@
     <IgnoreListFile>%DC_CONFIG_PATH%/ignorelist.txt</IgnoreListFile>
   </IgnoreList>
   <DirectoryHotList>
-    <HotDir Name="home" Path="/home/loki/"/>
+    <HotDir Name="home" Path="/home/loki"/>
+    <HotDir Name=".config" Path="/home/loki/.config/"/>
   </DirectoryHotList>
   <Viewer>
     <PreviewVisible>False</PreviewVisible>
@@ -626,7 +627,7 @@
         <Column>
           <Title>Name</Title>
           <FuncString>[DC().GETFILENAMENOEXT{}]</FuncString>
-          <Width>250</Width>
+          <Width>548</Width>
           <Align>0</Align>
           <Font>
             <Name>default</Name>

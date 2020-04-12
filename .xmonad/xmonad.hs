@@ -111,10 +111,16 @@ main = do
 --["1:\xf269", "2:\xf15c", "3:\xf120", "4:\xf25d", "5:\xf07c",
 --"6:\xf001", "7:\xf0ac", "8:\xf1dd", "9:\xf1fc", "0:\xf0e0", "ß:\xf11b"]
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
-myManageHook = insertPosition Below Newer <+> composeAll
+--myManageHook = insertPosition Below Newer <+> composeAll
+myManageHook = composeAll
      [
-       isDialog                                           --> doF W.swapUp
-     , className =? "KeePassXC"                           --> doFloat
+       --isDialog                                           --> doF W.swapUp
+     -- swapdowns
+       className =? "kitty"                               --> doF W.swapDown
+     , className =? "urxvtc"                              --> doF W.swapDown
+     , className =? "alacritty"                           --> doF W.swapDown
+     , className =? "QGIS3"                               --> doF W.swapDown
+     -- dedicated workspaces
      , className =? "firefox"                             --> viewShift "1:\xf269"
      , className =? "Chromium"                            --> viewShift "1:\xf269"
      , className =? "Emacs"                               --> viewShift "2:\xf15c"
@@ -137,6 +143,8 @@ myManageHook = insertPosition Below Newer <+> composeAll
      , className =? "Thunderbird"                         --> viewShift "0:\xf0e0"
      , className =? "qTox"                                --> viewShift "0:\xf0e0"
      , className =? "Steam"                               --> viewShift "ß:\xf11b"
+     -- floats
+     , className =? "KeePassXC"                           --> doFloat
      , className =? "myCookbook"                          --> doFloat
      , title =?     "Media viewer"                        --> doFloat
      , title =?     "Select entry type"                   --> doFloat
@@ -209,7 +217,7 @@ myKeys =
         -- Meh
         , ("C-S-M1-m", spawn "terminator")
         , ("C-S-M1-q", spawn "qgis")
-        , ("C-S-M1-e", spawn "killall emacs && emacs --daemon --chdir=$HOME")
+        , ("C-S-M1-e", spawn "killall emacs && emacs --daemon --chdir=$HOME && notify-send 'Emacs' 'Emacs Daemon restarted'")
         , ("C-S-M1-r", spawn "rstudio-bin")
         , ("C-S-M1-t", spawn "thunderbird")
         , ("C-S-M1-a", spawn "pavucontrol")

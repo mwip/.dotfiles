@@ -120,6 +120,7 @@ myManageHook = insertPosition Below Newer <+> composeAll
      , className =? "Emacs"                               --> viewShift "2:\xf15c"
      , className =? "RStudio"                             --> viewShift "4:\xf25d"
      , className =? "Pcmanfm"                             --> viewShift "5:\xf07c"
+     , className =? "Double Commander"                    --> viewShift "5:\xf07c"
      , className =? "Terminator"                          --> viewShift "6:\xf001"
      , className =? "QGIS3"                               --> viewShift "7:\xf0ac"
      , className =? "TeXstudio"                           --> viewShift "8:\xf1dd"

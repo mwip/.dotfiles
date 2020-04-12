@@ -59,7 +59,7 @@ import Control.Monad (liftM2)
 ----------------------------------------------------------------------
 myFont          = "xft:Ubuntu Mono Nerd Font:regular:pixelsize=12"
 myModMask       = mod4Mask  -- Sets modkey to super/windows key
-myTerminal      = "kitty" -- "alacritty"      -- Sets default terminal
+myTerminal      = "$MYTERM" -- Sets default terminal using MYTERM defined in .xprofile
 myTextEditor    = "emacsclient -c -n -a ''"     -- Sets default text editor
 myBorderWidth   = 2         -- Sets border width for windows
 myGaps          = 6
@@ -197,7 +197,7 @@ myKeys =
 
         -- Programs
         , ("M-r", spawn "/home/loki/.scripts/dmenu_recent.sh -i -fn 'Ubuntu Mono Nerd Font:size=11'")
-        , ("M-C-<Return>", spawn "firefox")
+        , ("M-C-<Return>", spawn "$MYBROWSER")
         , ("C-M1-e", spawn "emacsclient -c -a ''")
         , ("M-c", spawn (scripts ++ "org-capture.sh"))
         , ("M-S-b", spawn (scripts ++ "pabluezswitch.sh"))
@@ -205,6 +205,7 @@ myKeys =
         , ("M-g", spawn (scripts ++ "dmenu_filemanager.sh"))
         , ("M-C-l", spawn "xautolock -locknow")
         , ("M-a", spawn (scripts ++ "dmenu_websearch.sh"))
+        , ("M-u", spawn (scripts ++ "dmenu_umount.sh"))
         -- Meh
         , ("C-S-M1-m", spawn "terminator")
         , ("C-S-M1-q", spawn "qgis")
@@ -216,7 +217,7 @@ myKeys =
         , ("C-S-M1-d", spawn "telegram-desktop")
         , ("C-S-M1-f", spawn "firefox")
         , ("C-S-M1-b", spawn "blueman-manager")
-        , ("C-S-M1-k", spawn ("alacritty -e '" ++ scripts ++ "xmonad_keys.sh'"))
+        , ("C-S-M1-k", spawn ("$MYTERM -e '" ++ scripts ++ "xmonad_keys.sh'"))
 
         -- Ergodox-Layout
         , ("M-S-l", spawn "zathura /home/loki/Documents/output.pdf")

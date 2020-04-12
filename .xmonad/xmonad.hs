@@ -209,7 +209,7 @@ myKeys =
         -- Meh
         , ("C-S-M1-m", spawn "terminator")
         , ("C-S-M1-q", spawn "qgis")
-        , ("C-S-M1-e", spawn "emacsclient -c -a ''")
+        , ("C-S-M1-e", spawn "killall emacs && emacs --daemon --chdir=$HOME")
         , ("C-S-M1-r", spawn "rstudio-bin")
         , ("C-S-M1-t", spawn "thunderbird")
         , ("C-S-M1-a", spawn "pavucontrol")

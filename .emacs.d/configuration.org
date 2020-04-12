@@ -552,6 +552,7 @@
      :ensure t)
    (setq fci-rule-width 2)
    (setq fci-rule-color "red")
+   (setq fci-rule-column 80)
    (add-hook 'python-mode-hook 'fci-mode)
    (add-hook 'haskell-mode-hook 'fci-mode)
    (add-hook 'ess-mode-hook 'fci-mode)

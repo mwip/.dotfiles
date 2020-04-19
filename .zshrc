@@ -24,7 +24,7 @@ ZSH_THEME="agnoster"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -36,7 +36,7 @@ ZSH_THEME="agnoster"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -66,7 +66,6 @@ plugins=(
   git
   zsh-syntax-highlighting # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
   zsh-autosuggestions # git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
-  zsh-interactive-cd
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -99,24 +98,13 @@ export EDITOR=vim
 
 
 # If not running interactively, don't do anything
-HISTFILE=~/.histfile
+HISTFILE=$HOME/.config/zsh/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
 
-zstyle :compinstall filename '/home/loki/.zshrc'
+#zstyle :compinstall filename '/home/loki/.zshrc'
 
 autoload -Uz compinit
 compinit
 
-source $HOME/.config/aliases 
- 
-export PATH=$PATH:/home/loki/github/geoprocessors:$HOME/bin
-
-chpwd() ls
-
-# show neofetch at startup of console
-# neofetch --disable GPU
-
-# show pfetch at startup of console
-#pfetch
-source /opt/OTB-7.0.0-Linux64/otbenv.profile
+source $HOME/.config/aliases

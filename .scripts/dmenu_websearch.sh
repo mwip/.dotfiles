@@ -3,24 +3,32 @@
 # Opens a dmenu prompt for selecting a search engine and providing a search query
 # To avoid issues with spaces and special characters html encoding is applied to the query
 
-url=$(cat ~/.config/search/search |
-	  sed 's/:https.*//' |
-	  dmenu -i -p "Search Engine" |
+DMENU_CMD='dmenu -i -fn "Ubuntu Mono:size=11" -nb "#161616" -nf "#D0D0D0" -sf "#444444" -sb "#c3e88d"'
+
+URL=$(cat ~/.config/search/search|
+	  sed 's/:https.*//' | 
+	  eval "$DMENU_CMD -p 'Search Engine:'" |
 	  xargs -I % grep "%:" ~/.config/search/search |
 	  sed 's/.*:https/https/')
-search=$(sort ~/.config/search/search_history |
-	     dmenu -i -p "Search")
+SEARCH=$(sort ~/.config/search/search_history |
+	    eval "$DMENU_CMD -p 'Search:'")
 
 # Echo to history file
-if [ ! "$(grep -q "$search" < ~/.config/search/search_history)" ]; then
+if [ ! "$(grep -q "$SEARCH" < ~/.config/search/search_history)" ]; then
     if [ "$(wc -l < ~/.config/search/search_history)" -gt 500 ]; then
-        sed -i "1s/^/$search\n/;$ d" ~/.config/search/search_history
+        sed -i "1s/^/$SEARCH\n/;$ d" ~/.config/search/search_history
     else
-        echo "$search" >> ~/.config/search/search_history
+	[ -n "$SEARCH" ] && echo "$SEARCH" >> ~/.config/search/search_history
     fi
 fi
 
 # Open browser if search query provided
-[ -n "$search" ] &&
-    [ "$search" != "" ] &&
-    firefox --new-tab "$1" "$url$(~/.scripts/encode "$search")" &
+[ -n "$SEARCH" ] &&
+    [ "$SEARCH" != "" ] &&
+    case $SEARCH in
+	"~~edit~~")
+	    $EDITOR ~/.config/search/search
+	    ;;
+	*)
+	    firefox --new-tab "$1" "$URL$(~/.scripts/encode "$SEARCH")"
+    esac &

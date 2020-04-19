@@ -24,7 +24,7 @@ function execute {
     if [ "$CHOICE" == "Lock" ];then
 	ACTION="$HOME/.scripts/lockscreen.sh"
     elif [ "$CHOICE" == "Logout" ];then
-	ACTION="$HOME/.config/qtile/logoff.py && $HOME/.scripts/dwm_logoff"
+	ACTION="pkill xmonad"
     elif [ "$CHOICE" == "Suspend" ];then
 	ACTION="/bin/systemctl -i suspend"
     elif [ "$CHOICE" == "Reboot" ];then

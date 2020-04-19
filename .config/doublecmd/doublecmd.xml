@@ -476,7 +476,7 @@
   <DirectoryHotList>
     <HotDir Name="home" Path="/home/loki"/>
     <HotDir Name=".config" Path="/home/loki/.config"/>
-    <HotDir Name="Downloads" Path="/home/loki/Downloads/"/>
+    <HotDir Name="Downloads" Path="/home/loki/Downloads"/>
   </DirectoryHotList>
   <Viewer>
     <PreviewVisible>False</PreviewVisible>

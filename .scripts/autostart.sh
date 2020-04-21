@@ -25,6 +25,7 @@ libinput-gestures-setup restart &
 xautolock -time 10 -notify 30 -notifier "notify-send 'xautolock kicking in soon'" -corners 000- -locker '$HOME/.scripts/lockscreen.sh' &
 udiskie &
 synology-drive &
+protonmail-bridge --no-window &
 # net speed 
 case "$(hostname)" in
     walhall)

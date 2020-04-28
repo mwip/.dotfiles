@@ -3,3 +3,5 @@
  b:8
 "/usr/bin/xdotool key Alt+Right"
  b:9
+"/usr/bin/xdotool key Ctrl+Super+p"
+ XF86Favorites

@@ -118,7 +118,7 @@ myManageHook = composeAll
      -- swapdowns
        className =? "kitty"                               --> doF W.swapDown
      , className =? "urxvtc"                              --> doF W.swapDown
-     , className =? "alacritty"                           --> doF W.swapDown
+     , className =? "Alacritty"                           --> doF W.swapDown
      , className =? "QGIS3"                               --> doF W.swapDown
      -- dedicated workspaces
      , className =? "firefox"                             --> viewShift "1:\xf269"

@@ -1,4 +1,4 @@
-export MYTERM='kitty'
+export MYTERM='alacritty'
 export MYBROWSER='firefox'
 export MYFILEMNGR='doublecmd -T'
 export PATH=$PATH:/home/loki/github/geoprocessors:$HOME/bin:$HOME/.scripts

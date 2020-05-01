@@ -8,6 +8,7 @@
 #   - awk
 #   - sed
 #   - curl
+#   - pdftotext
 
 # set some variables
 PDF_VIEWER='zathura'
@@ -55,7 +56,7 @@ PACKAGE=$(echo -e $CACHED | sed 's/.pdf//g;s/ /\n/g;s/$/\n~~update~~/' |
 # if the chosen package is not cached yet, download it from CRAN
 [ $(echo $CACHED | grep -w $PACKAGE) ] ||
     wget https://cran.r-project.org/web/packages/$PACKAGE/$PACKAGE.pdf \
-	 -p ~/.cache/R-pdfs/
+	 -O ~/.cache/R-pdfs/$PACKAGE.pdf
 
 # open package pdf when it exists
 eval "$PDF_VIEWER $CACHE_DIR/$PACKAGE.pdf" &

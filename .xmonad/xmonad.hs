@@ -214,6 +214,7 @@ myKeys =
         , ("M-C-l", spawn "xautolock -locknow")
         , ("M-a", spawn (scripts ++ "dmenu_websearch.sh"))
         , ("M-u", spawn (scripts ++ "dmenu_umount.sh"))
+        , ("M-S-c", spawn(scripts ++ "xcolor_pick.sh"))
         -- Meh
         , ("C-S-M1-m", spawn "terminator")
         , ("C-S-M1-q", spawn "qgis")

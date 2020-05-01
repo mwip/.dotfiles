@@ -30,3 +30,5 @@ alias dwm-diff='~/.scripts/dwm-diffs'
 
 # misc
 alias update-bootloader='sudo bootctl --path=/efi update'
+
+alias wthr='curl v2.wttr.in'

@@ -206,7 +206,7 @@ myKeys =
         -- Programs
         , ("M-r", spawn "/home/loki/.scripts/dmenu_recent.sh -i -fn 'Ubuntu Mono Nerd Font:size=11' -nb '#161616' -nf '#D0D0D0' -sf '#444444' -sb '#C45500'")
         , ("M-C-<Return>", spawn "$MYBROWSER")
-        , ("C-M1-e", spawn "emacsclient -c -a ''")
+        , ("C-M1-e", spawn myTextEditor)
         , ("M-c", spawn (scripts ++ "org-capture.sh"))
         , ("M-S-b", spawn (scripts ++ "pabluezswitch.sh"))
         , ("M-p", spawn (scripts ++ "dmenu_displayselect.sh"))

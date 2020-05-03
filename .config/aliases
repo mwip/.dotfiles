@@ -4,6 +4,8 @@ alias ls='exa --group-directories-first --icons'
 alias ll='ls -alh'
 alias lt='ls --tree'
 
+# emacs editor 
+alias e='emacsclient -n'
 # find files from current directory
 alias ff='~/.scripts/fzf_file_search.sh'
 

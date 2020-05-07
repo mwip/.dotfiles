@@ -103,3 +103,10 @@ autoload -Uz compinit
 compinit
 
 source $HOME/.config/aliases
+
+# Insert empty line in front before promt after first promt
+precmd() {
+     precmd() {
+         echo
+     }
+}

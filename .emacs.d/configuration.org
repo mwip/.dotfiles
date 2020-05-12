@@ -496,6 +496,8 @@
      (use-package auto-highlight-symbol
        :ensure t)
      (global-auto-highlight-symbol-mode t)
+     (define-key auto-highlight-symbol-mode-map (kbd "M-<left>") nil)
+     (define-key auto-highlight-symbol-mode-map (kbd "M-<right>") nil)
      (define-key auto-highlight-symbol-mode-map (kbd "M-p") 'ahs-backward)
      (define-key auto-highlight-symbol-mode-map (kbd "M-n") 'ahs-forward)
      (setq ahs-idle-interval 0.3) ;; if you want instant highlighting, set it to 0, but I find it annoying

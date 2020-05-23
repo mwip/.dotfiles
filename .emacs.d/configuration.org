@@ -379,6 +379,13 @@
    (global-set-key (kbd "C-v") 'View-scroll-half-page-forward)
    (global-set-key (kbd "M-v") 'View-scroll-half-page-backward)
    #+end_src
+** Openwith
+   #+begin_src emacs-lisp
+   (use-package openwith
+     :ensure t)
+   (openwith-mode t)
+   (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))))
+   #+end_src
 * coding-related configuration
 ** projects with projectile
    see [[https://projectile.readthedocs.io/en/latest/usage/][Documentaiton]]

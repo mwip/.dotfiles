@@ -3,13 +3,13 @@
 # Device specific autostarts 
 if [ $(hostname) == "walhall" ]
 then
-    xrandr --output DisplayPort-0 --off --output DisplayPort-1 --mode 1680x1050 --pos 0x0 --rotate normal --output HDMI-0 --off --output DVI-0 --off --output DVI-1 --primary --mode 1920x1200 --pos 1680x0 --rotate normal &
+    xrandr --output DisplayPort-0 --off --output DisplayPort-1 --mode 1440x900 --pos 0x300 --rotate normal --output HDMI-0 --off --output DVI-0 --off --output DVI-1 --primary --mode 1920x1200 --pos 1440x0 --rotate normal
 fi &
 xbindkeys &
 wmname LG3D & # DWM tweak to get jabref running
 #trayer --edge top --align right --expand true --widthtype request --transparent true --alpha 0 --height 18 --tint 0x282a36 --monitor "primary" &
 stalonetray &
-compton &
+picom &
 nitrogen --restore & 
 urxvtd -q -o -f &
 xsetroot -cursor_name left_ptr &

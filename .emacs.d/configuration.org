@@ -549,6 +549,11 @@
     (add-hook 'text-mode-hook 'turn-on-auto-fill)
     (setq-default fill-column 80)
     #+END_SRC
+** Dockerfile mode
+    #+BEGIN_SRC emacs-lisp
+    (use-package dockerfile-mode
+      :ensure t)
+    #+END_SRC
 * R-Related Configuration
 ** Force scroll on R-console
    #+BEGIN_SRC emacs-lisp
@@ -906,9 +911,34 @@
 ** Comment for german keyboard-layout
    #+begin_src emacs-lisp
    (global-set-key (kbd "<C-x C-S-,>") 'comment-line)
-   
    #+end_src
-
+** Unlink TAB an C-i as well as RET and C-m
+    #+BEGIN_SRC emacs-lisp
+    (define-key input-decode-map [?\C-i] [C-i])
+    (define-key input-decode-map [?\C-m] [C-m])
+    ;;(global-set-key (kbd "TAB") 'indent-for-tab-command)
+    #+END_SRC
+** =C-i= Indention
+   #+BEGIN_SRC emacs-lisp
+   (defun my/c-i-indent ()
+   "Indent line and move to next line"
+   (interactive)
+     (indent-for-tab-command)
+     (beginning-of-line)
+     (next-line))
+   ;;(global-unset-key (kbd "C-i"))
+   (global-set-key (kbd "<C-i>") 'my/c-i-indent)
+   #+END_SRC
+** Duplicate line with C-S-d
+    #+BEGIN_SRC emacs-lisp
+    (global-unset-key (kbd "C-S-d"))
+    (global-set-key (kbd "C-S-d") 'duplicate-line-down)
+    #+END_SRC
+** Comment line with C-S-c
+    #+BEGIN_SRC emacs-lisp
+      (global-unset-key (kbd "C-S-c"))
+      ;; (global-set-key (kbd "C-S-c") 'comment-line)
+    #+END_SRC
 ** Kill Daemon
    #+begin_src emacs-lisp
      ;; define function to shutdown emacs server instance

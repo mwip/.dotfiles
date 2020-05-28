@@ -45,6 +45,7 @@ import qualified XMonad.Layout.ToggleLayouts as T (toggleLayouts, ToggleLayout(T
 import XMonad.Layout.Gaps
 import XMonad.Layout.Named
 import XMonad.Layout.ResizableTile
+import XMonad.Layout.ThreeColumns
 -- import XMonad.Layout.SimplestFloat
 import XMonad.Layout.IndependentScreens (countScreens)
 
@@ -162,9 +163,10 @@ myManageHook = composeAll
 myLayoutHook = avoidStruts $ windowArrange $ smartBorders $
                mkToggle (NBFULL ?? NOBORDERS ?? EOT) $ myDefaultLayout
              where 
-                 myDefaultLayout = tall ||| noBorders monocle -- ||| floats
-tall       = renamed [Replace "tall"]     $ limitWindows 12 $ spacing 6 $ ResizableTall 1 (3/100) (1/2) []
-monocle    = renamed [Replace "monocle"]  $ limitWindows 20 $ Full
+                 myDefaultLayout = tall ||| centermaster ||| noBorders monocle -- ||| floats
+tall         = renamed [Replace "tall"]     $ limitWindows 12 $ spacing 6 $ ResizableTall 1 (3/100) (1/2) []
+centermaster = renamed [Replace "cent"]   $ limitWindows 12 $ spacing 6 $ ThreeColMid 1 (3/100) (1/2)
+monocle      = renamed [Replace "mono"]  $ limitWindows 20 $ Full
 --floats     = renamed [Replace "floats"]   $ limitWindows 20 $ simplestFloat
 
 

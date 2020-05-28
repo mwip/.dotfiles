@@ -181,9 +181,9 @@
     #+end_src
 ** Font
    #+BEGIN_SRC emacs-lisp
-   (add-to-list 'default-frame-alist '(font . "Ubuntu Mono 13" ))
-   (set-face-attribute 'default t :font "Ubuntu Mono 13" )
-   (set-default-font "Ubuntu Mono 13")
+   (add-to-list 'default-frame-alist '(font . "Code New Roman Nerd Font Mono 13" ))
+   (set-face-attribute 'default t :font "Code New Roman Nerd Font Mono 13" )
+   (set-default-font "Code New Roman Nerd Font Mono 13")
    #+END_SRC
 ** Cursor
    #+begin_src emacs-lisp

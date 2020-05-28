@@ -19,6 +19,7 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeysP)
 import XMonad.Util.SpawnOnce
+import XMonad.Util.NamedScratchpad
 
 -- Actions
 import XMonad.Actions.CopyWindow (kill1, copy)
@@ -151,7 +152,7 @@ myManageHook = composeAll
      , className =? "Tor Browser"                         --> doFloat
      , className =? "cloud-drive-ui"                      --> doFloat
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
-     ]
+     ] <+> namedScratchpadManageHook myScratchPads
   where viewShift = doF . liftM2 (.) W.greedyView W.shift
 
 
@@ -250,6 +251,9 @@ myKeys =
         , ("<XF86AudioRaiseVolume>", spawn (scripts ++ "adjust_volume.sh +"))
         , ("<XF86AudioLowerVolume>", spawn (scripts ++ "adjust_volume.sh -"))
 
+        -- Scratchpads
+        , ("M-C-c", namedScratchpadAction myScratchPads "calc")
+
         ] ++ [
         -- Extra Workspaces: https://stackoverflow.com/a/27743913/3250126
           (("M-" ++ key), (windows $ W.greedyView ws)) | (key, ws) <- myExtraWorkspaces
@@ -269,3 +273,16 @@ wrkspcs = ["1:\xf269", "2:\xf15c", "3:\xf120", "4:\xf25d", "5:\xf07c"
 myWorkspaces = wrkspcs ++ (map snd myExtraWorkspaces)
         --["1:", "2:", "3:", "4:", "5:", "6:ﱘ", "7:", "8:", "9:", "0:"]
         -- Unicode escape chars: https://stackoverflow.com/q/60682325/3250126
+
+
+------------------------------------------------------------------------
+-- SCRATCHPADS
+------------------------------------------------------------------------
+myScratchPads :: [NamedScratchpad]
+myScratchPads = [ NS "calc" spawnTerm findQalc manageTerm
+                ]
+    where
+    spawnTerm  = myTerminal ++  " -t qalc -e qalc"
+    findQalc   = title =? "qalc"
+    manageTerm = customFloating $ W.RationalRect (1/4) (1/4) (1/2) (1/2)
+

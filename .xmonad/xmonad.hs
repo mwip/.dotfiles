@@ -233,7 +233,7 @@ myKeys =
         , ("C-S-M1-k", spawn ("$MYTERM -e '" ++ scripts ++ "xmonad_keys.sh'"))
 
         -- Ergodox-Layout
-        , ("M-S-l", spawn "zathura /home/loki/Documents/output.pdf")
+        , ("M-S-l", spawn "zathura /home/loki/CloudStation/currentEZlayout.pdf")
 
         -- Laptop
         , ("<XF86MonBrightnessUp>", spawn (scripts ++ "brightness.sh +"))

@@ -255,7 +255,7 @@
    #+END_SRC
 ** Languagetool
    #+begin_src emacs-lisp
-     (setq langtool-language-tool-jar "~/Programs/LanguageTool-4.5/languagetool-commandline.jar")
+     (setq langtool-language-tool-server-jar "~/Programs/LanguageTool-4.9.1/languagetool-server.jar")
      (use-package langtool
        :ensure t)
    #+end_src
@@ -386,6 +386,12 @@
    (openwith-mode t)
    (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))))
    #+end_src
+** Darkroom (focus reading)
+    #+BEGIN_SRC emacs-lisp
+    (use-package darkroom
+      :ensure t
+      :config
+    #+END_SRC
 * coding-related configuration
 ** projects with projectile
    see [[https://projectile.readthedocs.io/en/latest/usage/][Documentaiton]]
@@ -839,23 +845,29 @@
      :ensure t)
    #+end_src
 * Custom Shortcuts
+** Unlink TAB an =C-i= as well as RET and =C-m=
+    #+BEGIN_SRC emacs-lisp
+    ;;(define-key input-decode-map [?\C-i] [\C-i])
+    ;;(global-unset-key (kbd "C-i"))
+    ;;(define-key input-decode-map [?\C-m] [\C-m])
+    #+END_SRC
 ** Remap C-z to undo
    #+BEGIN_SRC emacs-lisp
-     (global-unset-key (kbd "C-z"))
-     (global-set-key (kbd "C-z") 'undo-tree-undo)
+   (global-unset-key (kbd "C-z"))
+   (global-set-key (kbd "C-z") 'undo-tree-undo)
    #+END_SRC
 ** C-d to delete line
    #+begin_src emacs-lisp
-    (global-unset-key (kbd "C-d"))
-    (global-set-key (kbd "C-d") 'kill-whole-line)
+   (global-unset-key (kbd "C-d"))
+   (global-set-key (kbd "C-d") 'kill-whole-line)
    #+end_src
 ** Custom Key Map
-*** Initialize keymap on =C-1=
-    #+BEGIN_SRC emacs-lisp
-    (define-prefix-command 'mymap)
-    (global-set-key (kbd "C-1") 'mymap)
-    #+END_SRC
-
+*** Initialize keymap on =C-m=
+     #+BEGIN_SRC emacs-lisp
+     ;(global-set-key (kbd "<return>") 'newline)
+     (define-prefix-command 'mymap)
+     (global-set-key (kbd "C-c m") 'mymap)
+     #+END_SRC
 *** Swap windows
     Funciton using ace-window
     #+BEGIN_SRC emacs-lisp
@@ -864,11 +876,18 @@
 	(interactive)
 	(ace-swap-window)
 	(aw-flip-window))
-    #+END_SRC
-    Bind to =C-1 w=
-    #+begin_src emacs-lisp 
       (define-key mymap (kbd "w") 'swap-windows-custom)
     #+end_src
+*** Indention
+    #+BEGIN_SRC emacs-lisp
+      (defun my/indent ()
+	"Indent line and move to next line"
+	(interactive)
+	(indent-for-tab-command)
+	(beginning-of-line)
+	(next-line))
+      (define-key mymap (kbd "i") 'my/indent)
+    #+END_SRC
     
 *** Languagetool
     #+begin_src emacs-lisp
@@ -880,11 +899,25 @@
     (define-key mymap (kbd "l n") 'langtool-goto-next-error)
     (define-key mymap (kbd "l p") 'langtool-goto-previous-error)
     #+end_src
-** Org-Mode
+*** Comment line
+    #+BEGIN_SRC emacs-lisp
+    (define-key mymap (kbd "c") 'comment-line)
+    #+END_SRC
+    
+
+** F-Keys
+   #+begin_src emacs-lisp
+   (global-set-key [f8] 'neotree-toggle)
+   (global-set-key [f9] 'auto-highlight-symbol-mode)
+   (global-unset-key [f10])
+   (global-set-key [f10] 'darkroom-mode))
+   #+end_src
+
+** Org- Agenda from everywhere
    #+BEGIN_SRC emacs-lisp
    (global-set-key "\C-ca" 'org-agenda)
    #+END_SRC
-** Duplicate line 
+** Duplicate line
    #+BEGIN_SRC emacs-lisp
    (defun duplicate-line-up ()
      (interactive)
@@ -907,38 +940,13 @@
    )
    (global-set-key (kbd "<M-S-up>") 'duplicate-line-up)
    (global-set-key (kbd "<M-S-down>") 'duplicate-line-down)
+   (global-unset-key (kbd "C-S-d"))
+   (global-set-key (kbd "C-S-d") 'duplicate-line-down)
    #+END_SRC
 ** Comment for german keyboard-layout
    #+begin_src emacs-lisp
    (global-set-key (kbd "<C-x C-S-,>") 'comment-line)
    #+end_src
-** Unlink TAB an C-i as well as RET and C-m
-    #+BEGIN_SRC emacs-lisp
-    (define-key input-decode-map [?\C-i] [C-i])
-    (define-key input-decode-map [?\C-m] [C-m])
-    ;;(global-set-key (kbd "TAB") 'indent-for-tab-command)
-    #+END_SRC
-** =C-i= Indention
-   #+BEGIN_SRC emacs-lisp
-   (defun my/c-i-indent ()
-   "Indent line and move to next line"
-   (interactive)
-     (indent-for-tab-command)
-     (beginning-of-line)
-     (next-line))
-   ;;(global-unset-key (kbd "C-i"))
-   (global-set-key (kbd "<C-i>") 'my/c-i-indent)
-   #+END_SRC
-** Duplicate line with C-S-d
-    #+BEGIN_SRC emacs-lisp
-    (global-unset-key (kbd "C-S-d"))
-    (global-set-key (kbd "C-S-d") 'duplicate-line-down)
-    #+END_SRC
-** Comment line with C-S-c
-    #+BEGIN_SRC emacs-lisp
-      (global-unset-key (kbd "C-S-c"))
-      ;; (global-set-key (kbd "C-S-c") 'comment-line)
-    #+END_SRC
 ** Kill Daemon
    #+begin_src emacs-lisp
      ;; define function to shutdown emacs server instance

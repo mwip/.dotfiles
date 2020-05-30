@@ -51,7 +51,8 @@ cpu(){
 mus(){
     if [ "$(hostname)" == "walhall" ]; then
 	music=$(echo $(mpc) | sed -e 's/\n//g' -e 's/\[playing\]/~/' -e 's/\[paused\]/~/' -e 's/~.*//g')
-	echo " "$music$sep
+	[ -z "$(echo $music | grep 'volume: n/a')" ] &&
+	    echo " "$music$sep
     fi
 }
 #~~~~~~~~~~~~Network~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~# 

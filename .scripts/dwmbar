@@ -56,9 +56,8 @@ mus(){
     fi
 }
 #~~~~~~~~~~~~Network~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~# 
-# using https://linuxclues.blogspot.com/2009/11/shell-script-show-network-speed.html
 net(){
-    echo -en "$(cat $HOME/.cache/networktraffic | sed 's/\r//g')$sep"
+    echo -en "$($HOME/.scripts/net_speed.sh)$sep"
 }
 
 temp(){

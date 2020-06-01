@@ -26,16 +26,6 @@ xautolock -time 10 -notify 30 -notifier "notify-send 'xautolock kicking in soon'
 udiskie &
 synology-drive &
 protonmail-bridge --no-window &
-# net speed 
-case "$(hostname)" in
-    walhall)
-	interface="enp4s0"
-	;;
-    bifrost)
-	interface="wlp0s20f3"
-	;;
-esac && $HOME/.scripts/net_speed.sh $interface &
-
 # Device specific autostarts 
 if [ $(hostname) == "bifrost" ]
 then
@@ -43,7 +33,7 @@ then
     # remap lenovo print key to context menu key
     xmodmap -e "keycode 107 = Menu" &
     # reduce size in alacritty 
-    sed 's/size: 11/size: 9/g' $HOME/.config/alacritty/alacritty.yml > /tmp/alacritty && cat /tmp/alacritty > $HOME/.config/alacritty/alacritty.yml &
+    sed 's/size: 13/size: 9/g' $HOME/.config/alacritty/alacritty.yml > /tmp/alacritty && cat /tmp/alacritty > $HOME/.config/alacritty/alacritty.yml &
     # start mpd notifications (using dunst)
     # sleep 30 & mpDris2 & # should be started as systemd service
 fi &

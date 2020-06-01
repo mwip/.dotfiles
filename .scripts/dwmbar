@@ -9,12 +9,6 @@ dte(){
   echo -e "$dte"
 }
 
-#~~~~~~~~~~~~Memory~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~# 
-mem(){
-  mem=`free | awk '/Mem/ {printf "%d MiB/%d MiB\n", $3 / 1024.0, $2 / 1024.0 }'`
-  echo -e "$mem$sep"
-}
-
 #~~~~~~~~~~~~Battery~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~# 
 bat(){
     if [ "$(hostname)" == "bifrost" ]; then
@@ -36,16 +30,6 @@ vol(){
     echo -e " 墳 $(pamixer --get-volume-human)$sep"
 }
 
-#~~~~~~~~~~~~CPU~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~# 
-cpu(){
-  read cpu a b c previdle rest < /proc/stat
-  prevtotal=$((a+b+c+previdle))
-  sleep 0.5
-  read cpu a b c idle rest < /proc/stat
-  total=$((a+b+c+idle))
-  cpu=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
-  echo -e "$cpu% cpu$sep"
-}
 
 #~~~~~~~~~~~~Music~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~# 
 mus(){
@@ -60,6 +44,7 @@ net(){
     echo -en "$($HOME/.scripts/net_speed.sh)$sep"
 }
 
+#~~~~~~~~~~~~Temperature~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 temp(){
     [ "$(hostname)" == "walhall" ] && temp=$(sensors | grep "CPU Temperature" | awk '{print $3}' | sed 's/+//')
     [ "$(hostname)" == "bifrost" ] && temp=$(sensors | grep "Package id 0:" | awk '{print $4}' | sed 's/+//')

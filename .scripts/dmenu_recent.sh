@@ -38,7 +38,7 @@ echo "$cmd" > "$recent_cache.$$"
 grep -vx "$cmd" "$recent_cache" | head -n "$max_recent" >> "$recent_cache.$$"
 mv "$recent_cache.$$"  "$recent_cache"
 
-exec $cmd
+exec $cmd &
 
 # Figure out how to run the command based on the command name, disregarding
 # arguments, if any.

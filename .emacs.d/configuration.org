@@ -910,7 +910,7 @@
    (global-set-key [f8] 'neotree-toggle)
    (global-set-key [f9] 'auto-highlight-symbol-mode)
    (global-unset-key [f10])
-   (global-set-key [f10] 'darkroom-mode))
+   (global-set-key [f10] 'darkroom-mode)
    #+end_src
 
 ** Org- Agenda from everywhere

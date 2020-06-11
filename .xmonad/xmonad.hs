@@ -146,13 +146,13 @@ myManageHook = composeAll
      , className =? "qTox"                                --> viewShift "0:\xf0e0"
      , className =? "Steam"                               --> viewShift "ß:\xf11b"
      -- floats
-     , className =? "KeePassXC"                           --> doFloat
+     , className =? "KeePassXC"                           --> doCenterFloat
      , className =? "myCookbook"                          --> doFloat
      , title =?     "Media viewer"                        --> doFloat
      , title =?     "Select entry type"                   --> doFloat
-     , className =? "Tor Browser"                         --> doFloat
-     , className =? "cloud-drive-ui"                      --> doFloat
-     , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
+     , className =? "Tor Browser"                         --> doCenterFloat
+     , className =? "cloud-drive-ui"                      --> doCenterFloat
+     , (className =? "firefox" <&&> resource =? "Dialog") --> doCenterFloat  -- Float Firefox Dialog
      ] <+> namedScratchpadManageHook myScratchPads
   where viewShift = doF . liftM2 (.) W.greedyView W.shift
 
@@ -201,7 +201,7 @@ myKeys =
         -- Windows
         , ("M-q", kill1)                           -- Kill the currently focused client
         , ("M-S-a", killAll)                       -- Kill all the windows on current workspace
-        , ("M-f", sinkAll)                         -- Push all floating windows back to tile
+        , ("M-S-f", sinkAll)                         -- Push all floating windows back to tile
 
         -- Terminal
         , ("M-<Return>", spawn myTerminal)
@@ -228,7 +228,7 @@ myKeys =
         , ("C-S-M1-a", spawn "pavucontrol")
         , ("C-S-M1-s", spawn "signal-desktop")
         , ("C-S-M1-d", spawn "telegram-desktop")
-        , ("C-S-M1-f", spawn "firefox")
+        , ("M-f", spawn "firefox")
         , ("C-S-M1-b", spawn "blueman-manager")
         , ("C-S-M1-k", spawn ("$MYTERM -e '" ++ scripts ++ "xmonad_keys.sh'"))
 

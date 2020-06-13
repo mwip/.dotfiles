@@ -102,24 +102,31 @@
      :bind ("M-s" . avy-goto-char-2))   
    #+END_SRC
 ** Window switching
-   Makes window changing look nicer
-   #+BEGIN_SRC emacs-lisp
-   (use-package ace-window
-      :ensure t
-      :init
-      (progn
-      (global-set-key [remap other-window] 'ace-window)
-      (custom-set-faces
-      '(aw-leading-char-face
-      ((t (:inherit ace-jump-face-foreground :height 3.0))))) 
-    ))  
-   #+END_SRC 
+*** Use =super + <left>= (...) to switch windows
+    #+begin_src emacs-lisp
+    (windmove-default-keybindings 'super)
+    #+end_src
+*** Makes window changing look nicer
+    #+BEGIN_SRC emacs-lisp
+    (use-package ace-window
+       :ensure t
+       :init
+       (progn
+       (global-set-key [remap other-window] 'ace-window)
+       (custom-set-faces
+       '(aw-leading-char-face
+       ((t (:inherit ace-jump-face-foreground :height 3.0))))) 
+     ))  
+    #+END_SRC 
 ** Ido-Mode
    #+BEGIN_SRC emacs-lisp
    (setq ido-enable-flex-matching t)
    (setq ido-everywhere t)
    (setq ido-use-filename-at-point 'guess)
    (ido-mode 1)
+   (use-package ido-vertical-mode
+     :ensure t)
+   (ido-vertical-mode 1)
    #+END_SRC
 ** Line wrapping
    #+begin_src emacs-lisp
@@ -190,9 +197,13 @@
    #+begin_src emacs-lisp
    (setq ring-bell-function 'ignore)
    #+END_SRC
-** Disable startup message 
+** Replace startup message with Dashboard
    #+BEGIN_SRC emacs-lisp
-   (setq inhibit-startup-message t)
+     (setq inhibit-startup-message t)
+     (use-package dashboard
+       :ensure t
+       :config
+       (dashboard-setup-startup-hook))
    #+END_SRC
 ** Remove Toolbar
    Remove the toolbar at the top of the window
@@ -436,15 +447,23 @@
 ** Auto-Pairs
    Fill in closing brackets, quotes and stuff when typing the opening one
    #+BEGIN_SRC emacs-lisp
-   (use-package autopair
-     :ensure t)
-   (electric-pair-mode)
-   (setq autopair-skip-whitespace t)
+   ;;(use-package autopair
+   ;;  :ensure t)
+   ;;(electric-pair-mode)
+   ;;(setq autopair-skip-whitespace t)
+   (use-package smartparens
+     :ensure t
+     :config
+     (smartparens-global-mode))
    #+END_SRC
 ** Hightligh Paris of Parenthesis
    #+BEGIN_SRC emacs-lisp
    (show-paren-mode 1)
    (setq show-paren-delay 0)
+   (use-package rainbow-delimiters
+     :ensure t)
+     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+     (add-hook 'org-mode-hook #'rainbow-delimiters-mode)
    #+END_SRC
 ** Syntax checking 
    Using [[https://www.flycheck.org][Flycheck]]
@@ -537,6 +556,10 @@
     #+BEGIN_SRC emacs-lisp
     (add-hook 'text-mode-hook 'turn-on-auto-fill)
     (setq-default fill-column 80)
+    (defun my-magit-turn-on-auto-fill ()
+      (setq fill-column 72)
+      (turn-on-auto-fill))
+    (add-hook 'magit-log-edit-mode-hook 'my-magit-turn-on-auto-fill)
     #+END_SRC
 ** Dockerfile mode
     #+BEGIN_SRC emacs-lisp
@@ -866,11 +889,18 @@
     Funciton using ace-window
     #+BEGIN_SRC emacs-lisp
       (defun swap-windows-custom ()
-	  "Swap two windows and move back to original"
+	"Swap two windows and move back to original"
 	(interactive)
 	(ace-swap-window)
 	(aw-flip-window))
       (define-key mymap (kbd "w") 'swap-windows-custom)
+      (use-package buffer-move
+	:ensure t
+	:config
+	(global-set-key (kbd "<S-s-up>") 'buf-move-up)
+	(global-set-key (kbd "<S-s-left>") 'buf-move-left)
+	(global-set-key (kbd "<S-s-down>") 'buf-move-down)
+	(global-set-key (kbd "<S-s-right>") 'buf-move-right))
     #+end_src
 *** Indention
     #+BEGIN_SRC emacs-lisp

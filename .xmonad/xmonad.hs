@@ -230,7 +230,7 @@ myKeys =
 
         -- Emacs
         , ("M-e e", spawn myTextEditor)
-        , ("M-e q", spawn "killall emacs && emacs --daemon --chdir=$HOME && notify-send 'Emacs' 'Emacs Daemon restarted'")
+        , ("M-e q", spawn "notify-send 'Emacs' 'Restarting Emacs Daemon' && killall emacs && emacs --daemon --chdir=$HOME && notify-send 'Emacs' 'Emacs Daemon restarted'")
         , ("M-c", spawn (scripts ++ "org-capture.sh"))
         
         -- Weather

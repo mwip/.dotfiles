@@ -566,7 +566,7 @@
     (use-package dockerfile-mode
       :ensure t)
     #+END_SRC
-** Indent-Guides
+** COMMENT Indent-Guides
     #+BEGIN_SRC emacs-lisp
     (use-package highlight-indent-guides
       :ensure t
@@ -652,7 +652,7 @@
  
    #+end_src
 * Python-related config
-** Jedi autocomplete
+** COMMENT Jedi autocomplete
    #+begin_src emacs-lisp
    (use-package jedi-core
      :ensure t)
@@ -672,7 +672,7 @@
    #+BEGIN_SRC emacs-lisp
    (require 'org)
    #+END_SRC
-** Org-bullets
+** COMMENT Org-bullets
    Nice bullet points for org mode
    #+BEGIN_SRC emacs-lisp
    (use-package org-bullets

@@ -219,7 +219,7 @@ myKeys =
         , ("M-S-c", spawn (scripts ++ "xcolor_pick.sh"))
 
         -- Meh
-        , ("C-S-M1-m", spawn "$MYTERM -t ncmpcpp -e ncmpcpp")
+        , ("C-S-M1-m", spawn "$MYTERM -t ncmpcpp -e sh -c 'while true; do ncmpcpp; done'")
         , ("C-S-M1-q", spawn "qgis")
         , ("C-S-M1-r", spawn "rstudio-bin")
         , ("C-S-M1-t", spawn "thunderbird")

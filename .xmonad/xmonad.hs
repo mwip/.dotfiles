@@ -129,7 +129,7 @@ myManageHook = composeAll
      , className =? "RStudio"                             --> viewShift "4:\xf25d"
      , className =? "Pcmanfm"                             --> viewShift "5:\xf07c"
      , className =? "Double Commander"                    --> viewShift "5:\xf07c"
-     , className =? "Terminator"                          --> viewShift "6:\xf001"
+     , title =? "ncmpcpp"                                 --> viewShift "6:\xf001"
      , className =? "QGIS3"                               --> viewShift "7:\xf0ac"
      , className =? "TeXstudio"                           --> viewShift "8:\xf1dd"
      , className =? "libreoffice-startcenter"             --> viewShift "8:\xf1dd"
@@ -200,7 +200,7 @@ myKeys =
         
         -- Windows
         , ("M-q", kill1)                           -- Kill the currently focused client
-        , ("M-S-a", killAll)                       -- Kill all the windows on current workspace
+        --, ("M-S-a", killAll)                       -- Kill all the windows on current workspace
         , ("M-S-f", sinkAll)                         -- Push all floating windows back to tile
 
         -- Terminal
@@ -209,8 +209,7 @@ myKeys =
         -- Programs
         , ("M-r", spawn "/home/loki/.scripts/dmenu_recent.sh -i -fn 'Ubuntu Mono Nerd Font:size=11' -nb '#161616' -nf '#D0D0D0' -sf '#444444' -sb '#C45500'")
         , ("M-C-<Return>", spawn "$MYBROWSER")
-        , ("C-M1-e", spawn myTextEditor)
-        , ("M-c", spawn (scripts ++ "org-capture.sh"))
+        , ("M-f", spawn "firefox")
         , ("M-S-b", spawn (scripts ++ "pabluezswitch.sh"))
         , ("M-p", spawn (scripts ++ "dmenu_displayselect.sh"))
         , ("M-g", spawn (scripts ++ "dmenu_filemanager.sh"))
@@ -218,31 +217,40 @@ myKeys =
         , ("M-a", spawn (scripts ++ "dmenu_websearch.sh"))
         , ("M-u", spawn (scripts ++ "dmenu_umount.sh"))
         , ("M-S-c", spawn (scripts ++ "xcolor_pick.sh"))
-        , ("M-S-h", spawn (scripts ++ "dmenu_R-pdfs.sh"))
+
         -- Meh
-        , ("C-S-M1-m", spawn "terminator")
+        , ("C-S-M1-m", spawn "$MYTERM -t ncmpcpp -e ncmpcpp")
         , ("C-S-M1-q", spawn "qgis")
-        , ("C-S-M1-e", spawn "killall emacs && emacs --daemon --chdir=$HOME && notify-send 'Emacs' 'Emacs Daemon restarted'")
         , ("C-S-M1-r", spawn "rstudio-bin")
         , ("C-S-M1-t", spawn "thunderbird")
         , ("C-S-M1-a", spawn "pavucontrol")
         , ("C-S-M1-s", spawn "signal-desktop")
         , ("C-S-M1-d", spawn "telegram-desktop")
-        , ("M-f", spawn "firefox")
         , ("C-S-M1-b", spawn "blueman-manager")
-        , ("C-S-M1-k", spawn ("$MYTERM -e '" ++ scripts ++ "xmonad_keys.sh'"))
 
-        -- Ergodox-Layout
-        , ("M-S-l", spawn "zathura /home/loki/CloudStation/currentEZlayout.pdf")
+        -- Emacs
+        , ("M-e e", spawn myTextEditor)
+        , ("M-e q", spawn "killall emacs && emacs --daemon --chdir=$HOME && notify-send 'Emacs' 'Emacs Daemon restarted'")
+        , ("M-c", spawn (scripts ++ "org-capture.sh"))
+        
+        -- Weather
+        , ("M-w w", spawn (scripts ++ "dmenu_wttr.sh"))
+        , ("M-w r", spawn (scripts ++ "wetterradar.sh"))
+
+        -- Help
+        , ("M-h k", spawn ("$MYTERM -e '" ++ scripts ++ "xmonad_keys.sh'"))
+        , ("M-h l", spawn "zathura /home/loki/CloudStation/currentEZlayout.pdf")
+        , ("M-h r", spawn (scripts ++ "dmenu_R-pdfs.sh"))
 
         -- Laptop
         , ("<XF86MonBrightnessUp>", spawn (scripts ++ "brightness.sh +"))
         , ("<XF86MonBrightnessDown>", spawn (scripts ++ "brightness.sh -"))
         , ("M-<F11>", spawn (scripts ++ "toggle_touchpad.sh"))
 
-        -- Screenshots
-        , ("M-s", spawn (scripts ++ "screenshot_full.sh"))
-        , ("M-S-s", spawn (scripts ++ "screenshot_region.sh"))
+        -- Screenshots / scratchpads
+        , ("M-s f", spawn (scripts ++ "screenshot_full.sh"))
+        , ("M-s r", spawn (scripts ++ "screenshot_region.sh"))
+        , ("M-s c", namedScratchpadAction myScratchPads "calc")
 
         -- Media
         , ("<XF86AudioPlay>", spawn "mpc toggle")
@@ -253,8 +261,6 @@ myKeys =
         , ("<XF86AudioRaiseVolume>", spawn (scripts ++ "adjust_volume.sh +"))
         , ("<XF86AudioLowerVolume>", spawn (scripts ++ "adjust_volume.sh -"))
 
-        -- Scratchpads
-        , ("M-C-c", namedScratchpadAction myScratchPads "calc")
 
         ] ++ [
         -- Extra Workspaces: https://stackoverflow.com/a/27743913/3250126
@@ -273,7 +279,6 @@ myExtraWorkspaces = [("0", "0:\xf0e0"), ("ß", "ß:\xf11b")] -- https://stackove
 wrkspcs = ["1:\xf269", "2:\xf15c", "3:\xf120", "4:\xfcd2", "5:\xf07c"
                , "6:\xf001", "7:\xf0ac", "8:\xf1dd", "9:\xf1fc"]
 myWorkspaces = wrkspcs ++ (map snd myExtraWorkspaces)
-        --["1:", "2:", "3:", "4:", "5:", "6:ﱘ", "7:", "8:", "9:", "0:"]
         -- Unicode escape chars: https://stackoverflow.com/q/60682325/3250126
 
 

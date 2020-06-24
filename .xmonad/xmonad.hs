@@ -238,9 +238,9 @@ myKeys =
         , ("M-w r", spawn (scripts ++ "wetterradar.sh"))
 
         -- Help
-        , ("M-h k", spawn ("$MYTERM -e '" ++ scripts ++ "xmonad_keys.sh'"))
-        , ("M-h l", spawn "zathura /home/loki/CloudStation/currentEZlayout.pdf")
-        , ("M-h r", spawn (scripts ++ "dmenu_R-pdfs.sh"))
+        , ("M-z k", spawn ("$MYTERM -e '" ++ scripts ++ "xmonad_keys.sh'"))
+        , ("M-z l", spawn "zathura /home/loki/CloudStation/currentEZlayout.pdf")
+        , ("M-z r", spawn (scripts ++ "dmenu_R-pdfs.sh"))
 
         -- Laptop
         , ("<XF86MonBrightnessUp>", spawn (scripts ++ "brightness.sh +"))

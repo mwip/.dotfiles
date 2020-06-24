@@ -4,7 +4,7 @@
 
 recent_cache="${XDG_CACHE_HOME:-$HOME/.cache}/dmenu-recent/recent"
 
-echo $recent_cache
+# echo $recent_cache
 
 
 
@@ -12,7 +12,7 @@ removal=$(cat "$recent_cache" | dmenu -p 'Remove from recent:')
 
 mv $recent_cache $recent_cache.bak
 
-grep -v "$removal" $recent_cache.bak > $recent_cache
+grep -vx "$removal" $recent_cache.bak > $recent_cache
 
 rm $recent_cache.bak
 

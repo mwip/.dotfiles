@@ -80,6 +80,12 @@
 	(setq company-global-modes '(not org-mode))
 
    #+END_SRC
+** =evil=
+   #+begin_src emacs-lisp
+   (use-package evil
+     :ensure t)
+   (evil-mode 1)
+   #+end_src
 ** Key-Chord explanations
    Lists all the options of shortcuts after a while
    #+BEGIN_SRC emacs-lisp

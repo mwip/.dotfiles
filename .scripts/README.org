@@ -1,0 +1,134 @@
+* My scripts
+
+This collection of shell scripts provides some functionality for different parts
+of my daily workflow. 
+
+** =adjust_volume.sh=
+   create unified interface for increasing and decreasing volume or toggle
+   mute. Also uses gstreamer to play "plop" sound.
+
+** =autostart.sh=
+   My autostart script for window managers
+
+** =battery_crit_check.sh=
+   Indicate when battery is critical and send a notification. 
+
+** =batterystatus.sh=
+   Report a fancy batterystatus to stdout. To be used in bars (e.g. dwm or
+   xmobar)
+
+** =brightness.sh=
+   Univied interface to change the display backlight brightness
+
+** =deactivateBluetooth=
+   Deactivate bluetooth interface
+
+** =dmenu_displayselect.sh=
+   Dmenu prompt to select different xrandr presets for a laptop
+
+** =dmenu_exit.sh=
+   Dmenu prompt to select lock / logout / suspend / shutdown.
+
+** =dmenu_filemanager.sh=
+   Dmenu prompt with bookmarks for the file manager of choice.
+
+** =dmenu_mount.sh=
+   Dmenu prompt for mounting devices.
+
+** =dmenu_pass.sh=
+   Dmenu prompt for entering the password.
+
+** =dmenu_recent.sh=
+   Dmenu run prompt which tracks your recently run programs.
+
+** =dmenu_removeRecent.sh=
+   Dmenu prompt to remove entries from the list of recently run programs.
+
+** =dmenu_R-pdfs.sh=
+   Dmenu prompt to show or acquire package description PDF files for R packages
+   from CRAN.
+
+** =dmenu_umount.sh=
+   Dmenu prompt to unmount USB devices.
+
+** =dmenu_websearch.sh=
+   Dmenu prompt for a system wide search prompt.
+
+** =dmenu_wttr.sh=
+   Dmenu prompt for curling wttr.in
+
+** =dwmbar=
+   My dwmbar.
+
+** =dwm-diffs=
+   Create diffs of dwm-patches.
+
+** =dwm_logoff=
+   Log out of dwm.
+
+** =dwm-merge=
+   Merge all patches into the DWM codebase.
+
+** =dwm_ref_bar.sh=
+   Refresh the dwmbar.
+
+** =encode=
+   Encode a string for usage in a URL.
+
+** =fzf_file_search.sh=
+   This script uses fzf to search for a file and then uses a dmenu prompt to
+   determine how to open that file.
+
+** =get_artwork.sh=
+   Use a searx web-search to get the artwork of a music album. This script uses
+   the current and parent path to guess the Artist's and Album's name. Search
+   results are then shown sxiv as thumbnails from which the user can select
+   one which is then copied into the directory as folder.jpeg.
+
+** =get_brightness.sh=
+   Determine the current display brightness. 
+
+** =i3lock.service=
+   The service to start lockscreen.sh before sleep.target.
+
+** =lockscreen.sh=
+   My version of i3lock. Pixelating the current desktop.
+
+** =net_speed.sh=
+   Show the network speed. Useful for minimal bars like dwmbar or xmobar.
+
+** =org-capture.sh=
+   Systemwide org capture for emacs.
+
+** =pabluezswitch.sh=
+   Quickly deactivate and activate Bluetooth to reset delay.
+
+** =prompt.sh=
+   Dmenu prompt for yes or no questions.
+
+** =restart_systray.sh=
+   Use xdotool to bring the system tray to the top if it was covered, e.g. by xmobar.
+
+** =screenshot_full.sh=
+   Use scrot to make a screen shot of the entire screen and copy it to
+   =$HOME/Pictures/screenshots=.
+
+** =screenshot_region.sh=
+   Use scrot to make a screenshot of a selected region and copy it to the clipboard.
+
+** =toggle_microphone.sh=
+   Toggle the built in microphone on the laptop. 
+
+** =trayer_padding_icon.sh=
+   Create a dummy icon to place in the xmobar to dynamically pad for the system tray's width.
+
+** =wetterradar.sh=
+   Download the current rain radar from DWD for Bavaria and show it via mpv.
+
+** =xcolor_pick.sh=
+   Pick a color from the display using the mouse. The color is copied to the
+   clipboard. 
+
+** =xmonad_keys.sh=
+   Display the xmonad key bindings.
+

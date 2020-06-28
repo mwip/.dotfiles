@@ -99,6 +99,7 @@ SAVEHIST=10000
 
 #zstyle :compinstall filename '/home/loki/.zshrc'
 
+setopt completealiases
 autoload -Uz compinit
 compinit
 

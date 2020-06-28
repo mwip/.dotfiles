@@ -440,6 +440,8 @@
 	 '((:maildir "/Archive" :key ?a)
 	   (:maildir "/INBOX"   :key ?i)
 	   (:maildir "/Sent"    :key ?s)))
+     (define-key mu4e-headers-mode-map (kbd "C-c c") 'mu4e-org-store-and-capture)
+     (define-key mu4e-view-mode-map (kbd "C-c c") 'mu4e-org-store-and-capture)
     #+end_src
 
 

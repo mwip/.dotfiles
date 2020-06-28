@@ -155,6 +155,7 @@
       (add-to-list 'load-path "~/")
       (use-package doom-modeline
 	:ensure t)
+      (setq doom-modeline-icon t)
       (use-package doom-themes
 	:ensure t)
       (use-package neotree
@@ -227,8 +228,23 @@
    #+END_SRC
 ** Line-Numbers
    #+BEGIN_SRC emacs-lisp
-   (when (version<= "26.0.50" emacs-version)
-       (global-display-line-numbers-mode))
+     ;; (when (version<= "26.0.50" emacs-version)
+     ;;       (global-display-line-numbers-mode))
+     (require 'display-line-numbers)
+     (defcustom display-line-numbers-exempt-modes '(vterm-mode eshell-mode shell-mode term-mode ansi-term-mode mu4e-main-mode mu4e-headers-mode)
+       "Major modes on which to disable the linum mode, exempts them from global requirement"
+       :group 'display-line-numbers
+       :type 'list
+       :version "green")
+
+     (defun display-line-numbers--turn-on ()
+       "turn on line numbers but excempting certain majore modes defined in `display-line-numbers-exempt-modes'"
+       (if (and
+	    (not (member major-mode display-line-numbers-exempt-modes))
+	    (not (minibufferp)))
+	   (display-line-numbers-mode)))
+
+     (global-display-line-numbers-mode)
    #+END_SRC
 ** Undo Tree
    #+begin_src emacs-lisp
@@ -253,14 +269,6 @@
    (setq auto-revert-verbose nil) ;; suppress the verbose
    #+END_SRC
 
-** Often used files
-   #+begin_src emacs-lisp
-   (global-set-key (kbd "\e\em") (lambda () (interactive) (find-file "~/myorg.org")))   
-   (global-set-key (kbd "\e\es") (lambda () (interactive) (find-file "~/shopping.org")))   
-   (global-set-key (kbd "\e\ec") (lambda () (interactive) (find-file "~/.emacs.d/configuration.org")))
-   (global-set-key (kbd "\e\ex") (lambda () (interactive) (find-file "~/.xmonad/xmonad.hs")))
-   (global-set-key (kbd "\e\ea") (lambda () (interactive) (find-file "~/org-diss/dissertation.org")))
-   #+END_SRC
 ** Line wrapping
    #+begin_src emacs-lisp
    (use-package adaptive-wrap
@@ -891,6 +899,14 @@
      (define-prefix-command 'mymap)
      (global-set-key (kbd "C-c m") 'mymap)
      #+END_SRC
+*** Often used files
+    #+begin_src emacs-lisp
+    (define-key mymap (kbd "f m") (lambda () (interactive) (find-file "~/myorg.org")))   
+    (define-key mymap (kbd "f s") (lambda () (interactive) (find-file "~/shopping.org")))   
+    (define-key mymap (kbd "f c") (lambda () (interactive) (find-file "~/.emacs.d/configuration.org")))
+    (define-key mymap (kbd "f x") (lambda () (interactive) (find-file "~/.xmonad/xmonad.hs")))
+    (define-key mymap (kbd "f a") (lambda () (interactive) (find-file "~/org-diss/dissertation.org")))
+    #+END_SRC
 *** Swap windows
     Funciton using ace-window
     #+BEGIN_SRC emacs-lisp
@@ -934,6 +950,10 @@
     (define-key mymap (kbd "c") 'comment-line)
     #+END_SRC
     
+*** mu4e
+    #+BEGIN_SRC emacs-lisp
+    (define-key mymap (kbd "m") 'mu4e)
+    #+END_SRC
 ** F-Keys
    #+begin_src emacs-lisp
    (global-set-key [f5] 'revert-buffer)

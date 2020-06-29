@@ -403,6 +403,11 @@
 * mu4e
    #+begin_src emacs-lisp
      (require 'mu4e)
+     (use-package mu4e-alert
+       :ensure t)
+     (setq doom-modeline-mu4e t)
+     (setq mu4e-enable-notifications t)
+     (add-hook 'after-init-hook #'mu4e-alert-enable-mode-line-display)
      ;; use mu4e for e-mail in emacs
      (setq mail-user-agent 'mu4e-user-agent)
 
@@ -440,6 +445,7 @@
 	 '((:maildir "/Archive" :key ?a)
 	   (:maildir "/INBOX"   :key ?i)
 	   (:maildir "/Sent"    :key ?s)))
+     (setq mu4e-html2text-command "w3m -dump -T text/html")
     #+end_src
 
 

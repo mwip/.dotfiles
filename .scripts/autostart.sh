@@ -5,6 +5,11 @@ if [ $(hostname) == "walhall" ]
 then
     xrandr --output DisplayPort-0 --off --output DisplayPort-1 --mode 1440x900 --pos 0x300 --rotate normal --output HDMI-0 --off --output DVI-0 --off --output DVI-1 --primary --mode 1920x1200 --pos 1440x0 --rotate normal
 fi &
+if [ $(hostname) == "andlang" ]
+then
+    xrandr --output DisplayPort-0 --primary --mode 1920x1200 --pos 1920x0 --rotate normal --output DisplayPort-1 --mode 1920x1200 --pos 0x0 --rotate normal --output DisplayPort-2 --off --output HDMI-A-0 --off
+~
+fi &
 xbindkeys &
 wmname LG3D & # DWM tweak to get jabref running
 #trayer --edge top --align right --expand true --widthtype request --transparent true --alpha 0 --height 18 --tint 0x282a36 --monitor "primary" &

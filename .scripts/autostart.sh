@@ -8,7 +8,7 @@ fi &
 if [ $(hostname) == "andlang" ]
 then
     xrandr --output DisplayPort-0 --primary --mode 1920x1200 --pos 1920x0 --rotate normal --output DisplayPort-1 --mode 1920x1200 --pos 0x0 --rotate normal --output DisplayPort-2 --off --output HDMI-A-0 --off
-~
+    setxkbmap de
 fi &
 xbindkeys &
 wmname LG3D & # DWM tweak to get jabref running

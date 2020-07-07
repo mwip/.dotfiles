@@ -3,3 +3,4 @@ export MYBROWSER='firefox'
 export MYFILEMNGR='doublecmd -T'
 export PATH=$PATH:/home/loki/github/geoprocessors:$HOME/bin:$HOME/.scripts
 export WINIT_X11_SCALE_FACTOR=1
+setxkbmap de

@@ -28,6 +28,8 @@ fi
 
 [ -f $HOME/.xprofile ] && . $HOME/.xprofile
 
+setxkbmap de
+
 # twm &
 # xclock -geometry 50x50-1+1 &
 # xterm -geometry 80x50+494+51 &

@@ -1,4 +1,4 @@
-Config { font    = "xft:Ubuntu Mono Nerd Font:style=Bold:pixelsize=14:antialias=true:hinting=true"
+Config { font    = "xft:CodeNewRoman Nerd Font:style=Bold:pixelsize=14:antialias=true:hinting=true"
        , additionalFonts = [ "xft:FontAwesome:pixelsize=13" ]
        , bgColor = "#161616"
        , fgColor = "#D0D0D0"

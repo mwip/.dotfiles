@@ -394,6 +394,8 @@
      :ensure t)
    (openwith-mode t)
    (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))))
+   ;; avoid interference with mu4e attachments
+   (add-to-list 'mm-inhibit-file-name-handlers 'openwith-file-handler)
    #+end_src
 ** Darkroom (focus reading)
     #+BEGIN_SRC emacs-lisp

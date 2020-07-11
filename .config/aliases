@@ -10,7 +10,8 @@ alias e='emacsclient -n'
 alias ff='~/.scripts/fzf_file_search.sh'
 
 # pacman and trizen 
-alias pacman-autoremove='sudo pacman -Rsn $(pacman -Qdtq)'
+alias pacautoremove='sudo pacman -Rsn $(pacman -Qdtq)'
+alias pacremove='sudo pacman -Rsc' # remove package dependencies and dependents
 alias up='trizen -Syu'
 
 # programs 

@@ -447,7 +447,9 @@
 	   (:maildir "/Sent"    :key ?s)))
      (define-key mu4e-headers-mode-map (kbd "C-c c") 'mu4e-org-store-and-capture)
      (define-key mu4e-view-mode-map (kbd "C-c c") 'mu4e-org-store-and-capture)
-     (setq mu4e-html2text-command "w3m -dump -T text/html")
+     (setq mu4e-html2text-command "w3m -I %{UTF-8} -dump -T text/html")
+
+     (setq mu4e-headers-include-related nil)
     #+end_src
 
 
@@ -468,6 +470,11 @@
    ;; install ag for search
    (use-package ag
       :ensure t)
+   (counsel-projectile-modify-action
+     'counsel-projectile-switch-project-action
+     '((default counsel-projectile-switch-project-action-vc)))
+
+
    #+END_SRC
 ** dumb jump
    #+begin_src emacs-lisp
@@ -966,7 +973,7 @@
 	(interactive)
 	(ace-swap-window)
 	(aw-flip-window))
-      (define-key mymap (kbd "w") 'swap-windows-custom)
+      (define-key mymap (kbd "w s") 'swap-windows-custom)
       (use-package buffer-move
 	:ensure t
 	:config
@@ -974,6 +981,12 @@
 	(global-set-key (kbd "<S-s-left>") 'buf-move-left)
 	(global-set-key (kbd "<S-s-down>") 'buf-move-down)
 	(global-set-key (kbd "<S-s-right>") 'buf-move-right))
+    #+end_src
+*** Transpose Windows
+    #+begin_src emacs-lisp
+    (use-package transpose-frame
+      :ensure t)
+    (define-key mymap (kbd "w t") 'transpose-frame)
     #+end_src
 *** Indention
     #+BEGIN_SRC emacs-lisp

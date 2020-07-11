@@ -37,7 +37,7 @@
      ("dvipsnames, usenames" "xcolor" nil nil))))
  '(package-selected-packages
    (quote
-    (mu4e-alert mu4e evil rainbow-delimiters ido-vertical-mode dockerfile-mode openwith org-pdftools syntax-subword org-ref fill-column-indicator company-distel company-jedi magit git-gutter neotree all-the-icons-ivy treemacs doom-themes doom-modeline dumb-jump ag counsel-projectile projectile powerline iedit expand-region undo-tree multiple-cursors yasnippet-snippets yasnippet flycheck ess org which-key use-package try tabbar org-bullets counsel color-theme-modern auto-org-md auto-complete ace-window)))
+    (transpose-frame mu4e-alert mu4e evil rainbow-delimiters ido-vertical-mode dockerfile-mode openwith org-pdftools syntax-subword org-ref fill-column-indicator company-distel company-jedi magit git-gutter neotree all-the-icons-ivy treemacs doom-themes doom-modeline dumb-jump ag counsel-projectile projectile powerline iedit expand-region undo-tree multiple-cursors yasnippet-snippets yasnippet flycheck ess org which-key use-package try tabbar org-bullets counsel color-theme-modern auto-org-md auto-complete ace-window)))
  '(send-mail-function (quote smtpmail-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

@@ -1,3 +1,5 @@
+Xcursor.theme: Breeze Default
+Xcursor.size: 16
 URxvt.font: xft:UbuntuMono Nerd Font:11
 URxvt*scrollBar: false
 URxvt.keysym.Control-Up:     \033[1;5A

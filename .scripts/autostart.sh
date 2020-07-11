@@ -24,6 +24,7 @@ nm-applet &
 syncthing-gtk &
 dunst &
 redshift-gtk -t 6500:3000 -l 48.13:11.57 & 
+xfce4-power-manager &
 $HOME/.scripts/deactivateBluetooth &
 blueman-applet &
 libinput-gestures-setup restart &

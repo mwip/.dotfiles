@@ -5,6 +5,7 @@
 import XMonad
 import XMonad.Config.Desktop
 import Data.Monoid
+import Data.List
 import qualified XMonad.StackSet as W
 
 -- Hooks
@@ -82,7 +83,7 @@ main = do
       else spawnPipe "/dev/null"
       
     xmonad $ ewmh desktopConfig
-        { manageHook = manageDocks <+> myManageHook <+> manageHook desktopConfig
+        { manageHook = defaultConfig <+> manageDocks <+> myManageHook <+> manageHook desktopConfig
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = \x -> hPutStrLn xmproc0 x  >> hPutStrLn xmproc1 x
                         , ppCurrent = xmobarColor "#c3e88d" "" . wrap "[" "]" -- Current workspace in xmobar
@@ -128,8 +129,8 @@ myManageHook = composeAll
      , className =? "Emacs"                               --> viewShift "2:\xf15c"
      , className =? "RStudio"                             --> viewShift "4:\xf25d"
      , className =? "Pcmanfm"                             --> viewShift "5:\xf07c"
-     , className =? "Double Commander"                    --> viewShift "5:\xf07c"
-     , title =? "ncmpcpp"                                 --> viewShift "6:\xf001"
+     , className =? "Doublecmd"                           --> viewShift "5:\xf07c"
+     , title =?     "ncmpcpp"                             --> viewShift "6:\xf001"
      , className =? "QGIS3"                               --> viewShift "7:\xf0ac"
      , className =? "TeXstudio"                           --> viewShift "8:\xf1dd"
      , className =? "libreoffice-startcenter"             --> viewShift "8:\xf1dd"
@@ -146,15 +147,15 @@ myManageHook = composeAll
      , className =? "qTox"                                --> viewShift "0:\xf0e0"
      , className =? "Steam"                               --> viewShift "ß:\xf11b"
      -- floats
-     , className =? "KeePassXC"                           --> doCenterFloat
-     , className =? "myCookbook"                          --> doFloat
-     , title =?     "Media viewer"                        --> doFloat
-     , title =?     "Select entry type"                   --> doFloat
-     , className =? "Tor Browser"                         --> doCenterFloat
-     , className =? "cloud-drive-ui"                      --> doCenterFloat
      , (className =? "firefox" <&&> resource =? "Dialog") --> doCenterFloat  -- Float Firefox Dialog
+     , isDialog                                           --> doCenterFloat  -- Float Dialogs
+     , fmap (t `isInfixOf`) title     --> doCenterFloat | t <- titleFloats
+     , fmap (t `isInfixOf`) className --> doCenterFloat | c <- classFloats
      ] <+> namedScratchpadManageHook myScratchPads
   where viewShift = doF . liftM2 (.) W.greedyView W.shift
+        titleFloats = ["Copying", "Media viewer", "Select entry type"]
+        classFloats = ["KeePassXC", "myCookbook", "Tor Browser", "cloud-drive-ui"]
+ 
 
 
 ----------------------------------------------------------------------
@@ -217,6 +218,7 @@ myKeys =
         , ("M-a", spawn (scripts ++ "dmenu_websearch.sh"))
         , ("M-u", spawn (scripts ++ "dmenu_umount.sh"))
         , ("M-S-c", spawn (scripts ++ "xcolor_pick.sh"))
+        , ("M-S-C-p", spawn "keepassxc")
 
         -- Meh
         , ("C-S-M1-m", spawn "$MYTERM -t ncmpcpp -e sh -c 'while true; do ncmpcpp; done'")

@@ -30,7 +30,7 @@ mpd_host = localhost
 #
 ## Needed for tag editor and file operations to work.
 ##
-mpd_music_dir = /media/loki/Daten/Musik
+mpd_music_dir = $HOME/Music/
 #
 #mpd_crossfade_time = 5
 #
@@ -528,7 +528,7 @@ colors_enabled = yes
 #
 #color2 = green
 #
-#progressbar_color = black:b
+progressbar_color = black:b
 #
 progressbar_elapsed_color = red:b
 #

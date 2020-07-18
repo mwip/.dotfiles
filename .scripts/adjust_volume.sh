@@ -3,7 +3,7 @@
 PERCENT=5
 MAXVOLUME=200
 SOUND=.scripts/audio-volume-change.wav
-GST='gst-play-1.0 -q --no-interactive'
+GST='gst-play-1.0 -q --no-interactive --volume=1.0'
 # pactl version
 # pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo $1$PERCENT% && gst-play-1.0 $HOME/.config/qtile/audio-volume-change.oga
 

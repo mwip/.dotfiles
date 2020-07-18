@@ -83,7 +83,9 @@
 ** =evil=
    #+begin_src emacs-lisp
    (use-package evil
-     :ensure t)
+     :ensure t
+     :init 
+     (setq evil-want-C-u-scroll t))
    (evil-mode 1)
    #+end_src
 ** Key-Chord explanations
@@ -394,9 +396,7 @@
      :ensure t)
    (openwith-mode t)
    (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))))
-   ;; avoid interference with mu4e attachments
-   (add-to-list 'mm-inhibit-file-name-handlers 'openwith-file-handler)
-   #+end_src
+  #+end_src
 ** Darkroom (focus reading)
     #+BEGIN_SRC emacs-lisp
     (use-package darkroom
@@ -451,9 +451,12 @@
      (define-key mu4e-view-mode-map (kbd "C-c c") 'mu4e-org-store-and-capture)
      (setq mu4e-html2text-command "w3m -I %{UTF-8} -dump -T text/html")
 
-     (setq mu4e-headers-include-related nil)
+     (setq mu4e-headers-include-related nil)   
+     ;; avoid interference with mu4e attachments
+     (add-to-list 'mm-inhibit-file-name-handlers 'openwith-file-handler)
+ 
     #+end_src
-
+    
 
 * coding-related configuration
 ** projects with projectile

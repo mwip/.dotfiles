@@ -632,11 +632,12 @@
 ** Auto Fill
     #+BEGIN_SRC emacs-lisp
     (add-hook 'text-mode-hook 'turn-on-auto-fill)
-    (setq-default fill-column 80)
+    (setq-default fill-column 100)
     (defun my-magit-turn-on-auto-fill ()
       (setq fill-column 72)
       (turn-on-auto-fill))
     (add-hook 'magit-log-edit-mode-hook 'my-magit-turn-on-auto-fill)
+    (add-hook 'git-commit-mode-hook 'my-magit-turn-on-auto-fill)
     #+END_SRC
 ** Dockerfile mode
     #+BEGIN_SRC emacs-lisp

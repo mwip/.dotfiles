@@ -16,7 +16,7 @@ wmname LG3D & # DWM tweak to get jabref running
 stalonetray &
 picom &
 nitrogen --restore & 
-urxvtd -q -o -f &
+#urxvtd -q -o -f &
 xsetroot -cursor_name left_ptr &
 keepassxc &
 xrdb -merge ~/.Xresources &
@@ -30,7 +30,7 @@ blueman-applet &
 libinput-gestures-setup restart &
 xautolock -time 10 -notify 30 -notifier "notify-send 'xautolock kicking in soon'" -corners 000- -locker '$HOME/.scripts/lockscreen.sh' &
 udiskie &
-synology-drive &
+#synology-drive &
 protonmail-bridge --no-window &
 # Device specific autostarts 
 if [ $(hostname) == "bifrost" ]

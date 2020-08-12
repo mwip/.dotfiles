@@ -402,6 +402,11 @@
     (use-package darkroom
       :ensure t)
     #+END_SRC
+** Auto-save_mode
+   #+begin_src emacs-lisp
+   (setq auto-save-default t)
+   (auto-save-visited-mode)
+   #+end_src
 * mu4e
    #+begin_src emacs-lisp
      (require 'mu4e)

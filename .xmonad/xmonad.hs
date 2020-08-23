@@ -149,8 +149,8 @@ myManageHook = composeAll
      -- floats
      , (className =? "firefox" <&&> resource =? "Dialog") --> doCenterFloat  -- Float Firefox Dialog
      , isDialog                                           --> doCenterFloat  -- Float Dialogs
-     --, fmap (t `isInfixOf`) title     --> doCenterFloat | t <- titleFloats
-     --, fmap (t `isInfixOf`) className --> doCenterFloat | c <- classFloats
+--     , fmap (t `isInfixOf`) title     --> doCenterFloat | t <- titleFloats
+--     , fmap (t `isInfixOf`) className --> doCenterFloat | c <- classFloats
      ] <+> namedScratchpadManageHook myScratchPads
   where viewShift = doF . liftM2 (.) W.greedyView W.shift
         titleFloats = ["Copying", "Media viewer", "Select entry type"]

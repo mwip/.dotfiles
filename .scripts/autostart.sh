@@ -16,7 +16,7 @@ wmname LG3D & # DWM tweak to get jabref running
 stalonetray &
 picom &
 nitrogen --restore & 
-urxvtd -q -o -f &
+#urxvtd -q -o -f &
 xsetroot -cursor_name left_ptr &
 keepassxc &
 xrdb -merge ~/.Xresources &

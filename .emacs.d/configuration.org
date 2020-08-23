@@ -13,7 +13,53 @@
    (use-package try
        :ensure t)
    #+END_SRC
-* General Configurations
+** =evil=
+** evil leader
+   #+begin_src emacs-lisp
+     (use-package evil-leader
+       :ensure t)
+     (global-evil-leader-mode)
+     (evil-leader/set-leader "<SPC>")
+     (evil-leader/set-key "ti" 'org-inlinetask-insert-task)
+   #+end_src
+** evil
+  #+begin_src emacs-lisp
+  (use-package evil
+    :ensure t
+    :init
+    (setq evil-want-C-u-scroll t))
+  (evil-mode 1)
+  (setq evil-want-fine-undo t)
+  #+end_src
+** org evil
+   #+begin_src emacs-lisp
+   (use-package org-evil
+     :ensure t)
+   #+end_src
+* =evil=
+** evil leader
+   #+begin_src emacs-lisp
+     (use-package evil-leader
+       :ensure t)
+     (global-evil-leader-mode)
+     (evil-leader/set-leader "<SPC>")
+     (evil-leader/set-key "ti" 'org-inlinetask-insert-task)
+   #+end_src
+** evil
+  #+begin_src emacs-lisp
+  (use-package evil
+    :ensure t
+    :init
+    (setq evil-want-C-u-scroll t))
+  (evil-mode 1)
+  (setq evil-want-fine-undo t)
+  #+end_src
+** org evil
+   #+begin_src emacs-lisp
+   (use-package org-evil
+     :ensure t)
+   #+end_src
+ General Configurations
 ** =counsel=
    Counsel is a dependency for =swiper=
    Counsel is also used for kill ring rotation visualization
@@ -80,14 +126,6 @@
 	(setq company-global-modes '(not org-mode))
 
    #+END_SRC
-** =evil=
-   #+begin_src emacs-lisp
-   (use-package evil
-     :ensure t
-     :init 
-     (setq evil-want-C-u-scroll t))
-   (evil-mode 1)
-   #+end_src
 ** Key-Chord explanations
    Lists all the options of shortcuts after a while
    #+BEGIN_SRC emacs-lisp

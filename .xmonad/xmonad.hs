@@ -83,7 +83,7 @@ main = do
       else spawnPipe "/dev/null"
       
     xmonad $ ewmh desktopConfig
-        { manageHook = defaultConfig <+> manageDocks <+> myManageHook <+> manageHook desktopConfig
+        { manageHook = manageDocks <+> myManageHook <+> manageHook desktopConfig
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = \x -> hPutStrLn xmproc0 x  >> hPutStrLn xmproc1 x
                         , ppCurrent = xmobarColor "#c3e88d" "" . wrap "[" "]" -- Current workspace in xmobar
@@ -149,8 +149,8 @@ myManageHook = composeAll
      -- floats
      , (className =? "firefox" <&&> resource =? "Dialog") --> doCenterFloat  -- Float Firefox Dialog
      , isDialog                                           --> doCenterFloat  -- Float Dialogs
-     , fmap (t `isInfixOf`) title     --> doCenterFloat | t <- titleFloats
-     , fmap (t `isInfixOf`) className --> doCenterFloat | c <- classFloats
+     --, fmap (t `isInfixOf`) title     --> doCenterFloat | t <- titleFloats
+     --, fmap (t `isInfixOf`) className --> doCenterFloat | c <- classFloats
      ] <+> namedScratchpadManageHook myScratchPads
   where viewShift = doF . liftM2 (.) W.greedyView W.shift
         titleFloats = ["Copying", "Media viewer", "Select entry type"]

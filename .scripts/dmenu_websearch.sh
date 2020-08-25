@@ -10,6 +10,9 @@ URL=$(cat ~/.config/search/search|
 	  eval "$DMENU_CMD -p 'Search Engine:'" |
 	  xargs -I % grep "%:" ~/.config/search/search |
 	  sed 's/.*:https/https/')
+# exit if no url was selected
+[ -z $URL ] && exit 0
+
 SEARCH=$(sort ~/.config/search/search_history |
 	    eval "$DMENU_CMD -p 'Search:'")
 

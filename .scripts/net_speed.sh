@@ -6,7 +6,7 @@ TX=$(( $(cat /sys/class/net/*/statistics/tx_bytes | paste -sd '+' ) ))
 UT=$(date +'%s')
 
 # read data from log file
-LOGFILE="$HOME/.cache/net.log"
+LOGFILE="/tmp/net.log"
 touch $LOGFILE
 LOGDATA=$(cat $LOGFILE | head -n 1)
 PREVTEXT=$(cat $LOGFILE | tail -n 1)

@@ -26,6 +26,7 @@ import XMonad.Util.NamedScratchpad
 import XMonad.Actions.CopyWindow (kill1, copy)
 import XMonad.Actions.WithAll (sinkAll, killAll)
 import XMonad.Actions.CycleWS
+import XMonad.Actions.GridSelect
 
 -- Prompt
 import XMonad.Prompt
@@ -153,7 +154,7 @@ myManageHook = composeAll
 --     , fmap (t `isInfixOf`) title     --> doCenterFloat | t <- titleFloats
 --     , fmap (t `isInfixOf`) className --> doCenterFloat | c <- classFloats
      ] <+> namedScratchpadManageHook myScratchPads
-  where viewShift = doF . liftM2 (.) W.greedyView W.shift
+  where viewShift = doF . liftM2 (.) W.view W.shift
         titleFloats = ["Copying", "Media viewer", "Select entry type"]
         classFloats = ["KeePassXC", "myCookbook", "Tor Browser", "cloud-drive-ui"]
  
@@ -179,6 +180,30 @@ myStartupHook = do
           spawnOnce "/home/loki/.scripts/autostart.sh &"
           --spawnOnce "stalonetray" 
           setWMName "LG3D"
+
+
+ 
+----------------------------------------------------------------------
+-- Grid select for going to windows
+----------------------------------------------------------------------
+myColorizer :: Window -> Bool -> X (String, String)
+myColorizer = colorRangeFromClassName
+                  (0x29,0x2d,0x3e) -- lowest inactive bg
+                  (0x29,0x2d,0x3e) -- highest inactive bg
+                  (0xc7,0x92,0xea) -- active bg
+                  (0xc0,0xa7,0x9a) -- inactive fg
+                  (0x29,0x2d,0x3e) -- active fg
+-- gridSelect menu layout
+mygridConfig :: p -> GSConfig Window
+mygridConfig colorizer = (buildDefaultGSConfig myColorizer)
+    { gs_cellheight   = 40
+    , gs_cellwidth    = 200
+    , gs_cellpadding  = 6
+    , gs_originFractX = 0.5
+    , gs_originFractY = 0.5
+    , gs_font         = "xft:Ubuntu Mono Nerd Font:bold:pixelsize=14"
+    }
+
 
 ----------------------------------------------------------------------
 -- Key bindings
@@ -230,6 +255,7 @@ myKeys =
         , ("C-S-M1-s", spawn "signal-desktop")
         , ("C-S-M1-d", spawn "telegram-desktop")
         , ("C-S-M1-b", spawn "blueman-manager")
+        , ("C-S-M1-w", goToSelected $ mygridConfig myColorizer)  -- goto selected window
 
         -- Emacs
         , ("M-e e", spawn myTextEditor)

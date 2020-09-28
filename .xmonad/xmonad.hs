@@ -149,6 +149,7 @@ myManageHook = composeAll
      -- floats
      , (className =? "firefox" <&&> resource =? "Dialog") --> doCenterFloat  -- Float Firefox Dialog
      , isDialog                                           --> doCenterFloat  -- Float Dialogs
+     , title =? "Media viewer"                            --> doCenterFloat
 --     , fmap (t `isInfixOf`) title     --> doCenterFloat | t <- titleFloats
 --     , fmap (t `isInfixOf`) className --> doCenterFloat | c <- classFloats
      ] <+> namedScratchpadManageHook myScratchPads

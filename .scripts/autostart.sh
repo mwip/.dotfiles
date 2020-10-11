@@ -31,7 +31,7 @@ blueman-applet &
 libinput-gestures-setup restart &
 xautolock -time 10 -notify 30 -notifier "notify-send 'xautolock kicking in soon'" -corners 000- -locker '$HOME/.scripts/lockscreen.sh' -detectsleep  &
 udiskie &
-synology-drive &
+#synology-drive &
 nextcloud &
 protonmail-bridge --no-window &
 # Device specific autostarts 

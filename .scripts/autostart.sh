@@ -12,12 +12,10 @@ then
 fi &
 xbindkeys &
 wmname LG3D & # DWM tweak to get jabref running
-#trayer --edge top --align right --expand true --widthtype request --transparent true --alpha 0 --height 18 --tint 0x282a36 --monitor "primary" &
 stalonetray &
 picom &
 #nitrogen --restore &
 sleep 5 && coperincus_wallpaper.sh &
-#urxvtd -q -o -f &
 xsetroot -cursor_name left_ptr &
 keepassxc &
 xrdb -merge ~/.Xresources &
@@ -29,9 +27,8 @@ xfce4-power-manager &
 $HOME/.scripts/deactivateBluetooth &
 blueman-applet &
 libinput-gestures-setup restart &
-xautolock -time 10 -notify 30 -notifier "notify-send 'xautolock kicking in soon'" -corners 000- -locker '$HOME/.scripts/lockscreen.sh' -detectsleep  &
+xautolock -time 10 -notify 30 -notifier "notify-send 'xautolock kicking in soon'" -corners 000- -locker 'betterlockscreen -l blur' -detectsleep  &
 udiskie &
-#synology-drive &
 nextcloud &
 protonmail-bridge --no-window &
 # Device specific autostarts 

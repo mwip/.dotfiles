@@ -1,0 +1,9 @@
+[Unit]
+Description=Nm-Applet for persistence
+
+[Service]
+ExecStart=/usr/bin/nm-applet
+Restart=always
+
+[Install]
+WantedBy=default.target

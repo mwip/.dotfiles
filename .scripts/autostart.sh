@@ -19,7 +19,6 @@ sleep 5 && coperincus_wallpaper.sh &
 xsetroot -cursor_name left_ptr &
 keepassxc &
 xrdb -merge ~/.Xresources &
-nm-applet &
 syncthing-gtk &
 dunst &
 redshift-gtk -t 6500:3000 -l 48.13:11.57 & 

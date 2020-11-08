@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DMENU_CMD='dmenu -i -fn "Ubuntu Mono:size=11" -nb "#161616" -nf "#D0D0D0" -sf "#444444" -sb "#82AAFF"'
-FOLDERS="home\nCloudStation\nDownloads/\nDocuments/\n.config\n.scripts\n~~edit~~"
+FOLDERS="home\nNextCloud\nDownloads/\nDocuments/\n.config\n.scripts\n~~edit~~"
 
 CHOICE=$(echo -e $FOLDERS | eval "$DMENU_CMD -p 'Launch $(echo $MYFILEMNGR | awk '{print $1}') at:'" )
 
@@ -11,7 +11,7 @@ CHOICE=$(echo -e $FOLDERS | eval "$DMENU_CMD -p 'Launch $(echo $MYFILEMNGR | awk
 	    $MYFILEMNGR $HOME
 	    ;;
 	'~~edit~~')
-	    $MYTERM vim ${BASH_SOURCE[0]}
+	    $MYTERM -e vim ${BASH_SOURCE[0]}
 	    ;;
 	*)
 	    doublecmd -T $CHOICE

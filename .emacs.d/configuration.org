@@ -13,7 +13,13 @@
    (use-package try
        :ensure t)
    #+END_SRC
-** =evil=
+* EVIL
+** Assumed configuration previous to evil
+   #+begin_src emacs-lisp
+     (setq evil-want-keybinding nil)
+     (setq evil-want-integration t)
+   #+end_src
+
 ** evil leader
    #+begin_src emacs-lisp
      (use-package evil-leader
@@ -21,45 +27,51 @@
      (global-evil-leader-mode)
      (evil-leader/set-leader "<SPC>")
      (evil-leader/set-key "ti" 'org-inlinetask-insert-task)
+     (evil-leader/set-key "tt" 'org-todo)
+     (evil-leader/set-key "a" 'org-agenda)
    #+end_src
 ** evil
   #+begin_src emacs-lisp
+  (setq evil-want-C-u-scroll t)
   (use-package evil
     :ensure t
     :init
-    (setq evil-want-C-u-scroll t))
+    )
   (evil-mode 1)
   (setq evil-want-fine-undo t)
   #+end_src
-** org evil
+** evil-collection
    #+begin_src emacs-lisp
-   (use-package org-evil
-     :ensure t)
+     (use-package evil-collection
+	:after evil, org
+	:ensure t
+        :custom (evil-collection-calendar-want-org-bindings t)
+	:config (evil-collection-init))
    #+end_src
-* =evil=
-** evil leader
+** evil-org
    #+begin_src emacs-lisp
-     (use-package evil-leader
-       :ensure t)
-     (global-evil-leader-mode)
-     (evil-leader/set-leader "<SPC>")
-     (evil-leader/set-key "ti" 'org-inlinetask-insert-task)
+     (use-package evil-org
+       :ensure t
+       :commands evil-org-mode
+       :after org
+       :init
+       (add-hook 'org-mode-hook 'evil-org-mode)
+       :config
+       (add-hook 'evil-org-mode-hook
+		 (lambda ()
+		   (evil-org-set-key-theme '(textobjects insert navigation additional shift
+							 todo)))))
+     (require 'evil-org-agenda)
+     (evil-org-agenda-set-keys)
    #+end_src
-** evil
-  #+begin_src emacs-lisp
-  (use-package evil
-    :ensure t
-    :init
-    (setq evil-want-C-u-scroll t))
-  (evil-mode 1)
-  (setq evil-want-fine-undo t)
-  #+end_src
-** org evil
+** evil-magit
    #+begin_src emacs-lisp
-   (use-package org-evil
-     :ensure t)
-   #+end_src
- General Configurations
+   (use-package evil-magit
+     :ensure t
+     :init (setq evil-magit-state 'normal)
+     :after evil)
+   #+end_src  
+* General Configurations
 ** =counsel=
    Counsel is a dependency for =swiper=
    Counsel is also used for kill ring rotation visualization
@@ -800,6 +812,10 @@
       :ensure t
       :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))   
    #+END_SRC
+** Hide Leading stars
+   #+begin_src emacs-lisp
+   (setq org-hide-leading-stars t)
+   #+end_src
 ** Require org-inlinetask
    #+begin_src emacs-lisp
    (require 'org-inlinetask)

@@ -22,7 +22,7 @@ function confirm {
 
 function execute {
     if [ "$CHOICE" == "Lock" ];then
-	ACTION="$HOME/.scripts/lockscreen.sh"
+	ACTION="betterlockscreen -l blur"
     elif [ "$CHOICE" == "Logout" ];then
 	ACTION="pkill xmonad"
     elif [ "$CHOICE" == "Suspend" ];then

@@ -16,8 +16,9 @@
 * EVIL
 ** Assumed configuration previous to evil
    #+begin_src emacs-lisp
-     (setq evil-want-keybinding nil)
-     (setq evil-want-integration t)
+   (setq evil-want-keybinding nil)
+   (setq evil-want-integration t)
+   (setq evil-undo-system 'undo-tree)
    #+end_src
 
 ** evil leader
@@ -29,13 +30,13 @@
    #+end_src
 ** evil
   #+begin_src emacs-lisp
-  (setq evil-want-C-u-scroll t)
-  (use-package evil
-    :ensure t
-    :init
-    )
-  (evil-mode 1)
-  (setq evil-want-fine-undo t)
+    (setq evil-want-C-u-scroll t)
+    (use-package evil
+      :ensure t
+      :init
+      )
+    (evil-mode 1)
+    (setq evil-want-fine-undo t)
   #+end_src
 ** evil-collection
    #+begin_src emacs-lisp
@@ -296,8 +297,9 @@
    #+begin_src emacs-lisp
      (use-package undo-tree
        :ensure t
-       :init
+       :config
        (global-undo-tree-mode))
+
    #+END_SRC
 ** COMMENT Beacon
    #+begin_src emacs-lisp
@@ -552,10 +554,10 @@
         (setq fci-rule-width 1)
         (setq fci-rule-color "gray23")
       )
-      (add-hook 'prog-mode-hook 'fci-mode)
-      (add-hook 'python-mode-hook 'fci-mode)
-      (add-hook 'haskell-mode-hook 'fci-mode)
-      (add-hook 'ess-mode-hook 'fci-mode)
+     ;; (add-hook 'prog-mode-hook 'fci-mode)
+     ;; (add-hook 'python-mode-hook 'fci-mode)
+     ;; (add-hook 'haskell-mode-hook 'fci-mode)
+     ;; (add-hook 'ess-mode-hook 'fci-mode)
       (defalias 'margin80 'fci-mode)
    #+END_SRC
 ** auto-complete

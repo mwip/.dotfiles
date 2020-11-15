@@ -26,9 +26,6 @@
        :ensure t)
      (global-evil-leader-mode)
      (evil-leader/set-leader "<SPC>")
-     (evil-leader/set-key "ti" 'org-inlinetask-insert-task)
-     (evil-leader/set-key "tt" 'org-todo)
-     (evil-leader/set-key "a" 'org-agenda)
    #+end_src
 ** evil
   #+begin_src emacs-lisp
@@ -997,6 +994,7 @@
      :ensure t)
    #+end_src
 * Custom Shortcuts
+  
 ** Unlink TAB an =C-i= as well as RET and =C-m=
     #+BEGIN_SRC emacs-lisp
     ;;(define-key input-decode-map [?\C-i] [\C-i])
@@ -1081,6 +1079,31 @@
     #+BEGIN_SRC emacs-lisp
     (define-key mymap (kbd "m") 'mu4e)
     #+END_SRC
+** More evil-leader
+   #+begin_src emacs-lisp
+     (evil-leader/set-key "ti" 'org-inlinetask-insert-task)
+     (evil-leader/set-key "tt" 'org-todo)
+     (evil-leader/set-key "a" 'org-agenda)
+     (evil-leader/set-key "m" 'mu4e)
+     (evil-leader/set-key "c" 'comment-line)
+     (evil-leader/set-key "ll" 'langtool-check)
+     (evil-leader/set-key "ld" 'langtool-check-done)
+     (evil-leader/set-key "ls" 'langtool-switch-default-language)
+     (evil-leader/set-key "lm" 'langtool-show-message-at-point)
+     (evil-leader/set-key "lc" 'langtool-correct-buffer)
+     (evil-leader/set-key "ln" 'langtool-goto-next-error)
+     (evil-leader/set-key "lp" 'langtool-goto-previous-error)
+     (evil-leader/set-key "i" 'my/indent)
+     (evil-leader/set-key "wt" 'transpose-frame)
+     ;; often used files
+     (evil-leader/set-key "fm" (lambda () (interactive) (find-file "~/myorg.org")))
+     (evil-leader/set-key "fs" (lambda () (interactive) (find-file "~/shopping.org")))
+     (evil-leader/set-key "fc" (lambda () (interactive) (find-file "~/.emacs.d/configuration.org")))
+     (evil-leader/set-key "fx" (lambda () (interactive) (find-file "~/.xmonad/xmonad.hs")))
+     (evil-leader/set-key "fa" (lambda () (interactive) (find-file "~/org-diss/dissertation.org")))
+     (evil-leader/set-key "fp" (lambda () (interactive) (find-file "~/org-diss/paper3.org")))
+   #+end_src
+
 ** F-Keys
    #+begin_src emacs-lisp
    (global-set-key [f5] 'revert-buffer)

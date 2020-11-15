@@ -53,14 +53,6 @@ handle_temp_files() {
     fi
     
 }
-	# -a|--activate)
-	    # ACTIVATE=true; shift;;
-	# -c|--command)
-	    # COMMAND=$2; shift; shift;;
-	# -d|--deactivate)
-	    # DEACTIVATE=true; shift;;
-	# -D|--daemon)
-	    # START_DAEMON=true; shift;;
 
 help() {
     # TODO complete help message

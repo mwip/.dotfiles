@@ -268,7 +268,7 @@ myKeys =
 
         -- Help
         , ("M-z k", spawn ("$MYTERM -e '" ++ scripts ++ "xmonad_keys.sh'"))
-        , ("M-z l", spawn "zathura /home/loki/CloudStation/currentEZlayout.pdf")
+        , ("M-z l", spawn "zathura /home/loki/Nextcloud/currentEZlayout.pdf")
         , ("M-z r", spawn (scripts ++ "dmenu_R-pdfs.sh"))
 
         -- Laptop

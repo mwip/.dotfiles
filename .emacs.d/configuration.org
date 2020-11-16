@@ -235,8 +235,8 @@
     #+end_src
 ** Font
    #+BEGIN_SRC emacs-lisp
-   (add-to-list 'default-frame-alist '(font . "Code New Roman Nerd Font Mono 13" ))
-   (set-face-attribute 'default t :font "Code New Roman Nerd Font Mono 13" )
+   (add-to-list 'default-frame-alist '(font . "Code New Roman Nerd Font Mono 14" ))
+   (set-face-attribute 'default t :font "Code New Roman Nerd Font Mono 14" )
    ;;(set-default-font "Code New Roman Nerd Font Mono 13")
    #+END_SRC
 ** Cursor
@@ -634,11 +634,46 @@
       :config
       (setq magit-diff-refine-hunk (quote all)))
    #+end_src
+*** support for bare dotfiles repo
+    #+begin_src emacs-lisp
+;;; Configure magit to use .myconf (and not .git) as the git
+;;; directory when a .myconf directory is found in the current
+;;; working directory (which Emacs calls its `default-directory'
+;;; per buffer) and there is no .git directory.
+;;;
+;;; For example, if dotfiles are tracked with a git directory at
+;;; $HOME/.myconf, and the Emacs process starts from $HOME (and
+;;; nothing in its configuration changes its `default-directory'
+;;; in the current buffer), this will configure magit to use
+;;; .myconf as the git directory.
+;;;
+;;; NOTE: This setting will apply for the entire Emacs process,
+;;; regardless of magit invocation in other directories.
+(unless (boundp 'myconf-magit-hook?)
+  ;; Only run this hook once, even if Emacs reloads configuration.
+  (eval-after-load 'magit
+    '(let ((myconf-path (expand-file-name ".dotfiles")))
+       (when (and (file-exists-p myconf-path)
+                  (not (file-exists-p ".git")))
+         ;; Insert git directory and working tree into magit's git
+         ;; global arguments, while preserving magit's existing
+         ;; command-line settings; `add-to-list' adds to the
+         ;; beginning of the list.
+         (add-to-list 'magit-git-global-arguments
+                      (format "--work-tree=%s"
+                              ;; Drop trailing slash.
+                              (directory-file-name
+                               ;; Get directory part (`dirname`).
+                               (file-name-directory myconf-path))))
+         (add-to-list 'magit-git-global-arguments
+                      (format "--git-dir=%s" myconf-path)))))
+  (setq myconf-magit-hook? t))
+    #+end_src
 ** Auto highlight
    #+begin_src emacs-lisp
      (use-package auto-highlight-symbol
        :ensure t)
-     (global-auto-highlight-symbol-mode t)
+     ;;(global-auto-highlight-symbol-mode t)
      (define-key auto-highlight-symbol-mode-map (kbd "M-<left>") nil)
      (define-key auto-highlight-symbol-mode-map (kbd "M-<right>") nil)
      (define-key auto-highlight-symbol-mode-map (kbd "M-p") 'ahs-backward)
@@ -653,7 +688,7 @@
 				   font-lock-doc-string-face
 				   font-lock-string-face
 				   ))
-     (add-hook 'org-mode-hook 'auto-highlight-symbol-mode)
+     ;;(add-hook 'org-mode-hook 'auto-highlight-symbol-mode)
    #+end_src
 ** Move line up/down
    #+begin_src emacs-lisp
@@ -1083,6 +1118,7 @@
     #+END_SRC
 ** More evil-leader
    #+begin_src emacs-lisp
+     (evil-leader/set-key "u" 'universal-argument)
      (evil-leader/set-key "ti" 'org-inlinetask-insert-task)
      (evil-leader/set-key "tt" 'org-todo)
      (evil-leader/set-key "a" 'org-agenda)
@@ -1104,6 +1140,14 @@
      (evil-leader/set-key "fx" (lambda () (interactive) (find-file "~/.xmonad/xmonad.hs")))
      (evil-leader/set-key "fa" (lambda () (interactive) (find-file "~/org-diss/dissertation.org")))
      (evil-leader/set-key "fp" (lambda () (interactive) (find-file "~/org-diss/paper3.org")))
+     (evil-leader/set-key-for-mode 'org-mode
+       "d" 'org-deadline
+       "s" 'org-schedule)
+     (evil-leader/set-key-for-mode 'org-agenda-mode
+       "d" 'org-agenda-deadline
+       "s" 'org-agenda-schedule
+       "vd" 'org-agenda-day-view)
+     (evil-leader/set-key "g" 'magit-status)
    #+end_src
 
 ** F-Keys

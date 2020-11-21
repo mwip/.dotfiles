@@ -634,7 +634,7 @@
       :config
       (setq magit-diff-refine-hunk (quote all)))
    #+end_src
-*** support for bare dotfiles repo
+*** COMMENT support for bare dotfiles repo
     #+begin_src emacs-lisp
 ;;; Configure magit to use .myconf (and not .git) as the git
 ;;; directory when a .myconf directory is found in the current
@@ -668,6 +668,30 @@
          (add-to-list 'magit-git-global-arguments
                       (format "--git-dir=%s" myconf-path)))))
   (setq myconf-magit-hook? t))
+    #+end_src
+*** Support for bare dotfiles repo
+    Creds to https://emacs.stackexchange.com/a/58859/24163
+    #+begin_src emacs-lisp
+      ;; prepare the arguments
+      (setq dotfiles-git-dir (concat "--git-dir=" (expand-file-name "~/.dotfiles")))
+      (setq dotfiles-work-tree (concat "--work-tree=" (expand-file-name "~")))
+
+      ;; function to start magit on dotfiles
+      (defun dotfiles-magit-status ()
+	(interactive)
+	(add-to-list 'magit-git-global-arguments dotfiles-git-dir)
+	(add-to-list 'magit-git-global-arguments dotfiles-work-tree)
+	(call-interactively 'magit-status))
+
+      ;; wrapper to remove additional args before starting magit
+      (defun magit-status-with-removed-dotfiles-args ()
+	(interactive)
+	(setq magit-git-global-arguments (remove dotfiles-git-dir magit-git-global-arguments))
+	(setq magit-git-global-arguments (remove dotfiles-work-tree magit-git-global-arguments))
+	(call-interactively 'magit-status))
+      ;; redirect global magit hotkey to our wrapper
+      (global-set-key (kbd "C-x g") 'magit-status-with-removed-dotfiles-args)
+      ;;(define-key magit-file-mode-map (kbd "C-x g") 'magit-status-with-removed-dotfiles-args)
     #+end_src
 ** Auto highlight
    #+begin_src emacs-lisp
@@ -1118,6 +1142,7 @@
     #+END_SRC
 ** More evil-leader
    #+begin_src emacs-lisp
+     (evil-leader/set-key "." 'find-file)
      (evil-leader/set-key "u" 'universal-argument)
      (evil-leader/set-key "ti" 'org-inlinetask-insert-task)
      (evil-leader/set-key "tt" 'org-todo)
@@ -1147,7 +1172,9 @@
        "d" 'org-agenda-deadline
        "s" 'org-agenda-schedule
        "vd" 'org-agenda-day-view)
-     (evil-leader/set-key "g" 'magit-status)
+     ;; (evil-leader/set-key "g" 'magit-status)
+     (evil-leader/set-key "gg" 'magit-status-with-removed-dotfiles-args)
+     (evil-leader/set-key "gd" 'dotfiles-magit-status)
    #+end_src
 
 ** F-Keys

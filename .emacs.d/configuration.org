@@ -601,8 +601,7 @@
    #+BEGIN_SRC emacs-lisp
    (use-package flycheck
      :ensure t
-     :init
-     (global-flycheck-mode t))
+     :init (global-flycheck-mode))
    #+END_SRC
 ** Multi-cursor
    #+BEGIN_SRC emacs-lisp
@@ -766,6 +765,21 @@
       (setq highlight-indent-guides-auto-character-face-perc 20))
     (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
     #+END_SRC
+** Julia-mode
+   #+begin_src emacs-lisp
+     (use-package julia-mode
+       :ensure t)
+     (setenv "JULIA_NUM_THREADS" "12")
+
+     (use-package julia-repl
+       :ensure t)
+     (add-hook 'julia-mode-hook 'julia-repl-mode)
+
+     ;;(use-package flycheck-julia
+     ;;  :ensure t)
+     ;;(flycheck-julia-setup)
+     ;;(add-hook 'julia-mode-hook 'flycheck-mode)
+   #+end_src
 * R-Related Configuration
 ** Force scroll on R-console
    #+BEGIN_SRC emacs-lisp

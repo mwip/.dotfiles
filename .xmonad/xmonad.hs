@@ -123,7 +123,6 @@ myManageHook = composeAll
        className =? "kitty"                               --> doF W.swapDown
      , className =? "urxvtc"                              --> doF W.swapDown
      , className =? "Alacritty"                           --> doF W.swapDown
-     , className =? "QGIS3"                               --> doF W.swapDown
      -- dedicated workspaces
      , className =? "firefox"                             --> viewShift "1:\xf269"
      , className =? "Chromium"                            --> viewShift "1:\xf269"
@@ -218,8 +217,8 @@ myKeys =
         , ("M-i", sendMessage (IncMasterN 1))
         , ("M-d", sendMessage (IncMasterN (-1)))
         , ("M-S-q", spawn (home ++ ".scripts/dmenu_exit.sh"))
-        , ("M-y", nextScreen)
-        , ("M-S-y", shiftNextScreen >> nextScreen)
+        , ("M-o", nextScreen)
+        , ("M-S-o", shiftNextScreen >> nextScreen)
         , ("M-x", swapNextScreen)
 
         -- Tray

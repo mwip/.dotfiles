@@ -121,17 +121,13 @@
 	  :ensure t
 	  :config 
 	  (setq company-idle-delay 0)
-	  (setq company-minimum-prefix-length 2)
+	  (setq company-minimum-prefix-length 3)
 	  (setq company-selection-wrap-around t)
 	  (setq company-tooltip-align-annotations t)
 	  (setq company-tooltip-limit 10)
 
-	  (global-company-mode t)
+	  ;;(global-company-mode t)
      )
-	(use-package company-quickhelp
-	  :ensure t)
-	(company-quickhelp-mode)
-
 	;; disable company in org-files
 	(setq company-global-modes '(not org-mode))
 

@@ -8,6 +8,7 @@ alias lt='ls --tree'
 alias e='emacsclient -n'
 # find files from current directory
 alias ff='~/.scripts/fzf_file_search.sh'
+alias cat='bat'
 
 # pacman and trizen 
 alias pacautoremove='sudo pacman -Rsn $(pacman -Qdtq)'

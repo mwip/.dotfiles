@@ -698,7 +698,7 @@
      (define-key auto-highlight-symbol-mode-map (kbd "M-<right>") nil)
      (define-key auto-highlight-symbol-mode-map (kbd "M-p") 'ahs-backward)
      (define-key auto-highlight-symbol-mode-map (kbd "M-n") 'ahs-forward)
-     (setq ahs-idle-interval 0.3) ;; if you want instant highlighting, set it to 0, but I find it annoying
+     (setq ahs-idle-interval 1.0) ;; if you want instant highlighting, set it to 0, but I find it annoying
      (setq ahs-default-range 'ahs-range-whole-buffer) ;; highlight every occurence in buffer
 
      ;; inhibits highlighting in specific places, like in comments
@@ -1187,6 +1187,7 @@
        "vd" 'org-agenda-day-view)
      ;; (evil-leader/set-key "g" 'magit-status)
      (evil-leader/set-key "gg" 'magit-status-with-removed-dotfiles-args)
+     (evil-leader/set-key "gf" 'magit-file-dispatch)
      (evil-leader/set-key "gd" 'dotfiles-magit-status)
    #+end_src
 

@@ -455,6 +455,7 @@
      (require 'mu4e)
      (use-package mu4e-alert
        :ensure t)
+     (evil-collection-init 'mu4e)
      (setq doom-modeline-mu4e t)
      (setq mu4e-enable-notifications t)
      (add-hook 'after-init-hook #'mu4e-alert-enable-mode-line-display)
@@ -470,7 +471,7 @@
      ;; Get mail
      (setq mu4e-get-mail-command "mbsync -c ~/.config/mbsync/mbsyncrc protonmail"
 	   mu4e-change-filenames-when-moving t   ; needed for mbsync
-	   mu4e-update-interval 120)             ; update every 2 minutes
+	   mu4e-update-interval 300)             ; update every 2 minutes
 
      ;; Send mail
      (setq message-send-mail-function 'smtpmail-send-it
@@ -480,7 +481,7 @@
 	   smtpmail-smtp-service 1029)
 
      (with-eval-after-load 'gnutls
-     (add-to-list 'gnutls-trustfiles (expand-file-name "~/.config/protonmail/bridge/cert.pem")))
+       (add-to-list 'gnutls-trustfiles (expand-file-name "~/.config/protonmail/bridge/cert.pem")))
      ;; the next are relative to the root maildir
      ;; (see `mu info`).
      ;; instead of strings, they can be functions too, see
@@ -502,7 +503,6 @@
      (setq mu4e-headers-include-related nil)   
      ;; avoid interference with mu4e attachments
      (add-to-list 'mm-inhibit-file-name-handlers 'openwith-file-handler)
- 
     #+end_src
     
 
@@ -1189,6 +1189,9 @@
      (evil-leader/set-key "gg" 'magit-status-with-removed-dotfiles-args)
      (evil-leader/set-key "gf" 'magit-file-dispatch)
      (evil-leader/set-key "gd" 'dotfiles-magit-status)
+     ;; projectile
+     (evil-leader/set-key "pp" 'counsel-projectile-switch-project)
+     (evil-leader/set-key "pf" 'counsel-projectile-find-file)
    #+end_src
 
 ** F-Keys

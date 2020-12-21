@@ -216,6 +216,13 @@ myKeys =
         , ("M-S-<Space>", sendMessage (Toggle NBFULL) >> sendMessage ToggleStruts) -- Toggles noborder/full
         , ("M-i", sendMessage (IncMasterN 1))
         , ("M-d", sendMessage (IncMasterN (-1)))
+        -- Window resizing
+        , ("M-h", sendMessage Shrink)                   -- Shrink horiz window width
+        , ("M-l", sendMessage Expand)                   -- Expand horiz window width
+        , ("M-M1-j", sendMessage MirrorShrink)          -- Shrink vert window width
+        , ("M-M1-k", sendMessage MirrorExpand)          -- Exoand vert window width
+
+
         , ("M-S-q", spawn (home ++ ".scripts/dmenu_exit.sh"))
         , ("M-o", nextScreen)
         , ("M-S-o", shiftNextScreen >> nextScreen)

@@ -450,6 +450,11 @@
    (setq auto-save-default t)
    (auto-save-visited-mode)
    #+end_src
+** Highlight trailing whitespace
+   #+begin_src emacs-lisp
+     ;; can be deactivated with F8
+     (setq show-trailing-whitespace t)
+   #+end_src
 * mu4e
    #+begin_src emacs-lisp
      (require 'mu4e)

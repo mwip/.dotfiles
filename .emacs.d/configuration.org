@@ -1191,18 +1191,19 @@
      (evil-leader/set-key "gd" 'dotfiles-magit-status)
      ;; projectile
      (evil-leader/set-key "pp" 'counsel-projectile-switch-project)
-     (evil-leader/set-key "pf" 'counsel-projectile-find-file)
+     (evil-leader/set-key "p." 'counsel-projectile-find-file)
    #+end_src
 
 ** F-Keys
    #+begin_src emacs-lisp
-   (global-set-key [f5] 'revert-buffer)
-   (global-set-key [f7] 'fci-mode)
-   (global-set-key [f9] 'auto-highlight-symbol-mode)
-   (global-unset-key [f10])
-   (global-set-key [f10] 'darkroom-mode)
-   (global-set-key [f11] (lambda () (interactive) (load-theme 'doom-one t)))
-   (global-set-key [f12] (lambda () (interactive) (load-theme 'doom-one-light t)))
+     (global-set-key [f5] 'revert-buffer)
+     (global-set-key [f7] 'fci-mode)
+     (global-set-key [f8] (lambda () (interactive) (setq show-trailing-whitespace (not show-trailing-whitespace))))
+     (global-set-key [f9] 'auto-highlight-symbol-mode)
+     (global-unset-key [f10])
+     (global-set-key [f10] 'darkroom-mode)
+     (global-set-key [f11] (lambda () (interactive) (load-theme 'doom-one t)))
+     (global-set-key [f12] (lambda () (interactive) (load-theme 'doom-one-light t)))
    #+end_src
 
 ** Org- Agenda from everywhere

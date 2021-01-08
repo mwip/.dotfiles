@@ -35,9 +35,9 @@ protonmail-bridge --no-window &
 # Device specific autostarts 
 if [ $(hostname) == "bifrost" ]
 then
-    setxkbmap de && setxkbmap -option ctrl:nocaps & # remap capslock to control
+    setxkbmap de && setxkbmap -option ctrl:nocaps  # remap capslock to control
     # remap lenovo print key to context menu key
-    xmodmap -e "keycode 107 = Menu" &
+    xmodmap -e "keycode 107 = Menu" 
     # reduce size in alacritty 
     #sed 's/size: 13/size: 9/g' $HOME/.config/alacritty/alacritty.yml > /tmp/alacritty && cat /tmp/alacritty > $HOME/.config/alacritty/alacritty.yml &
     # start mpd notifications (using dunst)

@@ -1,16 +1,24 @@
 #!/bin/sh
+# dependencies:
+#   - feh
+#   - wget
+#   - imagemagick
 
-CACHE_FILE=~/.cache/wp/sentinel_calendar_$(date +%m).jpg
+YEAR=$(date +%Y)
+MNTH=$(date +%m)
 
 mkdir -p ~/.cache/wp/
 
-URL="https://esamultimedia.esa.int/multimedia/eo/calendar2020/2020_Sentinels_digital_calendar_1920x1080_$(date +%m).jpg"
+CACHE_FILE=~/.cache/wp/sentinel_calendar_$YEAR$MNTH.jpg
+URL="https://esamultimedia.esa.int/multimedia/eo/calendar"$YEAR"/"$YEAR"_Sentinels_digital_calendar_FB_TW%20feed_1920x1080_$MNTH.jpg"
 
-until wget $URL -O $CACHE_FILE &> /dev/null
-do
+if [ -f $CACHE_FILE ]; then
+    until wget $URL -O $CACHE_FILE &> /dev/null
+    do
 	echo "No success... Wait and retry"
         sleep 5
-done
+    done
+fi
 
 BG_COL=$(convert $CACHE_FILE -resize 1x1 txt:- | grep -Po "#[[:xdigit:]]{6}")
 

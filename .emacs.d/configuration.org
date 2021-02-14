@@ -1185,12 +1185,14 @@
      (evil-leader/set-key "fa" (lambda () (interactive) (find-file "~/org-diss/dissertation.org")))
      (evil-leader/set-key "fp" (lambda () (interactive) (find-file "~/org-diss/paper3.org")))
      (evil-leader/set-key-for-mode 'org-mode
-       "d" 'org-deadline
-       "s" 'org-schedule)
+       "od" 'org-deadline
+       "os" 'org-schedule)
      (evil-leader/set-key-for-mode 'org-agenda-mode
        "d" 'org-agenda-deadline
        "s" 'org-agenda-schedule
        "vd" 'org-agenda-day-view)
+     ;; org export
+     (evil-leader/set-key "oe" 'org-export-dispatch)
      ;; (evil-leader/set-key "g" 'magit-status)
      (evil-leader/set-key "gg" 'magit-status-with-removed-dotfiles-args)
      (evil-leader/set-key "gf" 'magit-file-dispatch)

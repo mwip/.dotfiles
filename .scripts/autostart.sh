@@ -44,5 +44,4 @@ then
     # sleep 30 & mpDris2 & # should be started as systemd service
 fi &
 emacs --daemon --chdir=$HOME &
-caffeine & 
 sleep 5 && $HOME/.scripts/restart_systray.sh stalonetray &

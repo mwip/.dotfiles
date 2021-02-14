@@ -176,6 +176,7 @@ monocle      = renamed [Replace "mono"]  $ limitWindows 20 $ Full
 -- Startup
 ----------------------------------------------------------------------
 myStartupHook = do
+          spawnOnce "lxsession &"
           spawnOnce "/home/loki/.scripts/autostart.sh &"
           --spawnOnce "stalonetray" 
           setWMName "LG3D"

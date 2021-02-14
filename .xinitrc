@@ -33,7 +33,7 @@ fi
 [ -f $HOME/.xprofile ] && . $HOME/.xprofile
 
 setxkbmap de
-
+FontPath /usr/share/fonts/100dpi
 # twm &
 # xclock -geometry 50x50-1+1 &
 # xterm -geometry 80x50+494+51 &
@@ -42,3 +42,4 @@ setxkbmap de
 # qtile
 ##exec xterm
 #exec startkde
+exec xmonad

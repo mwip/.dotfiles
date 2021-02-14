@@ -1200,6 +1200,7 @@
      ;; projectile
      (evil-leader/set-key "pp" 'counsel-projectile-switch-project)
      (evil-leader/set-key "p." 'counsel-projectile-find-file)
+     (evil-leader/set-key "p." 'counsel-projectile-find-file)
    #+end_src
 
 ** F-Keys

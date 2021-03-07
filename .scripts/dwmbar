@@ -41,7 +41,18 @@ mus(){
 }
 #~~~~~~~~~~~~Network~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~# 
 net(){
-    echo -en "$($HOME/.scripts/net_speed.sh)$sep"
+    [ "$(hostname)" == "bifrost" ] && iface=wlp0s20f3
+    [ "$(hostname)" == "andlang" ] && iface=enp34s0
+
+    stats=$(ifstat -t 1 $iface | grep $iface)
+    rx=$(echo $stats | awk '{print $6}')
+    tx=$(echo $stats | awk '{print $8}')
+    [ -n "$(echo $rx | grep -i k)" ] && rx=$(echo "$(echo $rx | grep -oE '[[:digit:]]+') * 1024" | bc )
+    [ -n "$(echo $tx | grep -i k)" ] && tx=$(echo "$(echo $tx | grep -oE '[[:digit:]]+') * 1024" | bc )
+    rx_text=$(echo "scale=2;($rx * 8) / (1024 ^ 2)" | bc)
+    tx_text=$(echo "scale=2;($tx * 8) / (1024 ^ 2)" | bc)
+
+    echo -en " : $rx_text Mbit/s : $tx_text Mbit/s$sep" 
 }
 
 #~~~~~~~~~~~~Temperature~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#

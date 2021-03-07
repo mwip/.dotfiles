@@ -8,7 +8,7 @@ Config { font    = "xft:UbuntuMono Nerd Font:style=Bold:pixelsize=14:antialias=t
        , allDesktops = True
        , persistent = True
        , iconRoot = "/home/dt/.xmonad/xpm/"  -- default: "."
-       , commands = [ Run Com "/home/loki/.scripts/dwmbar" ["-oneshot"] "mystatus" 20
+       , commands = [ Run Com "/home/loki/.scripts/dwmbar" ["-oneshot"] "mystatus" 10
        	 	    , Run Com "/home/loki/.scripts/trayer_padding_icon.sh" [] "trayerpad" 20
        	 	    , Run UnsafeStdinReader
                     ]

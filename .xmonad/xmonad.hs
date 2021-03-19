@@ -265,8 +265,9 @@ myKeys =
         , ("C-S-M1-w", goToSelected $ mygridConfig myColorizer)  -- goto selected window
 
         -- Emacs
-        , ("M-e e", spawn myTextEditor)
-        , ("M-c", spawn (scripts ++ "org-capture.sh"))
+        , ("M-e e", spawn "emacsclient -c -a 'emacs'")
+        , ("M-e c", spawn "emacsclient -c -a 'emacs' -e '(org-capture)'")
+        , ("M-e m", spawn "emacsclient -c -a 'emacs' -e '(mu4e)'")
         , ("M-e q", spawn (scripts ++ "restart_emacs.sh"))
         
         -- Weather

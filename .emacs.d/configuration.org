@@ -41,10 +41,14 @@
 ** evil-collection
    #+begin_src emacs-lisp
      (use-package evil-collection
-	:after evil, org
+        :after evil, org
 	:ensure t
-        :custom (evil-collection-calendar-want-org-bindings t)
-	:config (evil-collection-init))
+	:custom (evil-collection-calendar-want-org-bindings t)
+	:config
+	(add-to-list 'evil-collection-mode-list 'magit)
+	(evil-collection-magit-setup))
+     (setq evil-magit-state 'normal)
+     (evil-collection-init)
    #+end_src
 ** evil-org
    #+begin_src emacs-lisp
@@ -62,13 +66,6 @@
      (require 'evil-org-agenda)
      (evil-org-agenda-set-keys)
    #+end_src
-** evil-magit
-   #+begin_src emacs-lisp
-   (use-package evil-magit
-     :ensure t
-     :init (setq evil-magit-state 'normal)
-     :after evil)
-   #+end_src  
 * General Configurations
 ** =counsel=
    Counsel is a dependency for =swiper=

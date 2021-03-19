@@ -13,6 +13,7 @@ alias cat='bat'
 # pacman and trizen 
 alias pacautoremove='sudo pacman -Rsn $(pacman -Qdtq)'
 alias pacremove='sudo pacman -Rsc' # remove package dependencies and dependents
+alias trizen='trizen --pager-mode --pager="bat"'
 alias up='trizen -Syu && xmonad --recompile'
 
 # programs 

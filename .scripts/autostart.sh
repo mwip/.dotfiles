@@ -17,6 +17,7 @@ picom &
 #nitrogen --restore &
 sleep 5 && coperincus_wallpaper.sh &
 xsetroot -cursor_name left_ptr &
+xset r rate 280 35 &
 keepassxc &
 xrdb -merge ~/.Xresources &
 syncthing-gtk &

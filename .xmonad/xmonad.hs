@@ -223,6 +223,8 @@ myKeys =
         , ("M-M1-j", sendMessage MirrorShrink)          -- Shrink vert window width
         , ("M-M1-k", sendMessage MirrorExpand)          -- Exoand vert window width
 
+        , ("M-w", spawn "rofi -show window -show-icons -matching fuzzy")  -- goto selected window
+
 
         , ("M-S-q", spawn (home ++ ".scripts/dmenu_exit.sh"))
         , ("M-o", nextScreen)
@@ -262,7 +264,6 @@ myKeys =
         , ("C-S-M1-s", spawn "signal-desktop")
         , ("C-S-M1-d", spawn "telegram-desktop")
         , ("C-S-M1-b", spawn "blueman-manager")
-        , ("C-S-M1-w", goToSelected $ mygridConfig myColorizer)  -- goto selected window
 
         -- Emacs
         , ("M-e e", spawn "emacsclient -c -a 'emacs'")
@@ -271,8 +272,8 @@ myKeys =
         , ("M-e q", spawn (scripts ++ "restart_emacs.sh"))
         
         -- Weather
-        , ("M-w w", spawn (scripts ++ "dmenu_wttr.sh"))
-        , ("M-w r", spawn (scripts ++ "wetterradar.sh"))
+        --, ("M-w w", spawn (scripts ++ "dmenu_wttr.sh"))
+        --, ("M-w r", spawn (scripts ++ "wetterradar.sh"))
 
         -- Help
         , ("M-z k", spawn ("$MYTERM -e '" ++ scripts ++ "xmonad_keys.sh'"))

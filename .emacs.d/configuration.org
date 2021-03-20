@@ -215,7 +215,8 @@
 
       ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
       ;; may have their own settings.
-      (load-theme 'doom-one t) ;;+ 
+      ;;(load-theme 'doom-one t) ;;+ 
+      (load-theme 'doom-vibrant t) ;;+ 
       ;;(load-theme 'doom-spacegrey t) 0
       ;;(load-theme 'doom-city-lights t);; + 
       ;;(load-theme 'doom-dracula t) 0
@@ -1216,7 +1217,7 @@
      (global-set-key [f9] 'auto-highlight-symbol-mode)
      (global-unset-key [f10])
      (global-set-key [f10] 'darkroom-mode)
-     (global-set-key [f11] (lambda () (interactive) (load-theme 'doom-one t)))
+     (global-set-key [f11] (lambda () (interactive) (load-theme 'doom-vibrant t)))
      (global-set-key [f12] (lambda () (interactive) (load-theme 'doom-one-light t)))
    #+end_src
 

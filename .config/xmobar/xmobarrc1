@@ -7,8 +7,7 @@ Config { font    = "xft:UbuntuMono Nerd Font:style=Bold:pixelsize=14:antialias=t
        , hideOnStart = False
        , allDesktops = True
        , persistent = True
-       , iconRoot = "/home/dt/.xmonad/xpm/"  -- default: "."
-      , commands = [ Run Com "/home/loki/.scripts/dwmbar" ["-oneshot"] "mystatus" 10
+      , commands = [ Run Com "date" ["+%F %H:%M"] "mystatus" 10
        	 	    , Run UnsafeStdinReader
                     ]
        , sepChar = "%"

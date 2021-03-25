@@ -114,20 +114,28 @@
 ** =company=
    Auto-completion with company-mode
    #+begin_src emacs-lisp
-	(use-package company
-	  :ensure t
-	  :config 
-	  (setq company-idle-delay 0)
-	  (setq company-minimum-prefix-length 3)
-	  (setq company-selection-wrap-around t)
-	  (setq company-tooltip-align-annotations t)
-	  (setq company-tooltip-limit 10)
+	   (use-package company
+	     :ensure t
+	     :config 
+	     (setq company-idle-delay 0)
+	     (setq company-minimum-prefix-length 3)
+	     (setq company-selection-wrap-around t)
+	     (setq company-tooltip-align-annotations t)
+	     (setq company-tooltip-limit 10)
 
-	  ;;(global-company-mode t)
-     )
-	;; disable company in org-files
-	(setq company-global-modes '(not org-mode))
+	     (global-company-mode t)
+	)
+	   ;; disable company in org-files
+	   (setq company-global-modes '(not org-mode))
+     ;;(require 'color)
 
+     ;;(let ((bg (face-attribute 'default :background)))
+       ;;(custom-set-faces
+	;;`(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 4)))))
+	;;`(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
+	;;`(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
+	;;`(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+	;;`(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
    #+END_SRC
 ** Key-Chord explanations
    Lists all the options of shortcuts after a while
@@ -207,7 +215,8 @@
 
       ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
       ;; may have their own settings.
-      (load-theme 'doom-one t) ;;+ 
+      ;;(load-theme 'doom-one t) ;;+ 
+      (load-theme 'doom-vibrant t) ;;+ 
       ;;(load-theme 'doom-spacegrey t) 0
       ;;(load-theme 'doom-city-lights t);; + 
       ;;(load-theme 'doom-dracula t) 0
@@ -1208,7 +1217,7 @@
      (global-set-key [f9] 'auto-highlight-symbol-mode)
      (global-unset-key [f10])
      (global-set-key [f10] 'darkroom-mode)
-     (global-set-key [f11] (lambda () (interactive) (load-theme 'doom-one t)))
+     (global-set-key [f11] (lambda () (interactive) (load-theme 'doom-vibrant t)))
      (global-set-key [f12] (lambda () (interactive) (load-theme 'doom-one-light t)))
    #+end_src
 

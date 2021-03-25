@@ -147,6 +147,7 @@ myManageHook = composeAll
      , className =? "qTox"                                --> viewShift "0:\xf0e0"
      , className =? "Steam"                               --> viewShift "ß:\xf11b"
      -- floats
+     , title =?      "Auto-Type - KeePassXC"              --> floatkpx
      , (className =? "firefox" <&&> resource =? "Dialog") --> doCenterFloat  -- Float Firefox Dialog
      , isDialog                                           --> doCenterFloat  -- Float Dialogs
      , title =? "Media viewer"                            --> doCenterFloat
@@ -154,6 +155,7 @@ myManageHook = composeAll
 --     , fmap (t `isInfixOf`) className --> doCenterFloat | c <- classFloats
      ] <+> namedScratchpadManageHook myScratchPads
   where viewShift = doF . liftM2 (.) W.view W.shift
+        floatkpx = doRectFloat $ W.RationalRect 0.33 0.33 0.33 0.33
         titleFloats = ["Copying", "Media viewer", "Select entry type"]
         classFloats = ["KeePassXC", "myCookbook", "Tor Browser", "cloud-drive-ui"]
  

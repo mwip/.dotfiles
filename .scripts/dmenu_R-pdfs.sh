@@ -23,7 +23,7 @@ mkdir -p $CACHE_DIR
 CACHED=$(ls $CACHE_DIR)
 
 # dmenu prompt to select the wanted pdf file
-PACKAGE=$(echo -e $CACHED | sed 's/.pdf//g;s/ /\n/g;s/$/\n~~update~~/' |
+PACKAGE=$(echo $CACHED | sed 's/.pdf//g;s/ /\n/g;s/$/\n~~update~~/' |
 	      eval "$DMENU_CMD")
 
 # exit if the dmenu prompt was canceled or nothing was entered

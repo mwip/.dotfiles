@@ -125,6 +125,8 @@ myManageHook = composeAll
      , className =? "Alacritty"                           --> doF W.swapDown
      -- dedicated workspaces
      , className =? "librewolf"                           --> viewShift "1:\xf269"
+     , className =? "LibreWolf"                           --> viewShift "1:\xf269"
+     , className =? "Navigator"                           --> viewShift "1:\xf269"
      , className =? "firefox"                             --> viewShift "1:\xf269"
      , className =? "Chromium"                            --> viewShift "1:\xf269"
      , className =? "Emacs"                               --> viewShift "2:\xf15c"

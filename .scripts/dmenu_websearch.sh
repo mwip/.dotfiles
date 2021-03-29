@@ -33,5 +33,5 @@ fi
 	    $EDITOR ~/.config/search/search
 	    ;;
 	*)
-	    firefox --new-tab "$1" "$URL$(~/.scripts/encode "$SEARCH")"
+	    librewolf --new-tab "$1" "$URL$(~/.scripts/encode "$SEARCH")"
     esac &

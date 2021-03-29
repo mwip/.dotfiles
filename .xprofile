@@ -1,7 +1,7 @@
 export MYTERM='alacritty'
 export MYBROWSER='firefox'
 export MYFILEMNGR='doublecmd -T'
-export PATH=$PATH:/home/loki/github/geoprocessors:$HOME/bin:$HOME/.scripts
+export PATH=$PATH:/home/loki/github/geoprocessors:$HOME/bin:$HOME/.scripts:$HOME/.local/bin
 export WINIT_X11_SCALE_FACTOR=1
 setxkbmap de
 xset r rate 280 35

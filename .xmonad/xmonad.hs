@@ -124,6 +124,7 @@ myManageHook = composeAll
      , className =? "urxvtc"                              --> doF W.swapDown
      , className =? "Alacritty"                           --> doF W.swapDown
      -- dedicated workspaces
+     , className =? "librewolf"                           --> viewShift "1:\xf269"
      , className =? "firefox"                             --> viewShift "1:\xf269"
      , className =? "Chromium"                            --> viewShift "1:\xf269"
      , className =? "Emacs"                               --> viewShift "2:\xf15c"
@@ -247,7 +248,7 @@ myKeys =
         -- Programs
         , ("M-r", spawn "/home/loki/.scripts/dmenu_recent.sh -i -fn 'Ubuntu Mono Nerd Font:size=11' -nb '#161616' -nf '#D0D0D0' -sf '#444444' -sb '#C45500'")
         , ("M-C-<Return>", spawn "$MYBROWSER")
-        , ("M-f", spawn "firefox")
+        , ("M-f", spawn "librewolf")
         , ("M-S-b", spawn (scripts ++ "pabluezswitch.sh"))
         , ("M-p", spawn (scripts ++ "dmenu_displayselect.sh"))
         , ("M-g", spawn (scripts ++ "dmenu_filemanager.sh"))

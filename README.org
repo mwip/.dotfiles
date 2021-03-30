@@ -8,8 +8,6 @@
    - DE/WM: Xmonad
    - Input: Ergodox-EZ
 
-   [[file:rice.png]]
-
 ** Getting started
 
   as described [[https://wiki.archlinux.org/index.php/Dotfiles#Tracking_dotfiles_directly_with_Git][in this Arch-Wiki page]], I use a bare git repository to track my configuration and dotfiles. 
@@ -36,12 +34,19 @@
 
    *Please be careful!* This will delete your current configuration!
    
-   After cloning the repo, you will see that the files have been deleted. Therefore, you need to revert the files. You can do that like this: 
+   After cloning the repo, you will see that the files have been deleted. Therefore, you need to
+   revert the files files you want to use. You can do that like this:
 
    #+begin_src shell
    dotfiles restore --staged .zshrc
    dotfiles diff .zshrc # will show you the differences between your current file and this configuration
    dotfiles restore .zshrc
+   #+end_src
+
+   Or, if you want to get the entire set of dotfiles, just checkout the master branch:
+
+   #+begin_src shell
+   dotfiles checkout master
    #+end_src
    
 

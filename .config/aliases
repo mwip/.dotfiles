@@ -1,7 +1,7 @@
 # File and directory operations
 alias ..='cd ..'
 alias ls='exa --group-directories-first --icons'
-alias ll='ls -alh'
+alias ll='ls -alh --git'
 alias lt='ls --tree'
 
 # emacs editor 

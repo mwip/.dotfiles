@@ -87,13 +87,13 @@ main = do
         { manageHook = manageDocks <+> myManageHook <+> manageHook desktopConfig
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = \x -> hPutStrLn xmproc0 x  >> hPutStrLn xmproc1 x
-                        , ppCurrent = xmobarColor "#c3e88d" "" . wrap "[" "]" -- Current workspace in xmobar
-                        , ppVisible = xmobarColor "#c3e88d" ""                -- Visible but not current workspace
-                        , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""   -- Hidden workspaces in xmobar
-                        , ppHiddenNoWindows = xmobarColor "#444444" ""        -- Hidden workspaces (no windows)
-                        , ppTitle = xmobarColor "#d0d0d0" "" . shorten 80     -- Title of active window in xmobar
-                        , ppSep =  "<fc=#9AEDFE> : </fc>"                     -- Separators in xmobar
-                        , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"  -- Urgent workspace
+                        , ppCurrent = xmobarColor "#e69055" "" . wrap "" "" -- Current workspace in xmobar
+                        , ppVisible = xmobarColor "#7bc275" ""                -- Visible but not current workspace
+                        , ppHidden = xmobarColor "#1f5582" "" . wrap "" ""   -- Hidden workspaces in xmobar
+                        , ppHiddenNoWindows = xmobarColor "#484854" ""        -- Hidden workspaces (no windows)
+                        , ppTitle = xmobarColor "#bbc2cf" "" . shorten 80     -- Title of active window in xmobar
+                        , ppSep =  "<fc=#bbc2cf> : </fc>"                     -- Separators in xmobar
+                        , ppUrgent = xmobarColor "#ff665c" "" . wrap "!" "!"  -- Urgent workspace
                         , ppExtras  = [windowCount]                           -- # of windows current workspace
                         , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
                         }
@@ -104,8 +104,8 @@ main = do
         , startupHook        = myStartupHook
         , workspaces         = myWorkspaces
         , borderWidth        = myBorderWidth
-        , normalBorderColor  = "#161616"
-        , focusedBorderColor = "#C45500"
+        , normalBorderColor  = "#242730"
+        , focusedBorderColor = "#e69055"
         } `additionalKeysP` myKeys
 
 

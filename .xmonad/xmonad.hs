@@ -294,6 +294,7 @@ myKeys =
         , ("M-s f", spawn (scripts ++ "screenshot_full.sh"))
         , ("M-s r", spawn (scripts ++ "screenshot_region.sh"))
         , ("M-s c", namedScratchpadAction myScratchPads "calc")
+        , ("M-s d", namedScratchpadAction myScratchPads "calendar")
 
         -- Media
         , ("<XF86AudioPlay>", spawn "mpc toggle")
@@ -330,9 +331,13 @@ myWorkspaces = wrkspcs ++ (map snd myExtraWorkspaces)
 ------------------------------------------------------------------------
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "calc" spawnTerm findQalc manageTerm
+                , NS "calendar" spawnCal findCal manageCal
                 ]
     where
     spawnTerm  = myTerminal ++  " -t qalc -e qalc"
     findQalc   = title =? "qalc"
     manageTerm = customFloating $ W.RationalRect (1/4) (1/4) (1/2) (1/2)
+    spawnCal   = myTerminal ++ " -t calendar --hold -e /usr/bin/cal -y"
+    findCal    = title =? "calendar"
+    manageCal  = customFloating $ W.RationalRect (0.325) (1/6) (0.35) (0.55)
 

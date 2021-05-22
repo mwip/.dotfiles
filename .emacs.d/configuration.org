@@ -1167,7 +1167,8 @@
    #+begin_src emacs-lisp
      (evil-leader/set-key "." 'find-file)
      (evil-leader/set-key "u" 'universal-argument)
-     (evil-leader/set-key "bb" 'ivy-switch-buffer)
+     (evil-leader/set-key "bb" 'ido-switch-buffer)
+     (evil-leader/set-key "bl" 'ibuffer)
      (evil-leader/set-key "bk" 'ido-kill-buffer)
      (evil-leader/set-key "ti" 'org-inlinetask-insert-task)
      (evil-leader/set-key "tt" 'org-todo)

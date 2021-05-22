@@ -16,8 +16,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(doc-view-continuous nil)
+ '(helm-minibuffer-history-key "M-p")
  '(org-agenda-files
-   '("~/Documents/green_lu/README.org" "~/org-diss/paper3.org" "~/org-diss/dissertation.org" "~/myorg.org"))
+   '("/mnt/data/green_lu/README.org" "~/org-diss/paper3.org" "~/org-diss/dissertation.org" "~/myorg.org"))
  '(org-latex-default-packages-alist
    '(("AUTO" "inputenc" t
       ("pdflatex"))

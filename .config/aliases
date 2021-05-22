@@ -38,3 +38,6 @@ alias dwm-diff='~/.scripts/dwm-diffs'
 alias update-bootloader='sudo bootctl --path=/efi update'
 
 alias wthr='curl v2.wttr.in'
+
+# btrfs
+alias snapdata='sudo btrfs subvolume snapshot -r /mnt/data /mnt/data/.snapshots/$(date +"%F_%H-%M")'

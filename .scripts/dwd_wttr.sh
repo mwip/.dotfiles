@@ -18,7 +18,7 @@ Sachsen\n\
 Sachsen-Anhalt\n\
 Schleswig-Holstein und Hamburg\n\
 Thüringen\n\
-Deutschland" | dmenu -l 10 -p "Choose your region:")
+Deutschland" | dmenu -i -l 10 -p "Choose your region:")
 
 # if used from $DWD_LOCATION, remove parantheses
 region=$(echo $region | sed "s/\s*(.*)//g")
@@ -31,7 +31,7 @@ case $region in
     "Bayern")                         abbr="bay" ;;
     "Baden-Württemberg")              abbr="baw" ;;
     "Berlin und Brandenburg")         abbr="bbb" ;;
-    "Hessen")                         abbr="hessen" ;;
+    "Hessen")                         abbr="hes" ;;
     "Mecklenburg-Vorpommern")         abbr="mvp" ;;
     "Niedersachsen und Bremen")       abbr="nib" ;;
     "Nordrhein-Westfalen")            abbr="nrw" ;;

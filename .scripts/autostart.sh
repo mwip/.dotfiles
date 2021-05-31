@@ -28,9 +28,9 @@ xfce4-power-manager &
 $HOME/.scripts/deactivateBluetooth &
 blueman-applet &
 libinput-gestures-setup restart &
-#xautolock -time 10 -notify 30 -notifier "notify-send 'xautolock kicking in soon'" -corners 000- -locker 'betterlockscreen -l blur' -detectsleep  &
-lockctl.sh -D &> /tmp/lockctl.log &
-xautolock -time 10 -notify 30 -notifier "notify-send 'xautolock kicking in soon'" -corners 000- -locker 'lockctl.sh -l' -detectsleep -secure &
+xautolock -time 10 -notify 30 -notifier "notify-send 'xautolock kicking in soon'" -corners 000- -locker 'betterlockscreen -l blur' -detectsleep  &
+#lockctl.sh -D &> /tmp/lockctl.log &
+#xautolock -time 10 -notify 30 -notifier "notify-send 'xautolock kicking in soon'" -corners 000- -locker 'lockctl.sh -l' -detectsleep -secure &
 udiskie &
 nextcloud &
 protonmail-bridge --no-window &

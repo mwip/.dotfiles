@@ -152,6 +152,7 @@ myManageHook = composeAll
      -- floats
      , title =?      "Auto-Type - KeePassXC"              --> floatkpx
      , (className =? "firefox" <&&> resource =? "Dialog") --> doCenterFloat  -- Float Firefox Dialog
+     , className =? "KeePassXC"                           --> doCenterFloat
      , isDialog                                           --> doCenterFloat  -- Float Dialogs
      , title =? "Media viewer"                            --> doCenterFloat
 --     , fmap (t `isInfixOf`) title     --> doCenterFloat | t <- titleFloats

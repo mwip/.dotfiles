@@ -42,4 +42,4 @@ FontPath /usr/share/fonts/100dpi
 # qtile
 ##exec xterm
 #exec startkde
-exec ssh-agent xmonad
+exec ssh-agent xmonad > /tmp/xmonadlog

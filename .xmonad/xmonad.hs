@@ -293,6 +293,7 @@ myKeys =
         -- Screenshots / scratchpads
         , ("M-s f", spawn (scripts ++ "screenshot_full.sh"))
         , ("M-s r", spawn (scripts ++ "screenshot_region.sh"))
+        , ("M-s x", spawn "xset r rate 280 35")
         , ("M-s c", namedScratchpadAction myScratchPads "calc")
         , ("M-s d", namedScratchpadAction myScratchPads "calendar")
 

@@ -280,7 +280,7 @@
      ;; (when (version<= "26.0.50" emacs-version)
      ;;       (global-display-line-numbers-mode))
      (require 'display-line-numbers)
-     (defcustom display-line-numbers-exempt-modes '(vterm-mode eshell-mode shell-mode term-mode ansi-term-mode mu4e-main-mode mu4e-headers-mode)
+     (defcustom display-line-numbers-exempt-modes '(vterm-mode eshell-mode shell-mode term-mode ansi-term-mode mu4e-main-mode mu4e-headers-mode org-mode org-agenda-mode)
        "Major modes on which to disable the linum mode, exempts them from global requirement"
        :group 'display-line-numbers
        :type 'list

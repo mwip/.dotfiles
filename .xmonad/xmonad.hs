@@ -299,9 +299,9 @@ myKeys =
         , ("M-s d", namedScratchpadAction myScratchPads "calendar")
 
         -- Media
-        , ("<XF86AudioPlay>", spawn "mpc toggle")
-        , ("<XF86AudioNext>", spawn "mpc next")
-        , ("<XF86AudioPrev>", spawn "mpc prev")
+        , ("<XF86AudioPlay>", spawn "mpc toggle > /dev/null")
+        , ("<XF86AudioNext>", spawn "mpc next > /dev/null")
+        , ("<XF86AudioPrev>", spawn "mpc prev > /dev/null")
         , ("<XF86AudioMicMute>", spawn (scripts ++ "toggle_microphone.sh"))
         , ("<XF86AudioMute>", spawn (scripts ++ "adjust_volume.sh m"))
         , ("<XF86AudioRaiseVolume>", spawn (scripts ++ "adjust_volume.sh +"))

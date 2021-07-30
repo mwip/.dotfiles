@@ -237,8 +237,8 @@
     #+end_src
 ** Font
    #+BEGIN_SRC emacs-lisp
-   (add-to-list 'default-frame-alist '(font . "Code New Roman Nerd Font Mono 13" ))
-   (set-face-attribute 'default t :font "Code New Roman Nerd Font Mono 13" )
+   (add-to-list 'default-frame-alist '(font . "Code New Roman Nerd Font Mono 12" ))
+   (set-face-attribute 'default t :font "Code New Roman Nerd Font Mono 12" )
    ;;(set-default-font "Code New Roman Nerd Font Mono 13")
    #+END_SRC
 ** Cursor
@@ -788,6 +788,12 @@
      ;;(flycheck-julia-setup)
      ;;(add-hook 'julia-mode-hook 'flycheck-mode)
    #+end_src
+** Highligh TODO comments
+   #+begin_src emacs-lisp
+     (use-package fic-mode
+       :ensure t
+       :config (add-hook 'prog-mode-hook 'fic-mode))
+   #+end_src
 * R-Related Configuration
 ** Force scroll on R-console
    #+BEGIN_SRC emacs-lisp
@@ -871,6 +877,20 @@
        :config
        (elpy-enable))
    #+end_src 
+   
+** Pyvenv
+   #+begin_src emacs-lisp
+     (use-package pyvenv
+       :ensure t
+       :init
+       (setenv "WORKON_HOME" "/home/loki/miniconda3/envs")
+       ;;(add-to-list 'exec-path "~/miniconda3/bin")
+       ;;(setenv "PATH" "~/miniconda3/bin:$PATH")
+       :config
+       (defalias 'workon 'pyvenv-workon)
+       )
+   #+end_src
+
 ** COMMENT Jedi autocomplete
    #+begin_src emacs-lisp
    (use-package jedi-core
@@ -1216,6 +1236,11 @@
      (evil-leader/set-key "pp" 'counsel-projectile-switch-project)
      (evil-leader/set-key "p." 'counsel-projectile-find-file)
      (evil-leader/set-key "p." 'counsel-projectile-find-file)
+     ;; delete whitespace
+     (evil-leader/set-key "dt" 'delete-trailing-whitespace)
+     ;; elpy
+     (evil-leader/set-key "egd" 'elpy-goto-definition)
+     (evil-leader/set-key "ev" 'pyvenv-workon)
    #+end_src
 
 ** F-Keys

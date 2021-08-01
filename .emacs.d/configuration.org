@@ -510,11 +510,13 @@
      (define-key mu4e-headers-mode-map (kbd "C-c c") 'mu4e-org-store-and-capture)
      (define-key mu4e-view-mode-map (kbd "C-c c") 'mu4e-org-store-and-capture)
      (setq mu4e-html2text-command "w3m -I %{UTF-8} -dump -T text/html")
-
+     
      (setq mu4e-headers-include-related nil)
      (setq mu4e-headers-show-threads nil)
      ;; avoid interference with mu4e attachments
      (add-to-list 'mm-inhibit-file-name-handlers 'openwith-file-handler)
+     (setq mu4e-headers-precise-alignment t)
+     (setq gnus-blocked-images "http") ;; https://github.com/djcb/mu/issues/1434
     #+end_src
     
 

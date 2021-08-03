@@ -3,7 +3,7 @@
 ** Install use-package if not installed
    #+BEGIN_SRC emacs-lisp
    (unless (package-installed-p 'use-package)
-       (package-refresh-contents)
+       ;;(package-refresh-contents)
        (package-install 'use-package))
    #+END_SRC
 ** Try Packages
@@ -16,7 +16,7 @@
 * EVIL
 ** Assumed configuration previous to evil
    #+begin_src emacs-lisp
-   (setq evil-want-keybinding nil)
+   (setq evil-want-keybinding nil) ;; https://github.com/emacs-evil/evil-collection/issues/215
    (setq evil-want-integration t)
    (setq evil-undo-system 'undo-tree)
    (setq evil-want-C-u-scroll t)
@@ -73,43 +73,34 @@
    #+BEGIN_SRC emacs-lisp
      ;; it looks like counsel is a requirement for swiper
      (use-package counsel
-	:ensure t
-	:bind 
-	(("M-y" . counsel-yank-pop)
+       :ensure t
+       :bind 
+       (("M-y" . counsel-yank-pop)
 	("M-x" . counsel-M-x)
 	("C-x C-f" . counsel-find-file)
-	 :map ivy-minibuffer-map
-	 ("M-y" . ivy-next-line))
-     )
+	:map ivy-minibuffer-map
+	("M-y" . ivy-next-line)))
    #+END_SRC
 ** =ivy=
    #+BEGIN_SRC emacs-lisp
-   (use-package ivy
-      :ensure t
-      :diminish (ivy-mode)
-      :bind 
-      (("C-x b" . ivy-switch-buffer)
-       ("C-c C-r" . ivy-resume))
-      :config
-   (ivy-mode 1)
-   (setq ivy-use-virtual-buffers t)
-   (setq ivy-display-style 'fancy))
-   #+END_SRC
-** =swiper=
-   Replace standard search with swiper
-   #+BEGIN_SRC emacs-lisp
-   (use-package swiper
-      :ensure try
-      :bind (
-        ("C-s" . swiper-isearch)
-	("C-r" . swiper-isearch)
-        ;;("C-s" . counsel-grep-or-swiper)
-        ;;("C-r" . counsel-grep-or-swiper)
-      )
+     (use-package ivy
+       :ensure t
+       :diminish (ivy-mode)
+       :bind 
+       (("C-x b" . ivy-switch-buffer)
+	("C-c C-r" . ivy-resume))
        :config
-       (progn
-	  (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
-	  ))   
+       (ivy-mode 1)
+       (setq ivy-use-virtual-buffers t)
+       (setq ivy-display-style 'fancy))
+   #+END_SRC
+** COMMENT =swiper=
+   Replace standard search with swiper
+   -- ditched since evil is standard search now
+   #+BEGIN_SRC emacs-lisp
+     (use-package swiper
+       :ensure try
+       :bind (("C-s" . swiper-isearch)))
    #+END_SRC
 ** =company=
    Auto-completion with company-mode
@@ -163,7 +154,8 @@
     #+begin_src emacs-lisp
     (windmove-default-keybindings 'super)
     #+end_src
-*** Makes window changing look nicer
+*** COMMENT Makes window changing look nicer
+    -- ditched for evil-mode
     #+BEGIN_SRC emacs-lisp
     (use-package ace-window
        :ensure t
@@ -181,9 +173,9 @@
    (setq ido-everywhere t)
    (setq ido-use-filename-at-point 'guess)
    (ido-mode 1)
-   (use-package ido-vertical-mode
-     :ensure t)
-   (ido-vertical-mode 1)
+   ;;(use-package ido-vertical-mode
+   ;;  :ensure t)
+   ;;(ido-vertical-mode 1)
    #+END_SRC
 ** Line wrapping
    #+begin_src emacs-lisp
@@ -193,7 +185,6 @@
    Change how buffers are listed in with =C-x b=
    #+BEGIN_SRC emacs-lisp
    (defalias 'list-buffers 'ibuffer)
-   ;; (defalias 'list-buffers 'ibuffer-other-window)
    #+END_SRC
 ** Theme
    adjust the theme
@@ -203,36 +194,22 @@
    #+END_SRC
 *** Doom-Theme
     #+begin_src emacs-lisp
-      (add-to-list 'load-path "~/")
+      ;;(add-to-list 'load-path "~/")
       (use-package doom-modeline
 	:ensure t)
       (setq doom-modeline-icon t)
       (use-package doom-themes
-	:ensure t)
-      ;; Global settings (defaults)
-      (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-	    doom-themes-enable-italic t) ; if nil, italics is universally disabled
-
-      ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
-      ;; may have their own settings.
-      ;;(load-theme 'doom-one t) ;;+ 
-      (load-theme 'doom-vibrant t) ;;+ 
-      ;;(load-theme 'doom-spacegrey t) 0
-      ;;(load-theme 'doom-city-lights t);; + 
-      ;;(load-theme 'doom-dracula t) 0
-      ;;(load-theme 'doom-molokai t) +  
-      ;;(load-theme 'doom-solarized-dark t)
-
-      ;; Enable flashing mode-line on errors
-      ;;(doom-themes-visual-bell-config)
-
-      ;; or for treemacs users
-      (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
-      (doom-themes-treemacs-config)
-
-      ;; Corrects (and improves) org-mode's native fontification.
-      (doom-themes-org-config)
-
+	:ensure t
+	:config
+	;; Global settings (defaults)
+	(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+	      doom-themes-enable-italic t) ; if nil, italics is universally disabled
+	(load-theme 'doom-vibrant t) ;;+ 
+	;; or for treemacs users
+	;; (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+	;; (doom-themes-treemacs-config)
+	;; Corrects (and improves) org-mode's native fontification.
+	(doom-themes-org-config))
       (doom-modeline-init)
     #+end_src
 ** Font
@@ -251,7 +228,7 @@
    #+begin_src emacs-lisp
    (setq ring-bell-function 'ignore)
    #+END_SRC
-** Replace startup message with Dashboard
+** COMMENT Replace startup message with Dashboard
    #+BEGIN_SRC emacs-lisp
      (setq inhibit-startup-message t)
      (use-package dashboard
@@ -321,21 +298,21 @@
 
 ** Line wrapping
    #+begin_src emacs-lisp
-   (use-package adaptive-wrap
-      :ensure t)
-   (when (fboundp 'adaptive-wrap-prefix-mode)
-   (defun my-activate-adaptive-wrap-prefix-mode ()
-     "Toggle `visual-line-mode' and `adaptive-wrap-prefix-mode' simultaneously."
-     (adaptive-wrap-prefix-mode (if visual-line-mode 1 -1)))
-   (add-hook 'visual-line-mode-hook 'my-activate-adaptive-wrap-prefix-mode))
-   (global-visual-line-mode)
-   (adaptive-wrap-prefix-mode)
-   (add-hook 'org-agenda-mode-hook
-          (lambda ()
-            (visual-line-mode -1)
-            (toggle-truncate-lines 1)))
+     (use-package adaptive-wrap
+       :ensure t)
+     (when (fboundp 'adaptive-wrap-prefix-mode)
+       (defun my-activate-adaptive-wrap-prefix-mode ()
+	 "Toggle `visual-line-mode' and `adaptive-wrap-prefix-mode' simultaneously."
+	 (adaptive-wrap-prefix-mode (if visual-line-mode 1 -1)))
+       (add-hook 'visual-line-mode-hook 'my-activate-adaptive-wrap-prefix-mode))
+     (global-visual-line-mode)
+     (adaptive-wrap-prefix-mode)
+     (add-hook 'org-agenda-mode-hook
+	       (lambda ()
+		 (visual-line-mode -1)
+		 (toggle-truncate-lines 1)))
    #+end_src
-** Better Control-Backspace behavior
+** COMMENT Better Control-Backspace behavior
     #+begin_src emacs-lisp
       (defun my-backward-kill-word ()
         "Customize/Smart backward-kill-word."
@@ -371,7 +348,7 @@
                  ))
       (global-set-key  [C-backspace] 'my-backward-kill-word)
 #+end_src
-** Overwrite highlighted text
+** COMMENT Overwrite highlighted text
    #+begin_src emacs-lisp
    (delete-selection-mode 1)
    #+end_src
@@ -405,7 +382,7 @@
 					    (match-string-no-properties 0)))))))
      (defun hexcolour-add-to-font-lock ()
        (font-lock-add-keywords nil hexcolour-keywords))
-
+     
      (add-hook 'ess-mode-hook 'hexcolour-add-to-font-lock)
      (add-hook 'prog-mode-hook 'hexcolour-add-to-font-lock)
      (add-hook 'python-mode-hook 'hexcolour-add-to-font-lock)
@@ -431,7 +408,7 @@
       :ensure t)
    (auto-dim-other-buffers-mode)
    #+END_SRC
-** Half page up/down
+** COMMENT Half page up/down
    #+begin_src emacs-lisp
    (autoload 'View-scroll-half-page-forward "view")
    (autoload 'View-scroll-half-page-backward "view")
@@ -521,29 +498,38 @@
     
 
 * coding-related configuration
+** Snippets
+   See [[https://joaotavora.github.io/yasnippet/snippet-development.html][here]] how to write your own snippets
+   Paste the snippets in =.emacs.d/snippets/=
+   #+BEGIN_SRC emacs-lisp
+   (use-package yasnippet
+     :ensure t
+     :init
+     (yas-global-mode 1))
+   (use-package yasnippet-snippets
+     :ensure t)
+   #+END_SRC
 ** projects with projectile
    see [[https://projectile.readthedocs.io/en/latest/usage/][Documentaiton]]
    #+begin_src emacs-lisp
-   (use-package projectile
-      :ensure t
-      :config
-      (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-      (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-      (projectile-mode +1))
-   (use-package counsel-projectile
-      :ensure t
-      :config
-      (counsel-projectile-mode))
-   ;; install ag for search
-   (use-package ag
-      :ensure t)
-   (counsel-projectile-modify-action
-     'counsel-projectile-switch-project-action
-     '((default counsel-projectile-switch-project-action-vc)))
-
-
+     (use-package projectile
+       :ensure t
+       :config
+       (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+       (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+       (projectile-mode +1))
+     (use-package counsel-projectile
+       :ensure t
+       :config
+       (counsel-projectile-mode))
+     ;; install ag for search
+     ;; (use-package ag
+       ;; :ensure t)
+     (counsel-projectile-modify-action
+      'counsel-projectile-switch-project-action
+      '((default counsel-projectile-switch-project-action-vc)))
    #+END_SRC
-** dumb jump
+** COMMENT dumb jump
    #+begin_src emacs-lisp
    (use-package dumb-jump
    :ensure t
@@ -556,7 +542,7 @@
    :init
    (dumb-jump-mode))
    #+END_SRC
-** Code Margin 80-column
+** Code Margin 100-column
     #+BEGIN_SRC emacs-lisp
       (use-package fill-column-indicator
         :ensure t
@@ -571,29 +557,23 @@
      ;; (add-hook 'ess-mode-hook 'fci-mode)
       (defalias 'margin80 'fci-mode)
    #+END_SRC
-** auto-complete
-   autocomplete everywhere
-   #+BEGIN_SRC emacs-lisp
-     ;; (use-package auto-complete
-     ;;    :ensure t
-     ;;    :init
-     ;;    (progn
-     ;;      (ac-config-default)
-     ;;      (global-auto-complete-mode t)
-     ;;    ))   
-   #+END_SRC
-
 ** Auto-Pairs
    Fill in closing brackets, quotes and stuff when typing the opening one
    #+BEGIN_SRC emacs-lisp
-   ;;(use-package autopair
-   ;;  :ensure t)
-   ;;(electric-pair-mode)
-   ;;(setq autopair-skip-whitespace t)
-   (use-package smartparens
-     :ensure t
-     :config
-     (smartparens-global-mode))
+     ;;(use-package autopair
+     ;;  :ensure t)
+     ;;(electric-pair-mode)
+     ;;(setq autopair-skip-whitespace t)
+     (use-package smartparens
+       :ensure t
+       :init
+       (require 'smartparens-config)
+       :config
+       (require 'smartparens)
+       (sp-pair "(" ")" :unless '(sp-point-before-word-p))
+       (sp-pair "{" "}" :unless '(sp-point-before-word-p))
+       (sp-pair "[" "]" :unless '(sp-point-before-word-p))
+       (smartparens-global-mode))
    #+END_SRC
 ** Hightligh Paris of Parenthesis
    #+BEGIN_SRC emacs-lisp
@@ -615,15 +595,16 @@
    #+END_SRC
 ** Multi-cursor
    #+BEGIN_SRC emacs-lisp
-   (use-package multiple-cursors
-     :ensure t)
-   (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-   (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-   (global-unset-key (kbd "M-<mouse-1>"))
-   (global-set-key (kbd "C-M-<mouse-1>") 'mc/add-cursor-on-click)
-   (define-key mc/keymap (kbd "<return>") nil) ;; stop multi-cursor with C-g not enter
-   (setq mc/always-run-for-all t)
+     (use-package multiple-cursors
+       :ensure t
+       :config
+       (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+       (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+       (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+       (global-unset-key (kbd "M-<mouse-1>"))
+       (global-set-key (kbd "C-M-<mouse-1>") 'mc/add-cursor-on-click)
+       (define-key mc/keymap (kbd "<return>") nil) ;; stop multi-cursor with C-g not enter
+       (setq mc/always-run-for-all t))
    #+END_SRC
 ** Git-Gutter 
    Shows little indicators of changes at the left edge in gitted files
@@ -638,47 +619,10 @@
    (use-package magit
       :ensure t
       :init
-      (progn
-      (bind-key "C-x g" 'magit-status)
-      )
+      (progn (bind-key "C-x g" 'magit-status))
       :config
       (setq magit-diff-refine-hunk (quote all)))
    #+end_src
-*** COMMENT support for bare dotfiles repo
-    #+begin_src emacs-lisp
-;;; Configure magit to use .myconf (and not .git) as the git
-;;; directory when a .myconf directory is found in the current
-;;; working directory (which Emacs calls its `default-directory'
-;;; per buffer) and there is no .git directory.
-;;;
-;;; For example, if dotfiles are tracked with a git directory at
-;;; $HOME/.myconf, and the Emacs process starts from $HOME (and
-;;; nothing in its configuration changes its `default-directory'
-;;; in the current buffer), this will configure magit to use
-;;; .myconf as the git directory.
-;;;
-;;; NOTE: This setting will apply for the entire Emacs process,
-;;; regardless of magit invocation in other directories.
-(unless (boundp 'myconf-magit-hook?)
-  ;; Only run this hook once, even if Emacs reloads configuration.
-  (eval-after-load 'magit
-    '(let ((myconf-path (expand-file-name ".dotfiles")))
-       (when (and (file-exists-p myconf-path)
-                  (not (file-exists-p ".git")))
-         ;; Insert git directory and working tree into magit's git
-         ;; global arguments, while preserving magit's existing
-         ;; command-line settings; `add-to-list' adds to the
-         ;; beginning of the list.
-         (add-to-list 'magit-git-global-arguments
-                      (format "--work-tree=%s"
-                              ;; Drop trailing slash.
-                              (directory-file-name
-                               ;; Get directory part (`dirname`).
-                               (file-name-directory myconf-path))))
-         (add-to-list 'magit-git-global-arguments
-                      (format "--git-dir=%s" myconf-path)))))
-  (setq myconf-magit-hook? t))
-    #+end_src
 *** Support for bare dotfiles repo
     Creds to https://emacs.stackexchange.com/a/58859/24163
     #+begin_src emacs-lisp
@@ -750,45 +694,28 @@
    (setq column-number-mode t)
    #+end_src
 ** Auto Fill
-    #+BEGIN_SRC emacs-lisp
-    (add-hook 'text-mode-hook 'turn-on-auto-fill)
-    (setq-default fill-column 100)
-    (defun my-magit-turn-on-auto-fill ()
-      (setq fill-column 72)
-      (turn-on-auto-fill))
-    (add-hook 'magit-log-edit-mode-hook 'my-magit-turn-on-auto-fill)
-    (add-hook 'git-commit-mode-hook 'my-magit-turn-on-auto-fill)
-    #+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'text-mode-hook 'turn-on-auto-fill)
+     (setq-default fill-column 100)
+     (defun my-magit-turn-on-auto-fill ()
+       (setq fill-column 72)
+       (turn-on-auto-fill))
+     (add-hook 'magit-log-edit-mode-hook 'my-magit-turn-on-auto-fill)
+     (add-hook 'git-commit-mode-hook 'my-magit-turn-on-auto-fill)
+   #+END_SRC
 ** Dockerfile mode
     #+BEGIN_SRC emacs-lisp
     (use-package dockerfile-mode
       :ensure t)
-    #+END_SRC
-** COMMENT Indent-Guides
-    #+BEGIN_SRC emacs-lisp
-    (use-package highlight-indent-guides
-      :ensure t
-      :config
-      (setq highlight-indent-guides-method 'character)
-      (setq highlight-indent-guides-auto-odd-face-perc 15)
-      (setq highlight-indent-guides-auto-even-face-perc 15)
-      (setq highlight-indent-guides-auto-character-face-perc 20))
-    (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
     #+END_SRC
 ** Julia-mode
    #+begin_src emacs-lisp
      (use-package julia-mode
        :ensure t)
      (setenv "JULIA_NUM_THREADS" "12")
-
      (use-package julia-repl
        :ensure t)
      (add-hook 'julia-mode-hook 'julia-repl-mode)
-
-     ;;(use-package flycheck-julia
-     ;;  :ensure t)
-     ;;(flycheck-julia-setup)
-     ;;(add-hook 'julia-mode-hook 'flycheck-mode)
    #+end_src
 ** Highligh TODO comments
    #+begin_src emacs-lisp
@@ -812,17 +739,6 @@
      (define-key ess-mode-map (kbd "<C-return>") 'ess-eval-region-or-function-or-paragraph-and-step)
      (define-key ess-mode-map (kbd "<C-enter>") 'ess-eval-region-or-function-or-paragraph-and-step)
    #+end_src
-** Snippets
-   See [[https://joaotavora.github.io/yasnippet/snippet-development.html][here]] how to write your own snippets
-   Paste the snippets in =.emacs.d/snippets/=
-   #+BEGIN_SRC emacs-lisp
-   (use-package yasnippet
-     :ensure t
-     :init
-     (yas-global-mode 1))
-   (use-package yasnippet-snippets
-     :ensure t)
-   #+END_SRC
 ** Expand region
    #+BEGIN_SRC emacs-lisp
    (use-package expand-region
@@ -831,14 +747,14 @@
      (global-set-key (kbd "<C-S-up>") 'er/expand-region)
      (global-set-key (kbd "<C-S-down>") (kbd "C-- <C-S-up>")))
    #+END_SRC
-** iEdit
+** COMMENT iEdit
    Much like "Rename in Scope" in RStudio but on the keybinding =C-;=
    #+BEGIN_SRC emacs-lisp
      (use-package iedit
        :ensure t)
    #+END_SRC
  
-** Auto-completion for file names
+** COMMENT Auto-completion for file names
    #+BEGIN_SRC emacs-lisp
    ;;(setq ess-tab-complete-in-script t)
    #+END_SRC
@@ -879,7 +795,6 @@
        :config
        (elpy-enable))
    #+end_src 
-   
 ** Pyvenv
    #+begin_src emacs-lisp
      (use-package pyvenv
@@ -892,7 +807,6 @@
        (defalias 'workon 'pyvenv-workon)
        )
    #+end_src
-
 ** COMMENT Jedi autocomplete
    #+begin_src emacs-lisp
    (use-package jedi-core
@@ -936,25 +850,16 @@
    #+BEGIN_SRC emacs-lisp
    (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
    #+END_SRC
-** Select with shift (conflict)
-   [[https://orgmode.org/manual/Conflicts.html][Org-Mode EMCAS conflicts]]
-** Org todo rotation
+** My Org todo rotation
    =C-c C-t= will trigger a selection how to mark todo items
   #+BEGIN_SRC emacs-lisp
   (setq org-todo-keywords
      '((sequence "TODO(t)" "NEXT(n)" "IN-PROGRESS(i)" "WAIT(w@/!)" "MAYBE(m)" "SOMEDAY(s)" "PROJ(p)" "READ(r)" "PUT-INTO-PAPER(a)" "|" "DONE(d)" "CANCELLED(c@/!)" "FINISHED-PROJ(f@)")))
    #+END_SRC
 ** Monday is the first day in Calendar week
-
    #+begin_src emacs-lisp
-
    (setq calendar-week-start-day 1)
-
    #+end_src
-** Auto-Update agenda 
-   #+BEGIN_SRC emacs-lisp
-   ;;(run-with-idle-timer 60 t (lambda () (org-agenda nil "a")))   
-   #+END_SRC
 ** Add timestamp when DONE
    #+BEGIN_SRC emacs-lisp
    (setq org-log-done 'time)
@@ -965,7 +870,6 @@
    #+end_src
 ** Log rescheduling
    #+begin_src emacs-lisp
-   ;;(setq org-log-note-headins '((reschedule . "Rescheduled on %t: %S -> %s")))
    (setq org-log-reschedule 'time)
    #+end_src
 
@@ -973,7 +877,6 @@
    Allow refiling to all org-agenda-files
    #+begin_src emacs-lisp
    (setq org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
-   ;;(setq org-refile-use-outline-path t)
    #+end_src
 ** Custom Agenda Views
    #+begin_src emacs-lisp
@@ -1021,8 +924,7 @@
    #+begin_src emacs-lisp
      (setq org-deadline-warning-days 7)
    #+end_src
-
-** Org Edna
+** COMMENT Org Edna
    #+begin_src emacs-lisp
      (use-package org-edna
        :ensure t
@@ -1034,10 +936,10 @@
      (use-package org-ref
        :ensure t)
      (setq org-latex-pdf-process
-		   '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-		     "bibtex %b"
-		     "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-		     "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+	   '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+	     "bibtex %b"
+	     "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+	     "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
      (setq org-latex-prefer-user-labels t)
      (setq org-ref-default-citation-link "citep")
    #+END_SRC
@@ -1047,11 +949,17 @@
   (global-set-key (kbd "C-c c") 'org-capture)
   (setq org-capture-templates
      '(("t" "TODO Item" entry (file+headline "~/myorg.org" "INBOX")
-"** TODO %?\n   DEADLINE: %^t")
+"** TODO %?
+   DEADLINE: %^t
+")
        ("p" "Paper to read" entry (file+headline "~/myorg.org" "INBOX")
-       "** READ [[file:~/Literatur/%^{Enter PDF-Filename (relative to ~/Literatur)}][%^{Enter a link display name}]]\n   CONTEXT: %^{Which context is this paper for}")
+"** READ [[file:~/Literatur/%^{Enter PDF-Filename (relative to ~/Literatur)}][%^{Enter a link display name}]]
+   CONTEXT: %^{Which context is this paper for}
+")
        ("l" "Link to read" entry (file+headline "~/myorg.org" "INBOX")
-        "** READ %^{Enter Link}\n    CONTEXT: %^{Context of the link}")
+"** READ %^{Enter Link}
+   CONTEXT: %^{Context of the link}
+")
        ("P" "New Project" entry(file+headline "~/myorg.org" "INBOX")
 "** PROJ %^{What is the project name?}
    DEADLINE: %^t
@@ -1063,7 +971,8 @@
    :END:
  *** TODO What is the very next thing that needs to happen?
     SCHEDULED: %^T
-    must be specific, what needs to be done? ('Set meeting is not sufficient')")))
+    must be specific, what needs to be done? ('Set meeting is not sufficient')
+")))
    #+end_src
 ** System wide capture
    #+begin_src emacs-lisp
@@ -1102,25 +1011,21 @@
    (setq org-agenda-archives-mode t)
    #+END_SRC
 
-** PDF-tools
+** COMMENT PDF-tools
    #+begin_src emacs-lisp
    (use-package pdf-tools
      :ensure t)
    #+end_src
 * Custom Shortcuts
   
-** Unlink TAB an =C-i= as well as RET and =C-m=
-    #+BEGIN_SRC emacs-lisp
-    ;;(define-key input-decode-map [?\C-i] [\C-i])
-    ;;(global-unset-key (kbd "C-i"))
-    ;;(define-key input-decode-map [?\C-m] [\C-m])
-    #+END_SRC
-** Remap C-z to undo
+** COMMENT Remap C-z to undo
+   -- ditched in favor of evil
    #+BEGIN_SRC emacs-lisp
    (global-unset-key (kbd "C-z"))
    (global-set-key (kbd "C-z") 'undo-tree-undo)
    #+END_SRC
-** C-d to delete line
+** COMMENT C-d to delete line
+   -- ditched in favor of evil
    #+begin_src emacs-lisp
    (global-unset-key (kbd "C-d"))
    (global-set-key (kbd "C-d") 'kill-whole-line)
@@ -1157,7 +1062,7 @@
 	(global-set-key (kbd "<S-s-down>") 'buf-move-down)
 	(global-set-key (kbd "<S-s-right>") 'buf-move-right))
     #+end_src
-*** Transpose Windows
+*** COMMENT Transpose Windows
     #+begin_src emacs-lisp
     (use-package transpose-frame
       :ensure t)
@@ -1174,7 +1079,7 @@
       (define-key mymap (kbd "i") 'my/indent)
     #+END_SRC
     
-*** Languagetool
+*** COMMENT Languagetool
     #+begin_src emacs-lisp
     (define-key mymap (kbd "l l") 'langtool-check)
     (define-key mymap (kbd "l d") 'langtool-check-done)
@@ -1184,12 +1089,12 @@
     (define-key mymap (kbd "l n") 'langtool-goto-next-error)
     (define-key mymap (kbd "l p") 'langtool-goto-previous-error)
     #+end_src
-*** Comment line
+*** COMMENT Comment line
     #+BEGIN_SRC emacs-lisp
     (define-key mymap (kbd "c") 'comment-line)
     #+END_SRC
     
-*** mu4e
+*** COMMENT mu4e
     #+BEGIN_SRC emacs-lisp
     (define-key mymap (kbd "m") 'mu4e)
     #+END_SRC
@@ -1197,7 +1102,7 @@
    #+begin_src emacs-lisp
      (evil-leader/set-key "." 'find-file)
      (evil-leader/set-key "u" 'universal-argument)
-     (evil-leader/set-key "bb" 'ido-switch-buffer)
+     (evil-leader/set-key "bb" 'ivy-switch-buffer)
      (evil-leader/set-key "bl" 'ibuffer)
      (evil-leader/set-key "bk" 'ido-kill-buffer)
      (evil-leader/set-key "ti" 'org-inlinetask-insert-task)
@@ -1261,7 +1166,8 @@
    #+BEGIN_SRC emacs-lisp
    (global-set-key "\C-ca" 'org-agenda)
    #+END_SRC
-** Duplicate line
+** COMMENT Duplicate line
+   -- ditched in favor of evil
    #+BEGIN_SRC emacs-lisp
    (defun duplicate-line-up ()
      (interactive)
@@ -1287,7 +1193,7 @@
    (global-unset-key (kbd "C-S-d"))
    (global-set-key (kbd "C-S-d") 'duplicate-line-down)
    #+END_SRC
-** Comment for german keyboard-layout
+** COMMENT Comment for german keyboard-layout
    #+begin_src emacs-lisp
    (global-set-key (kbd "<C-x C-S-,>") 'comment-line)
    #+end_src

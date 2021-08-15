@@ -800,7 +800,7 @@
      (use-package pyvenv
        :ensure t
        :init
-       (setenv "WORKON_HOME" "/home/loki/miniconda3/envs")
+       (setenv "WORKON_HOME" "/home/loki/miniforge3/envs")
        ;;(add-to-list 'exec-path "~/miniconda3/bin")
        ;;(setenv "PATH" "~/miniconda3/bin:$PATH")
        :config

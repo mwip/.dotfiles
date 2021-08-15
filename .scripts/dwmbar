@@ -34,7 +34,7 @@ vol(){
 #~~~~~~~~~~~~Music~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~# 
 mus(){
     if [ "$(hostname)" == "andlang" ]; then
-	music=$(echo $(mpc) | sed -e 's/\n//g' -e 's/\[playing\]/~/' -e 's/\[paused\]/~/' -e 's/~.*//g' | cut -c -50)
+	music=$(echo $(mpc) | sed -e 's/\n//g' -e 's/\[playing\]/~/' -e 's/\[paused\]/~/' -e 's/~.*//g')
 	[ -z "$(echo $music | grep 'volume: n/a')" ] &&
 	    echo " "$music$sep
     fi

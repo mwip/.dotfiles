@@ -45,5 +45,6 @@ then
     # start mpd notifications (using dunst)
     # sleep 30 & mpDris2 & # should be started as systemd service
 fi &
+betterlockscreen -u $(/usr/bin/ls ~/Pictures/Wallpapers/* | shuf -n1) --blur 1 &
 emacs --daemon --chdir=$HOME &
 sleep 5 && $HOME/.scripts/restart_systray.sh stalonetray &

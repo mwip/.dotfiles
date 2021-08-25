@@ -1,0 +1,7 @@
+auto_activate_base: false
+
+create_default_packages:
+  - pip
+  - ipython
+  - jedi
+  - flake8

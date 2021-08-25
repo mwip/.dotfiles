@@ -573,6 +573,8 @@
        (sp-pair "(" ")" :unless '(sp-point-before-word-p))
        (sp-pair "{" "}" :unless '(sp-point-before-word-p))
        (sp-pair "[" "]" :unless '(sp-point-before-word-p))
+       (sp-pair "'" "'" :unless '(sp-point-before-word-p))
+       (sp-pair "\"" "\"" :unless '(sp-point-before-word-p))
        (smartparens-global-mode))
    #+END_SRC
 ** Hightligh Paris of Parenthesis
@@ -1128,6 +1130,7 @@
      (evil-leader/set-key "fp" (lambda () (interactive) (find-file "~/org-diss/paper3.org")))
      (evil-leader/set-key-for-mode 'org-mode
        "od" 'org-deadline
+       "otdc" 'org-table-delete-column
        "os" 'org-schedule)
      (evil-leader/set-key-for-mode 'org-agenda-mode
        "d" 'org-agenda-deadline

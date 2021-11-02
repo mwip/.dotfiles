@@ -29,3 +29,5 @@ ignore =
     E251,
     # line too long
     E501,
+    # blank line at end of file
+    W391,

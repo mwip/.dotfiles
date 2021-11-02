@@ -1145,7 +1145,7 @@
      ;; projectile
      (evil-leader/set-key "pp" 'counsel-projectile-switch-project)
      (evil-leader/set-key "p." 'counsel-projectile-find-file)
-     (evil-leader/set-key "p." 'counsel-projectile-find-file)
+     (evil-leader/set-key "p" 'projectile-command-map)
      ;; delete whitespace
      (evil-leader/set-key "dt" 'delete-trailing-whitespace)
      ;; elpy

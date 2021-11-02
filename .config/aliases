@@ -14,7 +14,7 @@ alias cat='bat'
 alias pacautoremove='sudo pacman -Rsn $(pacman -Qdtq)'
 alias pacremove='sudo pacman -Rsc' # remove package dependencies and dependents
 alias trizen='trizen --pager-mode --pager="bat"'
-alias up='paru -Syu --upgrademenu; xmonad --recompile'
+alias up='paru -Syu --upgrademenu --clonedir=/tmp/t; xmonad --recompile'
 
 # programs 
 alias tor='cd /opt/tor-browser_en-US && ./start-tor-browser.desktop && exit'

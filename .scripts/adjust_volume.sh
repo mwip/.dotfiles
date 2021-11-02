@@ -15,19 +15,19 @@ if [ $1 == '+' ]
 then
     if [ $(pamixer --get-volume) -lt "$MAXVOLUME" ]
        then	
-	   $($GST $TMPSOUND) > /dev/null &
+	   $GST $TMPSOUND > /dev/null &
 	   pamixer -i $PERCENT --allow-boost &
     fi
 fi
 
 if [ $1 == '-' ]
 then
-   $($GST $TMPSOUND) > /dev/null &
+   $GST $TMPSOUND > /dev/null &
    pamixer -d $PERCENT --allow-boost &
 fi    
    
 if [ $1 == 'm' ]
 then
-    $($GST $TMPSOUND) > /dev/null &
+    $GST $TMPSOUND > /dev/null &
     pamixer -t --allow-boost &
 fi

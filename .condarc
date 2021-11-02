@@ -1,3 +1,6 @@
+channels:
+  - conda-forge
+
 auto_activate_base: false
 
 create_default_packages:
@@ -5,3 +8,4 @@ create_default_packages:
   - ipython
   - jedi
   - flake8
+  - mamba

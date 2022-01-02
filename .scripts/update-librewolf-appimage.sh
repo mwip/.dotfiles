@@ -8,12 +8,7 @@ else
     exit 1
 fi
 
-if [ -f $file ]; then
-    echo "file is present, attempting to symlink"
-else
-    echo "Attempting download from $link"
-    wget --directory-prefix ~/Nextcloud/AppImages/ $link
-fi
+wget -O $file $link
 
 if [ -f $file ]; then
     chmod +x $file

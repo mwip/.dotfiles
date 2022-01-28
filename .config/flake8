@@ -1,4 +1,5 @@
 [flake8]
+max-line-length = 100
 # it's not a bug that we aren't using all of hacking
 ignore =
     # F812: list comprehension redefines ...

@@ -12,7 +12,7 @@ ignore =
     # H301: one import per line
     # H301,
     # H306: imports not in alphabetical order (time, os)
-    H306,
+    # H306,
     # H401: docstring should not start with a space
     # H401,
     # H403: multi line docstrings should end on a new line

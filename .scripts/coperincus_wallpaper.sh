@@ -10,7 +10,7 @@ MNTH=$(date +%m)
 mkdir -p ~/.cache/wp/
 
 CACHE_FILE=~/.cache/wp/sentinel_calendar_$YEAR$MNTH.jpg
-URL="https://esamultimedia.esa.int/multimedia/eo/calendar"$YEAR"/"$YEAR"_Sentinels_digital_calendar_FB_TW%20feed_1920x1080_$MNTH.jpg"
+URL="https://esamultimedia.esa.int/img/2021/12/2022_Sentinels_digital_calendar_1024x768_211215$(echo $MNTH | sed s/^0// | sed s/^1$//).jpg"
 
 if [ ! -f $CACHE_FILE ]; then
     until wget $URL -O $CACHE_FILE &> /dev/null

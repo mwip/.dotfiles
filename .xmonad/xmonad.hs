@@ -254,7 +254,7 @@ myKeys =
         , ("M-f", spawn "librewolf")
         , ("M-S-b", spawn (scripts ++ "pabluezswitch.sh"))
         , ("M-p", spawn (scripts ++ "dmenu_displayselect.sh"))
-        , ("M-g", spawn (scripts ++ "dmenu_filemanager.sh"))
+        , ("M-g", spawn "doublecmd")
         , ("M-C-l", spawn "xautolock -locknow")
         , ("M-a", spawn (scripts ++ "dmenu_websearch.sh"))
         , ("M-u", spawn (scripts ++ "dmenu_umount.sh"))

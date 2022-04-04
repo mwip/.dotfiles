@@ -41,3 +41,6 @@ alias wthr='curl v2.wttr.in'
 
 # btrfs
 alias snapdata='sudo btrfs subvolume snapshot -r /mnt/data /mnt/data/.snapshots/$(date +"%F_%H-%M")'
+
+# ledger
+alias ledger='ledger -f ledger.dat -V'

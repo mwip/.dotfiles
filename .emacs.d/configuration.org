@@ -365,11 +365,10 @@
      (use-package langtool
        :ensure t
        :config
-       (setq langtool-language-tool-jar "/usr/share/java/languagetool/languagetool-server.jar"
-	     langtool-server-user-arguments '("-p" "8082")
-	     langtool-java-classpath	"/usr/share/languagetool:/usr/share/java/languagetool/*"
+       (setq langtool-http-server-host	"localhost"
+          langtool-http-server-port 8081
 	     langtool-disabled-rules '("WHITESPACE_RULE" 
-	                               "LEERZEICHEN_VOR_AUSRUFEZEICHEN_ETC")
+				       "LEERZEICHEN_VOR_AUSRUFEZEICHEN_ETC")
 	     )
      )
    #+end_src

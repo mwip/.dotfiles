@@ -404,6 +404,13 @@
      ;; can be deactivated with F8
      (setq show-trailing-whitespace t)
    #+end_src
+** Ledger Mode
+   #+begin_src emacs-lisp
+	  (use-package ledger-mode
+	    :ensure t)
+     (add-to-list 'auto-mode-alist '("\.dat" . ledger-mode))
+   #+end_src
+
 * mu4e
    #+begin_src emacs-lisp
      (require 'mu4e)

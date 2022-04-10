@@ -1074,6 +1074,7 @@
      (evil-leader/set-key "fs" (lambda () (interactive) (find-file "~/shopping.org")))
      (evil-leader/set-key "fc" (lambda () (interactive) (find-file "~/.emacs.d/configuration.org")))
      (evil-leader/set-key "fx" (lambda () (interactive) (find-file "~/.xmonad/xmonad.hs")))
+     (evil-leader/set-key "fq" (lambda () (interactive) (find-file "~/.config/qtile/config.py")))
      (evil-leader/set-key "fa" (lambda () (interactive) (find-file "~/org-diss/dissertation.org")))
      (evil-leader/set-key "fp" (lambda () (interactive) (find-file "~/org-diss/paper3.org")))
      (evil-leader/set-key-for-mode 'org-mode

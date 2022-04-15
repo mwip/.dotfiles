@@ -24,7 +24,8 @@ function execute {
     if [ "$CHOICE" == "Lock" ];then
 	ACTION="betterlockscreen -l blur"
     elif [ "$CHOICE" == "Logout" ];then
-	ACTION="pkill xmonad"
+	 [ -n "$(ps -a | grep qtile)" ] && ACTION="pkill qtile"
+	 [ -n "$(ps -a | grep xmonad)" ] && ACTION="pkill xmonad"
     elif [ "$CHOICE" == "Suspend" ];then
 	ACTION="/bin/systemctl -i suspend"
     elif [ "$CHOICE" == "Reboot" ];then

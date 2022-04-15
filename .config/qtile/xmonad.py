@@ -15,6 +15,7 @@
 # Copyright (c) 2014 Florian Scherf
 # Copyright (c) 2017 Dirk Hartmann
 # Copyright (c) 2021 Jakob Helmecke
+# Copyright (c) 2022 Matthias Weigand
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal

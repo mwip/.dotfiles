@@ -409,13 +409,11 @@ if HOST == "bifrost":
     screens = [
         Screen(
             top=bar.Bar(
-                widgets=widgets[
-                    w_groupbox(),
+                widgets=[
+                    w_f_groupbox(),
                     w_sep,
                     w_layout,
                     w_win_title,
-                    w_sep,
-                    w_mpd,
                     w_sep,
                     w_net,
                     w_netgraph,

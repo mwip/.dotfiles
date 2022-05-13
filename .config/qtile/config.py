@@ -237,11 +237,11 @@ groups += [
     ),
 ]
 
-layout_kwargs = {
-    "border_focus": "#C45500",
-    "border_width": 2,
-    "margin": 6,
-}
+layout_kwargs = dict(
+    border_focus="#C45500",
+    border_width=2,
+    margin=6,
+)
 layouts = [
     xmonad.MonadTall(new_client_position="after_current", **layout_kwargs),
     layout.Max(**layout_kwargs),
@@ -256,6 +256,7 @@ widget_defaults = dict(
     fgcolor_high="#e6b155",
     fgcolor_crit="#dd5262",
     padding=5,
+    update_interval=1,
 )
 
 extension_defaults = widget_defaults.copy()
@@ -284,8 +285,14 @@ w_layout = widget.CurrentLayout()
 # Window title
 w_win_title = widget.WindowName()
 # Network usage
-w_net = widget.Net(format=" {down} ↓↑ {up}", use_bits=True)
-w_netgraph = widget.NetGraph(border_color="#444959", graph_color="#e69055", fill_color="#C45500")
+w_net = widget.Net(format=" {down} ↓↑ {up}", use_bits=True, interface=["enp34s0"])
+if HOST == "andlang":
+    netgraph_iface = "enp34s0"
+elif HOST == "bifrost":
+    netgraph_iface = "wlp0s20f3"
+w_netgraph = widget.NetGraph(
+    interface=netgraph_iface, border_color="#444959", graph_color="#e69055", fill_color="#C45500"
+)
 
 # Audio level
 w_vol = widget.Volume(

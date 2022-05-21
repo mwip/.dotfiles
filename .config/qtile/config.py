@@ -282,8 +282,6 @@ def w_f_groupbox():
 w_sep = widget.Sep()
 # Layout
 w_layout = widget.CurrentLayout()
-# Window title
-w_win_title = widget.WindowName()
 # Network usage
 w_net = widget.Net(format=" {down} ↓↑ {up}", use_bits=True, interface=["enp34s0"])
 if HOST == "andlang":
@@ -354,7 +352,8 @@ if HOST == "andlang":
                     w_f_groupbox(),
                     w_sep,
                     w_layout,
-                    w_win_title,
+                    w_sep,
+                    widget.WindowName(),
                     w_sep,
                     w_mpd,
                     w_sep,
@@ -392,7 +391,8 @@ if HOST == "andlang":
                     w_f_groupbox(),
                     w_sep,
                     w_layout,
-                    w_win_title,
+                    w_sep,
+                    widget.WindowName(),
                     widget.Spacer(),
                     w_sep,
                     w_mpd,

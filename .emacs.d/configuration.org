@@ -215,7 +215,8 @@
     #+begin_src emacs-lisp
       ;;(add-to-list 'load-path "~/")
       (use-package doom-modeline
-	:ensure t)
+	:ensure t
+	:init (doom-modeline-mode 1))
       (setq doom-modeline-icon t)
       (use-package doom-themes
 	:ensure t
@@ -229,7 +230,6 @@
 	;; (doom-themes-treemacs-config)
 	;; Corrects (and improves) org-mode's native fontification.
 	(doom-themes-org-config))
-      (doom-modeline-init)
     #+end_src
 ** Font
    #+BEGIN_SRC emacs-lisp

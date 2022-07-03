@@ -67,6 +67,10 @@
      (evil-org-agenda-set-keys)
    #+end_src
 * General Configurations
+** Spaces! no tabs!
+   #+begin_src emacs-lisp
+     (setq-default indent-tabs-mode nil)
+   #+end_src
 ** completion with vertico, orderles & marginalia 
    #+begin_src emacs-lisp
      ;; from https://github.com/minad/vertico

@@ -222,7 +222,8 @@
     #+begin_src emacs-lisp
       ;;(add-to-list 'load-path "~/")
       (use-package doom-modeline
-	:ensure t)
+	:ensure t
+	:init (doom-modeline-mode 1))
       (setq doom-modeline-icon t)
       (use-package doom-themes
 	:ensure t
@@ -236,7 +237,6 @@
 	;; (doom-themes-treemacs-config)
 	;; Corrects (and improves) org-mode's native fontification.
 	(doom-themes-org-config))
-      (doom-modeline-init)
     #+end_src
 ** Font
    #+BEGIN_SRC emacs-lisp
@@ -899,6 +899,7 @@
 	     "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
      (setq org-latex-prefer-user-labels t)
      (setq org-ref-default-citation-link "citep")
+     (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
    #+END_SRC
 
 ** Capture
@@ -1083,14 +1084,19 @@
      (evil-leader/set-key "fx" (lambda () (interactive) (find-file "~/.xmonad/xmonad.hs")))
      (evil-leader/set-key "fq" (lambda () (interactive) (find-file "~/.config/qtile/config.py")))
      (evil-leader/set-key "fa" (lambda () (interactive) (find-file "~/org-diss/dissertation.org")))
+     (evil-leader/set-key "fl" (lambda () (interactive) (find-file "~/Nextcloud/Privat/Ledger/ledger.dat")))
      (evil-leader/set-key "fp" (lambda () (interactive) (find-file "~/org-diss/paper3.org")))
      (evil-leader/set-key-for-mode 'org-mode
        "od" 'org-deadline
-       "otdc" 'org-table-delete-column
-       "os" 'org-schedule)
+       "os" 'org-schedule
+       "ota" 'org-time-stamp
+       "oti" 'org-time-stamp-inactive
+       "oa" 'org-archive-subtree-default-with-confirmation
+       "ox" 'org-export-dispatch
+       "r" 'org-ref-insert-cite-link)
      (evil-leader/set-key-for-mode 'org-agenda-mode
-       "d" 'org-agenda-deadline
-       "s" 'org-agenda-schedule
+       "od" 'org-agenda-deadline
+       "os" 'org-agenda-schedule
        "vd" 'org-agenda-day-view)
      ;; org export
      (evil-leader/set-key "oe" 'org-export-dispatch)
@@ -1107,6 +1113,17 @@
      ;; elpy
      (evil-leader/set-key "egd" 'elpy-goto-definition)
      (evil-leader/set-key "ev" 'pyvenv-workon)
+     (evil-leader/set-key "eb" 'elpy-black-fix-code)
+     ;;devdocs
+     (evil-leader/set-key "dd" 'devdocs-lookup)
+     (evil-leader/set-key "di" 'devdocs-install)
+     (evil-leader/set-key "du" 'devdocs-update-all)
+     ;evil-window
+     (evil-leader/set-key "ww" 'evil-window-next)
+     (evil-leader/set-key "wl" 'evil-window-left)
+     (evil-leader/set-key "wr" 'evil-window-right)
+     (evil-leader/set-key "wk" 'evil-window-up)
+     (evil-leader/set-key "wj" 'evil-window-down)
    #+end_src
 
 ** F-Keys

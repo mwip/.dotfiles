@@ -94,6 +94,7 @@ keys = [
     #
     # Applications
     Key([MOD], "f", lazy.spawn("librewolf"), desc="Launch Firefox"),
+    Key([MOD], "g", lazy.spawn("doublecmd"), desc="Launch Doublecommander"),
     Key([MOD, SHIFT], "c", lazy.spawn(f"{SCRIPTS}/xcolor_pick.sh")),
     Key([MOD, CTRL, SHIFT], "p", lazy.spawn("keepassxc")),
     # Meh
@@ -123,6 +124,15 @@ keys = [
                 desc="Launch org capture",
             ),
             Key([], "q", lazy.spawn(f"{SCRIPTS}/restart_emacs.sh")),
+        ],
+    ),
+    KeyChord(
+        [MOD],
+        "s",
+        [
+            Key([], "x", lazy.spawn("xset r rate 280 35")),
+            Key([], "c", lazy.group["scratchpad"].dropdown_toggle("qalc")),
+            Key([], "d", lazy.group["scratchpad"].dropdown_toggle("cal")),
         ],
     ),
     #
@@ -220,17 +230,17 @@ groups += [
             DropDown(
                 "cal",
                 f"{TERMINAL} -t calendar --hold -e /usr/bin/cal -y",
-                opacity=0.8,
-                height=0.8,
+                opacity=1,
+                height=0.6,
                 width=0.4,
                 x=0.3,
-                y=0.1,
+                y=0.2,
                 on_focus_lost_hide=False,
             ),
             DropDown(
                 "qalc",
                 f"{TERMINAL} -t qalc --hold -e /usr/bin/qalc",
-                opacity=0.8,
+                opacity=1,
                 on_focus_lost_hide=False,
             ),
         ],
@@ -283,7 +293,13 @@ w_sep = widget.Sep()
 # Layout
 w_layout = widget.CurrentLayout()
 # Network usage
-w_net = widget.Net(format=" {down} ↓↑ {up}", use_bits=True, interface=["enp34s0"])
+net_iface = "enp34s0"
+w_net = widget.Net(
+    format=" {down} ↓↑ {up}",
+    use_bits=True,
+    interface=["enp34s0"],
+    mouse_callbacks={"Button1": lazy.spawn(f"{TERMINAL} -t nload -e sh -c 'nload f{net_iface}'")},
+)
 if HOST == "andlang":
     netgraph_iface = "enp34s0"
 elif HOST == "bifrost":
@@ -461,6 +477,7 @@ floating_layout = layout.Floating(
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
         Match(wm_class="KeePassXC"),
+        Match(title="doublecmd"),  # otherwise doublecmd will get stuck in load screen
         Match(title="Copying"),
         Match(title="Copy file(s)"),
     ]

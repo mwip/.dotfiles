@@ -979,6 +979,31 @@
    (use-package pdf-tools
      :ensure t)
    #+end_src
+** Org-Export LaTeX Classes
+   #+begin_src emacs-lisp
+     (with-eval-after-load 'ox-latex
+	(add-to-list 'org-latex-classes
+		     '("elsarticle"
+		       "\\documentclass{elsarticle}"
+		       ("\\section{%s}" . "\\section*{%s}")
+		       ("\\subsection{%s}" . "\\subsection*{%s}")
+		       ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+     (with-eval-after-load 'ox-latex
+	(add-to-list 'org-latex-classes
+		     '("extarticle"
+		       "\\documentclass{extarticle}"
+		       ("\\section{%s}" . "\\section*{%s}")
+		       ("\\subsection{%s}" . "\\subsection*{%s}")
+		       ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+     (with-eval-after-load 'ox-latex
+	(add-to-list 'org-latex-classes
+		     '("cas-dc"
+		       "\\documentclass{cas-dc}"
+		       ("\\section{%s}" . "\\section*{%s}")
+		       ("\\subsection{%s}" . "\\subsection*{%s}")
+		       ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+   #+end_src
+
 * Custom Shortcuts
   
 ** COMMENT Remap C-z to undo

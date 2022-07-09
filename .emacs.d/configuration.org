@@ -784,6 +784,11 @@
    #+BEGIN_SRC emacs-lisp
    (require 'org)
    #+END_SRC
+** Hard indentation
+   see https://orgmode.org/org.html#Hard-indentation
+   #+begin_src emacs-lisp
+     (setq org-adapt-indentation t)
+   #+end_src
 ** COMMENT Org-bullets
    Nice bullet points for org mode
    #+BEGIN_SRC emacs-lisp

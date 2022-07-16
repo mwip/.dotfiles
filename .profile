@@ -1,6 +1,7 @@
 export EDITOR=/usr/bin/vim
 export TERM=xterm-256color
 export DWD_LOCATION=Bayern
+export PYTHONPATH="$PYTHONPATH:/usr/share/qgis/python/plugins:/usr/share/qgis/python"
 # MPD daemon start (if no other user instance exists)
 #[ ! -s ~/.config/mpd/pid ] && mpd
 export SUDO_ASKPASS="$HOME/.scripts/dmenu_pass.sh"

@@ -304,6 +304,7 @@ if HOST == "andlang":
     netgraph_iface = "enp34s0"
 elif HOST == "bifrost":
     netgraph_iface = "wlp0s20f3"
+w_net = widget.Net(format=" {down} ↓↑ {up}", use_bits=True, interface=[netgraph_iface])
 w_netgraph = widget.NetGraph(
     interface=netgraph_iface, border_color="#444959", graph_color="#e69055", fill_color="#C45500"
 )
@@ -436,7 +437,8 @@ if HOST == "bifrost":
                     w_f_groupbox(),
                     w_sep,
                     w_layout,
-                    w_win_title,
+                    w_sep,
+                    widget.WindowName(),
                     w_sep,
                     w_net,
                     w_netgraph,
@@ -457,7 +459,35 @@ if HOST == "bifrost":
                 size=24,
                 background="#242730",
             )
-        )
+        ),
+        Screen(
+            top=bar.Bar(
+                widgets=[
+                    w_f_groupbox(),
+                    w_sep,
+                    w_layout,
+                    w_sep,
+                    widget.WindowName(),
+                    widget.Spacer(),
+                    w_sep,
+                    w_net,
+                    w_netgraph,
+                    w_sep,
+                    w_temp,
+                    w_sep,
+                    w_batt_icon,
+                    w_batt,
+                    w_sep,
+                    w_backlight,
+                    w_sep,
+                    w_vol,
+                    w_sep,
+                    w_clock,
+                ],
+                size=24,
+                background="#242730",
+            )
+        ),
     ]
 
 # Drag floating layouts.

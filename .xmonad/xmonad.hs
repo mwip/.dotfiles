@@ -9,7 +9,7 @@ import Data.List
 import qualified XMonad.StackSet as W
 
 -- Hooks
-import XMonad.Hooks.DynamicLog (dynamicLogWithPP, defaultPP, wrap, pad, xmobarPP, xmobarColor, shorten, PP(..))
+import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, pad, xmobarPP, xmobarColor, shorten, PP(..))
 import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.ManageDocks 
 import XMonad.Hooks.SetWMName

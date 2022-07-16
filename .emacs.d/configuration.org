@@ -420,7 +420,7 @@
    #+begin_src emacs-lisp
 	  (use-package ledger-mode
 	    :ensure t)
-     (add-to-list 'auto-mode-alist '("\.dat" . ledger-mode))
+     (add-to-list 'auto-mode-alist '("\.dat$" . ledger-mode))
    #+end_src
 
 * mu4e

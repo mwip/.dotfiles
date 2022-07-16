@@ -709,6 +709,12 @@
        :ensure t
        :config (add-hook 'prog-mode-hook 'fic-mode))
    #+end_src
+** Markdown Mode
+   #+begin_src emacs-lisp
+   (use-package markdown-mode
+     :ensure t)
+   #+end_src
+
 * R-Related Configuration
 ** Force scroll on R-console
    #+BEGIN_SRC emacs-lisp
@@ -786,6 +792,14 @@
        :config
        (defalias 'workon 'pyvenv-workon)
        )
+   #+end_src
+** Isort
+   #+begin_src emacs-lisp
+     (use-package py-isort
+       :ensure t
+       :config (setq py-isort-options '("--profile=black"))
+       (add-hook 'before-save-hook 'py-isort-before-save)
+     )
    #+end_src
 * Org-Mode Configuration
 ** Require org-mode

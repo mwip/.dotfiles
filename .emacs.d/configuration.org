@@ -71,6 +71,13 @@
    #+begin_src emacs-lisp
      (setq-default indent-tabs-mode nil)
    #+end_src
+** All the Icons
+   #+begin_src emacs-lisp
+     (use-package all-the-icons
+       :ensure t
+       :if (display-graphic-p)
+       )
+   #+end_src
 ** completion with vertico, orderles & marginalia 
    #+begin_src emacs-lisp
      ;; from https://github.com/minad/vertico
@@ -118,8 +125,8 @@
        :ensure t
        ;; Either bind `marginalia-cycle` globally or only in the minibuffer
        :bind (("M-A" . marginalia-cycle)
-	      :map minibuffer-local-map
-	      ("M-A" . marginalia-cycle))
+              :map minibuffer-local-map
+              ("M-A" . marginalia-cycle))
 
        ;; The :init configuration is always executed (Not lazy!)
        :init
@@ -361,7 +368,6 @@
      (defun hexcolour-add-to-font-lock ()
        (font-lock-add-keywords nil hexcolour-keywords))
      
-     (add-hook 'ess-mode-hook 'hexcolour-add-to-font-lock)
      (add-hook 'prog-mode-hook 'hexcolour-add-to-font-lock)
      (add-hook 'python-mode-hook 'hexcolour-add-to-font-lock)
      (add-hook 'org-mode-hook 'hexcolour-add-to-font-lock)
@@ -715,6 +721,8 @@
    #+END_SRC
 ** Key binding for evaluation
    #+begin_src emacs-lisp
+     (use-package ess
+       :ensure t)
      (require 'ess-mode)
      (define-key ess-mode-map (kbd "<C-return>") 'ess-eval-region-or-function-or-paragraph-and-step)
      (define-key ess-mode-map (kbd "<C-enter>") 'ess-eval-region-or-function-or-paragraph-and-step)
@@ -1128,8 +1136,6 @@
        "od" 'org-agenda-deadline
        "os" 'org-agenda-schedule
        "vd" 'org-agenda-day-view)
-     ;; org export
-     (evil-leader/set-key "oe" 'org-export-dispatch)
      ;; (evil-leader/set-key "g" 'magit-status)
      (evil-leader/set-key "gg" 'magit-status-with-removed-dotfiles-args)
      (evil-leader/set-key "gf" 'magit-file-dispatch)

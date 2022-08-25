@@ -1,3 +1,5 @@
+# Global configs are no longer supported by flake8 Version >= 4.0.0
+# Copy this to project folder
 [flake8]
 max-line-length = 100
 # it's not a bug that we aren't using all of hacking

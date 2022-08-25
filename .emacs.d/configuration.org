@@ -1028,6 +1028,21 @@
 		       ("\\section{%s}" . "\\section*{%s}")
 		       ("\\subsection{%s}" . "\\subsection*{%s}")
 		       ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+     (with-eval-after-load 'ox-latex
+	(add-to-list 'org-latex-classes
+		     '("memoir"
+		       "\\documentclass{memoir}"
+		       ("\\section{%s}" . "\\section*{%s}")
+		       ("\\subsection{%s}" . "\\subsection*{%s}")
+		       ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+     (with-eval-after-load 'ox-latex
+	(add-to-list 'org-latex-classes
+		     '("sphdthesis"
+		       "\\documentclass{SPhdThesis}"
+		       ("\\chapter{%s}" . "\\chapter*{%s}")
+		       ("\\section{%s}" . "\\section*{%s}")
+		       ("\\subsection{%s}" . "\\subsection*{%s}")
+		       ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
    #+end_src
 
 * Custom Shortcuts

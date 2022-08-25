@@ -1,10 +1,21 @@
 import socket
 from os.path import expanduser
 from subprocess import run
-from copy import deepcopy
-from libqtile import bar, layout, widget, hook, extension
-from libqtile.config import Click, Drag, DropDown, Group, Key, Match, Screen, ScratchPad, KeyChord
+
+from libqtile import bar, extension, hook, layout, qtile, widget
+from libqtile.config import (
+    Click,
+    Drag,
+    DropDown,
+    Group,
+    Key,
+    KeyChord,
+    Match,
+    ScratchPad,
+    Screen,
+)
 from libqtile.lazy import lazy
+
 import xmonad
 
 MOD = "mod4"
@@ -21,6 +32,16 @@ SCRIPTS = f"{HOME}/.scripts"
 @hook.subscribe.startup_once
 def autostart():
     run([expanduser("~/.config/qtile/autostart.sh")])
+
+
+@hook.subscribe.client_managed
+def auto_show_screen(window):
+    # check whether group is visible on any screen right now
+    # qtile.groups_map['<somegroup>'].screen is None in case it is currently not shown on any screen
+    visible_groups = [group_name for group_name, group in qtile.groups_map.items() if group.screen]
+
+    if window.group.name not in visible_groups:
+        window.group.cmd_toscreen()
 
 
 keys = [

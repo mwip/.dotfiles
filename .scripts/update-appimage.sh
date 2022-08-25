@@ -10,6 +10,9 @@ else
 fi
 
 wget -O $file $link
+echo "md5:    $(md5sum $file | cut -d' ' -f1)"
+echo "sha1:   $(sha1sum $file | cut -d' ' -f1)"
+echo "sha256: $(sha256sum $file | cut -d' ' -f1)"
 
 if [ -f $file ]; then
     chmod +x $file
@@ -19,4 +22,3 @@ else
     echo $file is not a file!
     exit 1
 fi
-

@@ -778,11 +778,13 @@
      (use-package elpy
        :ensure t
        :config
-       (elpy-enable))
-     (add-hook 'elpy-mode-hook (lambda ()
-				 (add-hook 'before-save-hook
-					   'elpy-black-fix-code nil t)))
-   #+end_src 
+       (elpy-enable)
+       (add-hook 'elpy-mode-hook (lambda ()
+                                   (add-hook 'before-save-hook
+                                             'elpy-black-fix-code nil t)))
+       (setq elpy-get-info-from-shell t)
+     )
+   #+end_src
 ** Pyvenv
    #+begin_src emacs-lisp
      (use-package pyvenv

@@ -531,6 +531,7 @@ floating_layout = layout.Floating(
         Match(title="doublecmd"),  # otherwise doublecmd will get stuck in load screen
         Match(title="Copying"),
         Match(title="Copy file(s)"),
+        Match(title="Select entry type"),  # Jabref
     ]
 )
 auto_fullscreen = True

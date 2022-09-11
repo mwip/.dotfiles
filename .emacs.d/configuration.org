@@ -78,7 +78,7 @@
        :if (display-graphic-p)
        )
    #+end_src
-** completion with vertico, orderles & marginalia 
+** completion with vertico, orderles & marginalia
    #+begin_src emacs-lisp
      ;; from https://github.com/minad/vertico
      ;; Enable vertico
@@ -191,7 +191,7 @@
    #+begin_src emacs-lisp
 	   (use-package company
 	     :ensure t
-	     :config 
+	     :config
 	     (setq company-idle-delay 0)
 	     (setq company-minimum-prefix-length 3)
 	     (setq company-selection-wrap-around t)
@@ -217,7 +217,7 @@
    #+BEGIN_SRC emacs-lisp
    (use-package which-key
        :ensure t
-       :config 
+       :config
        ;; Allow C-h to trigger which-key before it is done automatically
        (setq which-key-show-early-on-C-h t)
        ;; make sure which-key doesn't show normally but refreshes quickly after it is
@@ -231,26 +231,13 @@
    #+BEGIN_SRC emacs-lisp
    (use-package avy
      :ensure t
-     :bind ("M-s" . avy-goto-char-2))   
+     :bind ("M-s" . avy-goto-char-2))
    #+END_SRC
 ** Window switching
 *** Use =super + <left>= (...) to switch windows
     #+begin_src emacs-lisp
     (windmove-default-keybindings 'super)
     #+end_src
-*** COMMENT Makes window changing look nicer
-    -- ditched for evil-mode
-    #+BEGIN_SRC emacs-lisp
-    (use-package ace-window
-       :ensure t
-       :init
-       (progn
-       (global-set-key [remap other-window] 'ace-window)
-       (custom-set-faces
-       '(aw-leading-char-face
-       ((t (:inherit ace-jump-face-foreground :height 3.0))))) 
-     ))  
-    #+END_SRC 
 ** COMMENT Ido-Mode
    #+BEGIN_SRC emacs-lisp
    (setq ido-enable-flex-matching t)
@@ -289,7 +276,7 @@
 	;; Global settings (defaults)
 	(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
 	      doom-themes-enable-italic t) ; if nil, italics is universally disabled
-	(load-theme 'doom-vibrant t) ;;+ 
+	(load-theme 'doom-vibrant t) ;;+
 	;; or for treemacs users
 	;; (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
 	;; (doom-themes-treemacs-config)
@@ -323,7 +310,7 @@
 ** Remove Toolbar
    Remove the toolbar at the top of the window
    #+BEGIN_SRC emacs-lisp
-   (tool-bar-mode -1)   
+   (tool-bar-mode -1)
    (menu-bar-mode -1)
    (scroll-bar-mode -1)
    #+END_SRC
@@ -367,7 +354,7 @@
 
    #+END_SRC
 ** Auto-revert
-   auto-revert when file changed 
+   auto-revert when file changed
    useful for org syncronization
    #+begin_src emacs-lisp
    (global-auto-revert-mode 1) ;; auto revert from file
@@ -392,9 +379,9 @@
    #+end_src
 ** System locale
    #+begin_src emacs-lisp
-   (setq system-time-locale "C") 
+   (setq system-time-locale "C")
    #+end_src
-   
+
 ** Move autosave files to tmp
    [[https://emacsredux.com/blog/2013/05/09/keep-backup-and-auto-save-files-out-of-the-way/][found here]]
    #+begin_src emacs-lisp
@@ -420,7 +407,7 @@
 					    (match-string-no-properties 0)))))))
      (defun hexcolour-add-to-font-lock ()
        (font-lock-add-keywords nil hexcolour-keywords))
-     
+
      (add-hook 'prog-mode-hook 'hexcolour-add-to-font-lock)
      (add-hook 'python-mode-hook 'hexcolour-add-to-font-lock)
      (add-hook 'org-mode-hook 'hexcolour-add-to-font-lock)
@@ -433,7 +420,7 @@
        :config
        (setq langtool-http-server-host	"localhost"
           langtool-http-server-port 8081
-	     langtool-disabled-rules '("WHITESPACE_RULE" 
+	     langtool-disabled-rules '("WHITESPACE_RULE"
 				       "LEERZEICHEN_VOR_AUSRUFEZEICHEN_ETC")
 	     )
      )
@@ -525,7 +512,7 @@
      (define-key mu4e-headers-mode-map (kbd "C-c c") 'mu4e-org-store-and-capture)
      (define-key mu4e-view-mode-map (kbd "C-c c") 'mu4e-org-store-and-capture)
      (setq mu4e-html2text-command "w3m -I %{UTF-8} -dump -T text/html")
-     
+
      (setq mu4e-headers-include-related nil)
      (setq mu4e-headers-show-threads nil)
      ;; avoid interference with mu4e attachments
@@ -533,7 +520,7 @@
      (setq mu4e-headers-precise-alignment t)
      (setq gnus-blocked-images "http") ;; https://github.com/djcb/mu/issues/1434
     #+end_src
-    
+
 
 * coding-related configuration
 ** Snippets
@@ -571,7 +558,7 @@
    #+begin_src emacs-lisp
    (use-package dumb-jump
    :ensure t
-   :bind 
+   :bind
       (("M-g o" . dumb-jump-go-other-window)
       ("M-g j" . dumb-jump-go)
       ("M-g x" . dumb-jump-go-prefer-external)
@@ -623,9 +610,9 @@
      (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
      (add-hook 'org-mode-hook #'rainbow-delimiters-mode)
    #+END_SRC
-** Syntax checking 
+** Syntax checking
    Using [[https://www.flycheck.org][Flycheck]]
-   Needs the R-Package =lintr= to be installed: 
+   Needs the R-Package =lintr= to be installed:
    =install.packages("lintr")=
    #+BEGIN_SRC emacs-lisp
    (use-package flycheck
@@ -645,7 +632,7 @@
        (define-key mc/keymap (kbd "<return>") nil) ;; stop multi-cursor with C-g not enter
        (setq mc/always-run-for-all t))
    #+END_SRC
-** Git-Gutter 
+** Git-Gutter
    Shows little indicators of changes at the left edge in gitted files
    #+begin_src emacs-lisp
      (use-package git-gutter
@@ -820,10 +807,10 @@
                                                   (ess-fl-keyword:delimiters . t)
                                                   (ess-fl-keyword:= . t)
                                                   (ess-R-fl-keyword:F&T . t))))
- 
+
    #+end_src
 * Python-related config
-  
+
 ** Elpy
    #+begin_src emacs-lisp
      (use-package elpy
@@ -866,13 +853,6 @@
    #+begin_src emacs-lisp
      (setq org-adapt-indentation t)
    #+end_src
-** COMMENT Org-bullets
-   Nice bullet points for org mode
-   #+BEGIN_SRC emacs-lisp
-   (use-package org-bullets
-      :ensure t
-      :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))   
-   #+END_SRC
 ** Hide Leading stars
    #+begin_src emacs-lisp
    (setq org-hide-leading-stars t)
@@ -928,7 +908,7 @@
 		       '(org-agenda-skip-entry-if
 			 'timestamp
 			 'todo '("PROJ" "READ"))))))
-	      nil nil) 
+	      nil nil)
 	     ("co" "Overdue items"
 	      ((tags "DEADLINE<\"<today>\""
 		     ((org-agenda-overriding-header "\nOverdue items")
@@ -962,13 +942,6 @@
 ** Deadline warning days
    #+begin_src emacs-lisp
      (setq org-deadline-warning-days 7)
-   #+end_src
-** COMMENT Org Edna
-   #+begin_src emacs-lisp
-     (use-package org-edna
-       :ensure t
-       :config
-       (org-edna-load))
    #+end_src
 ** Org-ref
    #+BEGIN_SRC emacs-lisp
@@ -1038,7 +1011,7 @@
        "run org-capture in capture frame"
        (select-frame-by-name "capture")
        (switch-to-buffer (get-buffer-create "*scratch*"))
-       (org-capture)) 
+       (org-capture))
    #+end_src
 ** Agenda: Skip scheduled when deadline is shown
    see [[https://superuser.com/questions/501440/emacs-org-mode-how-to-avoid-duplicate-lines-in-agenda-when-items-is-scheduled][this SE post]]
@@ -1051,11 +1024,6 @@
    (setq org-agenda-archives-mode t)
    #+END_SRC
 
-** COMMENT PDF-tools
-   #+begin_src emacs-lisp
-   (use-package pdf-tools
-     :ensure t)
-   #+end_src
 ** Org-Export LaTeX Classes
    #+begin_src emacs-lisp
      (with-eval-after-load 'ox-latex
@@ -1097,30 +1065,18 @@
    #+end_src
 
 * Custom Shortcuts
-  
-** COMMENT Remap C-z to undo
-   -- ditched in favor of evil
-   #+BEGIN_SRC emacs-lisp
-   (global-unset-key (kbd "C-z"))
-   (global-set-key (kbd "C-z") 'undo-tree-undo)
-   #+END_SRC
-** COMMENT C-d to delete line
-   -- ditched in favor of evil
-   #+begin_src emacs-lisp
-   (global-unset-key (kbd "C-d"))
-   (global-set-key (kbd "C-d") 'kill-whole-line)
-   #+end_src
+
 ** Custom Key Map
 *** Initialize keymap on =C-m=
-     #+BEGIN_SRC emacs-lisp
-     ;(global-set-key (kbd "<return>") 'newline)
-     (define-prefix-command 'mymap)
-     (global-set-key (kbd "C-c m") 'mymap)
-     #+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      ;(global-set-key (kbd "<return>") 'newline)
+      (define-prefix-command 'mymap)
+      (global-set-key (kbd "C-c m") 'mymap)
+    #+END_SRC
 *** Often used files
     #+begin_src emacs-lisp
-    (define-key mymap (kbd "f m") (lambda () (interactive) (find-file "~/myorg.org")))   
-    (define-key mymap (kbd "f s") (lambda () (interactive) (find-file "~/shopping.org")))   
+    (define-key mymap (kbd "f m") (lambda () (interactive) (find-file "~/myorg.org")))
+    (define-key mymap (kbd "f s") (lambda () (interactive) (find-file "~/shopping.org")))
     (define-key mymap (kbd "f c") (lambda () (interactive) (find-file "~/.emacs.d/configuration.org")))
     (define-key mymap (kbd "f x") (lambda () (interactive) (find-file "~/.xmonad/xmonad.hs")))
     (define-key mymap (kbd "f a") (lambda () (interactive) (find-file "~/org-diss/dissertation.org")))
@@ -1142,11 +1098,10 @@
 	(global-set-key (kbd "<S-s-down>") 'buf-move-down)
 	(global-set-key (kbd "<S-s-right>") 'buf-move-right))
     #+end_src
-*** COMMENT Transpose Windows
+*** Transpose Windows
     #+begin_src emacs-lisp
     (use-package transpose-frame
       :ensure t)
-    (define-key mymap (kbd "w t") 'transpose-frame)
     #+end_src
 *** Indention
     #+BEGIN_SRC emacs-lisp
@@ -1156,28 +1111,8 @@
 	(indent-for-tab-command)
 	(beginning-of-line)
 	(next-line))
-      (define-key mymap (kbd "i") 'my/indent)
     #+END_SRC
-    
-*** COMMENT Languagetool
-    #+begin_src emacs-lisp
-    (define-key mymap (kbd "l l") 'langtool-check)
-    (define-key mymap (kbd "l d") 'langtool-check-done)
-    (define-key mymap (kbd "l s") 'langtool-switch-default-language)
-    (define-key mymap (kbd "l m") 'langtool-show-message-at-point)
-    (define-key mymap (kbd "l c") 'langtool-correct-buffer)
-    (define-key mymap (kbd "l n") 'langtool-goto-next-error)
-    (define-key mymap (kbd "l p") 'langtool-goto-previous-error)
-    #+end_src
-*** COMMENT Comment line
-    #+BEGIN_SRC emacs-lisp
-    (define-key mymap (kbd "c") 'comment-line)
-    #+END_SRC
-    
-*** COMMENT mu4e
-    #+BEGIN_SRC emacs-lisp
-    (define-key mymap (kbd "m") 'mu4e)
-    #+END_SRC
+
 ** More evil-leader
    #+begin_src emacs-lisp
      (evil-leader/set-key "." 'find-file)

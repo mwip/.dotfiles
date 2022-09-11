@@ -195,6 +195,7 @@ keys = [
         lazy.spawn(f"{TERMINAL} -t ncmpcpp -e sh -c 'while true; do ncmpcpp; done'"),
     ),
     Key([CTRL, SHIFT, ALT], "q", lazy.spawn("qgis")),
+    Key([CTRL, SHIFT, ALT], "z", lazy.spawn("zathura")),
     Key([CTRL, SHIFT, ALT], "r", lazy.spawn("rstudio-bin")),
     Key([CTRL, SHIFT, ALT], "a", lazy.spawn("pavucontrol")),
     Key([CTRL, SHIFT, ALT], "s", lazy.spawn("signal-desktop")),

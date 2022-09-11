@@ -222,7 +222,7 @@
        (setq which-key-show-early-on-C-h t)
        ;; make sure which-key doesn't show normally but refreshes quickly after it is
        ;; triggered.
-       (setq which-key-idle-delay 10)
+       (setq which-key-idle-delay 0.5)
        (setq which-key-idle-secondary-delay 0.05)
        (which-key-mode))
    #+END_SRC
@@ -328,7 +328,7 @@
      ;; (when (version<= "26.0.50" emacs-version)
      ;;       (global-display-line-numbers-mode))
      (require 'display-line-numbers)
-     (defcustom display-line-numbers-exempt-modes '(vterm-mode eshell-mode shell-mode term-mode ansi-term-mode mu4e-main-mode mu4e-headers-mode org-mode org-agenda-mode)
+     (defcustom display-line-numbers-exempt-modes '(vterm-mode eshell-mode shell-mode term-mode ansi-term-mode mu4e-main-mode mu4e-headers-mode org-mode org-agenda-mode treemacs-mode)
        "Major modes on which to disable the linum mode, exempts them from global requirement"
        :group 'display-line-numbers
        :type 'list
@@ -523,6 +523,28 @@
 
 
 * coding-related configuration
+** LSP mode
+   LSP mode is best enabled per language with a hook. e.g.
+   =:hook (python-mode . lsp-deferred)=
+   #+begin_src emacs-lisp
+     (use-package lsp-mode
+       :ensure t
+       :commands (lsp lsp-deferred)
+       :init
+       (setq lsp-keymap-prefix "C-c l")
+       :config (lsp-enable-which-key-integration t)
+       )
+
+     (use-package lsp-ui
+       :ensure t
+       :custom
+       (lsp-ui-doc-position "bottom")
+       :hook (lsp-mode . lsp-ui-mode))
+
+     (use-package lsp-treemacs
+       :after lsp
+       :ensure t)
+   #+end_src
 ** Snippets
    See [[https://joaotavora.github.io/yasnippet/snippet-development.html][here]] how to write your own snippets
    Paste the snippets in =.emacs.d/snippets/=
@@ -811,6 +833,15 @@
    #+end_src
 * Python-related config
 
+** Python mode
+   #+begin_src emacs-lisp
+     (use-package python-mode
+       :ensure t
+       :hook (python-mode . lsp-deferred)
+       ;; install lsp via `pip install --user python-laguage-server[all]`
+       ;; :custom (python-shell-interpreter "python3")
+       )
+   #+end_src
 ** Elpy
    #+begin_src emacs-lisp
      (use-package elpy
@@ -1179,6 +1210,9 @@
      (evil-leader/set-key "wr" 'evil-window-right)
      (evil-leader/set-key "wk" 'evil-window-up)
      (evil-leader/set-key "wj" 'evil-window-down)
+     (with-eval-after-load 'lsp-mode
+       (evil-leader/set-key
+         "l" lsp-command-map))
    #+end_src
 
 ** F-Keys

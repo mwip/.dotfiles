@@ -538,7 +538,9 @@
      (use-package lsp-ui
        :ensure t
        :custom
-       (lsp-ui-doc-position "bottom")
+       (lsp-ui-doc-position 'bottom)
+       (lsp-ui-doc-show-with-cursor t)
+       (lsp-ui-doc-show-with-mouse nil)
        :hook (lsp-mode . lsp-ui-mode))
 
      (use-package lsp-treemacs

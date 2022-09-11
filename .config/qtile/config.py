@@ -27,6 +27,7 @@ MYFONT = "Code New Roman Nerd Font Mono"  # "Hack Nerd Font Mono" "Ubuntu Mono N
 HOST = socket.gethostname()
 HOME = "/home/loki"
 SCRIPTS = f"{HOME}/.scripts"
+CUSTOM_SCREEN_ORDER = [0, 1]
 
 
 @hook.subscribe.startup_once
@@ -42,6 +43,67 @@ def auto_show_screen(window):
 
     if window.group.name not in visible_groups:
         window.group.cmd_toscreen()
+
+
+@lazy.function
+def to_next_screen(qtile, focus_after_move=True):
+    """Move window to group on other screen"""
+    # see if custom screen order is set as global, otherwise set by range
+    try:
+        CUSTOM_SCREEN_ORDER  # noqa: F823
+    except NameError:
+        CUSTOM_SCREEN_ORDER = list(range(len(qtile.cmd_screens())))
+
+    # duplicate list for wrapping around the end
+    screen_order = CUSTOM_SCREEN_ORDER * 2
+
+    # get next position in the order
+    next_screen_idx = CUSTOM_SCREEN_ORDER.index(qtile.current_screen.index) + 1
+
+    # move the window to next screen
+    qtile.current_window.cmd_toscreen(screen_order[next_screen_idx])
+
+    # focus the other screen, default: True to allow for calling it multiple times
+    if focus_after_move:
+        qtile.cmd_to_screen(screen_order[next_screen_idx])
+
+
+@lazy.function
+def swap_screens(qtile, direction="right", focus_on_next_screen=False):
+    # see if custom screen order is set as global, otherwise set by range
+    try:
+        CUSTOM_SCREEN_ORDER  # noqa: F823
+    except NameError:
+        CUSTOM_SCREEN_ORDER = list(range(len(qtile.cmd_screens())))
+
+    # triple list for wrapping around the end
+    screen_order = CUSTOM_SCREEN_ORDER * 3
+
+    screens_groups = {
+        group.screen.index: group_name
+        for group_name, group in qtile.groups_map.items()
+        if group.screen
+    }
+
+    match direction:
+        case "right":
+            adjustment = 1
+        case "left":
+            adjustment = -1
+        case _:
+            raise NotImplementedError
+
+    current_screen_id = qtile.current_screen.index
+    next_screen_idx = (
+        CUSTOM_SCREEN_ORDER.index(current_screen_id)  # which indexx in current order
+        + len(CUSTOM_SCREEN_ORDER)  # account for tiple padding (necessary for left AND right)
+        + adjustment  # adjust
+    )
+    # switch groups
+    qtile.current_screen.cmd_toggle_group(screens_groups[screen_order[next_screen_idx]])
+    # keep focus on screen
+    if focus_on_next_screen:
+        qtile.cmd_to_screen(screen_order[next_screen_idx])
 
 
 keys = [
@@ -75,12 +137,20 @@ keys = [
     #
     # Screens
     Key([MOD], "o", lazy.next_screen()),
-    # Key([MOD, "shift"], "o", lazy.to_next_screen())  # see swap groups
+    KeyChord(
+        [MOD],
+        "x",
+        [
+            Key([], "l", swap_screens(direction="right", focus_on_next_screen=True)),
+            Key([], "h", swap_screens(direction="left", focus_on_next_screen=True)),
+        ],
+    ),
+    Key([MOD, "shift"], "o", to_next_screen),  # see swap groups
+    Key([MOD], "Page_Up", lazy.screen.prev_group()),
+    Key([MOD], "Page_Down", lazy.screen.next_group()),
     #
     # Groups
     Key([MOD], "space", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([MOD], "Page_Up", lazy.screen.prev_group()),
-    Key([MOD], "Page_Down", lazy.screen.next_group()),
     # swap groups:
     # lazy.screen.toggle_group() should to it but you would probably will need to pass the ogher group name as the 'group_name' parameter
     # Key([MOD], "x", lazy.next_screen()),
@@ -511,6 +581,24 @@ if HOST == "bifrost":
         ),
     ]
 
+for i, screen in enumerate(screens):
+    keys.extend(
+        [
+            # Key(
+            #     [MOD, CTRL],
+            #     str(i),
+            #     lazy.screen.focus(),
+            #     desc="Switch to group {}".format(group.name),
+            # ),
+            # # mod1 + shift + letter of group = switch to & move focused window to group
+            Key(
+                [MOD, CTRL, SHIFT],
+                str(i),
+                lazy.window.toscreen(i),
+                desc=f"Move window to screen {i}",
+            ),
+        ]
+    )
 # Drag floating layouts.
 mouse = [
     Drag([MOD], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),

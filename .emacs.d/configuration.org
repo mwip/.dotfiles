@@ -778,6 +778,11 @@
    (use-package markdown-mode
      :ensure t)
    #+end_src
+** YAML-Mode
+   #+begin_src emacs-lisp
+     (use-package yaml-mode
+       :ensure t)
+   #+end_src
 
 * R-Related Configuration
 ** Force scroll on R-console
@@ -840,7 +845,7 @@
      (use-package python-mode
        :ensure t
        :hook (python-mode . lsp-deferred)
-       ;; install lsp via `pip install --user python-laguage-server[all]`
+       ;; install lsp via `pip install --user python-lsp-server[all]`
        ;; :custom (python-shell-interpreter "python3")
        )
    #+end_src

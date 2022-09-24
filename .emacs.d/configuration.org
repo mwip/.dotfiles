@@ -1230,8 +1230,8 @@
      (global-set-key [f9] 'auto-highlight-symbol-mode)
      (global-unset-key [f10])
      (global-set-key [f10] 'darkroom-mode)
-     (global-set-key [f11] (lambda () (interactive) (load-theme 'doom-vibrant t)))
-     (global-set-key [f12] (lambda () (interactive) (load-theme 'doom-one-light t)))
+     (global-set-key [f11] (lambda () (interactive) (disable-theme 'doom-one-light) (load-theme 'doom-vibrant t)))
+     (global-set-key [f12] (lambda () (interactive) (disable-theme 'doom-vibrant) (load-theme 'doom-one-light t)))
    #+end_src
 
 ** Org- Agenda from everywhere

@@ -342,11 +342,10 @@ groups += [
 layout_kwargs = dict(
     border_focus="#C45500",
     border_width=2,
-    margin=6,
 )
 layouts = [
-    xmonad.MonadTall(new_client_position="after_current", **layout_kwargs),
-    layout.Max(**layout_kwargs),
+    xmonad.MonadTall(new_client_position="after_current", margin=4, **layout_kwargs),
+    layout.Max(**layout_kwargs, margin=0),
     layout.Floating(**layout_kwargs),
 ]
 
@@ -359,6 +358,7 @@ widget_defaults = dict(
     fgcolor_crit="#dd5262",
     padding=5,
     update_interval=1,
+    border="#C45500",
 )
 
 extension_defaults = widget_defaults.copy()
@@ -382,8 +382,6 @@ def w_f_groupbox():
 
 # separator
 w_sep = widget.Sep()
-# Layout
-w_layout = widget.CurrentLayout()
 # Network usage
 net_iface = "enp34s0"
 w_net = widget.Net(
@@ -440,29 +438,27 @@ if HOST == "bifrost":
     )
     w_temp = widget.ThermalZone(high=60, crit=70)
 
+tasklist_kwargs = dict(
+    font=f"{MYFONT}",
+    markup_floating="<b>{}</b>",
+    markup_focused="<b>{}</b>",
+    markup_maximized="<b>{}</b>",
+    markup_minimized="<b>{}</b>",
+    markup_normal="<b>{}</b>",
+    padding=3,
+    border="#C45500",
+)
 
 if HOST == "andlang":
     screens = [
         Screen(
             top=bar.Bar(
                 widgets=[
-                    # widget.GroupBox(
-                    #     padding=1,
-                    #     font=MYFONT,
-                    #     disable_drag=True,
-                    #     highlight_method="text",
-                    #     highlight_color="#e69055",
-                    #     active="#1f5582",
-                    #     this_current_screen_border="#e69055",
-                    #     this_screen_border="#e69055",
-                    #     other_screen_border="#7bc275",
-                    #     other_current_screen_border="#7bc275",
-                    # ),
                     w_f_groupbox(),
                     w_sep,
-                    w_layout,
+                    widget.CurrentLayout(),
                     w_sep,
-                    widget.WindowName(),
+                    widget.TaskList(**tasklist_kwargs),
                     w_sep,
                     w_mpd,
                     w_sep,
@@ -485,24 +481,12 @@ if HOST == "andlang":
         Screen(
             top=bar.Bar(
                 widgets=[
-                    # widget.GroupBox(
-                    #     padding=1,
-                    #     font=MYFONT,
-                    #     disable_drag=True,
-                    #     highlight_method="text",
-                    #     highlight_color="#e69055",
-                    #     active="#1f5582",
-                    #     this_current_screen_border="#e69055",
-                    #     this_screen_border="#e69055",
-                    #     other_screen_border="#7bc275",
-                    #     other_current_screen_border="#7bc275",
-                    # ),
                     w_f_groupbox(),
                     w_sep,
-                    w_layout,
+                    widget.CurrentLayout(),
                     w_sep,
-                    widget.WindowName(),
-                    widget.Spacer(),
+                    w_sep,
+                    widget.TaskList(**tasklist_kwargs),
                     w_sep,
                     w_mpd,
                     w_sep,
@@ -528,9 +512,9 @@ if HOST == "bifrost":
                 widgets=[
                     w_f_groupbox(),
                     w_sep,
-                    w_layout,
+                    widget.CurrentLayout(),
                     w_sep,
-                    widget.WindowName(),
+                    widget.TaskList(**tasklist_kwargs),
                     w_sep,
                     w_net,
                     w_netgraph,
@@ -557,10 +541,9 @@ if HOST == "bifrost":
                 widgets=[
                     w_f_groupbox(),
                     w_sep,
-                    w_layout,
+                    widget.CurrentLayout(),
                     w_sep,
-                    widget.WindowName(),
-                    widget.Spacer(),
+                    widget.TaskList(**tasklist_kwargs),
                     w_sep,
                     w_net,
                     w_netgraph,

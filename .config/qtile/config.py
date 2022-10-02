@@ -414,8 +414,15 @@ w_tray = widget.Systray(padding=0)
 if HOST == "andlang":
     # mpd
     w_mpd = widget.Mpd2(
-        status_format=" {artist} - {title} {play_status}",
+        status_format=" {play_status} {artist} - {title}",
         play_states={"pause": "", "play": "▶", "stop": "■"},
+        color_progress="#1f5582",
+        # max_chars=24,
+        # scroll=True,
+        # scroll_interval=0.05,
+        # scroll_step=2,
+        # scroll_delay=0.5,
+        # width=250,
     )
     # Temperature
     w_cpu_temp = widget.ThermalZone(
@@ -484,7 +491,6 @@ if HOST == "andlang":
                     w_f_groupbox(),
                     w_sep,
                     widget.CurrentLayout(),
-                    w_sep,
                     w_sep,
                     widget.TaskList(**tasklist_kwargs),
                     w_sep,
@@ -603,6 +609,7 @@ floating_layout = layout.Floating(
         Match(title="doublecmd"),  # otherwise doublecmd will get stuck in load screen
         Match(title="Copying"),
         Match(title="Copy file(s)"),
+        Match(title="Move file(s)"),
         Match(title="Select entry type"),  # Jabref
     ]
 )

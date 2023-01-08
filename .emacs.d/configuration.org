@@ -67,6 +67,10 @@
      (evil-org-agenda-set-keys)
    #+end_src
 * General Configurations
+** Scratch buffer in text mode
+   #+begin_src emacs-lisp
+     (setq initial-major-mode 'text-mode)
+   #+end_src
 ** Spaces! no tabs!
    #+begin_src emacs-lisp
      (setq-default indent-tabs-mode nil)

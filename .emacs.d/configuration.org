@@ -70,6 +70,7 @@
 ** Scratch buffer in text mode
    #+begin_src emacs-lisp
      (setq initial-major-mode 'text-mode)
+     (setq initial-scratch-message nil)
    #+end_src
 ** Spaces! no tabs!
    #+begin_src emacs-lisp

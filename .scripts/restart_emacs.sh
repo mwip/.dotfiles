@@ -3,7 +3,7 @@
 
 notify-send 'Emacs' 'Restarting Emacs Daemon'
 
-[ -n "$(pgrep emacs)" ] && killall emacs
+[ -n "$(pgrep emacs)" ] && emacsclient -e '(server-shutdown)'
 
 emacs --daemon --chdir=$HOME
 

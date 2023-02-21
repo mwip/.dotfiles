@@ -272,26 +272,31 @@
     #+begin_src emacs-lisp
       ;;(add-to-list 'load-path "~/")
       (use-package doom-modeline
-	:ensure t
-	:init (doom-modeline-mode 1))
+        :ensure t
+        :init (doom-modeline-mode 1))
       (setq doom-modeline-icon t)
       (use-package doom-themes
-	:ensure t
-	:config
-	;; Global settings (defaults)
-	(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-	      doom-themes-enable-italic t) ; if nil, italics is universally disabled
-	(load-theme 'doom-vibrant t) ;;+
-	;; or for treemacs users
-	;; (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
-	;; (doom-themes-treemacs-config)
-	;; Corrects (and improves) org-mode's native fontification.
-	(doom-themes-org-config))
+        :ensure t
+        :config
+        ;; Global settings (defaults)
+        (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+              doom-themes-enable-italic t) ; if nil, italics is universally disabled
+        (load-theme 'doom-vibrant t) ;;+
+        ;; (load-theme 'doom-acario-dark t)
+        ;; (load-theme 'doom-dark+ t) ;;+
+        ;; (load-theme 'doom-Iosvkem t) ;;+
+        ;; (load-theme 'doom-material t) ;;+
+        ;; or for treemacs users
+        ;; (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+        ;; (doom-themes-treemacs-config)
+        ;; Corrects (and improves) org-mode's native fontification.
+        (doom-themes-org-config))
     #+end_src
 ** Font
    #+BEGIN_SRC emacs-lisp
-   (add-to-list 'default-frame-alist '(font . "Code New Roman Nerd Font Mono 12" ))
-   (set-face-attribute 'default t :font "Code New Roman Nerd Font Mono 12" )
+   ;;(add-to-list 'default-frame-alist '(font . "Code New Roman Nerd Font Complete Mono 12" ))
+   (add-to-list 'default-frame-alist '(font . "CodeNewRomanNerdFontCompleteM Nerd Font 12" ))
+   (set-face-attribute 'default t :font "CodeNewRomanNerdFontCompleteM Nerd Font 12" )
    ;;(set-default-font "Code New Roman Nerd Font Mono 13")
    #+END_SRC
 ** Cursor
@@ -419,7 +424,7 @@
      (add-hook 'text-mode-hook 'hexcolour-add-to-font-lock)
    #+END_SRC
 ** Languagetool support
-   #+begin_src emacs-lisp
+   #+begin_comment
      (use-package langtool
        :ensure t
        :config
@@ -429,6 +434,18 @@
 				       "LEERZEICHEN_VOR_AUSRUFEZEICHEN_ETC")
 	     )
      )
+   #+end_comment
+   #+begin_src emacs-lisp
+     (use-package languagetool
+       :ensure t
+       :config
+       (setq languagetool-disabled-rules
+             '("WHITESPACE_RULE"
+               "LEERZEICHEN_VOR_AUSRUFEZEICHEN_ETC"
+               "CURRENCY_SPACE"
+               "PLUS_MINUS"
+               ))
+       )
    #+end_src
 ** Auto dim other buffers
    #+BEGIN_SRC emacs-lisp
@@ -452,9 +469,9 @@
 ** Auto-save_mode
    #+begin_src emacs-lisp
      (setq auto-save-default t)
-     (auto-save-visited-mode)
      (setq auto-save-visited-interval 30)
      (setq auto-save-visited 30)
+     (auto-save-visited-mode)
    #+end_src
 ** Highlight trailing whitespace
    #+begin_src emacs-lisp
@@ -891,6 +908,12 @@
    #+BEGIN_SRC emacs-lisp
    (require 'org)
    #+END_SRC
+** Org Habit
+   #+begin_src emacs-lisp
+     (require 'org-habit)
+     (add-to-list 'org-modules 'org-habit)
+     (setq org-habit-graph-column 60)
+   #+end_src
 ** Hard indentation
    see https://orgmode.org/org.html#Hard-indentation
    #+begin_src emacs-lisp
@@ -1118,7 +1141,7 @@
     #+END_SRC
 *** Often used files
     #+begin_src emacs-lisp
-    (define-key mymap (kbd "f m") (lambda () (interactive) (find-file "~/myorg.org")))
+    (define-key mymap (kbd "f m") (lambda  () "myorg" (interactive) (find-file "~/myorg.org")))
     (define-key mymap (kbd "f s") (lambda () (interactive) (find-file "~/shopping.org")))
     (define-key mymap (kbd "f c") (lambda () (interactive) (find-file "~/.emacs.d/configuration.org")))
     (define-key mymap (kbd "f x") (lambda () (interactive) (find-file "~/.xmonad/xmonad.hs")))
@@ -1168,13 +1191,16 @@
      (evil-leader/set-key "a" 'org-agenda)
      (evil-leader/set-key "m" 'mu4e)
      (evil-leader/set-key "c" 'comment-line)
-     (evil-leader/set-key "ll" 'langtool-check)
-     (evil-leader/set-key "ld" 'langtool-check-done)
-     (evil-leader/set-key "ls" 'langtool-switch-default-language)
-     (evil-leader/set-key "lm" 'langtool-show-message-at-point)
-     (evil-leader/set-key "lc" 'langtool-correct-buffer)
-     (evil-leader/set-key "ln" 'langtool-goto-next-error)
-     (evil-leader/set-key "lp" 'langtool-goto-previous-error)
+     (evil-leader/set-key "ll" 'languagetool-server-mode)
+     (evil-leader/set-key "lc" 'languagetool-correct-buffer)
+     (evil-leader/set-key "lp" 'languagetool-correct-at-point)
+     ;; (evil-leader/set-key "ll" 'langtool-check)
+     ;; (evil-leader/set-key "ld" 'langtool-check-done)
+     ;; (evil-leader/set-key "ls" 'langtool-switch-default-language)
+     ;; (evil-leader/set-key "lm" 'langtool-show-message-at-point)
+     ;; (evil-leader/set-key "lc" 'langtool-correct-buffer)
+     ;; (evil-leader/set-key "ln" 'langtool-goto-next-error)
+     ;; (evil-leader/set-key "lp" 'langtool-goto-previous-error)
      (evil-leader/set-key "i" 'my/indent)
      (evil-leader/set-key "wt" 'transpose-frame)
      ;; often used files

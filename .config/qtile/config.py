@@ -23,7 +23,9 @@ ALT = "mod1"
 SHIFT = "shift"
 CTRL = "control"
 TERMINAL = "alacritty"
-MYFONT = "Code New Roman Nerd Font Mono"  # "Hack Nerd Font Mono" "Ubuntu Mono Nerd Font"
+MYFONT = "CodeNewRomanNerdFontCompleteM Nerd Font"
+MYFONT_BOLD = f"{MYFONT}"
+# MYFONT = "Ubuntu Mono Nerd Font"  # "Hack Nerd Font Mono" "Ubuntu Mono Nerd Font"
 HOST = socket.gethostname()
 HOME = "/home/loki"
 SCRIPTS = f"{HOME}/.scripts"
@@ -159,7 +161,7 @@ keys = [
     Key([MOD, CTRL], "r", lazy.reload_config(), desc="Reload the config"),
     Key([MOD, CTRL, SHIFT], "r", lazy.restart(), desc="Restart Qtile"),
     Key([MOD, CTRL], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([MOD, SHIFT], "q", lazy.spawn(f"{SCRIPTS}/dmenu_exit.sh"), desc="Shutdown Qtile"),
+    Key([MOD, SHIFT], "q", lazy.spawn(f"{SCRIPTS}/rofi_exit.sh"), desc="Shutdown Qtile"),
     #
     # spawn applications
     Key([MOD], "Return", lazy.spawn(TERMINAL), desc="Launch terminal"),
@@ -277,11 +279,11 @@ match_8 = [
 
 groups = [
     Group("1", label="1:", layout="max", matches=[Match(wm_class=["librewolf", "Chromium"])]),
-    Group("2", label="2:", layout="max", matches=[Match(wm_class=["Emacs"])]),
-    Group("3", label="3:", layout="monadtall"),
-    Group("4", label="4:", layout="max", matches=[Match(wm_class=["RStudio"])]),
+    Group("2", label="2:", layout="max", matches=[Match(wm_class=["Emacs"])]),
+    Group("3", label="3:", layout="monadtall"),
+    Group("4", label="4:󰟔", layout="max", matches=[Match(wm_class=["RStudio"])]),
     Group("5", label="5:", layout="max", matches=[Match(wm_class=["Doublecmd", "Pcmanfm"])]),
-    Group("6", label="6:ﱘ", layout="monadtall", matches=[Match(title=["ncmpcpp"])]),
+    Group("6", label="6:", layout="monadtall", matches=[Match(title=["ncmpcpp"])]),
     Group("7", label="7:", layout="floating", matches=[Match(wm_class=["QGIS3"])]),
     Group("8", label="8:", layout="max", matches=match_8),
     Group("9", label="9:", layout="max", matches=[Match(wm_class=["Gimp", "Inkscape"])]),
@@ -350,7 +352,7 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font=f"{MYFONT} Bold",
+    font=f"{MYFONT}",
     fontsize=14,
     foreground="#bbc2cf",
     fgcolor_normal="#bbc2cf",
@@ -368,9 +370,11 @@ extension_defaults = widget_defaults.copy()
 # Groups
 def w_f_groupbox():
     return widget.GroupBox(
-        padding=1,
+        font=f"{MYFONT_BOLD}",
+        fontsize=16,
+        padding=3,
         disable_drag=True,
-        highlight_method="line",
+        highlight_method="block",
         highlight_color="#e69055",
         active="#1f5582",
         this_current_screen_border="#e69055",
@@ -447,11 +451,16 @@ if HOST == "bifrost":
 
 tasklist_kwargs = dict(
     font=f"{MYFONT}",
-    markup_floating="<b>{}</b>",
-    markup_focused="<b>{}</b>",
-    markup_maximized="<b>{}</b>",
-    markup_minimized="<b>{}</b>",
-    markup_normal="<b>{}</b>",
+    # markup_floating="<b>{}</b>",
+    # markup_focused="<b>{}</b>",
+    # markup_maximized="<b>{}</b>",
+    # markup_minimized="<b>{}</b>",
+    # markup_normal="<b>{}</b>",
+    markup_floating="{}",
+    markup_focused="{}",
+    markup_maximized="{}",
+    markup_minimized="<i>{}</i>",
+    markup_normal="{}",
     padding=3,
     border="#C45500",
 )
@@ -538,7 +547,7 @@ if HOST == "bifrost":
                     w_sep,
                     w_tray,
                 ],
-                size=24,
+                size=28,
                 background="#242730",
             )
         ),
@@ -565,7 +574,34 @@ if HOST == "bifrost":
                     w_sep,
                     w_clock,
                 ],
-                size=24,
+                size=28,
+                background="#242730",
+            )
+        ),
+        Screen(
+            top=bar.Bar(
+                widgets=[
+                    w_f_groupbox(),
+                    w_sep,
+                    widget.CurrentLayout(),
+                    w_sep,
+                    widget.TaskList(**tasklist_kwargs),
+                    w_sep,
+                    w_net,
+                    w_netgraph,
+                    w_sep,
+                    w_temp,
+                    w_sep,
+                    w_batt_icon,
+                    w_batt,
+                    w_sep,
+                    w_backlight,
+                    w_sep,
+                    w_vol,
+                    w_sep,
+                    w_clock,
+                ],
+                size=28,
                 background="#242730",
             )
         ),

@@ -3,7 +3,8 @@ configuration {
 /*	width: 50;*/
 /*	lines: 15;*/
 /*	columns: 1;*/
-	font: "Code New Roman Nerd Font 12";
+/*	font: "Code New Roman Nerd Font 12";*/
+	font: "CodeNewRomanNerdFontCompleteM Nerd Font 12";
 /*	bw: 1;*/
 /*	location: 0;*/
 /*	padding: 5;*/

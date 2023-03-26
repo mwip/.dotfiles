@@ -224,9 +224,16 @@ keys = [
         [MOD],
         "s",
         [
-            Key([], "x", lazy.spawn("xset r rate 280 35")),
+            Key([], "x", lazy.spawn("setxkbmap de -option ctrl:nocaps && xset r rate 280 28")),
             Key([], "c", lazy.group["scratchpad"].dropdown_toggle("qalc")),
             Key([], "d", lazy.group["scratchpad"].dropdown_toggle("cal")),
+        ],
+    ),
+    KeyChord(
+        [MOD],
+        "z",
+        [
+            Key([], "r", lazy.spawn(f"{SCRIPTS}/dmenu_R-pdfs.sh"), desc="Launch R help PDF dmenu"),
         ],
     ),
     #
@@ -251,6 +258,12 @@ keys = [
         [],
         "XF86AudioMute",
         lazy.spawn("pactl set-sink-mute 0 toggle"),
+        lazy.spawn("mpv /tmp/avc.wav"),
+    ),
+    Key(
+        [],
+        "XF86AudioMicMute",
+        lazy.spawn("pactl set-source-mute alsa_input.pci-0000_00_1f.3.analog-stereo toggle"),
         lazy.spawn("mpv /tmp/avc.wav"),
     ),
     Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight + 10 -time 0")),

@@ -438,14 +438,22 @@
    #+begin_src emacs-lisp
      (use-package languagetool
        :ensure t
+       :init
+       (setq languagetool-suggestion-level "picky")
        :config
+       (setq languagetool-mother-tongue "de")
        (setq languagetool-disabled-rules
              '("WHITESPACE_RULE"
                "LEERZEICHEN_VOR_AUSRUFEZEICHEN_ETC"
                "CURRENCY_SPACE"
                "PLUS_MINUS"
+               "GERMAN_QUOTES"
+               "EN_QUOTES"
+               "EG_NO_COMMA"
+               "IE_NO_COMMA"
                ))
        )
+
    #+end_src
 ** Auto dim other buffers
    #+BEGIN_SRC emacs-lisp

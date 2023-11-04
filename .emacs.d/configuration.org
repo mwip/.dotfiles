@@ -493,9 +493,11 @@
    #+end_src
 ** Ledger Mode
    #+begin_src emacs-lisp
-	  (use-package ledger-mode
-	    :ensure t)
-     (add-to-list 'auto-mode-alist '("\.dat$" . ledger-mode))
+     (use-package ledger-mode
+       :ensure t
+       :config
+       (add-to-list 'auto-mode-alist '("\\.dat$" . ledger-mode))
+     )
    #+end_src
 
 ** Comment line
@@ -571,6 +573,8 @@
      (use-package lsp-mode
        :ensure t
        :commands (lsp lsp-deferred)
+       :hook
+       (sh-mode . lsp)
        :init
        (setq lsp-keymap-prefix "C-c l")
        :config

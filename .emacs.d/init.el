@@ -31,13 +31,23 @@
      ("" "rotating" nil nil)
      ("normalem" "ulem" t nil)
      ("" "amsmath" t nil)
-     ("" "textcomp" t nil)
      ("" "amssymb" t nil)
-     ("" "capt-of" nil nil)
-     ("colorlinks=true, allcolors=MidnightBlue, final=true" "hyperref" nil nil)
-     ("dvipsnames, usenames" "xcolor" nil nil)))
+     ("" "capt-of" nil nil)))
  '(package-selected-packages
-   '(yaml-mode lsp-treemacs lsp-ui python-mode lsp-mode kind-icon corfu py-isort markdown-mode all-the-icons ledger-mode julia-mode python-black julia-repl smartparens adaptive-wrap haskell-mode darkroom langtool orderless evil-leader auto-highlight-symbol auto-dim-other-buffers buffer-move marginalia vertico fic-mode fci-mode elpy julia-snail vterm flycheck-julia evil-org transpose-frame mu4e-alert mu4e evil evil-collection rainbow-delimiters ido-vertical-mode dockerfile-mode openwith org-pdftools syntax-subword org-ref fill-column-indicator magit git-gutter neotree all-the-icons-ivy treemacs doom-themes doom-modeline dumb-jump ag counsel-projectile projectile powerline iedit expand-region undo-tree multiple-cursors yasnippet-snippets yasnippet flycheck ess org which-key use-package try tabbar org-bullets counsel color-theme-modern auto-org-md auto-complete ace-window))
+   '(evil-nerd-commenter hl-todo rustic languagetool yaml-mode lsp-treemacs lsp-ui python-mode lsp-mode kind-icon corfu py-isort markdown-mode all-the-icons ledger-mode julia-mode python-black julia-repl smartparens adaptive-wrap haskell-mode darkroom langtool orderless evil-leader auto-highlight-symbol auto-dim-other-buffers buffer-move marginalia vertico fic-mode fci-mode elpy julia-snail vterm flycheck-julia evil-org transpose-frame mu4e-alert mu4e evil evil-collection rainbow-delimiters ido-vertical-mode dockerfile-mode openwith org-pdftools syntax-subword org-ref fill-column-indicator magit git-gutter neotree all-the-icons-ivy treemacs doom-themes doom-modeline dumb-jump ag counsel-projectile projectile powerline iedit expand-region undo-tree multiple-cursors yasnippet-snippets yasnippet flycheck ess org which-key use-package try tabbar org-bullets counsel color-theme-modern auto-org-md auto-complete ace-window))
+ '(safe-local-variable-values
+   '((eval setq org-latex-listings t)
+     (org-ref-default-citation-link . "parencite")
+     (languagetool-local-disabled-rules "TYPOGRAFISCHE_ANFUEHRUNGSZEICHEN" "F_ANSTATT_PH")
+     (eval setq org-ref-default-citation-link "parencite")
+     (eval setq org-latex-pdf-process
+           (list "latexmk -shell-escape -bibtex -f -pdf %f"))
+     (languagetool-local-disabled-rules "F_ANSTATT_PH")
+     (org-latex-default-packages-alist)
+     (languagetool-local-disabled-rules quote
+                                        ("WHITESPACE_RULE"))
+     (org-image-actual-width)
+     (ledger-post-amount-alignment-column . 59)))
  '(send-mail-function 'smtpmail-send-it)
  '(warning-suppress-types '((:warning) (ox-pandoc) (ox-pandoc))))
 (custom-set-faces

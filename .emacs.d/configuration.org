@@ -20,6 +20,7 @@
    (setq evil-want-integration t)
    (setq evil-undo-system 'undo-tree)
    (setq evil-want-C-u-scroll t)
+   (setq evil-respect-visual-line-mode t)
    #+end_src
 
 ** evil leader
@@ -166,7 +167,11 @@
        ;; This is recommended since Dabbrev can be used globally (M-/).
        ;; See also `corfu-excluded-modes'.
        :init
-       (global-corfu-mode))
+       (global-corfu-mode)
+
+       (setq corfu-auto-prefix 1)
+       (setq corfu-auto-delay 0.0)
+       )
 
      ;; A few more useful configurations...
      (use-package emacs
@@ -493,6 +498,12 @@
      (add-to-list 'auto-mode-alist '("\.dat$" . ledger-mode))
    #+end_src
 
+** Comment line
+   #+begin_src emacs-lisp
+     (use-package evil-nerd-commenter
+       :ensure t)
+     (global-set-key (kbd "C-S-c") 'evilnc-comment-or-uncomment-lines)
+   #+end_src
 * mu4e
    #+begin_src emacs-lisp
      (require 'mu4e)
@@ -562,7 +573,10 @@
        :commands (lsp lsp-deferred)
        :init
        (setq lsp-keymap-prefix "C-c l")
-       :config (lsp-enable-which-key-integration t)
+       :config
+       (lsp-enable-which-key-integration t)
+       (setq lsp-inlay-hint-enable t)
+       (setq read-process-output-max (* 1024 1024 4))
        )
 
      (use-package lsp-ui
@@ -608,19 +622,6 @@
       'counsel-projectile-switch-project-action
       '((default counsel-projectile-switch-project-action-vc)))
    #+END_SRC
-** COMMENT dumb jump
-   #+begin_src emacs-lisp
-   (use-package dumb-jump
-   :ensure t
-   :bind
-      (("M-g o" . dumb-jump-go-other-window)
-      ("M-g j" . dumb-jump-go)
-      ("M-g x" . dumb-jump-go-prefer-external)
-      ("M-g z" . dumb-jump-go-prefer-external-other-window))
-   :config (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
-   :init
-   (dumb-jump-mode))
-   #+END_SRC
 ** Code Margin 100-column
     #+BEGIN_SRC emacs-lisp
       ;;  (use-package fill-column-indicator
@@ -640,7 +641,6 @@
    #+BEGIN_SRC emacs-lisp
      ;;(use-package autopair
      ;;  :ensure t)
-     ;;(electric-pair-mode)
      ;;(setq autopair-skip-whitespace t)
      (use-package smartparens
        :ensure t
@@ -654,6 +654,7 @@
        (sp-pair "'" "'" :unless '(sp-point-before-word-p))
        (sp-pair "\"" "\"" :unless '(sp-point-before-word-p))
        (smartparens-global-mode))
+     (electric-pair-mode)
    #+END_SRC
 ** Hightligh Paris of Parenthesis
    #+BEGIN_SRC emacs-lisp
@@ -799,9 +800,17 @@
    #+end_src
 ** Highligh TODO comments
    #+begin_src emacs-lisp
-     (use-package fic-mode
-       :ensure t
-       :config (add-hook 'prog-mode-hook 'fic-mode))
+     (use-package hl-todo
+       :ensure
+       :config
+       (setq hl-todo-keyword-faces
+             '(("TODO"   . "#fa5847")
+               ("FIXME"  . "#fa5847")
+               ("DEBUG"  . "#fa5847")
+               ("GOTCHA" . "#fa5847")
+               ("STUB"   . "#EB2E1A"))
+           )  )
+     (add-hook 'prog-mode-hook #'hl-todo-mode)
    #+end_src
 ** Markdown Mode
    #+begin_src emacs-lisp
@@ -814,72 +823,63 @@
        :ensure t)
    #+end_src
 
-* R-Related Configuration
-** Force scroll on R-console
-   #+BEGIN_SRC emacs-lisp
-   (setq comint-croll-to-bottom-on-input t)
-   (setq comint-croll-to-bottom-on-output t)
-   #+END_SRC
-** Use Rstudio indentions
-   #+BEGIN_SRC emacs-lisp
-   (setq ess-style 'RStudio)
-   #+END_SRC
-** Key binding for evaluation
+** Rust
+   https://robert.kra.hn/posts/rust-emacs-setup/#rust-emacs-configuration-in-detail
    #+begin_src emacs-lisp
-     (use-package ess
-       :ensure t)
-     (require 'ess-mode)
-     (define-key ess-mode-map (kbd "<C-return>") 'ess-eval-region-or-function-or-paragraph-and-step)
-     (define-key ess-mode-map (kbd "<C-enter>") 'ess-eval-region-or-function-or-paragraph-and-step)
-   #+end_src
-** Expand region
-   #+BEGIN_SRC emacs-lisp
-   (use-package expand-region
-     :ensure t
-     :config
-     (global-set-key (kbd "<C-S-up>") 'er/expand-region)
-     (global-set-key (kbd "<C-S-down>") (kbd "C-- <C-S-up>")))
-   #+END_SRC
-** Insert Pipe
-   Found [[https://emacs.stackexchange.com/questions/8041/how-to-implement-the-piping-operator-in-ess-mode][here]]
-   #+BEGIN_SRC emacs-lisp
-   (defun then_R_operator ()
-                "R - %>% operator or 'then' pipe operator"
-                (interactive)
-                (just-one-space 1)
-                (insert "%>%")
-                (reindent-then-newline-and-indent))
-   (global-set-key (kbd "C-S-m") 'then_R_operator)
-   #+END_SRC
-** ESS-Fontlock
-   #+begin_src emacs-lisp
-     (setq ess-R-font-lock-keywords
-                                  (quote ((ess-R-fl-keyword:keywords . t)
-                                                  (ess-R-fl-keyword:constants . t)
-                                                  (ess-R-fl-keyword:modifiers . t)
-                                                  (ess-R-fl-keyword:fun-defs . t)
-                                                  (ess-R-fl-keyword:assign-ops . t)
-                                                  (ess-R-fl-keyword:%op% . t)
-                                                  (ess-fl-keyword:fun-calls . t)
-                                                  (ess-fl-keyword:numbers . t)
-                                                  (ess-fl-keyword:operators . t)
-                                                  (ess-fl-keyword:delimiters . t)
-                                                  (ess-fl-keyword:= . t)
-                                                  (ess-R-fl-keyword:F&T . t))))
+     (use-package rustic
+       :ensure t
+       ;; :bind (:map rustic-mode-map
+       ;;             ("M-j" . lsp-ui-imenu)
+       ;;             ("M-?" . lsp-find-references)
+       ;;             ("C-c C-c l" . flycheck-list-errors)
+       ;;             ("C-c C-c a" . lsp-execute-code-action)
+       ;;             ("C-c C-c r" . lsp-rename)
+       ;;             ("C-c C-c q" . lsp-workspace-restart)
+       ;;             ("C-c C-c Q" . lsp-workspace-shutdown)
+       ;;             ("C-c C-c s" . lsp-rust-analyzer-status))
+       :config
+       ;; uncomment for less flashiness
+       ;; (setq lsp-eldoc-hook nil)
+       ;; (setq lsp-enable-symbol-highlighting nil)
+       ;; (setq lsp-signature-auto-activate nil)
 
+       ;; comment to disable rustfmt on save
+       (setq rustic-format-on-save t)
+       (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook))
+
+     (defun rk/rustic-mode-hook ()
+       ;; so that run C-c C-c C-r works without having to confirm, but don't try to
+       ;; save rust buffers that are not file visiting. Once
+       ;; https://github.com/brotzeit/rustic/issues/253 has been resolved this should
+       ;; no longer be necessary.
+       (when buffer-file-name
+         (setq-local buffer-save-without-query t))
+       (add-hook 'before-save-hook 'lsp-format-buffer nil t))
    #+end_src
+
 * Python-related config
-
 ** Python mode
    #+begin_src emacs-lisp
      (use-package python-mode
        :ensure t
        :hook (python-mode . lsp-deferred)
-       ;; install lsp via `pip install --user python-lsp-server[all]`
-       ;; :custom (python-shell-interpreter "python3")
        )
+
+     ; use virtualenvironment for more up-to-date python & pylsp
+     ; create more up-to-date environment
+     ; conda create -n pylsp python=3.10
+     ; conda activate pylsp
+     ; pip install python-lsp-server python-lsp-ruff pylsp-mypy pylsp-rope
+     (require 'lsp-pylsp)
+     (setq lsp-pylsp-server-command "~/miniforge3/envs/pylsp/bin/pylsp")
+     (setq lsp-pylsp-plugins-ruff-enabled t)
+     (setq lsp-pylsp-plugins-flake8-enabled nil)
+     (setq lsp-pylsp-plugins-pycodestyle-enabled nil)
+     (setq lsp-pylsp-plugins-pyflakes-enabled nil)
+     (setq lsp-pylsp-plugins-mccabe-enabled nil)
+     (setq lsp-pylsp-plugins-pyls_isort-enabled nil)
    #+end_src
-** Elpy
+** Elpy for black formatting on save
    #+begin_src emacs-lisp
      (use-package elpy
        :ensure t
@@ -1029,6 +1029,7 @@
      (setq org-latex-prefer-user-labels t)
      (setq org-ref-default-citation-link "citep")
      (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
+     (define-key org-mode-map (kbd "C-c r") 'org-ref-insert-link)
    #+END_SRC
 
 ** Capture
@@ -1198,17 +1199,10 @@
      (evil-leader/set-key "tt" 'org-todo)
      (evil-leader/set-key "a" 'org-agenda)
      (evil-leader/set-key "m" 'mu4e)
-     (evil-leader/set-key "c" 'comment-line)
+     (evil-leader/set-key "c" 'evilnc-comment-or-uncomment-lines)
      (evil-leader/set-key "ll" 'languagetool-server-mode)
      (evil-leader/set-key "lc" 'languagetool-correct-buffer)
      (evil-leader/set-key "lp" 'languagetool-correct-at-point)
-     ;; (evil-leader/set-key "ll" 'langtool-check)
-     ;; (evil-leader/set-key "ld" 'langtool-check-done)
-     ;; (evil-leader/set-key "ls" 'langtool-switch-default-language)
-     ;; (evil-leader/set-key "lm" 'langtool-show-message-at-point)
-     ;; (evil-leader/set-key "lc" 'langtool-correct-buffer)
-     ;; (evil-leader/set-key "ln" 'langtool-goto-next-error)
-     ;; (evil-leader/set-key "lp" 'langtool-goto-previous-error)
      (evil-leader/set-key "i" 'my/indent)
      (evil-leader/set-key "wt" 'transpose-frame)
      ;; often used files
@@ -1263,6 +1257,7 @@
 
 ** F-Keys
    #+begin_src emacs-lisp
+     (global-set-key [f4] 'treemacs)
      (global-set-key [f5] 'revert-buffer)
      (global-set-key [f7] 'display-fill-column-indicator-mode)
      (global-set-key [f8] (lambda () (interactive) (setq show-trailing-whitespace (not show-trailing-whitespace))))
@@ -1277,37 +1272,6 @@
    #+BEGIN_SRC emacs-lisp
    (global-set-key "\C-ca" 'org-agenda)
    #+END_SRC
-** COMMENT Duplicate line
-   -- ditched in favor of evil
-   #+BEGIN_SRC emacs-lisp
-   (defun duplicate-line-up ()
-     (interactive)
-     (move-beginning-of-line 1)
-     (kill-line)
-     (yank)
-     (next-line -1)
-     (open-line 1)
-     (next-line 1)
-     (yank)
-   )
-   (defun duplicate-line-down ()
-     (interactive)
-     (move-beginning-of-line 1)
-     (kill-line)
-     (yank)
-     (open-line 1)
-     (next-line 1)
-     (yank)
-   )
-   (global-set-key (kbd "<M-S-up>") 'duplicate-line-up)
-   (global-set-key (kbd "<M-S-down>") 'duplicate-line-down)
-   (global-unset-key (kbd "C-S-d"))
-   (global-set-key (kbd "C-S-d") 'duplicate-line-down)
-   #+END_SRC
-** COMMENT Comment for german keyboard-layout
-   #+begin_src emacs-lisp
-   (global-set-key (kbd "<C-x C-S-,>") 'comment-line)
-   #+end_src
 ** Kill Daemon
    #+begin_src emacs-lisp
      ;; define function to shutdown emacs server instance

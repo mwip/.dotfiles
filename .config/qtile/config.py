@@ -16,8 +16,6 @@ from libqtile.config import (
 )
 from libqtile.lazy import lazy
 
-import xmonad
-
 MOD = "mod4"
 ALT = "mod1"
 SHIFT = "shift"
@@ -41,7 +39,9 @@ def autostart():
 def auto_show_screen(window):
     # check whether group is visible on any screen right now
     # qtile.groups_map['<somegroup>'].screen is None in case it is currently not shown on any screen
-    visible_groups = [group_name for group_name, group in qtile.groups_map.items() if group.screen]
+    visible_groups = [
+        group_name for group_name, group in qtile.groups_map.items() if group.screen
+    ]
 
     if window.group.name not in visible_groups:
         window.group.cmd_toscreen()
@@ -98,7 +98,9 @@ def swap_screens(qtile, direction="right", focus_on_next_screen=False):
     current_screen_id = qtile.current_screen.index
     next_screen_idx = (
         CUSTOM_SCREEN_ORDER.index(current_screen_id)  # which indexx in current order
-        + len(CUSTOM_SCREEN_ORDER)  # account for tiple padding (necessary for left AND right)
+        + len(
+            CUSTOM_SCREEN_ORDER
+        )  # account for tiple padding (necessary for left AND right)
         + adjustment  # adjust
     )
     # switch groups
@@ -116,16 +118,18 @@ keys = [
     Key([MOD, CTRL], "j", lazy.group.next_window()),
     Key([MOD], "k", lazy.layout.up()),
     Key([MOD, CTRL], "k", lazy.group.prev_window()),
-    Key([MOD], "l", lazy.layout.grow_master(), desc="Grow main"),
-    Key([MOD], "h", lazy.layout.shrink_master(), desc="Shrink main"),
+    Key([MOD], "l", lazy.layout.increase_ratio(), desc="Grow main"),
+    Key([MOD], "h", lazy.layout.decrease_ratio(), desc="Shrink main"),
     Key([MOD, ALT], "j", lazy.layout.shrink(), desc="Grow window down"),
     Key([MOD, ALT], "k", lazy.layout.grow(), desc="Grow window up"),
     Key([MOD, SHIFT], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([MOD, SHIFT], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key(
+        [MOD, SHIFT], "l", lazy.layout.shuffle_right(), desc="Move window to the right"
+    ),
     Key([MOD, SHIFT], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([MOD, SHIFT], "k", lazy.layout.shuffle_up(), desc="Move window up"),
-    Key([MOD], "i", lazy.layout.increase_nmaster()),
-    Key([MOD], "d", lazy.layout.decrease_nmaster()),
+    Key([MOD], "i", lazy.layout.increase_nmaster().when(layout="tile")),
+    Key([MOD], "d", lazy.layout.decrease_nmaster().when(layout="tile")),
     Key([MOD], "t", lazy.window.toggle_floating()),
     Key([MOD], "w", lazy.spawn("rofi -show window -show-icons -matching fuzzy")),
     Key([MOD], "q", lazy.window.kill()),
@@ -161,7 +165,9 @@ keys = [
     Key([MOD, CTRL], "r", lazy.reload_config(), desc="Reload the config"),
     Key([MOD, CTRL, SHIFT], "r", lazy.restart(), desc="Restart Qtile"),
     Key([MOD, CTRL], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([MOD, SHIFT], "q", lazy.spawn(f"{SCRIPTS}/rofi_exit.sh"), desc="Shutdown Qtile"),
+    Key(
+        [MOD, SHIFT], "q", lazy.spawn(f"{SCRIPTS}/rofi_exit.sh"), desc="Shutdown Qtile"
+    ),
     #
     # spawn applications
     Key([MOD], "Return", lazy.spawn(TERMINAL), desc="Launch terminal"),
@@ -210,7 +216,12 @@ keys = [
         "e",
         [
             Key([], "e", lazy.spawn("emacsclient -c -a 'emacs'"), desc="Launch Emacs"),
-            Key([], "m", lazy.spawn("emacsclient -c -a 'emacs' -e '(mu4e)'"), desc="Launch mu4e"),
+            Key(
+                [],
+                "m",
+                lazy.spawn("emacsclient -c -a 'emacs' -e '(mu4e)'"),
+                desc="Launch mu4e",
+            ),
             Key(
                 [],
                 "c",
@@ -219,12 +230,18 @@ keys = [
             ),
             Key([], "q", lazy.spawn(f"{SCRIPTS}/restart_emacs.sh")),
         ],
+        name="Emacs",
     ),
     KeyChord(
         [MOD],
         "s",
         [
-            Key([], "x", lazy.spawn("setxkbmap de -option ctrl:nocaps && xset r rate 280 28")),
+            Key(
+                [],
+                "x",
+                lazy.spawn("setxkbmap de -option ctrl:nocaps"),
+                lazy.spawn("xset r rate 280 28"),
+            ),
             Key([], "c", lazy.group["scratchpad"].dropdown_toggle("qalc")),
             Key([], "d", lazy.group["scratchpad"].dropdown_toggle("cal")),
         ],
@@ -233,7 +250,12 @@ keys = [
         [MOD],
         "z",
         [
-            Key([], "r", lazy.spawn(f"{SCRIPTS}/dmenu_R-pdfs.sh"), desc="Launch R help PDF dmenu"),
+            Key(
+                [],
+                "r",
+                lazy.spawn(f"{SCRIPTS}/dmenu_R-pdfs.sh"),
+                desc="Launch R help PDF dmenu",
+            ),
         ],
     ),
     #
@@ -263,7 +285,9 @@ keys = [
     Key(
         [],
         "XF86AudioMicMute",
-        lazy.spawn("pactl set-source-mute alsa_input.pci-0000_00_1f.3.analog-stereo toggle"),
+        lazy.spawn(
+            "pactl set-source-mute alsa_input.pci-0000_00_1f.3.analog-stereo toggle"
+        ),
         lazy.spawn("mpv /tmp/avc.wav"),
     ),
     Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight + 10 -time 0")),
@@ -291,17 +315,31 @@ match_8 = [
 ]
 
 groups = [
-    Group("1", label="1:", layout="max", matches=[Match(wm_class=["librewolf", "Chromium"])]),
+    Group(
+        "1",
+        label="1:",
+        layout="max",
+        matches=[Match(wm_class=["librewolf", "Chromium"])],
+    ),
     Group("2", label="2:", layout="max", matches=[Match(wm_class=["Emacs"])]),
-    Group("3", label="3:", layout="monadtall"),
+    Group("3", label="3:", layout="tile"),
     Group("4", label="4:󰟔", layout="max", matches=[Match(wm_class=["RStudio"])]),
-    Group("5", label="5:", layout="max", matches=[Match(wm_class=["Doublecmd", "Pcmanfm"])]),
-    Group("6", label="6:", layout="monadtall", matches=[Match(title=["ncmpcpp"])]),
+    Group(
+        "5",
+        label="5:",
+        layout="max",
+        matches=[Match(wm_class=["Doublecmd", "Pcmanfm"])],
+    ),
+    Group("6", label="6:", layout="tile", matches=[Match(title=["ncmpcpp"])]),
     Group("7", label="7:", layout="floating", matches=[Match(wm_class=["QGIS3"])]),
     Group("8", label="8:", layout="max", matches=match_8),
-    Group("9", label="9:", layout="max", matches=[Match(wm_class=["Gimp", "Inkscape"])]),
-    Group("0", label="0:", layout="monadtall", matches=[Match(wm_class=["Signal"])]),
-    Group("ssharp", label="ß:", layout="floating", matches=[Match(wm_class=["Steam"])]),
+    Group(
+        "9", label="9:", layout="max", matches=[Match(wm_class=["Gimp", "Inkscape"])]
+    ),
+    Group("0", label="0:", layout="tile", matches=[Match(wm_class=["Signal"])]),
+    Group(
+        "ssharp", label="ß:", layout="floating", matches=[Match(wm_class=["Steam"])]
+    ),
 ]
 
 # groups = [Group(i) for i in "123456789"]
@@ -359,7 +397,7 @@ layout_kwargs = dict(
     border_width=2,
 )
 layouts = [
-    xmonad.MonadTall(new_client_position="after_current", margin=4, **layout_kwargs),
+    layout.Tile(add_on_top=False, margin=2, ratio=0.5, shift_windows=True, **layout_kwargs),
     layout.Max(**layout_kwargs, margin=0),
     layout.Floating(**layout_kwargs),
 ]
@@ -400,20 +438,16 @@ def w_f_groupbox():
 # separator
 w_sep = widget.Sep()
 # Network usage
-net_iface = "enp34s0"
-w_net = widget.Net(
-    format=" {down} ↓↑ {up}",
-    use_bits=True,
-    interface=["enp34s0"],
-    mouse_callbacks={"Button1": lazy.spawn(f"{TERMINAL} -t nload -e sh -c 'nload f{net_iface}'")},
-)
 if HOST == "andlang":
     netgraph_iface = "enp34s0"
 elif HOST == "bifrost":
     netgraph_iface = "wlp0s20f3"
-w_net = widget.Net(format=" {down} ↓↑ {up}", use_bits=True, interface=[netgraph_iface])
+w_net = widget.Net(format=" {down:6.2f} {down_suffix:<2} ↓↑ {up:6.2f} {up_suffix:<2}", use_bits=True, interface=[netgraph_iface])
 w_netgraph = widget.NetGraph(
-    interface=netgraph_iface, border_color="#444959", graph_color="#e69055", fill_color="#C45500"
+    interface=netgraph_iface,
+    border_color="#444959",
+    graph_color="#e69055",
+    fill_color="#C45500",
 )
 
 # Audio level
@@ -443,10 +477,16 @@ if HOST == "andlang":
     )
     # Temperature
     w_cpu_temp = widget.ThermalZone(
-        format="CPU: {temp}°C", zone="/sys/class/hwmon/hwmon1/temp1_input", high=60, crit=70
+        format="CPU: {temp}°C",
+        zone="/sys/class/hwmon/hwmon1/temp1_input",
+        high=60,
+        crit=70,
     )
     w_gpu_temp = widget.ThermalZone(
-        format="GPU: {temp}°C", zone="/sys/class/hwmon/hwmon2/temp1_input", high=60, crit=70
+        format="GPU: {temp}°C",
+        zone="/sys/class/hwmon/hwmon2/temp1_input",
+        high=60,
+        crit=70,
     )
 
 # bifrost specific
@@ -640,8 +680,15 @@ for i, screen in enumerate(screens):
     )
 # Drag floating layouts.
 mouse = [
-    Drag([MOD], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag([MOD], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Drag(
+        [MOD],
+        "Button1",
+        lazy.window.set_position_floating(),
+        start=lazy.window.get_position(),
+    ),
+    Drag(
+        [MOD], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+    ),
     Click([MOD], "Button2", lazy.window.bring_to_front()),
 ]
 

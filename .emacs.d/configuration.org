@@ -501,13 +501,13 @@
      ;; can be deactivated with F8
      (setq-default show-trailing-whitespace t)
    #+end_src
-** Ledger Mode
+** Ledger Mode / Beancount
+   Use beancount mode instead: https://github.com/beancount/beancount-mode
    #+begin_src emacs-lisp
-     (use-package ledger-mode
-       :ensure t
-       :config
-       (add-to-list 'auto-mode-alist '("\\.dat$" . ledger-mode))
-     )
+     ;; clone git repo first
+     (add-to-list 'load-path "~/repos/beancount-mode/")
+     (require 'beancount)
+     (add-to-list 'auto-mode-alist '("\\.dat$" . beancount-mode))
    #+end_src
 
 ** Comment line

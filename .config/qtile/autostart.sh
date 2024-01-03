@@ -18,7 +18,6 @@ blueman-applet &
 xautolock -time 10 -notify 30 -notifier "notify-send 'xautolock kicking in soon'" -corners ---- -locker 'betterlockscreen -l blur' -detectsleep  &
 protonmail-bridge --no-window &
 udiskie &
-nextcloud &
 flameshot &
 betterlockscreen -u $(/usr/bin/ls ~/Pictures/Wallpapers/* | shuf -n1) --blur 1 &
 cp $HOME/.scripts/audio-volume-change.wav /tmp/avc.wav &

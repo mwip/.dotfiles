@@ -1,8 +1,9 @@
+"""My QTile config."""
+import pathlib
 import socket
-from os.path import expanduser
 from subprocess import run
 
-from libqtile import bar, extension, hook, layout, qtile, widget
+from libqtile import bar, core, extension, hook, layout, qtile, widget
 from libqtile.config import (
     Click,
     Drag,
@@ -11,6 +12,7 @@ from libqtile.config import (
     Key,
     KeyChord,
     Match,
+    Rule,
     ScratchPad,
     Screen,
 )
@@ -23,7 +25,6 @@ CTRL = "control"
 TERMINAL = "alacritty"
 MYFONT = "CodeNewRomanNerdFontCompleteM Nerd Font"
 MYFONT_BOLD = f"{MYFONT}"
-# MYFONT = "Ubuntu Mono Nerd Font"  # "Hack Nerd Font Mono" "Ubuntu Mono Nerd Font"
 HOST = socket.gethostname()
 HOME = "/home/loki"
 SCRIPTS = f"{HOME}/.scripts"
@@ -31,55 +32,58 @@ CUSTOM_SCREEN_ORDER = [0, 1]
 
 
 @hook.subscribe.startup_once
-def autostart():
-    run([expanduser("~/.config/qtile/autostart.sh")])
+def autostart() -> None:
+    """Register autostart script."""
+    run([pathlib.Path("~/.config/qtile/autostart.sh").expanduser()], check=True)
 
 
 @hook.subscribe.client_managed
-def auto_show_screen(window):
-    # check whether group is visible on any screen right now
+def auto_show_screen(window) -> None:  # noqa: ANN001
+    """Check whether group is visible on any screen right now."""
     # qtile.groups_map['<somegroup>'].screen is None in case it is currently not shown on any screen
-    visible_groups = [
-        group_name for group_name, group in qtile.groups_map.items() if group.screen
-    ]
+    visible_groups = [group_name for group_name, group in qtile.groups_map.items() if group.screen]  # type: ignore
 
     if window.group.name not in visible_groups:
-        window.group.cmd_toscreen()
+        window.group.toscreen()
 
 
 @lazy.function
-def to_next_screen(qtile, focus_after_move=True):
-    """Move window to group on other screen"""
+def to_next_screen(qtile: core.manager.Qtile, focus_after_move: bool = True) -> None:
+    """Move window to group on other screen."""
     # see if custom screen order is set as global, otherwise set by range
     try:
-        CUSTOM_SCREEN_ORDER  # noqa: F823
+        cso = CUSTOM_SCREEN_ORDER  # noqa: 823
     except NameError:
-        CUSTOM_SCREEN_ORDER = list(range(len(qtile.cmd_screens())))
+        cso = list(range(len(qtile.screens)))
 
     # duplicate list for wrapping around the end
-    screen_order = CUSTOM_SCREEN_ORDER * 2
+    screen_order = cso * 2
 
     # get next position in the order
-    next_screen_idx = CUSTOM_SCREEN_ORDER.index(qtile.current_screen.index) + 1
+    next_screen_idx = cso.index(qtile.current_screen.index) + 1
 
     # move the window to next screen
-    qtile.current_window.cmd_toscreen(screen_order[next_screen_idx])
+    if qtile.current_window:
+        qtile.current_window.toscreen(screen_order[next_screen_idx])
 
     # focus the other screen, default: True to allow for calling it multiple times
     if focus_after_move:
-        qtile.cmd_to_screen(screen_order[next_screen_idx])
+        qtile.to_screen(screen_order[next_screen_idx])
 
 
 @lazy.function
-def swap_screens(qtile, direction="right", focus_on_next_screen=False):
+def swap_screens(
+    qtile: core.manager.Qtile, direction: str = "right", focus_on_next_screen: bool = False
+) -> None:
+    """Swap screens into a specified direction."""
     # see if custom screen order is set as global, otherwise set by range
     try:
-        CUSTOM_SCREEN_ORDER  # noqa: F823
+        cso = CUSTOM_SCREEN_ORDER
     except NameError:
-        CUSTOM_SCREEN_ORDER = list(range(len(qtile.cmd_screens())))
+        cso = list(range(len(qtile.screens)))
 
     # triple list for wrapping around the end
-    screen_order = CUSTOM_SCREEN_ORDER * 3
+    screen_order = cso * 3
 
     screens_groups = {
         group.screen.index: group_name
@@ -97,17 +101,15 @@ def swap_screens(qtile, direction="right", focus_on_next_screen=False):
 
     current_screen_id = qtile.current_screen.index
     next_screen_idx = (
-        CUSTOM_SCREEN_ORDER.index(current_screen_id)  # which indexx in current order
-        + len(
-            CUSTOM_SCREEN_ORDER
-        )  # account for tiple padding (necessary for left AND right)
+        cso.index(current_screen_id)  # which indexx in current order
+        + len(cso)  # account for tiple padding (necessary for left AND right)
         + adjustment  # adjust
     )
     # switch groups
-    qtile.current_screen.cmd_toggle_group(screens_groups[screen_order[next_screen_idx]])
+    qtile.current_screen.toggle_group(screens_groups[screen_order[next_screen_idx]])
     # keep focus on screen
     if focus_on_next_screen:
-        qtile.cmd_to_screen(screen_order[next_screen_idx])
+        qtile.to_screen(screen_order[next_screen_idx])
 
 
 keys = [
@@ -123,9 +125,7 @@ keys = [
     Key([MOD, ALT], "j", lazy.layout.shrink(), desc="Grow window down"),
     Key([MOD, ALT], "k", lazy.layout.grow(), desc="Grow window up"),
     Key([MOD, SHIFT], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key(
-        [MOD, SHIFT], "l", lazy.layout.shuffle_right(), desc="Move window to the right"
-    ),
+    Key([MOD, SHIFT], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
     Key([MOD, SHIFT], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([MOD, SHIFT], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     Key([MOD], "i", lazy.layout.increase_nmaster().when(layout="tile")),
@@ -151,23 +151,21 @@ keys = [
             Key([], "h", swap_screens(direction="left", focus_on_next_screen=True)),
         ],
     ),
+    # swap groups:
+    # lazy.screen.toggle_group() should to it but you would probably will need to pass the other
+    # group name as the 'group_name' parameter
     Key([MOD, "shift"], "o", to_next_screen),  # see swap groups
     Key([MOD], "Page_Up", lazy.screen.prev_group()),
     Key([MOD], "Page_Down", lazy.screen.next_group()),
     #
     # Groups
     Key([MOD], "space", lazy.next_layout(), desc="Toggle between layouts"),
-    # swap groups:
-    # lazy.screen.toggle_group() should to it but you would probably will need to pass the ogher group name as the 'group_name' parameter
-    # Key([MOD], "x", lazy.next_screen()),
     #
     # Qtile
     Key([MOD, CTRL], "r", lazy.reload_config(), desc="Reload the config"),
     Key([MOD, CTRL, SHIFT], "r", lazy.restart(), desc="Restart Qtile"),
     Key([MOD, CTRL], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key(
-        [MOD, SHIFT], "q", lazy.spawn(f"{SCRIPTS}/rofi_exit.sh"), desc="Shutdown Qtile"
-    ),
+    Key([MOD, SHIFT], "q", lazy.spawn(f"{SCRIPTS}/rofi_exit.sh"), desc="Shutdown Qtile"),
     #
     # spawn applications
     Key([MOD], "Return", lazy.spawn(TERMINAL), desc="Launch terminal"),
@@ -179,7 +177,6 @@ keys = [
                 dmenu_prompt=">>>",
                 dmenu_command="dmenu_recent.sh",
                 dmenu_font=MYFONT,
-                # dmenu_height=16,
                 dmenu_ignorecase=True,
                 foreground="#D0D0D0",
                 background="#242730",
@@ -244,6 +241,7 @@ keys = [
             ),
             Key([], "c", lazy.group["scratchpad"].dropdown_toggle("qalc")),
             Key([], "d", lazy.group["scratchpad"].dropdown_toggle("cal")),
+            Key([], "t", lazy.group["scratchpad"].dropdown_toggle("btop")),
         ],
     ),
     KeyChord(
@@ -285,9 +283,7 @@ keys = [
     Key(
         [],
         "XF86AudioMicMute",
-        lazy.spawn(
-            "pactl set-source-mute alsa_input.pci-0000_00_1f.3.analog-stereo toggle"
-        ),
+        lazy.spawn("pactl set-source-mute alsa_input.pci-0000_00_1f.3.analog-stereo toggle"),
         lazy.spawn("mpv /tmp/avc.wav"),
     ),
     Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight + 10 -time 0")),
@@ -301,17 +297,16 @@ keys = [
 ]
 
 match_8 = [
-    Match(
-        wm_class=[
-            "org.jabref.JabRefMain",
-            "libreoffice",
-            "libreoffice-startcenter",
-            "libreoffice-calc",
-            "libreoffice-draw",
-            "libreoffice-impress",
-            "libreoffice-writer",
-        ]
-    )
+    Match(wm_class=x)
+    for x in [
+        "org.jabref.JabRefMain",
+        "libreoffice",
+        "libreoffice-startcenter",
+        "libreoffice-calc",
+        "libreoffice-draw",
+        "libreoffice-impress",
+        "libreoffice-writer",
+    ]
 ]
 
 groups = [
@@ -319,30 +314,26 @@ groups = [
         "1",
         label="1:",
         layout="max",
-        matches=[Match(wm_class=["librewolf", "Chromium"])],
+        matches=[Match(wm_class="librewolf"), Match(wm_class="Chromium")],
     ),
-    Group("2", label="2:", layout="max", matches=[Match(wm_class=["Emacs"])]),
+    Group("2", label="2:", layout="max", matches=[Match(wm_class="Emacs")]),
     Group("3", label="3:", layout="tile"),
-    Group("4", label="4:󰟔", layout="max", matches=[Match(wm_class=["RStudio"])]),
+    Group("4", label="4:󰟔", layout="max", matches=[Match(wm_class="RStudio")]),
     Group(
         "5",
         label="5:",
         layout="max",
-        matches=[Match(wm_class=["Doublecmd", "Pcmanfm"])],
+        matches=[Match(wm_class="Doublecmd"), Match(wm_class="Pcmanfm")],
     ),
-    Group("6", label="6:", layout="tile", matches=[Match(title=["ncmpcpp"])]),
-    Group("7", label="7:", layout="floating", matches=[Match(wm_class=["QGIS3"])]),
+    Group("6", label="6:", layout="tile", matches=[Match(title="ncmpcpp")]),
+    Group("7", label="7:", layout="floating", matches=[Match(wm_class="QGIS3")]),
     Group("8", label="8:", layout="max", matches=match_8),
     Group(
-        "9", label="9:", layout="max", matches=[Match(wm_class=["Gimp", "Inkscape"])]
+        "9", label="9:", layout="max", matches=[Match(wm_class="Gimp"), Match(wm_class="Inkscape")]
     ),
-    Group("0", label="0:", layout="tile", matches=[Match(wm_class=["Signal"])]),
-    Group(
-        "ssharp", label="ß:", layout="floating", matches=[Match(wm_class=["Steam"])]
-    ),
+    Group("0", label="0:", layout="tile", matches=[Match(wm_class="Signal")]),
+    Group("ssharp", label="ß:", layout="floating", matches=[Match(wm_class="Steam")]),
 ]
-
-# groups = [Group(i) for i in "123456789"]
 
 for group in groups:
     keys.extend(
@@ -352,14 +343,14 @@ for group in groups:
                 [MOD],
                 group.name,
                 lazy.group[group.name].toscreen(),
-                desc="Switch to group {}".format(group.name),
+                desc=f"Switch to group {group.name}",
             ),
             # mod1 + shift + letter of group = switch to & move focused window to group
             Key(
                 [MOD, SHIFT],
                 group.name,
                 lazy.window.togroup(group.name, switch_group=False),
-                desc="Switch to & move focused window to group {}".format(group.name),
+                desc=f"Switch to & move focused window to group {group.name}",
             ),
             # Or, use below if you prefer not to switch to that group.
             # # mod1 + shift + letter of group = move focused window to group
@@ -388,38 +379,49 @@ groups += [
                 opacity=1,
                 on_focus_lost_hide=False,
             ),
+            DropDown(
+                "btop",
+                f"{TERMINAL} -t btop --hold -e /usr/bin/btop",
+                opacity=1,
+                height=0.8,
+                width=0.8,
+                x=0.1,
+                y=0.1,
+                on_focus_lost_hide=False,
+            ),
         ],
     ),
 ]
 
-layout_kwargs = dict(
-    border_focus="#C45500",
-    border_width=2,
-)
+layout_kwargs = {
+    "border_focus": "#C45500",
+    "border_width": 2,
+}
 layouts = [
     layout.Tile(add_on_top=False, margin=2, ratio=0.5, shift_windows=True, **layout_kwargs),
     layout.Max(**layout_kwargs, margin=0),
-    layout.Floating(**layout_kwargs),
+    layout.Floating(**layout_kwargs),  # type: ignore
 ]
 
-widget_defaults = dict(
-    font=f"{MYFONT}",
-    fontsize=14,
-    foreground="#bbc2cf",
-    fgcolor_normal="#bbc2cf",
-    fgcolor_high="#e6b155",
-    fgcolor_crit="#dd5262",
-    padding=5,
-    update_interval=1,
-    border="#C45500",
-)
+widget_defaults = {
+    "font": f"{MYFONT}",
+    "fontsize": 14,
+    "foreground": "#bbc2cf",
+    "fgcolor_normal": "#bbc2cf",
+    "fgcolor_high": "#e6b155",
+    "fgcolor_crit": "#dd5262",
+    "padding": 5,
+    "update_interval": 1,
+    "border": "#C45500",
+}
 
 extension_defaults = widget_defaults.copy()
 
 
 # Widgets #########
 # Groups
-def w_f_groupbox():
+def w_f_groupbox() -> widget.GroupBox:
+    """Prototype a groupbox used to instantiate for each screen."""
     return widget.GroupBox(
         font=f"{MYFONT_BOLD}",
         fontsize=16,
@@ -442,7 +444,11 @@ if HOST == "andlang":
     netgraph_iface = "enp34s0"
 elif HOST == "bifrost":
     netgraph_iface = "wlp0s20f3"
-w_net = widget.Net(format=" {down:6.2f} {down_suffix:<2} ↓↑ {up:6.2f} {up_suffix:<2}", use_bits=True, interface=[netgraph_iface])
+w_net = widget.Net(
+    format=" {down:6.2f} {down_suffix:<2} ↓↑ {up:6.2f} {up_suffix:<2}",
+    use_bits=True,
+    interface=[netgraph_iface],
+)
 w_netgraph = widget.NetGraph(
     interface=netgraph_iface,
     border_color="#444959",
@@ -454,7 +460,6 @@ w_netgraph = widget.NetGraph(
 w_vol = widget.Volume(
     fmt="墳 {}",
     update_interval=0.2,
-    # get_volume_command="pulsemixer --get-volume | awk '{print $1}'",
 )
 # Time
 w_clock = widget.Clock(format="%Y-%m-%d %a %H:%M")
@@ -468,23 +473,17 @@ if HOST == "andlang":
         status_format=" {play_status} {artist} - {title}",
         play_states={"pause": "", "play": "▶", "stop": "■"},
         color_progress="#1f5582",
-        # max_chars=24,
-        # scroll=True,
-        # scroll_interval=0.05,
-        # scroll_step=2,
-        # scroll_delay=0.5,
-        # width=250,
     )
     # Temperature
     w_cpu_temp = widget.ThermalZone(
-        format="CPU: {temp}°C",
-        zone="/sys/class/hwmon/hwmon1/temp1_input",
+        format=" {temp}°C",
+        zone="/sys/class/hwmon/hwmon2/temp1_input",
         high=60,
         crit=70,
     )
     w_gpu_temp = widget.ThermalZone(
-        format="GPU: {temp}°C",
-        zone="/sys/class/hwmon/hwmon2/temp1_input",
+        format="/ {temp}°C",
+        zone="/sys/class/hwmon/hwmon1/temp1_input",
         high=60,
         crit=70,
     )
@@ -502,21 +501,16 @@ if HOST == "bifrost":
     )
     w_temp = widget.ThermalZone(high=60, crit=70)
 
-tasklist_kwargs = dict(
-    font=f"{MYFONT}",
-    # markup_floating="<b>{}</b>",
-    # markup_focused="<b>{}</b>",
-    # markup_maximized="<b>{}</b>",
-    # markup_minimized="<b>{}</b>",
-    # markup_normal="<b>{}</b>",
-    markup_floating="{}",
-    markup_focused="{}",
-    markup_maximized="{}",
-    markup_minimized="<i>{}</i>",
-    markup_normal="{}",
-    padding=3,
-    border="#C45500",
-)
+tasklist_kwargs = {
+    "font": f"{MYFONT}",
+    "markup_floating": "{}",
+    "markup_focused": "{}",
+    "markup_maximized": "{}",
+    "markup_minimized": "<i>{}</i>",
+    "markup_normal": "{}",
+    "padding": 3,
+    "border": "#C45500",
+}
 
 if HOST == "andlang":
     screens = [
@@ -660,40 +654,15 @@ if HOST == "bifrost":
         ),
     ]
 
-for i, screen in enumerate(screens):
-    keys.extend(
-        [
-            # Key(
-            #     [MOD, CTRL],
-            #     str(i),
-            #     lazy.screen.focus(),
-            #     desc="Switch to group {}".format(group.name),
-            # ),
-            # # mod1 + shift + letter of group = switch to & move focused window to group
-            Key(
-                [MOD, CTRL, SHIFT],
-                str(i),
-                lazy.window.toscreen(i),
-                desc=f"Move window to screen {i}",
-            ),
-        ]
-    )
 # Drag floating layouts.
 mouse = [
-    Drag(
-        [MOD],
-        "Button1",
-        lazy.window.set_position_floating(),
-        start=lazy.window.get_position(),
-    ),
-    Drag(
-        [MOD], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
-    ),
+    Drag([MOD], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
+    Drag([MOD], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
     Click([MOD], "Button2", lazy.window.bring_to_front()),
 ]
 
 dgroups_key_binder = None
-dgroups_app_rules = []
+dgroups_app_rules: list[Rule] = []
 follow_mouse_focus = True
 bring_front_click = "floating_only"
 cursor_warp = False

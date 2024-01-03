@@ -1,0 +1,33 @@
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-select = [
+    "ANN",
+    "ARG",
+    "B",
+    "BLE",
+    "C4",
+    "D",
+    "ERA",
+    "FIX",
+    "I",
+    "ICN",
+    "N",
+    "NPY",
+    "PIE",
+    "PL",
+    "PTH",
+    "Q",
+    "RET",
+    "RSE",
+    "RUF",
+    "SIM",
+    "T10",
+    "T20",
+    "TCH",
+    "TID",
+    "YTT",
+    "UP",
+    "W",
+]
+ignore = ["PLR0913"]

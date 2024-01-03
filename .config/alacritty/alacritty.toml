@@ -1,0 +1,45 @@
+# find full config docs at https://alacritty.org/config-alacritty.html
+live_config_reload = true
+
+[colors.normal]
+black = "#222222"
+blue = "#51afef"
+cyan = "#5cEfFF"
+green = "#99bb66"
+magenta = "#C57BDB"
+red = "#ff665c"
+white = "#dfdfdf"
+yellow = "#FCCE7B"
+
+[colors.primary]
+background = "#242730"
+foreground = "#bbc2cf"
+
+[colors.cursor]
+cursor = "#ffffff"
+text = "#000000"
+
+[colors.vi_mode_cursor]
+cursor = "#fcce7b"
+text = "#000000"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 12
+
+[font.normal]
+family = "CodeNewRomanNerdFontCompleteM Nerd Font"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "N"
+mods = "Control"
+
+[window]
+decorations = "none"
+opacity = 0.95
+
+[scrolling]
+history = 100000
